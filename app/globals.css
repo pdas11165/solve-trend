@@ -469,6 +469,104 @@ html.dark-mode-active .nav-dotgrid:hover { background-color: rgba(255, 255, 255,
 }
 
 /* =========================================================================
+   HERO MONUMENT — wordmark, glass hover-pills, floating icons
+   ========================================================================= */
+.hero-monument { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.hero-wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  color: var(--brand-white);
+  font-size: clamp(3.5rem, 12vw, 11rem);
+  text-shadow: 0 0 90px rgba(240, 50, 35, 0.45);
+}
+.hero-wordmark-reg { color: var(--brand-red); }
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.6vw, 1.5rem);
+  color: rgba(225, 225, 225, 0.62);
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  max-width: 760px;
+}
+
+.hero-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: default;
+  transition: box-shadow 0.35s var(--ease-smooth), background 0.35s var(--ease-smooth), transform 0.35s var(--ease-smooth);
+}
+.hero-pill .hero-pill-word { position: relative; z-index: 2; }
+.hero-pill:hover, .hero-pill:focus-visible { transform: translateY(-1px); }
+
+.hero-pill.accent-red {
+  background: rgba(240, 50, 35, 0.16);
+  border: 1px solid rgba(240, 50, 35, 0.5);
+  box-shadow: 0 0 16px rgba(240, 50, 35, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.hero-pill.accent-red:hover, .hero-pill.accent-red:focus-visible {
+  background: rgba(240, 50, 35, 0.28);
+  box-shadow: 0 0 34px rgba(240, 50, 35, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.hero-pill.accent-amber {
+  background: rgba(247, 162, 59, 0.16);
+  border: 1px solid rgba(247, 162, 59, 0.5);
+  box-shadow: 0 0 16px rgba(247, 162, 59, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.hero-pill.accent-amber:hover, .hero-pill.accent-amber:focus-visible {
+  background: rgba(247, 162, 59, 0.28);
+  box-shadow: 0 0 34px rgba(247, 162, 59, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.hero-pill.accent-coral {
+  background: rgba(242, 107, 58, 0.16);
+  border: 1px solid rgba(242, 107, 58, 0.5);
+  box-shadow: 0 0 16px rgba(242, 107, 58, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.hero-pill.accent-coral:hover, .hero-pill.accent-coral:focus-visible {
+  background: rgba(242, 107, 58, 0.28);
+  box-shadow: 0 0 34px rgba(242, 107, 58, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Floating tag icons (Arounda effect) */
+.hero-pill-icons { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.hero-pill-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+  transition: opacity 0.35s var(--ease-smooth), transform 0.35s var(--ease-smooth);
+}
+.hero-pill.accent-red .hero-pill-icon { color: var(--brand-red); }
+.hero-pill.accent-amber .hero-pill-icon { color: var(--brand-amber); }
+.hero-pill.accent-coral .hero-pill-icon { color: var(--brand-coral); }
+
+.hero-pill:hover .hero-pill-icon,
+.hero-pill:focus-visible .hero-pill-icon { opacity: 1; }
+.hero-pill:hover .hero-pill-icon.i1,
+.hero-pill:focus-visible .hero-pill-icon.i1 { transform: translate(-150%, -190%) scale(1); }
+.hero-pill:hover .hero-pill-icon.i2,
+.hero-pill:focus-visible .hero-pill-icon.i2 { transform: translate(70%, -170%) scale(1); }
+.hero-pill:hover .hero-pill-icon.i3,
+.hero-pill:focus-visible .hero-pill-icon.i3 { transform: translate(160%, 60%) scale(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-pill, .hero-pill-icon { transition: none; }
+}
+
+/* =========================================================================
    WHAT WE DO
    ========================================================================= */
 .what-we-do {
