@@ -1,66 +1,48 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Nav from "@/components/Nav";
+import Hero from "@/components/Hero";
+import WhatWeDo from "@/components/WhatWeDo";
+import Services from "@/components/Services";
+import DarkTransition from "@/components/DarkTransition";
+import Expertise from "@/components/Expertise";
+import LatestWork from "@/components/LatestWork";
+import FAQ from "@/components/FAQ";
+import Marquee from "@/components/Marquee";
+import Footer from "@/components/Footer";
+import SectionReveal from "@/components/SectionReveal";
 
-export default function Home() {
+export default function Page() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+    <>
+      <Nav />
+      <main>
+        <SectionReveal index={0} onMount>
+          <Hero />
+        </SectionReveal>
+        <SectionReveal index={1}>
+          <WhatWeDo />
+        </SectionReveal>
+        <SectionReveal index={2}>
+          <Services />
+        </SectionReveal>
+        <DarkTransition />
+        <div className="dark-shell">
+          <SectionReveal index={3}>
+            <Expertise />
+          </SectionReveal>
+          <SectionReveal index={4}>
+            <LatestWork />
+          </SectionReveal>
+          <SectionReveal index={5}>
+            <FAQ />
+          </SectionReveal>
+          <SectionReveal index={6}>
+            <Marquee />
+          </SectionReveal>
+          <SectionReveal index={7}>
+            <Footer />
+          </SectionReveal>
         </div>
       </main>
-    </div>
+    </>
   );
 }
