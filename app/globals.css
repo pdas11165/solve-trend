@@ -575,6 +575,89 @@ html.dark-mode-active .nav-dotgrid:hover { background-color: rgba(255, 255, 255,
 .hero-shader canvas { width: 100% !important; height: 100% !important; }
 
 /* =========================================================================
+   HERO SERVICE STRIPS — Bungee-style marquee + frosted hover reveal
+   ========================================================================= */
+.hero-strips {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.hero-strips-track {
+  display: flex;
+  gap: 14px;
+  align-items: flex-end;
+  width: max-content;
+  padding: 0 7px;
+  animation: heroStripScroll 38s linear infinite;
+}
+.hero-strips:hover .hero-strips-track { animation-play-state: paused; }
+@keyframes heroStripScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.hero-strip {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(120px, 12vw, 180px);
+  height: clamp(150px, 20vh, 240px);
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: box-shadow 0.4s var(--ease-smooth), transform 0.4s var(--ease-smooth);
+}
+.hero-strip-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-strip-frost {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  color: #fff;
+  background: rgba(20, 4, 4, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-smooth);
+}
+.hero-strip-num {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+.hero-strip-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(0.9rem, 1.1vw, 1.15rem);
+}
+.hero-strip:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 -10px 50px rgba(240, 50, 35, 0.55);
+  border-color: rgba(240, 50, 35, 0.6);
+}
+.hero-strip:hover .hero-strip-frost { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-strips-track { animation: none; }
+  .hero-strip, .hero-strip-frost { transition: none; }
+}
+
+/* =========================================================================
    WHAT WE DO
    ========================================================================= */
 .what-we-do {
