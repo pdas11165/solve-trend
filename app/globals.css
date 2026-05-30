@@ -14,6 +14,13 @@
   --red-light:    #FF8A6E;
   --red-mid:      #FF6B4A;
 
+  /* Brand (hero monument) — authoritative brand spec */
+  --brand-red:    #F03223;
+  --brand-amber:  #F7A23B;
+  --brand-coral:  #F26B3A;
+  --brand-black:  #050005;
+  --brand-white:  #E1E1E1;
+
   /* Light mode (opening sections) */
   --bg-light:     #F7F6F2;
   --text-light:   #1A1A1A;
@@ -372,9 +379,24 @@ html.dark-mode-active .nav-dotgrid:hover { background-color: rgba(255, 255, 255,
   position: relative;
   min-height: 100dvh;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
-  padding: 120px 0 80px;
+  padding: 120px 0 0;
+  background: var(--brand-black);
+  isolation: isolate;
+}
+.hero-monument-wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1 1 auto;
+  justify-content: center;
+  padding: 0 24px;
 }
 .hero .container { position: relative; z-index: 2; }
 .hero-canvas {
