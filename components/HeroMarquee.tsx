@@ -2,32 +2,15 @@ import * as React from "react";
 
 type Service = { num: string; name: string; img: string; video?: string };
 
+// Placeholder imagery borrowed from Bungee — to be replaced with real assets later.
+const CDN = "https://cdn.prod.website-files.com/6904c591abb4bd2b6a67271b";
 const SERVICES: Service[] = [
-  {
-    num: "01",
-    name: "UI/UX Design",
-    img: "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    num: "02",
-    name: "Web Development",
-    img: "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    num: "03",
-    name: "Brand Identity",
-    img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    num: "04",
-    name: "Growth Ops",
-    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    num: "05",
-    name: "Content Strategy",
-    img: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=600&q=80",
-  },
+  { num: "01", name: "Brand Identity", img: `${CDN}/6904ca7a4abbe56dfff89585_hero-marquee-img-02.avif` },
+  { num: "02", name: "Web Development", img: `${CDN}/6904ca7a4abbe56dfff89567_hero-marquee-img-04.avif` },
+  { num: "03", name: "UI/UX Design", img: `${CDN}/6904ca7a4abbe56dfff8956d_hero-marquee-img-05.avif` },
+  { num: "04", name: "Strategy", img: `${CDN}/6904ca7a4abbe56dfff89573_hero-marquee-img-06.avif` },
+  { num: "05", name: "Motion", img: `${CDN}/6904ca7a4abbe56dfff89578_hero-marquee-img-07.avif` },
+  { num: "06", name: "Content Strategy", img: `${CDN}/6904ca7a4abbe56dfff8957d_hero-marquee-img-08.avif` },
 ];
 
 function Tile({ s, dup }: { s: Service; dup?: boolean }) {
@@ -57,13 +40,15 @@ function Tile({ s, dup }: { s: Service; dup?: boolean }) {
 export default function HeroMarquee() {
   return (
     <div className="hero-strips" aria-label="Our services">
-      <div className="hero-strips-track">
-        {SERVICES.map((s) => (
-          <Tile key={s.num} s={s} />
-        ))}
-        {SERVICES.map((s) => (
-          <Tile key={`dup-${s.num}`} s={s} dup />
-        ))}
+      <div className="hero-strips-skew">
+        <div className="hero-strips-track">
+          {SERVICES.map((s) => (
+            <Tile key={s.num} s={s} />
+          ))}
+          {SERVICES.map((s) => (
+            <Tile key={`dup-${s.num}`} s={s} dup />
+          ))}
+        </div>
       </div>
     </div>
   );

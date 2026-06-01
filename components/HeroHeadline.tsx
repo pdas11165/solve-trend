@@ -9,6 +9,41 @@ const PILLS: { word: string; accent: Accent }[] = [
   { word: "ui/ux", accent: "coral" },
 ];
 
+const ROTATING_SERVICES = ["Brand", "Websites", "UI/UX", "Strategy", "Motion", "Content"];
+
+function RotatingTrend() {
+  const [active, setActive] = React.useState(false);
+  const [index, setIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!active) {
+      setIndex(0);
+      return;
+    }
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % ROTATING_SERVICES.length);
+    }, 1100);
+    return () => clearInterval(id);
+  }, [active]);
+
+  return (
+    <span
+      className={`hero-trend${active ? " is-rotating" : ""}`}
+      tabIndex={0}
+      role="text"
+      aria-label="Trend"
+      onMouseEnter={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
+      onFocus={() => setActive(true)}
+      onBlur={() => setActive(false)}
+    >
+      <span className="hero-trend-inner" key={active ? `s-${index}` : "trend"}>
+        {active ? ROTATING_SERVICES[index] : "Trend"}
+      </span>
+    </span>
+  );
+}
+
 function PillIcons() {
   return (
     <span className="hero-pill-icons" aria-hidden="true">
@@ -35,7 +70,8 @@ export default function HeroHeadline() {
   return (
     <div className="hero-monument">
       <h1 className="hero-wordmark">
-        Solve<span className="hero-wordmark-reg">&reg;</span>Trend
+        Solve<span className="hero-wordmark-reg">&reg;</span>
+        <RotatingTrend />
       </h1>
       <p className="hero-subtitle">
         We unite{" "}

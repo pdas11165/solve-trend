@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import WhatWeDo from "@/components/WhatWeDo";
+import CraftingSection from "@/components/CraftingSection";
+import IntroAnimation from "@/components/ui/scroll-morph-hero";
 import Services from "@/components/Services";
 import DarkTransition from "@/components/DarkTransition";
 import Expertise from "@/components/Expertise";
@@ -18,8 +19,9 @@ export default function Page() {
         <SectionReveal index={0} onMount>
           <Hero />
         </SectionReveal>
+        <CraftingSection />
         <SectionReveal index={1}>
-          <WhatWeDo />
+          <IntroAnimation />
         </SectionReveal>
         <SectionReveal index={2}>
           <Services />
