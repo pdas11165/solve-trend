@@ -6,6 +6,9 @@ import { useRef, useEffect, memo, useState, type ReactNode } from "react";
 import { createPortal, useFrame, useThree } from "@react-three/fiber";
 import { useFBO, useGLTF, MeshTransmissionMaterial } from "@react-three/drei";
 import { easing } from "maath";
+import { assetPath } from "@/lib/asset-path";
+
+const LENS_GLB = assetPath("/assets/3d/lens.glb");
 
 export type LensModeProps = {
   scale?: number;
@@ -122,7 +125,7 @@ type LensProps = {
 export function Lens({ modeProps = {}, followPointer = true, children }: LensProps) {
   return (
     <ModeWrapper
-      glb="/assets/3d/lens.glb"
+      glb={LENS_GLB}
       geometryKey="Cylinder"
       followPointer={followPointer}
       modeProps={modeProps}
@@ -132,4 +135,4 @@ export function Lens({ modeProps = {}, followPointer = true, children }: LensPro
   );
 }
 
-useGLTF.preload("/assets/3d/lens.glb");
+useGLTF.preload(LENS_GLB);

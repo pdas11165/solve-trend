@@ -1,11 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://solvetrend.example.com";
+
 export const metadata: Metadata = {
   title: "Solve Trend — Digital Marketing & Design Agency, Charlottetown PEI",
   description:
     "Solve Trend is a full-service digital marketing and design agency based in Charlottetown, PEI. We design, develop, and grow digital brands end-to-end.",
-  metadataBase: new URL("https://solvetrend.example.com"),
+  metadataBase: new URL(siteUrl),
   openGraph: {
     title: "Solve Trend — Digital Marketing & Design Agency",
     description:
