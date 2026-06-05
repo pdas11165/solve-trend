@@ -464,7 +464,10 @@ export default function IntroAnimation() {
   const scrollRef = useRef(0);
 
   const canInteract = introPhase === "circle";
-  const useWebGL = webglOk && !reducedMotion;
+  // FluidGlass WebGL (transmission lens) breaks on GitHub Pages static export —
+  // renders as an opaque black blob and hides the DOM card images.
+  const isStaticHosting = Boolean(process.env.NEXT_PUBLIC_BASE_PATH);
+  const useWebGL = webglOk && !reducedMotion && !isStaticHosting;
 
   const closeOverlay = useCallback(() => {
     setActiveIndex(null);
