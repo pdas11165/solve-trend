@@ -13,7 +13,15 @@ const SERVICES: Service[] = [
   { num: "06", name: "Content Strategy", img: `${CDN}/6904ca7a4abbe56dfff8957d_hero-marquee-img-08.avif` },
 ];
 
-function Tile({ s, dup }: { s: Service; dup?: boolean }) {
+function Tile({
+  s,
+  dup,
+  priority,
+}: {
+  s: Service;
+  dup?: boolean;
+  priority?: boolean;
+}) {
   return (
     <div className="hero-strip" aria-hidden={dup ? "true" : undefined}>
       {s.video ? (
@@ -27,7 +35,13 @@ function Tile({ s, dup }: { s: Service; dup?: boolean }) {
           playsInline
         />
       ) : (
-        <img className="hero-strip-media" src={s.img} alt="" loading="lazy" />
+        <img
+          className="hero-strip-media"
+          src={s.img}
+          alt=""
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : undefined}
+        />
       )}
       <div className="hero-strip-frost">
         <span className="hero-strip-num">{s.num}</span>
@@ -42,8 +56,8 @@ export default function HeroMarquee() {
     <div className="hero-strips" aria-label="Our services">
       <div className="hero-strips-skew">
         <div className="hero-strips-track">
-          {SERVICES.map((s) => (
-            <Tile key={s.num} s={s} />
+          {SERVICES.map((s, index) => (
+            <Tile key={s.num} s={s} priority={index < 3} />
           ))}
           {SERVICES.map((s) => (
             <Tile key={`dup-${s.num}`} s={s} dup />

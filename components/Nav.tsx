@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { DotGridArrow, DotGridIcon, Monogram } from "./Icons";
+import { useNavSurfaceTone } from "./useNavSurfaceTone";
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
@@ -11,8 +12,19 @@ const NAV_LINKS = [
   { label: "Contact", href: "#contact" },
 ];
 
+const NAV_LOGO_SIZE = Math.round(28 * 1.3);
+const NAV_WORDMARK_SIZE = `${18 * 1.3}px`;
+const NAV_PILL_GLASS_STYLE: React.CSSProperties = {
+  backgroundColor: "var(--nav-pill-fill, rgba(22, 22, 24, 0.14))",
+  backdropFilter: "blur(50px) saturate(150%)",
+  WebkitBackdropFilter: "blur(50px) saturate(150%)",
+};
+
 export default function Nav() {
+  const shellRef = React.useRef<HTMLElement>(null);
   const [open, setOpen] = React.useState(false);
+
+  useNavSurfaceTone(shellRef);
 
   React.useEffect(() => {
     if (!open) return;
@@ -29,13 +41,19 @@ export default function Nav() {
 
   return (
     <>
-      <header className="nav-shell" aria-label="Primary">
+      <header ref={shellRef} className="nav-shell" aria-label="Primary">
         <a href="#top" className="nav-logo" aria-label="Solve Trend — home">
-          <Monogram />
-          <span className="wordmark">solve trend</span>
+          <Monogram size={NAV_LOGO_SIZE} />
+          <span className="wordmark" style={{ fontSize: NAV_WORDMARK_SIZE }}>
+            solve trend
+          </span>
         </a>
 
-        <nav className="nav-pill" aria-label="Sections">
+        <nav
+          className="nav-pill"
+          style={NAV_PILL_GLASS_STYLE}
+          aria-label="Sections"
+        >
           {NAV_LINKS.map((l) => (
             <a key={l.href} href={l.href}>
               {l.label}
@@ -68,8 +86,10 @@ export default function Nav() {
       >
         <div className="overlay-top">
           <a href="#top" className="nav-logo" onClick={() => setOpen(false)}>
-            <Monogram />
-            <span className="wordmark">solve trend</span>
+            <Monogram size={NAV_LOGO_SIZE} />
+            <span className="wordmark" style={{ fontSize: NAV_WORDMARK_SIZE }}>
+              solve trend
+            </span>
           </a>
           <button
             type="button"

@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 "use client";
 
+import "@/lib/suppress-three-clock-warning";
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { Image } from "@react-three/drei";
