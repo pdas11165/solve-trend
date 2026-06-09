@@ -2,8 +2,14 @@
 
 import * as React from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { AnimatedUnderline } from "./Reveal";
 import { DotGridArrow } from "./Icons";
+import { useParallaxLayer } from "@/lib/scroll-parallax";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const PROJECTS = [
   {
@@ -31,39 +37,84 @@ const PROJECTS = [
 
 function WorkRow({
   p,
-  delay,
 }: {
   p: (typeof PROJECTS)[number];
-  delay: number;
 }) {
   const ref = React.useRef<HTMLElement>(null);
-  const [visible, setVisible] = React.useState(false);
+  const imgRef = React.useRef<HTMLDivElement>(null);
+  const detailRef = React.useRef<HTMLDivElement>(null);
+  const chipsRef = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          io.disconnect();
+  useParallaxLayer(imgRef, { speed: 0.65, trigger: ref });
+  useParallaxLayer(detailRef, { speed: 0.35, trigger: ref });
+
+  useGSAP(
+    () => {
+      const row = ref.current;
+      const imgWrap = imgRef.current;
+      const chips = chipsRef.current;
+      if (!row) return;
+
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        gsap.set(row, { opacity: 1, y: 0 });
+        if (imgWrap) gsap.set(imgWrap, { clipPath: "inset(0 0 0 0)" });
+      });
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.set(row, { opacity: 0, y: 24 });
+        if (imgWrap) gsap.set(imgWrap, { clipPath: "inset(0 100% 0 0)" });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: row,
+            start: "top 85%",
+            once: true,
+          },
+        });
+
+        tl.to(row, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+        }).to(
+          imgWrap,
+          {
+            clipPath: "inset(0 0 0 0)",
+            duration: 0.9,
+            ease: "power4.inOut",
+          },
+          "-=0.4"
+        );
+
+        if (chips) {
+          tl.from(
+            chips.querySelectorAll(".st-tag-glass"),
+            {
+              opacity: 0,
+              y: 12,
+              scale: 0.92,
+              duration: 0.4,
+              stagger: 0.06,
+              ease: "back.out(1.4)",
+            },
+            "-=0.3"
+          );
         }
-      },
-      { threshold: 0.15 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+      });
+
+      return () => mm.revert();
+    },
+    { scope: ref }
+  );
 
   return (
-    <article
-      ref={ref}
-      className={`work-row st-card ${visible ? "is-visible" : ""}`}
-      style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}
-    >
+    <article ref={ref} className="work-row st-card">
       <span className="st-card-glow-border" aria-hidden="true" />
       <div className="work-row-inner">
-        <div className="work-img-wrap">
+        <div className="work-img-wrap" ref={imgRef}>
           <Image
             src={`https://picsum.photos/seed/${p.seed}/1200/900`}
             alt={`${p.name} project preview`}
@@ -74,13 +125,13 @@ function WorkRow({
             unoptimized
           />
         </div>
-        <div className="work-detail">
+        <div className="work-detail" ref={detailRef}>
           <div>
             <h3>{p.name}</h3>
             <p className="desc" style={{ marginTop: 14 }}>
               {p.desc}
             </p>
-            <div className="chips" style={{ marginTop: 16 }}>
+            <div className="chips" style={{ marginTop: 16 }} ref={chipsRef}>
               {p.chips.map((c) => (
                 <span key={c} className="st-tag-glass">
                   {c}
@@ -88,7 +139,7 @@ function WorkRow({
               ))}
             </div>
           </div>
-          <blockquote className="quote">“{p.quote}”</blockquote>
+          <blockquote className="quote">&ldquo;{p.quote}&rdquo;</blockquote>
           <div className="cta-row">
             <a className="btn btn--white" href="#contact">
               Let&apos;s work together
@@ -112,8 +163,8 @@ export default function LatestWork() {
         </div>
 
         <div className="latest-rows">
-          {PROJECTS.map((p, i) => (
-            <WorkRow key={p.name} p={p} delay={i * 120} />
+          {PROJECTS.map((p) => (
+            <WorkRow key={p.name} p={p} />
           ))}
         </div>
 

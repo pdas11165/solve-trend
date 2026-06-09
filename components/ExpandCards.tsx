@@ -1,7 +1,12 @@
 "use client";
 
 import * as React from "react";
+import gsap from "gsap";
+import { Flip } from "gsap/Flip";
 import { DotGridArrow } from "./Icons";
+import { useParallaxLayers } from "@/lib/scroll-parallax";
+
+gsap.registerPlugin(Flip);
 
 type Card = {
   id: string;
@@ -83,7 +88,50 @@ const CARDS: Card[] = [
 export default function ExpandCards() {
   const [openId, setOpenId] = React.useState<string | null>(null);
   const refs = React.useRef<Record<string, HTMLDivElement | null>>({});
-  const originRects = React.useRef<Record<string, DOMRect>>({});
+  const rowRef = React.useRef<HTMLDivElement>(null);
+  const flipRef = React.useRef<ReturnType<typeof Flip.getState> | null>(null);
+
+  useParallaxLayers(rowRef, ".expand-card", [0.4, 0.55, 0.7, 0.85, 1], {
+    trigger: rowRef,
+  });
+
+  const runFlip = (id: string | null) => {
+    const el = id ? refs.current[id] : null;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion || !flipRef.current) return;
+
+    const targets = el ? [el] : Object.values(refs.current).filter(Boolean);
+    Flip.from(flipRef.current, {
+      targets,
+      duration: 0.6,
+      ease: "power4.inOut",
+      absolute: true,
+      scale: true,
+    });
+    flipRef.current = null;
+  };
+
+  const open = (id: string) => {
+    const el = refs.current[id];
+    if (!el) return;
+
+    flipRef.current = Flip.getState(el);
+    setOpenId(id);
+    requestAnimationFrame(() => runFlip(id));
+  };
+
+  const close = React.useCallback(() => {
+    setOpenId((current) => {
+      if (!current) return null;
+      const el = refs.current[current];
+      if (el) flipRef.current = Flip.getState(el);
+      requestAnimationFrame(() => runFlip(current));
+      return null;
+    });
+  }, []);
 
   React.useEffect(() => {
     if (openId) {
@@ -98,19 +146,10 @@ export default function ExpandCards() {
       };
     }
     document.body.classList.remove("expand-open");
-  }, [openId]);
-
-  const open = (id: string) => {
-    const el = refs.current[id];
-    if (!el) return;
-    originRects.current[id] = el.getBoundingClientRect();
-    setOpenId(id);
-  };
-
-  const close = () => setOpenId(null);
+  }, [openId, close]);
 
   return (
-    <div className="expand-row" role="list">
+    <div className="expand-row" role="list" ref={rowRef}>
       {CARDS.map((c) => {
         const isOpen = openId === c.id;
         return (

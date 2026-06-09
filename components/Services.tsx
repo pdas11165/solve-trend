@@ -1,8 +1,11 @@
 import * as React from "react";
 import ServiceAccordion from "./ServiceAccordion";
+import ServicesZoomParallax from "./ServicesZoomParallax";
 
 export default function Services() {
   return (
+    <>
+    <ServicesZoomParallax />
     <section className="services" id="services" aria-label="Our expertise">
       <div className="container">
         <div className="services-header">
@@ -17,5 +20,6 @@ export default function Services() {
         <ServiceAccordion />
       </div>
     </section>
+    </>
   );
 }

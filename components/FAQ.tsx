@@ -1,6 +1,9 @@
 "use client";
 
 import * as React from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 const QUESTIONS = [
   {
@@ -25,9 +28,36 @@ const QUESTIONS = [
   },
 ];
 
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 export default function FAQ() {
+  const rootRef = React.useRef<HTMLElement>(null);
   const [openIdx, setOpenIdx] = React.useState<number | null>(null);
   const bodyRefs = React.useRef<Array<HTMLDivElement | null>>([]);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.utils.toArray<HTMLElement>(".faq-item", rootRef.current).forEach((item, i) => {
+          gsap.from(item, {
+            y: 24,
+            opacity: 0,
+            duration: 0.7,
+            delay: i * 0.06,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 92%",
+              once: true,
+            },
+          });
+        });
+      });
+      return () => mm.revert();
+    },
+    { scope: rootRef }
+  );
 
   React.useEffect(() => {
     QUESTIONS.forEach((_, i) => {
@@ -42,7 +72,7 @@ export default function FAQ() {
   }, [openIdx]);
 
   return (
-    <section className="faq" id="faq" aria-label="Frequently asked questions">
+    <section ref={rootRef} className="faq" id="faq" aria-label="Frequently asked questions">
       <div className="container">
         <span className="eyebrow">Common Questions</span>
         <h2 style={{ marginTop: 12 }}>Everything else you might ask.</h2>
