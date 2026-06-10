@@ -5,8 +5,9 @@ import * as React from "react";
 type Accent = "red" | "amber" | "coral";
 const PILLS: { word: string; accent: Accent }[] = [
   { word: "brand", accent: "red" },
-  { word: "websites", accent: "amber" },
-  { word: "ui/ux", accent: "coral" },
+  { word: "digital experience", accent: "amber" },
+  { word: "website", accent: "coral" },
+  { word: "intelligent system", accent: "red" },
 ];
 
 const ROTATING_SERVICES = ["Brand", "Websites", "UI/UX", "Strategy", "Motion", "Content"];
@@ -44,24 +45,10 @@ function RotatingTrend() {
   );
 }
 
-function PillIcons() {
+function HeroPill({ word, accent, index }: { word: string; accent: Accent; index: number }) {
   return (
-    <span className="hero-pill-icons" aria-hidden="true">
-      <span className="hero-pill-icon i1">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-          <path d="M12 2l2.4 6.9H22l-6 4.4 2.3 7-6.3-4.6L5.7 20l2.3-7-6-4.4h7.6z" />
-        </svg>
-      </span>
-      <span className="hero-pill-icon i2">
-        <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
-          <rect x="4" y="4" width="16" height="16" rx="4" />
-        </svg>
-      </span>
-      <span className="hero-pill-icon i3">
-        <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor">
-          <circle cx="12" cy="12" r="9" />
-        </svg>
-      </span>
+    <span className={`hero-pill pill-${index} accent-${accent}`} tabIndex={0}>
+      <span className="hero-pill-word">{word}</span>
     </span>
   );
 }
@@ -74,17 +61,16 @@ export default function HeroHeadline() {
         <RotatingTrend />
       </h1>
       <p className="hero-subtitle">
-        We unite{" "}
+        <span className="hero-subtitle-chunk chunk-a">We build </span>
         {PILLS.map((p, i) => (
           <React.Fragment key={p.word}>
-            <span className={`hero-pill accent-${p.accent}`} tabIndex={0}>
-              <span className="hero-pill-word">{p.word}</span>
-              <PillIcons />
-            </span>
-            {i < PILLS.length - 1 ? (i === PILLS.length - 2 ? " & " : ", ") : ""}
+            <HeroPill word={p.word} accent={p.accent} index={i} />
+            {i === 0 ? <span className="hero-subtitle-chunk chunk-b">, </span> : null}
+            {i === 1 ? <span className="hero-subtitle-chunk chunk-c">, </span> : null}
+            {i === 2 ? <span className="hero-subtitle-chunk chunk-d"> and </span> : null}
           </React.Fragment>
-        ))}{" "}
-        into one product
+        ))}
+        <span className="hero-subtitle-chunk chunk-e"> that help ambitious businesses grow.</span>
       </p>
     </div>
   );

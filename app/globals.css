@@ -615,7 +615,11 @@ html.dark-mode-active .nav-logo { color: #fff; }
   align-items: center;
   justify-content: center;
   gap: 6px;
-  max-width: 760px;
+  max-width: 980px;
+}
+.hero-subtitle-chunk {
+  display: inline-block;
+  transition: transform 0.45s var(--ease-spring);
 }
 
 .hero-pill {
@@ -628,10 +632,89 @@ html.dark-mode-active .nav-logo { color: #fff; }
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   cursor: default;
-  transition: box-shadow 0.35s var(--ease-smooth), background 0.35s var(--ease-smooth), transform 0.35s var(--ease-smooth);
+  overflow: visible;
+  vertical-align: middle;
+  transform-origin: center center;
+  z-index: 1;
+  transition:
+    box-shadow 0.45s var(--ease-spring),
+    background 0.45s var(--ease-spring),
+    transform 0.45s var(--ease-spring);
 }
 .hero-pill .hero-pill-word { position: relative; z-index: 2; }
-.hero-pill:hover, .hero-pill:focus-visible { transform: translateY(-1px); }
+.hero-pill:hover, .hero-pill:focus-visible {
+  transform: scale(1.4);
+  z-index: 3;
+}
+
+/* Shift neighboring copy aside when a pill grows */
+.hero-subtitle:has(.pill-0:hover) .chunk-a,
+.hero-subtitle:has(.pill-0:focus-visible) .chunk-a { transform: translateX(-32px); }
+.hero-subtitle:has(.pill-0:hover) .chunk-b,
+.hero-subtitle:has(.pill-0:hover) .chunk-c,
+.hero-subtitle:has(.pill-0:hover) .chunk-d,
+.hero-subtitle:has(.pill-0:hover) .chunk-e,
+.hero-subtitle:has(.pill-0:hover) .pill-1,
+.hero-subtitle:has(.pill-0:hover) .pill-2,
+.hero-subtitle:has(.pill-0:hover) .pill-3,
+.hero-subtitle:has(.pill-0:focus-visible) .chunk-b,
+.hero-subtitle:has(.pill-0:focus-visible) .chunk-c,
+.hero-subtitle:has(.pill-0:focus-visible) .chunk-d,
+.hero-subtitle:has(.pill-0:focus-visible) .chunk-e,
+.hero-subtitle:has(.pill-0:focus-visible) .pill-1,
+.hero-subtitle:has(.pill-0:focus-visible) .pill-2,
+.hero-subtitle:has(.pill-0:focus-visible) .pill-3 { transform: translateX(32px); }
+
+.hero-subtitle:has(.pill-1:hover) .chunk-a,
+.hero-subtitle:has(.pill-1:hover) .chunk-b,
+.hero-subtitle:has(.pill-1:hover) .pill-0,
+.hero-subtitle:has(.pill-1:focus-visible) .chunk-a,
+.hero-subtitle:has(.pill-1:focus-visible) .chunk-b,
+.hero-subtitle:has(.pill-1:focus-visible) .pill-0 { transform: translateX(-32px); }
+.hero-subtitle:has(.pill-1:hover) .chunk-c,
+.hero-subtitle:has(.pill-1:hover) .chunk-d,
+.hero-subtitle:has(.pill-1:hover) .chunk-e,
+.hero-subtitle:has(.pill-1:hover) .pill-2,
+.hero-subtitle:has(.pill-1:hover) .pill-3,
+.hero-subtitle:has(.pill-1:focus-visible) .chunk-c,
+.hero-subtitle:has(.pill-1:focus-visible) .chunk-d,
+.hero-subtitle:has(.pill-1:focus-visible) .chunk-e,
+.hero-subtitle:has(.pill-1:focus-visible) .pill-2,
+.hero-subtitle:has(.pill-1:focus-visible) .pill-3 { transform: translateX(32px); }
+
+.hero-subtitle:has(.pill-2:hover) .chunk-a,
+.hero-subtitle:has(.pill-2:hover) .chunk-b,
+.hero-subtitle:has(.pill-2:hover) .chunk-c,
+.hero-subtitle:has(.pill-2:hover) .pill-0,
+.hero-subtitle:has(.pill-2:hover) .pill-1,
+.hero-subtitle:has(.pill-2:focus-visible) .chunk-a,
+.hero-subtitle:has(.pill-2:focus-visible) .chunk-b,
+.hero-subtitle:has(.pill-2:focus-visible) .chunk-c,
+.hero-subtitle:has(.pill-2:focus-visible) .pill-0,
+.hero-subtitle:has(.pill-2:focus-visible) .pill-1 { transform: translateX(-32px); }
+.hero-subtitle:has(.pill-2:hover) .chunk-d,
+.hero-subtitle:has(.pill-2:hover) .chunk-e,
+.hero-subtitle:has(.pill-2:hover) .pill-3,
+.hero-subtitle:has(.pill-2:focus-visible) .chunk-d,
+.hero-subtitle:has(.pill-2:focus-visible) .chunk-e,
+.hero-subtitle:has(.pill-2:focus-visible) .pill-3 { transform: translateX(32px); }
+
+.hero-subtitle:has(.pill-3:hover) .chunk-a,
+.hero-subtitle:has(.pill-3:hover) .chunk-b,
+.hero-subtitle:has(.pill-3:hover) .chunk-c,
+.hero-subtitle:has(.pill-3:hover) .chunk-d,
+.hero-subtitle:has(.pill-3:hover) .pill-0,
+.hero-subtitle:has(.pill-3:hover) .pill-1,
+.hero-subtitle:has(.pill-3:hover) .pill-2,
+.hero-subtitle:has(.pill-3:focus-visible) .chunk-a,
+.hero-subtitle:has(.pill-3:focus-visible) .chunk-b,
+.hero-subtitle:has(.pill-3:focus-visible) .chunk-c,
+.hero-subtitle:has(.pill-3:focus-visible) .chunk-d,
+.hero-subtitle:has(.pill-3:focus-visible) .pill-0,
+.hero-subtitle:has(.pill-3:focus-visible) .pill-1,
+.hero-subtitle:has(.pill-3:focus-visible) .pill-2 { transform: translateX(-32px); }
+.hero-subtitle:has(.pill-3:hover) .chunk-e,
+.hero-subtitle:has(.pill-3:focus-visible) .chunk-e { transform: translateX(32px); }
 
 .hero-pill.accent-red {
   color: #c81e0f;
@@ -640,8 +723,11 @@ html.dark-mode-active .nav-logo { color: #fff; }
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 .hero-pill.accent-red:hover, .hero-pill.accent-red:focus-visible {
-  background: rgba(240, 50, 35, 0.18);
-  box-shadow: 0 6px 22px rgba(240, 50, 35, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  background: rgba(240, 50, 35, 0.22);
+  box-shadow:
+    0 10px 36px rgba(240, 50, 35, 0.45),
+    0 0 56px rgba(240, 50, 35, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 .hero-pill.accent-amber {
   color: #b9760f;
@@ -650,8 +736,11 @@ html.dark-mode-active .nav-logo { color: #fff; }
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 .hero-pill.accent-amber:hover, .hero-pill.accent-amber:focus-visible {
-  background: rgba(247, 162, 59, 0.22);
-  box-shadow: 0 6px 22px rgba(247, 162, 59, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  background: rgba(247, 162, 59, 0.26);
+  box-shadow:
+    0 10px 36px rgba(247, 162, 59, 0.45),
+    0 0 56px rgba(247, 162, 59, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 .hero-pill.accent-coral {
   color: #d1481f;
@@ -660,35 +749,15 @@ html.dark-mode-active .nav-logo { color: #fff; }
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 .hero-pill.accent-coral:hover, .hero-pill.accent-coral:focus-visible {
-  background: rgba(242, 107, 58, 0.2);
-  box-shadow: 0 6px 22px rgba(242, 107, 58, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  background: rgba(242, 107, 58, 0.24);
+  box-shadow:
+    0 10px 36px rgba(242, 107, 58, 0.45),
+    0 0 56px rgba(242, 107, 58, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
-
-/* Floating tag icons (Arounda effect) */
-.hero-pill-icons { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-.hero-pill-icon {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.6);
-  transition: opacity 0.35s var(--ease-smooth), transform 0.35s var(--ease-smooth);
-}
-.hero-pill.accent-red .hero-pill-icon { color: var(--brand-red); }
-.hero-pill.accent-amber .hero-pill-icon { color: var(--brand-amber); }
-.hero-pill.accent-coral .hero-pill-icon { color: var(--brand-coral); }
-
-.hero-pill:hover .hero-pill-icon,
-.hero-pill:focus-visible .hero-pill-icon { opacity: 1; }
-.hero-pill:hover .hero-pill-icon.i1,
-.hero-pill:focus-visible .hero-pill-icon.i1 { transform: translate(-150%, -190%) scale(1); }
-.hero-pill:hover .hero-pill-icon.i2,
-.hero-pill:focus-visible .hero-pill-icon.i2 { transform: translate(70%, -170%) scale(1); }
-.hero-pill:hover .hero-pill-icon.i3,
-.hero-pill:focus-visible .hero-pill-icon.i3 { transform: translate(160%, 60%) scale(1); }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-pill, .hero-pill-icon { transition: none; }
+  .hero-pill, .hero-subtitle-chunk { transition: none; }
 }
 
 /* =========================================================================
