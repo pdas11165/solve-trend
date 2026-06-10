@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import ResultsCards from "./ResultsCards";
+import { useParallaxLayers } from "@/lib/scroll-parallax";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -13,22 +14,22 @@ const AWAKE_CDN =
 
 const BADGES = [
   {
+    id: "strategy",
+    label: "Strategy",
+    icon: `${AWAKE_CDN}/67aaddc4819d3c15ab088565_Frame%20(1).svg`,
+    className: "crafting-badge crafting-badge--strategy",
+  },
+  {
     id: "creativity",
     label: "Creativity",
     icon: `${AWAKE_CDN}/67aadb9ec80cd595bb214692_Magic%20Stick.svg`,
     className: "crafting-badge crafting-badge--creativity",
   },
   {
-    id: "innovation",
-    label: "Innovation",
+    id: "technology",
+    label: "Technology",
     icon: `${AWAKE_CDN}/67aaddc4c79cc5141322f4db_Frame.svg`,
-    className: "crafting-badge crafting-badge--innovation",
-  },
-  {
-    id: "strategy",
-    label: "Strategy",
-    icon: `${AWAKE_CDN}/67aaddc4819d3c15ab088565_Frame%20(1).svg`,
-    className: "crafting-badge crafting-badge--strategy",
+    className: "crafting-badge crafting-badge--technology",
   },
 ];
 
@@ -69,7 +70,7 @@ function LogoMarquee() {
     <div className="crafting-marquee" aria-label="Trusted brands">
       <div className="crafting-marquee__divider">
         <span className="crafting-marquee__line" aria-hidden="true" />
-        <p>Loved by 100,00+ big and small brands around the worlds</p>
+        <p>Loved by 100,000+ big and small brands around the world</p>
         <span className="crafting-marquee__line" aria-hidden="true" />
       </div>
       <div className="crafting-marquee__wrap">
@@ -98,6 +99,10 @@ function LogoMarquee() {
 
 export default function CraftingSection() {
   const root = React.useRef<HTMLElement>(null);
+
+  useParallaxLayers(root, ".crafting-result", [0.35, 0.55, 0.75], {
+    trigger: root,
+  });
 
   useGSAP(
     () => {
@@ -131,9 +136,9 @@ export default function CraftingSection() {
         });
 
         [
-          ".crafting-badge--creativity",
-          ".crafting-badge--innovation",
           ".crafting-badge--strategy",
+          ".crafting-badge--creativity",
+          ".crafting-badge--technology",
         ].forEach((selector, i) => {
           gsap.to(selector, {
             ...slideIn,
@@ -162,8 +167,8 @@ export default function CraftingSection() {
       <div className="container crafting-section__inner">
         <div className="crafting-intro">
           <h2 className="crafting-heading">
-            Crafting exceptional, well experienced &amp; technology driven
-            strategies to drive impactful results with
+            We combine strategy, creativity and technology to transform ideas
+            into experiences and systems that drive growth.
           </h2>
           <div className="crafting-badges">
             {BADGES.map((badge) => (

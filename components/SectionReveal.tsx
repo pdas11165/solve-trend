@@ -3,10 +3,13 @@
 import * as React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
+type RevealVariant = "fadeUp" | "clipReveal" | "none";
+
 type SectionRevealProps = {
   children: React.ReactNode;
   index?: number;
   onMount?: boolean;
+  variant?: RevealVariant;
   className?: string;
 };
 
@@ -14,22 +17,33 @@ export default function SectionReveal({
   children,
   index = 0,
   onMount = false,
+  variant = "fadeUp",
   className,
 }: SectionRevealProps) {
   const reduceMotion = useReducedMotion();
 
-  if (reduceMotion) {
+  if (reduceMotion || variant === "none") {
     return <div className={className}>{children}</div>;
   }
 
   const transition = {
-    duration: 0.7,
+    duration: variant === "clipReveal" ? 0.85 : 0.7,
     ease: [0.22, 1, 0.36, 1] as const,
     delay: index * 0.08,
   };
 
-  const hidden = { opacity: 0, y: 32 };
-  const shown = { opacity: 1, y: 0 };
+  const variants = {
+    fadeUp: {
+      hidden: { opacity: 0, y: 32 },
+      shown: { opacity: 1, y: 0 },
+    },
+    clipReveal: {
+      hidden: { opacity: 0, y: 24, clipPath: "inset(0 0 100% 0)" },
+      shown: { opacity: 1, y: 0, clipPath: "inset(0 0 0 0)" },
+    },
+  };
+
+  const { hidden, shown } = variants[variant];
 
   if (onMount) {
     return (

@@ -1,6 +1,13 @@
 "use client";
 
 import * as React from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 /**
  * Sticky-card scroll zoom that flips the page from light to dark.
@@ -15,88 +22,80 @@ import * as React from "react";
 export default function DarkTransition() {
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const cardRef = React.useRef<HTMLDivElement>(null);
+  const vignetteRef = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
-    const wrapper = wrapperRef.current;
-    const card = cardRef.current;
-    if (!wrapper || !card) return;
+  useGSAP(
+    () => {
+      const wrapper = wrapperRef.current;
+      const card = cardRef.current;
+      const vignette = vignetteRef.current;
+      if (!wrapper || !card) return;
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+      const mm = gsap.matchMedia();
 
-    if (reduceMotion) {
-      document.documentElement.classList.add("dark-mode-active");
-      card.style.transform = "scale(1)";
-      card.style.borderRadius = "0";
-      card.style.opacity = "1";
-      return;
-    }
-
-    // From #F7F6F2 (247,246,242) to #080808 (8,8,8)
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-    const clamp = (v: number, lo: number, hi: number) =>
-      Math.max(lo, Math.min(hi, v));
-
-    let current = 0;
-    let target = 0;
-    let raf: number | null = null;
-
-    const render = () => {
-      current += (target - current) * 0.08;
-      const p = current;
-
-      const scale = 0.85 + p * 0.15;
-      const radius = 24 - p * 24;
-      const opacity = 0.6 + p * 0.4;
-
-      card.style.transform = `scale(${scale})`;
-      card.style.borderRadius = `${radius}px`;
-      card.style.opacity = `${opacity}`;
-
-      const r = Math.round(lerp(247, 8, p));
-      const g = Math.round(lerp(246, 8, p));
-      const b = Math.round(lerp(242, 8, p));
-      document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-
-      if (p >= 0.95) {
+      mm.add("(prefers-reduced-motion: reduce)", () => {
         document.documentElement.classList.add("dark-mode-active");
-      } else {
-        document.documentElement.classList.remove("dark-mode-active");
-      }
+        gsap.set(card, {
+          scale: 1,
+          borderRadius: 0,
+          opacity: 1,
+          clearProps: "transform",
+        });
+        if (vignette) gsap.set(vignette, { opacity: 0 });
+      });
 
-      if (Math.abs(target - current) > 0.001) {
-        raf = requestAnimationFrame(render);
-      } else {
-        raf = null;
-      }
-    };
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const applyProgress = (p: number) => {
+          const scale = 0.85 + p * 0.15;
+          const radius = 24 - p * 24;
+          const opacity = 0.6 + p * 0.4;
 
-    const computeTarget = () => {
-      const rect = wrapper.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-      // progress goes 0 -> 1 across (wrapper.height - vh)
-      const total = wrapper.offsetHeight - vh;
-      const scrolled = -rect.top;
-      target = clamp(scrolled / total, 0, 1);
-      if (raf === null) raf = requestAnimationFrame(render);
-    };
+          gsap.set(card, {
+            scale,
+            borderRadius: `${radius}px`,
+            opacity,
+          });
 
-    const onScroll = () => computeTarget();
-    const onResize = () => computeTarget();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
-    computeTarget();
+          const r = Math.round(lerp(247, 8, p));
+          const g = Math.round(lerp(246, 8, p));
+          const b = Math.round(lerp(242, 8, p));
+          document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-      if (raf !== null) cancelAnimationFrame(raf);
-    };
-  }, []);
+          if (vignette) {
+            let vignetteOpacity = 0;
+            if (p >= 0.7 && p < 0.85) {
+              vignetteOpacity = gsap.utils.mapRange(0.7, 0.85, 0, 0.12, p);
+            } else if (p >= 0.85 && p < 0.95) {
+              vignetteOpacity = gsap.utils.mapRange(0.85, 0.95, 0.12, 0, p);
+            }
+            gsap.set(vignette, { opacity: vignetteOpacity });
+          }
+
+          if (p >= 0.95) {
+            document.documentElement.classList.add("dark-mode-active");
+          } else {
+            document.documentElement.classList.remove("dark-mode-active");
+          }
+        };
+
+        ScrollTrigger.create({
+          trigger: wrapper,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.5,
+          onUpdate: (self) => applyProgress(self.progress),
+          onRefresh: (self) => applyProgress(self.progress),
+        });
+      });
+
+      return () => mm.revert();
+    },
+    { scope: wrapperRef }
+  );
 
   return (
     <div ref={wrapperRef} className="dark-transition-wrapper" aria-hidden="true">
+      <div ref={vignetteRef} className="dark-transition-vignette" aria-hidden="true" />
       <div ref={cardRef} className="dark-card">
         <div className="dark-card-content">
           <span className="eyebrow">A new chapter</span>

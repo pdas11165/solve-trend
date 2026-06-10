@@ -2,6 +2,11 @@
 
 import * as React from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const CDN = "https://cdn.prod.website-files.com/6904c591abb4bd2b6a67271b";
 
@@ -17,54 +22,144 @@ type Service = {
 
 const SERVICES: Service[] = [
   {
-    id: "uiux",
+    id: "brand-strategy",
     num: "01",
-    title: "UI UX Design",
+    title: "Brand Strategy",
     description:
-      "We design intuitive interfaces that improve usability, guide users, and increase engagement.",
-    tags: ["User Research", "UX Flows", "Useability Testing", "Interface Design"],
-    image: `${CDN}/6904ca7a4abbe56dfff8956d_hero-marquee-img-05.avif`,
+      "We define positioning, messaging, and campaign direction so your brand speaks with clarity and purpose.",
+    tags: [
+      "Brand Positioning",
+      "Competitor & Market Research",
+      "Brand Messaging",
+      "Campaign Strategy",
+      "Content Direction",
+    ],
+    image: `${CDN}/6904ca7a4abbe56dfff89585_hero-marquee-img-02.avif`,
     gradientClass: "st-service-bg-01",
   },
   {
-    id: "web",
+    id: "brand-identity",
     num: "02",
-    title: "Web Development",
+    title: "Brand Identity & Graphic Design",
     description:
-      "We build fast responsive websites ensuring scalability performance and experiences across devices.",
-    tags: ["Webflow Builds", "CMS Integration", "Brand Guidelines", "Design Language"],
-    image: `${CDN}/6904ca7a4abbe56dfff89567_hero-marquee-img-04.avif`,
+      "We create visual systems that communicate values, build trust, and help businesses stand out.",
+    tags: [
+      "Logo Design",
+      "Brand Identity Design",
+      "Visual Language System",
+      "Social Media Design",
+      "Packaging Design",
+      "Marketing Materials",
+      "Print & Outdoor Design",
+      "Presentation Design",
+    ],
+    image: `${CDN}/6904ca7a4abbe56dfff89578_hero-marquee-img-07.avif`,
     gradientClass: "st-service-bg-02",
   },
   {
-    id: "brand",
+    id: "motion",
     num: "03",
-    title: "Brand Identity",
+    title: "Motion Graphics & Animation",
     description:
-      "We create brand systems that communicate values build trust and help businesses.",
-    tags: ["Logo Design", "Visual Identity", "Brand Guidelines", "Design Language"],
-    image: `${CDN}/6904ca7a4abbe56dfff89585_hero-marquee-img-02.avif`,
+      "We bring brands to life through motion — from logo animations to explainer videos and social content.",
+    tags: [
+      "Motion Graphics",
+      "Animated Ads",
+      "Logo Animation",
+      "Explainer Videos",
+      "Kinetic Typography",
+      "Social Media Motion Content",
+    ],
+    image: `${CDN}/6904ca7a4abbe56dfff89573_hero-marquee-img-06.avif`,
     gradientClass: "st-service-bg-03",
   },
   {
-    id: "growth",
+    id: "video",
     num: "04",
-    title: "Growth Ops",
+    title: "Video Editing & Production",
     description:
-      "We optimize websites through testing insights and improvements conversions accessibility speed.",
-    tags: ["Speed Optimization", "Technical SEO", "Core WebVitals", "SEO Structure"],
-    image: `${CDN}/6904ca7a4abbe56dfff89573_hero-marquee-img-06.avif`,
+      "We craft polished video content — from commercials and reels to corporate films and podcasts.",
+    tags: [
+      "Commercial Video Editing",
+      "Reels & Shorts Editing",
+      "Corporate Videos",
+      "Product Videos",
+      "Podcast Editing",
+      "Color Grading",
+      "Subtitle & Sound Design",
+    ],
+    image: `${CDN}/6904ca7a4abbe56dfff8957d_hero-marquee-img-08.avif`,
     gradientClass: "st-service-bg-04",
   },
   {
-    id: "content",
+    id: "ux",
     num: "05",
-    title: "Content Strategy",
+    title: "User Experience Design",
     description:
-      "We plan content structures that improve engagement consistency and long term brand communication.",
-    tags: ["Content", "Strategy", "Pixel Perfect Structure", "Content Planning"],
-    image: `${CDN}/6904ca7a4abbe56dfff8957d_hero-marquee-img-08.avif`,
+      "We design intuitive interfaces that improve usability, guide users, and increase engagement.",
+    tags: [
+      "UX / UI Design",
+      "Website UI Design",
+      "Mobile App Design",
+      "Wireframing",
+      "Prototyping",
+      "Design System & UI Kit",
+    ],
+    image: `${CDN}/6904ca7a4abbe56dfff8956d_hero-marquee-img-05.avif`,
     gradientClass: "st-service-bg-05",
+  },
+  {
+    id: "web",
+    num: "06",
+    title: "Web Development",
+    description:
+      "We build fast, responsive websites and applications ensuring scalability and performance across devices.",
+    tags: [
+      "Business Websites",
+      "Landing Pages",
+      "WordPress Development",
+      "Custom Web Applications",
+      "CMS Development",
+      "API Integration",
+      "Maintenance & Support",
+    ],
+    image: `${CDN}/6904ca7a4abbe56dfff89567_hero-marquee-img-04.avif`,
+    gradientClass: "st-service-bg-06",
+  },
+  {
+    id: "ecommerce",
+    num: "07",
+    title: "eCommerce Solutions",
+    description:
+      "We launch and optimize online stores that convert — from Shopify to custom marketplaces.",
+    tags: [
+      "Shopify Stores",
+      "WooCommerce Development",
+      "Custom eCommerce",
+      "Conversion Optimization",
+      "Multi-Vendor Marketplace",
+      "Payment Integration",
+    ],
+    image: `${CDN}/6904ca7a4abbe56dfff89585_hero-marquee-img-02.avif`,
+    gradientClass: "st-service-bg-07",
+  },
+  {
+    id: "ai",
+    num: "08",
+    title: "AI Automation",
+    description:
+      "We build intelligent systems that automate workflows, support customers, and accelerate growth.",
+    tags: [
+      "AI Chatbot Development",
+      "AI Customer Support Agent",
+      "Workflow Automation",
+      "CRM Automation",
+      "AI Content Systems",
+      "Lead Generation Automation",
+      "AI Research Automation",
+    ],
+    image: `${CDN}/6904ca7a4abbe56dfff8956d_hero-marquee-img-05.avif`,
+    gradientClass: "st-service-bg-08",
   },
 ];
 
@@ -81,6 +176,32 @@ function ServiceMeta({ num }: { num: string }) {
 export default function ServiceAccordion() {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [isMobile, setIsMobile] = React.useState(false);
+  const rootRef = React.useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.utils
+          .toArray<HTMLElement>(".service-accordion__image", rootRef.current)
+          .forEach((img) => {
+            gsap.to(img, {
+              yPercent: -12,
+              scale: 1.06,
+              ease: "none",
+              scrollTrigger: {
+                trigger: rootRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            });
+          });
+      });
+      return () => mm.revert();
+    },
+    { scope: rootRef, dependencies: [activeIndex] }
+  );
 
   React.useEffect(() => {
     const mq = window.matchMedia("(max-width: 991px)");
@@ -99,7 +220,7 @@ export default function ServiceAccordion() {
   };
 
   return (
-    <div className="service-accordion" role="list">
+    <div ref={rootRef} className="service-accordion service-accordion--8" role="list">
       {SERVICES.map((service, index) => {
         const isActive = activeIndex === index;
         return (

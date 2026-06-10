@@ -1,5 +1,12 @@
+"use client";
+
 import * as React from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { DotGridArrow, Monogram } from "./Icons";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const SERVICES_LINKS = [
   "Brand Strategy",
@@ -24,9 +31,85 @@ function SocialIcon({ label, d }: { label: string; d: string }) {
 }
 
 export default function Footer() {
+  const rootRef = React.useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        gsap.set(
+          [".footer-cta h2", ".footer-col", ".footer-top .nav-logo"],
+          { opacity: 1, y: 0, clipPath: "inset(0 0 0 0)" }
+        );
+      });
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.from(".footer-cta h2", {
+          y: 40,
+          opacity: 0,
+          clipPath: "inset(0 0 100% 0)",
+          duration: 0.9,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: ".footer-cta",
+            start: "top 85%",
+            once: true,
+          },
+        });
+
+        gsap.from(".footer-cta .btn", {
+          y: 20,
+          opacity: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          delay: 0.15,
+          scrollTrigger: {
+            trigger: ".footer-cta",
+            start: "top 85%",
+            once: true,
+          },
+        });
+
+        gsap.from(".footer-top .nav-logo", {
+          scale: 0.85,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".footer-top",
+            start: "top 90%",
+            once: true,
+          },
+        });
+
+        ScrollTrigger.batch(".footer-col", {
+          start: "top 90%",
+          once: true,
+          onEnter: (batch) => {
+            gsap.from(batch, {
+              y: 32,
+              opacity: 0,
+              duration: 0.7,
+              stagger: 0.08,
+              ease: "power3.out",
+            });
+          },
+        });
+      });
+
+      return () => mm.revert();
+    },
+    { scope: rootRef }
+  );
+
   return (
     <>
-      <section className="footer-cta st-section-glow st-cta-section" id="contact" aria-label="Call to action">
+      <section
+        className="footer-cta st-section-glow st-cta-section"
+        id="contact"
+        aria-label="Call to action"
+      >
         <div className="container footer-cta-inner">
           <h2>Ready to build something great?</h2>
           <a className="btn btn--primary" href="mailto:hello@solvetrend.example.com">
@@ -36,7 +119,7 @@ export default function Footer() {
         </div>
       </section>
 
-      <footer className="footer" aria-label="Site footer">
+      <footer ref={rootRef} className="footer" aria-label="Site footer">
         <div className="container">
           <div className="footer-top">
             <a href="#top" className="nav-logo" aria-label="Solve Trend — home">

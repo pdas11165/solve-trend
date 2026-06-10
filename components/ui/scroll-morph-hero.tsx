@@ -565,6 +565,17 @@ export default function IntroAnimation() {
           virtualScroll.set(newScroll);
         },
       });
+
+      gsap.to(".intro-morph-headline", {
+        yPercent: -15,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: `+=${MAX_SCROLL}`,
+          scrub: true,
+        },
+      });
     },
     { scope: sectionRef },
   );
@@ -708,7 +719,19 @@ export default function IntroAnimation() {
         className="relative h-screen w-full bg-[#FAFAFA] overflow-hidden"
       >
         <div className="flex h-full w-full flex-col items-center justify-center perspective-1000">
-          <div className="absolute z-0 flex flex-col items-center justify-center text-center pointer-events-none top-1/2 -translate-y-1/2">
+          <div className="absolute z-0 flex flex-col items-center justify-center text-center pointer-events-none top-1/2 -translate-y-1/2 intro-morph-headline">
+            <motion.span
+              initial={{ opacity: 0, y: 12 }}
+              animate={
+                introPhase === "circle" && morphValue < 0.5
+                  ? { opacity: 0.7 - morphValue * 1.2, y: 0 }
+                  : { opacity: 0, y: 12 }
+              }
+              transition={{ duration: 0.8 }}
+              className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[#E8341A]"
+            >
+              What We Build
+            </motion.span>
             <motion.h1
               initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
               animate={
@@ -743,7 +766,8 @@ export default function IntroAnimation() {
               Work that compounds
             </h2>
             <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed">
-              Real outcomes from brands we&apos;ve built and grown.{" "}
+              Our expertise spans branding, digital experiences and AI-powered
+              business solutions.{" "}
               <br className="hidden md:block" />
               Hover a project to explore the results.
             </p>

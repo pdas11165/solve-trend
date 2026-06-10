@@ -1,12 +1,11 @@
 import * as React from "react";
 import ExpandCards from "./ExpandCards";
 import Stats from "./Stats";
-import Process from "./Process";
 
 export default function Expertise() {
   return (
     <section
-      className="expertise st-cta-section"
+      className="expertise"
       id="expertise"
       aria-label="Why choose Solve Trend"
     >
@@ -27,7 +26,6 @@ export default function Expertise() {
 
         <ExpandCards />
         <Stats />
-        <Process />
       </div>
     </section>
   );

@@ -1,8 +1,13 @@
 "use client";
 
 import * as React from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { DotGridArrow, DotGridIcon, Monogram } from "./Icons";
 import { useNavSurfaceTone } from "./useNavSurfaceTone";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
@@ -21,10 +26,12 @@ const NAV_PILL_GLASS_STYLE: React.CSSProperties = {
 };
 
 export default function Nav() {
-  const shellRef = React.useRef<HTMLElement>(null);
   const [open, setOpen] = React.useState(false);
+  const headerRef = React.useRef<HTMLElement>(null);
+  const overlayRef = React.useRef<HTMLDivElement>(null);
+  const lastScrollY = React.useRef(0);
 
-  useNavSurfaceTone(shellRef);
+  useNavSurfaceTone(headerRef);
 
   React.useEffect(() => {
     if (!open) return;
@@ -39,9 +46,105 @@ export default function Nav() {
     };
   }, [open]);
 
+  React.useEffect(() => {
+    if (!open || !overlayRef.current) return;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (reduceMotion) return;
+
+    const links = overlayRef.current.querySelectorAll<HTMLElement>(
+      ".overlay-links a"
+    );
+    gsap.fromTo(
+      links,
+      { x: -24, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.08,
+        ease: "power4.out",
+        overwrite: true,
+      }
+    );
+  }, [open]);
+
+  useGSAP(
+    () => {
+      const header = headerRef.current;
+      if (!header) return;
+
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        header.classList.add("nav-shell--scrolled");
+      });
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        ScrollTrigger.create({
+          start: 0,
+          end: "max",
+          onUpdate: (self) => {
+            const y = self.scroll();
+            const delta = y - lastScrollY.current;
+
+            if (y > 80) {
+              header.classList.add("nav-shell--scrolled");
+            } else {
+              header.classList.remove("nav-shell--scrolled");
+            }
+
+            if (y > 120 && delta > 6) {
+              header.classList.add("nav-shell--hidden");
+            } else if (delta < -4) {
+              header.classList.remove("nav-shell--hidden");
+            }
+
+            lastScrollY.current = y;
+          },
+        });
+
+        NAV_LINKS.forEach(({ href }) => {
+          const section = document.querySelector(href);
+          if (!section) return;
+
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top 55%",
+            end: "bottom 45%",
+            onToggle: (self) => {
+              const link = header.querySelector<HTMLAnchorElement>(
+                `.nav-pill a[href="${href}"]`
+              );
+              if (!link) return;
+              if (self.isActive) {
+                header
+                  .querySelectorAll(".nav-pill a.is-active")
+                  .forEach((a) => a.classList.remove("is-active"));
+                link.classList.add("is-active");
+              }
+            },
+          });
+        });
+
+        ScrollTrigger.create({
+          trigger: ".dark-transition-wrapper",
+          start: "center center",
+          end: "center center",
+          onEnter: () => header.classList.add("nav-shell--chapter-pulse"),
+          onLeaveBack: () => header.classList.remove("nav-shell--chapter-pulse"),
+        });
+      });
+
+      return () => mm.revert();
+    },
+    { scope: headerRef }
+  );
+
   return (
     <>
-      <header ref={shellRef} className="nav-shell" aria-label="Primary">
+      <header ref={headerRef} className="nav-shell" aria-label="Primary">
         <a href="#top" className="nav-logo" aria-label="Solve Trend — home">
           <Monogram size={NAV_LOGO_SIZE} />
           <span className="wordmark" style={{ fontSize: NAV_WORDMARK_SIZE }}>
@@ -79,6 +182,7 @@ export default function Nav() {
 
       <div
         id="nav-overlay"
+        ref={overlayRef}
         className={`nav-overlay ${open ? "is-open" : ""}`}
         role="dialog"
         aria-modal="true"
@@ -102,13 +206,8 @@ export default function Nav() {
         </div>
 
         <nav className="overlay-links" aria-label="Full menu">
-          {NAV_LINKS.map((l, i) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              style={{ transitionDelay: open ? `${i * 80}ms` : "0ms" }}
-            >
+          {NAV_LINKS.map((l) => (
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
               {l.label}
             </a>
           ))}
