@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import CraftingSection from "@/components/CraftingSection";
 import HowWeWorkSection from "@/components/HowWeWorkSection";
+import VisionExpertiseSection from "@/components/VisionExpertiseSection";
 import Services from "@/components/Services";
 import PhilosophySection from "@/components/PhilosophySection";
 import DarkTransition from "@/components/DarkTransition";
@@ -25,20 +26,23 @@ export default function Page() {
         <CraftingSection />
         <HowWeWorkSection />
         <SectionReveal index={1} variant="none">
+          <VisionExpertiseSection />
+        </SectionReveal>
+        <SectionReveal index={2} variant="none">
           <Services />
         </SectionReveal>
         <DarkTransition />
-        <SectionReveal index={2} variant="none">
+        <SectionReveal index={3} variant="none">
           <PhilosophySection />
         </SectionReveal>
         <div className="dark-shell">
-          <SectionReveal index={3} variant="fadeUp">
+          <SectionReveal index={4} variant="fadeUp">
             <TestimonialShowcase />
           </SectionReveal>
-          <SectionReveal index={4} variant="none">
+          <SectionReveal index={5} variant="none">
             <FAQ />
           </SectionReveal>
-          <SectionReveal index={5} variant="none">
+          <SectionReveal index={6} variant="none">
             <Footer />
           </SectionReveal>
         </div>
