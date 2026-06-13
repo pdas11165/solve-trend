@@ -1,5 +1,6 @@
 "use client";
 
+import "@/lib/suppress-three-clock-warning";
 import React, {
   useState,
   useEffect,

@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 "use client";
 
+import "@/lib/suppress-three-clock-warning";
 import * as THREE from "three";
 import { useRef, useEffect, memo, useState, type ReactNode } from "react";
 import { createPortal, useFrame, useThree } from "@react-three/fiber";

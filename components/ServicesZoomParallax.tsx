@@ -1,17 +1,20 @@
 'use client';
 
 import {
+	cubicBezier,
 	motion,
+	useMotionValue,
 	useReducedMotion,
-	useScroll,
 	useTransform,
 	type MotionValue,
-	type Variants,
 } from 'framer-motion';
-import { Fragment, useRef } from 'react';
-import type { ZoomParallaxItem } from '@/components/ui/zoom-parallax';
+import { Fragment, useEffect, useRef } from 'react';
 
-interface ServiceCardItem extends ZoomParallaxItem {
+
+interface ServiceCardItem {
+	label: string;
+	backgroundColor: string;
+	textColor: string;
 	image: string;
 	tags: string[];
 }
@@ -84,7 +87,6 @@ const ALL_SERVICES: ServiceCardItem[] = [
 
 const STRIP_COUNT = 10;
 
-// Scatter offsets (vw / vh) for the non-hero cards during the zoom phase.
 const SCATTER_OFFSETS = [
 	{ x: 0, y: 0 },
 	{ x: -34, y: -27 },
@@ -99,30 +101,66 @@ const SCATTER_OFFSETS = [
 const PHASE = {
 	INTRO_END: 0.12,
 	ZOOM_START: 0.12,
-	ZOOM_END: 0.95,
+	ZOOM_END: 0.45,
+	SLIDESHOW_START: 0.45,
 } as const;
 
-const stripsParentVariants: Variants = {
-	hidden: {},
-	revealed: { transition: { staggerChildren: 0.06 } },
-};
+const SLIDE_COUNT = ALL_SERVICES.length;
+const SLIDE_STEPS = SLIDE_COUNT - 1;
+const STEP_EASE = cubicBezier(0.85, 0, 0.15, 1);
+const LINEAR = (t: number) => t;
 
-const stripVariants: Variants = {
-	hidden: { scaleY: 1 },
-	revealed: {
-		scaleY: 0,
-		transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] },
-	},
-};
+// How the slideshow scroll range is divided. Each slide's hold is weighted
+// much heavier than each shift, so slides linger on screen and the shift to
+// the next one is quick and snappy.
+const HOLD_WEIGHT = 3.2;
+const SHIFT_WEIGHT = 1;
+
+// Build a stepped keyframe track: the slideshow rests on each slide, then
+// quickly eases to the next, instead of crawling continuously with the scroll.
+// The range is shared across every slide's hold and every shift
+// (SLIDE_COUNT holds + SLIDE_STEPS shifts) so each slide — including the last —
+// gets an equal beat on screen before it moves on.
+const SLIDE_TRACK = (() => {
+	const span = 1 - PHASE.SLIDESHOW_START;
+	const unit = span / (SLIDE_COUNT * HOLD_WEIGHT + SLIDE_STEPS * SHIFT_WEIGHT);
+	const hold = unit * HOLD_WEIGHT;
+	const shift = unit * SHIFT_WEIGHT;
+	const input: number[] = [PHASE.SLIDESHOW_START];
+	const output: string[] = ['0vh'];
+	const ease: Array<(t: number) => number> = [];
+	let cursor = PHASE.SLIDESHOW_START;
+
+	for (let i = 0; i < SLIDE_STEPS; i++) {
+		// Rest on slide i.
+		cursor += hold;
+		input.push(cursor);
+		output.push(`${-i * 100}vh`);
+		ease.push(LINEAR);
+		// Shift to slide i + 1.
+		cursor += shift;
+		input.push(cursor);
+		output.push(`${-(i + 1) * 100}vh`);
+		ease.push(STEP_EASE);
+	}
+
+	// Rest on the final slide before the section releases.
+	cursor += hold;
+	input.push(cursor);
+	output.push(`${-SLIDE_STEPS * 100}vh`);
+	ease.push(LINEAR);
+
+	return { input, output, ease };
+})();
 
 function CardMedia({
 	item,
 	index,
-	strips,
+	strips = 'none',
 }: {
 	item: ServiceCardItem;
 	index: number;
-	strips: 'reveal' | 'static';
+	strips?: 'static' | 'none';
 }) {
 	const indexLabel = `(${String(index + 1).padStart(2, '0')})`;
 
@@ -133,32 +171,15 @@ function CardMedia({
 				src={item.image}
 				alt={item.label}
 				className="szp-card__img"
-				loading="lazy"
+				loading={strips === 'static' ? 'lazy' : 'eager'}
 			/>
-			{strips === 'reveal' ? (
-				<motion.div
-					className="szp-card__strips"
-					variants={stripsParentVariants}
-					initial="hidden"
-					whileInView="revealed"
-					viewport={{ once: true, amount: 0.45 }}
-					aria-hidden="true"
-				>
-					{Array.from({ length: STRIP_COUNT }).map((_, stripIndex) => (
-						<motion.span
-							key={stripIndex}
-							className="szp-card__strip"
-							variants={stripVariants}
-						/>
-					))}
-				</motion.div>
-			) : (
+			{strips === 'static' ? (
 				<div className="szp-card__strips szp-card__strips--static" aria-hidden="true">
 					{Array.from({ length: STRIP_COUNT }).map((_, stripIndex) => (
 						<span key={stripIndex} className="szp-card__strip" />
 					))}
 				</div>
-			)}
+			) : null}
 			<div className="szp-card__content">
 				<div className="szp-card__left">
 					<span className="szp-card__index">{indexLabel}</span>
@@ -241,6 +262,7 @@ function IntroTitle({ scrollYProgress }: { scrollYProgress: MotionValue<number> 
 	);
 }
 
+
 function ZoomCard({
 	item,
 	index,
@@ -264,21 +286,28 @@ function ZoomCard({
 		isHero ? [0, 1] : [0.42, 0.82],
 		isHero ? [1, 1] : [1, 0],
 	);
-	const x = useTransform(
-		zoomProgress,
-		[0, 1],
-		[`${offset.x}vw`, `${offset.x * fly}vw`],
-	);
-	const y = useTransform(
-		zoomProgress,
-		[0, 1],
-		[`${offset.y}vh`, `${offset.y * fly}vh`],
-	);
+	const x = useTransform(zoomProgress, (progress) => {
+		const shift = offset.x + (offset.x * fly - offset.x) * progress;
+		return `calc(-50% + ${shift}vw)`;
+	});
+	const y = useTransform(zoomProgress, (progress) => {
+		const shift = offset.y + (offset.y * fly - offset.y) * progress;
+		return `calc(-50% + ${shift}vh)`;
+	});
 
 	return (
 		<motion.div
 			className={`szp-zoom-card${isHero ? ' szp-zoom-card--hero' : ''}`}
-			style={{ x, y, scale, opacity, zIndex: isHero ? 5 : 1 }}
+			style={{
+				position: 'absolute',
+				left: '50%',
+				top: '50%',
+				x,
+				y,
+				scale,
+				opacity,
+				zIndex: isHero ? 5 : 1,
+			}}
 			aria-hidden="true"
 		>
 			<CardMedia item={item} index={index} strips="static" />
@@ -286,31 +315,71 @@ function ZoomCard({
 	);
 }
 
-function StackCard({
-	item,
-	index,
-}: {
-	item: ServiceCardItem;
-	index: number;
-}) {
+function SlideshowTrack({ scrollYProgress }: { scrollYProgress: MotionValue<number> }) {
+	const trackY = useTransform(
+		scrollYProgress,
+		SLIDE_TRACK.input,
+		SLIDE_TRACK.output,
+		{ ease: SLIDE_TRACK.ease },
+	);
+	const slideshowOpacity = useTransform(
+		scrollYProgress,
+		[PHASE.ZOOM_END - 0.04, PHASE.ZOOM_END + 0.04],
+		[0, 1],
+	);
+	const scrimOpacity = useTransform(
+		scrollYProgress,
+		[0, PHASE.INTRO_END * 0.6, PHASE.INTRO_END],
+		[1, 1, 0],
+	);
+
 	return (
-		<article
-			className="szp-card"
-			style={{ '--szp-i': index } as React.CSSProperties}
-			aria-label={item.label}
+		<motion.div
+			className="services-zoom-parallax__slideshow"
+			style={{ opacity: slideshowOpacity }}
 		>
-			<CardMedia item={item} index={index} strips={index === 0 ? 'static' : 'reveal'} />
-		</article>
+			<motion.div className="services-zoom-parallax__track" style={{ y: trackY }}>
+				{ALL_SERVICES.map((item, index) => (
+					<article key={item.label} className="szp-fullscreen-slide" aria-label={item.label}>
+						<CardMedia item={item} index={index} strips="none" />
+					</article>
+				))}
+			</motion.div>
+			<motion.div
+				className="services-zoom-parallax__intro-scrim"
+				style={{ opacity: scrimOpacity }}
+				aria-hidden="true"
+			/>
+		</motion.div>
 	);
 }
+
 
 export default function ServicesZoomParallax() {
 	const reduceMotion = useReducedMotion();
 	const zoomRef = useRef<HTMLDivElement>(null);
-	const { scrollYProgress } = useScroll({
-		target: zoomRef,
-		offset: ['start start', 'end end'],
-	});
+	const scrollYProgress = useMotionValue(0);
+
+	useEffect(() => {
+		const el = zoomRef.current;
+		if (!el) return;
+
+		const update = () => {
+			const scrollable = el.offsetHeight - window.innerHeight;
+			if (scrollable <= 0) return;
+			const rect = el.getBoundingClientRect();
+			const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
+			scrollYProgress.set(progress);
+		};
+
+		update();
+		window.addEventListener('scroll', update, { passive: true });
+		window.addEventListener('resize', update);
+		return () => {
+			window.removeEventListener('scroll', update);
+			window.removeEventListener('resize', update);
+		};
+	}, [scrollYProgress]);
 
 	const zoomProgress = useTransform(
 		scrollYProgress,
@@ -319,8 +388,8 @@ export default function ServicesZoomParallax() {
 	);
 	const scatterOpacity = useTransform(
 		scrollYProgress,
-		[0.04, PHASE.ZOOM_START],
-		[0, 1],
+		[0.04, PHASE.ZOOM_START, PHASE.ZOOM_END - 0.05, PHASE.ZOOM_END],
+		[0, 1, 1, 0],
 	);
 
 	if (reduceMotion) {
@@ -358,7 +427,7 @@ export default function ServicesZoomParallax() {
 			<div ref={zoomRef} className="services-zoom-parallax__zoom">
 				<div className="services-zoom-parallax__sticky">
 					<IntroTitle scrollYProgress={scrollYProgress} />
-
+					<SlideshowTrack scrollYProgress={scrollYProgress} />
 					<motion.div
 						className="services-zoom-parallax__scatter"
 						style={{ opacity: scatterOpacity }}
@@ -372,14 +441,6 @@ export default function ServicesZoomParallax() {
 							/>
 						))}
 					</motion.div>
-				</div>
-			</div>
-
-			<div className="services-zoom-parallax__inner">
-				<div className="services-zoom-parallax__stack">
-					{ALL_SERVICES.map((item, index) => (
-						<StackCard key={item.label} item={item} index={index} />
-					))}
 				</div>
 			</div>
 		</section>

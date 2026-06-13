@@ -1,5 +1,6 @@
 "use client";
 
+import "@/lib/suppress-three-clock-warning";
 import * as React from "react";
 
 /**
@@ -18,20 +19,35 @@ import * as React from "react";
  *   cost almost nothing.
  * - The host `.pulse-grid` element is mask-faded at its top and bottom edges
  *   (globals.css) so the grid dissolves in and out instead of cutting off.
- * - Dots fade slightly (never fully) behind the section heading.
+ * - Dots fade slightly (never fully) behind content via shieldSelectors elliptical zones.
  * - prefers-reduced-motion: renders one static grid frame, no rAF.
  * - Pauses when scrolled out of view.
  * - Fails safe: no WebGL -> leaves the plain CSS background.
  */
 
 const MAX_WAVES = 12;
+const MAX_SHIELDS = 4;
+const SHIELD_PAD_X = 28;
+const SHIELD_PAD_Y = 20;
 
-export default function PulseGrid() {
+type PulseGridProps = {
+  shieldSelectors?: string[];
+};
+
+function smoothstep(edge0: number, edge1: number, x: number): number {
+  const t = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
+  return t * t * (3 - 2 * t);
+}
+
+export default function PulseGrid({ shieldSelectors = [] }: PulseGridProps) {
   const mountRef = React.useRef<HTMLDivElement>(null);
+  const shieldSelectorsRef = React.useRef(shieldSelectors);
+  shieldSelectorsRef.current = shieldSelectors;
 
   React.useEffect(() => {
     const mount = mountRef.current;
     if (!mount) return;
+    const shieldSelectors = shieldSelectorsRef.current;
 
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -79,8 +95,13 @@ export default function PulseGrid() {
             () => new THREE.Vector4(0, 0, -1000, 0)
           ),
         },
-        uCenter: { value: new THREE.Vector2(w * 0.5, Math.min(h * 0.25, 340)) },
-        uRadii: { value: new THREE.Vector2(w * 0.36, Math.min(h * 0.25, 320)) },
+        uShieldCount: { value: 0 },
+        uShields: {
+          value: Array.from(
+            { length: MAX_SHIELDS },
+            () => new THREE.Vector4(0, 0, 0, 0)
+          ),
+        },
         uColorBase: { value: new THREE.Color(0x9a9088) }, // warm gray
         uColorHot: { value: new THREE.Color(0xf03223) }, // brand red
       };
@@ -96,14 +117,27 @@ export default function PulseGrid() {
           uniform vec2  uMouse;
           uniform float uMouseActive;
           uniform vec4  uWaves[${MAX_WAVES}];
-          uniform vec2  uCenter;
-          uniform vec2  uRadii;
+          uniform float uShieldCount;
+          uniform vec4  uShields[${MAX_SHIELDS}];
           attribute float aSeed;
           varying float vHeat;
           varying float vFade;
 
+          float contentShield(vec2 p) {
+            float shield = 1.0;
+            for (int i = 0; i < ${MAX_SHIELDS}; i++) {
+              if (float(i) >= uShieldCount) break;
+              vec4 s = uShields[i];
+              vec2 q = (p - s.xy) / s.zw;
+              float zone = mix(0.08, 1.0, smoothstep(0.5, 1.25, length(q)));
+              shield = min(shield, zone);
+            }
+            return shield;
+          }
+
           void main() {
             vec2 p = position.xy;
+            float shield = contentShield(p);
 
             // ambient: two slow crossed waves keep the grid breathing
             float ambient =
@@ -121,7 +155,7 @@ export default function PulseGrid() {
               float d = distance(p, wv.xy);
               float ring = age * 340.0;                  // wavefront radius px
               float band = exp(-pow(d - ring, 2.0) / 7200.0); // ~60px wide
-              float a = band * exp(-age * 1.5) * wv.w;
+              float a = band * exp(-age * 1.5) * wv.w * shield;
               excite += a;
               vec2 dir = d > 0.001 ? (p - wv.xy) / d : vec2(0.0);
               disp += dir * a * 16.0;
@@ -131,7 +165,7 @@ export default function PulseGrid() {
             float prox = 0.0;
             if (uMouseActive > 0.5) {
               float dm = distance(p, uMouse);
-              prox = exp(-dm * dm / 16200.0); // sigma ~90px
+              prox = exp(-dm * dm / 16200.0) * shield; // sigma ~90px
               vec2 dirm = dm > 0.001 ? (p - uMouse) / dm : vec2(0.0);
               disp += dirm * prox * 12.0;
             }
@@ -139,9 +173,7 @@ export default function PulseGrid() {
             float heat = clamp(excite + prox * 0.8, 0.0, 1.0);
             vHeat = heat;
 
-            // keep the heading zone calmer, never invisible
-            vec2 q = (p - uCenter) / uRadii;
-            vFade = mix(0.45, 1.0, smoothstep(0.65, 1.2, length(q)));
+            vFade = shield;
 
             vec4 mv = modelViewMatrix * vec4(p + disp, 0.0, 1.0);
             gl_Position = projectionMatrix * mv;
@@ -203,13 +235,78 @@ export default function PulseGrid() {
         scene.add(points);
       };
       buildGrid();
+      const parent = mount.parentElement;
+      const shieldEls: Element[] = [];
+      if (parent) {
+        for (const sel of shieldSelectors.slice(0, MAX_SHIELDS)) {
+          const el = parent.querySelector(sel);
+          if (el) shieldEls.push(el);
+        }
+      }
+
+      const shieldRects: Array<{
+        cx: number;
+        cy: number;
+        halfW: number;
+        halfH: number;
+      }> = [];
+
+      const updateShields = () => {
+        shieldRects.length = 0;
+        const mountRect = mount.getBoundingClientRect();
+        let count = 0;
+        for (const el of shieldEls) {
+          if (count >= MAX_SHIELDS) break;
+          const r = el.getBoundingClientRect();
+          const cx = r.left + r.width * 0.5 - mountRect.left;
+          const cy = r.top + r.height * 0.5 - mountRect.top;
+          const halfW = r.width * 0.5 + SHIELD_PAD_X;
+          const halfH = r.height * 0.5 + SHIELD_PAD_Y;
+          shieldRects.push({ cx, cy, halfW, halfH });
+          uniforms.uShields.value[count].set(cx, cy, halfW, halfH);
+          count++;
+        }
+        uniforms.uShieldCount.value = count;
+      };
+
+      const dampAt = (x: number, y: number): number => {
+        let damp = 1.0;
+        for (const s of shieldRects) {
+          const qx = (x - s.cx) / s.halfW;
+          const qy = (y - s.cy) / s.halfH;
+          const ql = Math.hypot(qx, qy);
+          const zone = 0.08 + (1.0 - 0.08) * smoothstep(0.5, 1.25, ql);
+          damp = Math.min(damp, zone);
+        }
+        return damp;
+      };
+
+      updateShields();
+
+      for (const el of shieldEls) {
+        const sro = new ResizeObserver(() => updateShields());
+        sro.observe(el);
+        cleanup.push(() => sro.disconnect());
+      }
+
+      const onScroll = () => updateShields();
+      window.addEventListener("scroll", onScroll, { passive: true, capture: true });
+      cleanup.push(() =>
+        window.removeEventListener("scroll", onScroll, { capture: true })
+      );
+
+      void document.fonts.ready.then(() => {
+        if (!disposed) updateShields();
+      });
 
       // ---- wave ring buffer ----
       let waveIdx = 0;
       const now = () => performance.now() / 1000;
       const fireWave = (x: number, y: number, strength: number) => {
+        const damp = dampAt(x, y);
+        if (damp < 0.2) return;
         const v = uniforms.uWaves.value[waveIdx];
-        v.set(x, y, now(), strength);
+        v.set(x, y, now(), strength * damp);
         waveIdx = (waveIdx + 1) % MAX_WAVES;
         lastWaveAt = now();
       };
@@ -223,7 +320,8 @@ export default function PulseGrid() {
         const y = e.clientY - rect.top;
         const inside =
           x >= -40 && x <= rect.width + 40 && y >= -40 && y <= rect.height + 40;
-        uniforms.uMouseActive.value = inside ? 1 : 0;
+        const damp = dampAt(x, y);
+        uniforms.uMouseActive.value = inside && damp > 0.15 ? 1 : 0;
         if (!inside) return;
         uniforms.uMouse.value.set(x, y);
         // trailing ripples while sweeping
@@ -247,16 +345,16 @@ export default function PulseGrid() {
       const onResize = () => {
         const nw = mount.clientWidth || window.innerWidth;
         const nh = mount.clientHeight || window.innerHeight;
-        if (nw === w && nh === h) return;
-        w = nw;
-        h = nh;
-        renderer.setSize(w, h);
-        camera.right = w;
-        camera.bottom = h;
-        camera.updateProjectionMatrix();
-        uniforms.uCenter.value.set(w * 0.5, Math.min(h * 0.25, 340));
-        uniforms.uRadii.value.set(w * 0.36, Math.min(h * 0.25, 320));
-        buildGrid();
+        if (nw !== w || nh !== h) {
+          w = nw;
+          h = nh;
+          renderer.setSize(w, h);
+          camera.right = w;
+          camera.bottom = h;
+          camera.updateProjectionMatrix();
+          buildGrid();
+        }
+        updateShields();
       };
       // the host section grows as images/fonts load — track its real size
       const ro = new ResizeObserver(onResize);
@@ -272,17 +370,22 @@ export default function PulseGrid() {
         uniforms.uTime.value = t;
         // ambient ripple when idle so the grid is alive without a cursor
         if (t - lastWaveAt > 2.4) {
-          fireWave(
-            w * (0.15 + Math.random() * 0.7),
-            h * (0.15 + Math.random() * 0.7),
-            0.55
-          );
+          let fired = false;
+          for (let attempt = 0; attempt < 6 && !fired; attempt++) {
+            const ax = w * (0.15 + Math.random() * 0.7);
+            const ay = h * (0.15 + Math.random() * 0.7);
+            if (dampAt(ax, ay) > 0.55) {
+              fireWave(ax, ay, 0.55);
+              fired = true;
+            }
+          }
         }
         renderer.render(scene, camera);
         frameId = requestAnimationFrame(tick);
       };
       const start = () => {
         if (running || reduceMotion) return;
+        updateShields();
         running = true;
         frameId = requestAnimationFrame(tick);
       };
@@ -293,6 +396,7 @@ export default function PulseGrid() {
       };
 
       if (reduceMotion) {
+        updateShields();
         uniforms.uTime.value = 0;
         renderer.render(scene, camera); // static grid
       } else {

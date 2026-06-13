@@ -104,7 +104,7 @@ export default function Footer() {
   );
 
   return (
-    <>
+    <div ref={rootRef} style={{ display: "contents" }}>
       <section
         className="footer-cta st-section-glow st-cta-section"
         id="contact"
@@ -119,7 +119,7 @@ export default function Footer() {
         </div>
       </section>
 
-      <footer ref={rootRef} className="footer" aria-label="Site footer">
+      <footer className="footer" aria-label="Site footer">
         <div className="container">
           <div className="footer-top">
             <a href="#top" className="nav-logo" aria-label="Solve Trend — home">
@@ -201,6 +201,6 @@ export default function Footer() {
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 }

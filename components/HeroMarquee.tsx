@@ -1,4 +1,4 @@
-import * as React from "react";
+import Image from "next/image";
 
 type Service = { num: string; name: string; img: string; video?: string };
 
@@ -34,13 +34,20 @@ function Tile({
           autoPlay
           playsInline
         />
+      ) : dup ? (
+        <div
+          className="hero-strip-media hero-strip-media--dup"
+          style={{ backgroundImage: `url(${s.img})` }}
+          role="presentation"
+        />
       ) : (
-        <img
+        <Image
           className="hero-strip-media"
           src={s.img}
           alt=""
-          loading={priority ? "eager" : "lazy"}
-          fetchPriority={priority ? "high" : undefined}
+          fill
+          sizes="(max-width: 768px) 170px, 280px"
+          {...(priority ? { priority: true } : { loading: "lazy" })}
         />
       )}
       <div className="hero-strip-frost">
@@ -57,7 +64,7 @@ export default function HeroMarquee() {
       <div className="hero-strips-skew">
         <div className="hero-strips-track">
           {SERVICES.map((s, index) => (
-            <Tile key={s.num} s={s} priority={index < 3} />
+            <Tile key={s.num} s={s} priority={index === 0} />
           ))}
           {SERVICES.map((s) => (
             <Tile key={`dup-${s.num}`} s={s} dup />

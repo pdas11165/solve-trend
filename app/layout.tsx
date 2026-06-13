@@ -32,6 +32,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link
+          rel="preload"
+          as="image"
+          href="https://cdn.prod.website-files.com/6904c591abb4bd2b6a67271b/6904ca7a4abbe56dfff89585_hero-marquee-img-02.avif"
+          type="image/avif"
+        />
+        <link
           rel="preconnect"
           href="https://api.fontshare.com"
           crossOrigin="anonymous"

@@ -128,13 +128,29 @@ export default function Nav() {
           });
         });
 
-        ScrollTrigger.create({
-          trigger: ".dark-transition-wrapper",
-          start: "center center",
-          end: "center center",
-          onEnter: () => header.classList.add("nav-shell--chapter-pulse"),
-          onLeaveBack: () => header.classList.remove("nav-shell--chapter-pulse"),
-        });
+        let darkChapterSt: ScrollTrigger | undefined;
+        const bindDarkChapter = () => {
+          if (darkChapterSt) return true;
+          const darkTransition = document.querySelector(
+            ".dark-transition-wrapper"
+          );
+          if (!darkTransition) return false;
+          darkChapterSt = ScrollTrigger.create({
+            trigger: darkTransition,
+            start: "center center",
+            end: "center center",
+            onEnter: () => header.classList.add("nav-shell--chapter-pulse"),
+            onLeaveBack: () =>
+              header.classList.remove("nav-shell--chapter-pulse"),
+          });
+          return true;
+        };
+        if (!bindDarkChapter()) {
+          const retryId = window.setInterval(() => {
+            if (bindDarkChapter()) window.clearInterval(retryId);
+          }, 50);
+          window.setTimeout(() => window.clearInterval(retryId), 5000);
+        }
       });
 
       return () => mm.revert();
