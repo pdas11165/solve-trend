@@ -5,14 +5,15 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { DotGridArrow, DotGridIcon, Monogram } from "./Icons";
+import { FlipLink } from "@/components/ui/flip-links";
 import { useNavSurfaceTone } from "./useNavSurfaceTone";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#latest" },
-  { label: "About", href: "#expertise" },
+  { label: "Portfolio", href: "#projects" },
+  { label: "About", href: "#about" },
   { label: "Insights", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
@@ -223,22 +224,42 @@ export default function Nav() {
 
         <nav className="overlay-links" aria-label="Full menu">
           {NAV_LINKS.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+            <FlipLink
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="font-[family-name:var(--font-display)] font-extrabold uppercase tracking-tight text-white [font-size:clamp(2.5rem,8vw,5.5rem)] hover:text-[var(--red)]"
+            >
               {l.label}
-            </a>
+            </FlipLink>
           ))}
         </nav>
 
         <div className="overlay-socials" aria-label="Social media">
-          <a href="https://instagram.com" target="_blank" rel="noreferrer noopener">
+          <FlipLink
+            href="https://instagram.com"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="text-sm uppercase tracking-[0.1em] text-white/60 hover:text-white"
+          >
             Instagram
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer noopener">
+          </FlipLink>
+          <FlipLink
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="text-sm uppercase tracking-[0.1em] text-white/60 hover:text-white"
+          >
             LinkedIn
-          </a>
-          <a href="https://tiktok.com" target="_blank" rel="noreferrer noopener">
+          </FlipLink>
+          <FlipLink
+            href="https://tiktok.com"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="text-sm uppercase tracking-[0.1em] text-white/60 hover:text-white"
+          >
             TikTok
-          </a>
+          </FlipLink>
         </div>
       </div>
     </>

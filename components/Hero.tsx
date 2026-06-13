@@ -7,7 +7,7 @@ import { useGSAP } from "@gsap/react";
 import { DotGridArrow } from "./Icons";
 import HeroHeadline from "./HeroHeadline";
 import HeroMarquee from "./HeroMarquee";
-import PulseGrid from "./PulseGrid";
+import { BackgroundGradientGlow } from "./ui/background-gradient-glow";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -84,9 +84,7 @@ export default function Hero() {
       id="top"
       aria-label="Hero"
     >
-      <PulseGrid
-        shieldSelectors={[".hero-wordmark", ".hero-subtitle"]}
-      />
+      <BackgroundGradientGlow />
       <div className="hero-monument-wrap">
         <HeroHeadline />
         <a className="hero-cta-neo" href="#contact">

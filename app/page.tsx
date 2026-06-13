@@ -1,14 +1,12 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import CraftingSection from "@/components/CraftingSection";
-import IntroAnimation from "@/components/ui/scroll-morph-hero";
+import HowWeWorkSection from "@/components/HowWeWorkSection";
 import Services from "@/components/Services";
 import PhilosophySection from "@/components/PhilosophySection";
 import DarkTransition from "@/components/DarkTransition";
-import Expertise from "@/components/Expertise";
-import LatestWork from "@/components/LatestWork";
 import FAQ from "@/components/FAQ";
-import Testimonials from "@/components/Testimonials";
+import TestimonialShowcase from "@/components/TestimonialShowcase";
 import Footer from "@/components/Footer";
 import SectionReveal from "@/components/SectionReveal";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -25,30 +23,22 @@ export default function Page() {
           <Hero />
         </SectionReveal>
         <CraftingSection />
+        <HowWeWorkSection />
         <SectionReveal index={1} variant="none">
-          <IntroAnimation />
-        </SectionReveal>
-        <SectionReveal index={2} variant="none">
           <Services />
         </SectionReveal>
-        <SectionReveal index={3}>
+        <DarkTransition />
+        <SectionReveal index={2} variant="none">
           <PhilosophySection />
         </SectionReveal>
-        <DarkTransition />
         <div className="dark-shell">
-          <SectionReveal index={4} variant="clipReveal">
-            <Expertise />
+          <SectionReveal index={3} variant="fadeUp">
+            <TestimonialShowcase />
           </SectionReveal>
-          <SectionReveal index={5} variant="clipReveal">
-            <LatestWork />
-          </SectionReveal>
-          <SectionReveal index={6} variant="clipReveal">
+          <SectionReveal index={4} variant="none">
             <FAQ />
           </SectionReveal>
-          <SectionReveal index={7} variant="clipReveal">
-            <Testimonials />
-          </SectionReveal>
-          <SectionReveal index={8} variant="clipReveal">
+          <SectionReveal index={5} variant="none">
             <Footer />
           </SectionReveal>
         </div>
