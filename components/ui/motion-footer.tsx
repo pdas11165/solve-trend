@@ -395,10 +395,9 @@ export function CinematicFooter() {
 
       <div
         ref={wrapperRef}
-        id="contact"
         className="relative h-screen w-full"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
-        aria-label="Contact and site footer"
+        aria-label="Site footer"
       >
         <footer className="cinematic-footer-wrapper cinematic-footer-surface fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden">
           <div className="footer-aurora pointer-events-none absolute left-1/2 top-1/2 z-0 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px]" />

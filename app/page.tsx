@@ -4,10 +4,12 @@ import CraftingSection from "@/components/CraftingSection";
 import HowWeWorkSection from "@/components/HowWeWorkSection";
 import VisionExpertiseSection from "@/components/VisionExpertiseSection";
 import Services from "@/components/Services";
+import TrendShowcaseSection from "@/components/TrendShowcaseSection";
 import PhilosophySection from "@/components/PhilosophySection";
 import DarkTransition from "@/components/DarkTransition";
 import FAQ from "@/components/FAQ";
 import TestimonialShowcase from "@/components/TestimonialShowcase";
+import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import SectionReveal from "@/components/SectionReveal";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -33,16 +35,22 @@ export default function Page() {
         </SectionReveal>
         <DarkTransition />
         <SectionReveal index={3} variant="none">
+          <TrendShowcaseSection />
+        </SectionReveal>
+        <SectionReveal index={4} variant="none">
           <PhilosophySection />
         </SectionReveal>
         <div className="dark-shell">
-          <SectionReveal index={4} variant="fadeUp">
+          <SectionReveal index={5} variant="fadeUp">
             <TestimonialShowcase />
           </SectionReveal>
-          <SectionReveal index={5} variant="none">
+          <SectionReveal index={6} variant="none">
             <FAQ />
           </SectionReveal>
-          <SectionReveal index={6} variant="none">
+          <SectionReveal index={7} variant="none">
+            <ContactSection />
+          </SectionReveal>
+          <SectionReveal index={8} variant="none">
             <Footer />
           </SectionReveal>
         </div>
