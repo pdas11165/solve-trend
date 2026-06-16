@@ -32,12 +32,12 @@ export default function VisionExpertiseSection() {
           </div>
         </ContainerAnimated>
         <ContainerAnimated>
-          <h2 className="services-zoom-parallax__title">
+          <h2 className="services-zoom-parallax__title text-[#1A1A1A]">
             Your <span className="text-[#E8341A]">Vision</span>
           </h2>
         </ContainerAnimated>
         <ContainerAnimated>
-          <p className="services-zoom-parallax__title mt-1">our Expertise</p>
+          <p className="services-zoom-parallax__title mt-1 text-[#1A1A1A]">our Expertise</p>
         </ContainerAnimated>
 
         <ContainerAnimated className="my-4">

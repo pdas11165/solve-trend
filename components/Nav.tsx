@@ -96,9 +96,9 @@ export default function Nav() {
               header.classList.remove("nav-shell--scrolled");
             }
 
-            if (y > 120 && delta > 6) {
+            if (y > 180 && delta > 14) {
               header.classList.add("nav-shell--hidden");
-            } else if (delta < -4) {
+            } else if (delta < -10 || y <= 140) {
               header.classList.remove("nav-shell--hidden");
             }
 

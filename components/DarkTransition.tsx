@@ -94,8 +94,10 @@ export default function DarkTransition() {
 
         gsap.set(track, { x: -travel * p });
 
-        document.documentElement.classList.add("dark-mode-active");
-        document.body.style.backgroundColor = "rgb(8, 8, 8)";
+        if (p > 0) {
+          document.documentElement.classList.add("dark-mode-active");
+          document.body.style.backgroundColor = "rgb(8, 8, 8)";
+        }
 
         if (heading) {
           const headingP = gsap.utils.clamp(0, 1, p / 0.28);

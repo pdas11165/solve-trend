@@ -16,6 +16,12 @@ export default function Hero() {
 
   useGSAP(
     () => {
+      const section = root.current;
+      if (!section) return;
+
+      const monument = section.querySelector<HTMLElement>(".hero-monument-wrap");
+      const skew = section.querySelector<HTMLElement>(".hero-strips-skew");
+
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
@@ -44,32 +50,36 @@ export default function Hero() {
             "-=0.6"
           );
 
-        gsap.to(".hero-monument-wrap", {
-          yPercent: -18,
-          opacity: 0.25,
-          filter: "blur(4px)",
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
+        if (monument) {
+          gsap.to(monument, {
+            yPercent: -18,
+            opacity: 0.25,
+            filter: "blur(4px)",
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        }
 
-        gsap.to(".hero-strips-skew", {
-          rotateX: 7,
-          scale: 0.94,
-          y: 40,
-          transformPerspective: 1000,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
+        if (skew) {
+          gsap.to(skew, {
+            rotateX: 7,
+            scale: 0.94,
+            y: 40,
+            transformPerspective: 1000,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        }
       });
 
       return () => mm.revert();
