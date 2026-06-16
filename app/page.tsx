@@ -37,7 +37,7 @@ export default function Page() {
         <SectionReveal index={3} variant="fadeUp">
           <TrendShowcaseSection />
         </SectionReveal>
-        <SectionReveal index={4} variant="clipReveal">
+        <SectionReveal index={4} variant="none">
           <PhilosophySection />
         </SectionReveal>
         <div className="dark-shell">
