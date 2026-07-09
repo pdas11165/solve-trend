@@ -1,15 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import * as Accordion from "@radix-ui/react-accordion";
 import { Minus, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export interface FAQItem {
   id: number;
@@ -34,53 +29,12 @@ export default function ScrollFAQAccordion({
   questionClassName,
   answerClassName,
 }: ScrollFAQAccordionProps) {
-  const reduceMotion = useReducedMotion();
-  const [openItem, setOpenItem] = React.useState(
-    () => data[0]?.id.toString() ?? ""
-  );
-  const trackRef = React.useRef<HTMLDivElement>(null);
-  const pinRef = React.useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      const track = trackRef.current;
-      const pin = pinRef.current;
-      if (!track || !pin || data.length === 0 || reduceMotion === true) return;
-
-      const mm = gsap.matchMedia();
-
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        ScrollTrigger.create({
-          trigger: track,
-          start: "top top",
-          end: "bottom bottom",
-          pin: pin,
-          scrub: 0.3,
-          onUpdate: (self) => {
-            const idx = Math.min(
-              data.length - 1,
-              Math.floor(self.progress * data.length * 0.999)
-            );
-            setOpenItem(data[idx].id.toString());
-          },
-        });
-      });
-
-      return () => mm.revert();
-    },
-    { scope: trackRef, dependencies: [data, reduceMotion] }
-  );
-
-  const trackHeight =
-    reduceMotion === true ? undefined : `${data.length * 35 + 50}vh`;
+  // All items start closed; the user opens them by clicking (bug #21).
+  const [openItem, setOpenItem] = React.useState("");
 
   return (
-    <div
-      ref={trackRef}
-      className={cn("scroll-faq-accordion__track", className)}
-      style={trackHeight ? { height: trackHeight } : undefined}
-    >
-      <div ref={pinRef} className="scroll-faq-accordion__pin">
+    <div className={cn("scroll-faq-accordion__track", className)}>
+      <div className="scroll-faq-accordion__pin">
         {header ? (
           <div className="scroll-faq-accordion__header">{header}</div>
         ) : null}

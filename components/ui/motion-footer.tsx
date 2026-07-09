@@ -108,7 +108,7 @@ const STYLES = `
 
 .footer-giant-bg-text {
   font-family: var(--font-display);
-  font-size: 26vw;
+  font-size: 13vw;
   line-height: 0.75;
   font-weight: 900;
   letter-spacing: -0.05em;
@@ -407,7 +407,7 @@ export function CinematicFooter() {
             ref={giantTextRef}
             className="footer-giant-bg-text pointer-events-none absolute -bottom-[5vh] left-1/2 z-0 -translate-x-1/2 select-none whitespace-nowrap"
           >
-            SOLVE
+            SOLVE TREND
           </div>
 
           <div className="cinematic-footer-marquee-band absolute left-0 top-12 z-10 w-full -rotate-2 scale-110 overflow-hidden py-4 shadow-2xl backdrop-blur-md">

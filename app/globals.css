@@ -46,6 +46,13 @@
   --ease-spring:  cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth:  cubic-bezier(0.23, 1, 0.32, 1);
   --ease-card:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Rhythm — one vertical spacing scale for every section (bug #10) */
+  --section-pad:    clamp(88px, 9vw, 120px);
+  --section-pad-sm: clamp(56px, 6vw, 80px);
+
+  /* Type scale — shared section-title size so headings match sitewide (bug #14) */
+  --fs-section-title: clamp(2.25rem, 4.5vw, 3.5rem);
 }
 
 /* ---------- Reset ---------- */
@@ -89,7 +96,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 800; line-height
   display: inline-block;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--red);
@@ -235,11 +242,6 @@ html.dark-mode-active body {
   transform: translateY(0);
   transition: transform 0.45s var(--ease-smooth);
 }
-.nav-shell--hidden {
-  transform: translateY(calc(-100% - 12px));
-  pointer-events: none;
-}
-.nav-shell--hidden > * { pointer-events: none; }
 .nav-shell > * { pointer-events: auto; }
 .nav-shell .nav-logo {
   display: inline-flex;
@@ -353,7 +355,7 @@ html.dark-mode-active .nav-logo { color: #fff; }
 .nav-overlay {
   position: fixed;
   inset: 0;
-  background-color: #080808;
+  background-color: var(--bg-dark);
   z-index: 200;
   display: flex;
   flex-direction: column;
@@ -459,7 +461,7 @@ html.dark-mode-active .nav-logo { color: #fff; }
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 120px 0 0;
+  padding: var(--section-pad) 0 0;
   background: var(--bg-light);
 }
 .hero-monument-wrap {
@@ -517,7 +519,7 @@ html.dark-mode-active .nav-logo { color: #fff; }
   display: flex;
   gap: 18px;
   color: rgba(255, 255, 255, 0.4);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   z-index: 2;
@@ -884,7 +886,7 @@ html.dark-mode-active .nav-logo { color: #fff; }
   align-items: center;
   gap: 10px;
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -918,7 +920,7 @@ html.dark-mode-active .dark-transition-wrapper { background-color: var(--bg-dark
 /* Phase 1 — Creative | small box | Studio */
 .dark-transition-expand {
   position: relative;
-  height: 200vh;
+  height: 150vh; /* tighter reveal — was 200vh (bug #19) */
   z-index: 2;
 }
 .dark-transition-sticky {
@@ -953,7 +955,7 @@ html.dark-mode-active .dark-transition-wrapper { background-color: var(--bg-dark
   width: clamp(140px, 18vw, 280px);
   height: clamp(56px, 7vh, 96px);
   border-radius: 14px;
-  background-color: #080808;
+  background-color: var(--bg-dark);
   will-change: width, height, border-radius;
   overflow: hidden;
 }
@@ -961,7 +963,7 @@ html.dark-mode-active .dark-transition-wrapper { background-color: var(--bg-dark
 /* Phase 2 — horizontal featured projects (Qubix marquee) */
 .dark-projects-marquee {
   position: relative;
-  height: 400vh;
+  height: 300vh; /* tighter horizontal-scroll run — was 400vh (bug #19) */
   background-color: var(--bg-dark);
   z-index: 1;
 }
@@ -1129,7 +1131,7 @@ html.dark-mode-active .dark-transition-wrapper { background-color: var(--bg-dark
    EXPAND CARDS (Why Choose Us / Expertise)
    ========================================================================= */
 .expertise {
-  padding: 120px 0;
+  padding: var(--section-pad) 0;
 }
 .expertise .section-head {
   display: flex;
@@ -1142,7 +1144,7 @@ html.dark-mode-active .dark-transition-wrapper { background-color: var(--bg-dark
 .expertise h2 {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: var(--fs-section-title);
   color: #fff;
   max-width: 600px;
 }
@@ -1353,14 +1355,14 @@ body.expand-open { overflow: hidden; }
    LATEST WORK
    ========================================================================= */
 .latest {
-  padding: 120px 0;
+  padding: var(--section-pad) 0;
   background-color: var(--bg-dark);
 }
 .latest .section-head { margin-bottom: 56px; }
 .latest h2 {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: var(--fs-section-title);
   color: #fff;
   margin-top: 12px;
 }
@@ -1443,6 +1445,10 @@ body.expand-open { overflow: hidden; }
 .philosophy-section {
   background-color: var(--bg-dark);
   color: var(--text-dark);
+  /* Letter-scatter headings start translated far outside the section;
+     clip (not hidden) keeps them from widening the page without
+     breaking position: sticky. */
+  overflow-x: clip;
 }
 .philosophy-section--dark {
   padding: 0;
@@ -1578,7 +1584,7 @@ body.expand-open { overflow: hidden; }
 }
 .philosophy-glass-card__eyebrow {
   display: block;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--red);
@@ -1617,7 +1623,7 @@ body.expand-open { overflow: hidden; }
    TESTIMONIALS
    ========================================================================= */
 .testimonials {
-  padding: 120px 0;
+  padding: var(--section-pad) 0;
   background-color: var(--bg-dark);
   border-top: 1px solid var(--divider-dark);
 }
@@ -1628,7 +1634,7 @@ body.expand-open { overflow: hidden; }
 .testimonials h2 {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--fs-section-title);
   color: #fff;
 }
 .testimonials .lead { color: var(--muted-dark); }
@@ -1669,7 +1675,7 @@ body.expand-open { overflow: hidden; }
   font-size: 15px;
 }
 .testimonials__role {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted-dark);
 }
 .testimonials__dots {
@@ -1712,15 +1718,16 @@ body.expand-open { overflow: hidden; }
    FAQ
    ========================================================================= */
 .faq {
-  padding: 120px 0 0;
+  padding: var(--section-pad) 0 0;
   background-color: var(--bg-dark-2);
   scroll-margin-top: 96px;
+  overflow-x: clip; /* contain letter-scatter heading animation */
 }
 .faq .eyebrow { color: var(--red); }
 .faq h2 {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: var(--fs-section-title);
   color: #fff;
   margin-bottom: 40px;
   max-width: 720px;
@@ -1826,7 +1833,7 @@ body.expand-open { overflow: hidden; }
    ========================================================================= */
 .marquee-section {
   background-color: var(--bg-dark-3);
-  padding: 64px 0;
+  padding: var(--section-pad-sm) 0;
   overflow: hidden;
 }
 .marquee-track-wrap {
@@ -1861,7 +1868,7 @@ body.expand-open { overflow: hidden; }
    FOOTER CTA STRIP + FOOTER
    ========================================================================= */
 .footer-cta {
-  padding: 100px 0;
+  padding: var(--section-pad) 0;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -1913,7 +1920,7 @@ body.expand-open { overflow: hidden; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
-  padding: 56px 0;
+  padding: var(--section-pad-sm) 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 .footer-col h4 {
@@ -1937,7 +1944,7 @@ body.expand-open { overflow: hidden; }
   gap: 16px;
   flex-wrap: wrap;
   color: rgba(255, 255, 255, 0.45);
-  font-size: 13px;
+  font-size: 14px;
 }
 .footer-socials { display: flex; gap: 16px; }
 .footer-socials a {
@@ -2009,7 +2016,7 @@ body.expand-open { overflow: hidden; }
   max-width: 900px;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--fs-section-title);
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.02em;

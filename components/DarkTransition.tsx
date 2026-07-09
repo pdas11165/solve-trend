@@ -89,10 +89,33 @@ export default function DarkTransition() {
         }
       };
 
+      const projectImgs = gsap.utils.toArray<HTMLElement>(
+        ".dark-project-card__img",
+        track
+      );
+
       const applyMarqueeProgress = (p: number) => {
         const travel = Math.max(track.scrollWidth - viewport.clientWidth, 0);
 
         gsap.set(track, { x: -travel * p });
+
+        // Inner-image parallax: each image drifts against the track's
+        // horizontal travel, proportional to its distance from the
+        // viewport center. Desktop marquee layout only.
+        if (window.matchMedia("(min-width: 992px)").matches) {
+          const half = window.innerWidth / 2;
+          projectImgs.forEach((img) => {
+            const frame = img.parentElement;
+            if (!frame) return;
+            const r = frame.getBoundingClientRect();
+            const offset = gsap.utils.clamp(
+              -1,
+              1,
+              (r.left + r.width / 2 - half) / half
+            );
+            gsap.set(img, { xPercent: offset * -6, scale: 1.14 });
+          });
+        }
 
         if (p > 0) {
           document.documentElement.classList.add("dark-mode-active");
@@ -100,7 +123,9 @@ export default function DarkTransition() {
         }
 
         if (heading) {
-          const headingP = gsap.utils.clamp(0, 1, p / 0.28);
+          // Bring the heading in quickly so the section never reads as an
+          // empty black screen while it waits (bug #18).
+          const headingP = gsap.utils.clamp(0, 1, p / 0.15);
           gsap.set(heading, {
             xPercent: lerp(-200, -50, headingP),
             yPercent: lerp(200, -50, headingP),
@@ -133,7 +158,32 @@ export default function DarkTransition() {
         if (heading) gsap.set(heading, { xPercent: -50, yPercent: -50 });
         gsap.set(track, { x: 0, clearProps: "transform" });
         gsap.set(".dark-project-card--compact", { opacity: 1 });
+        gsap.set(projectImgs, { clearProps: "transform" });
       });
+
+      // Vertical (stacked) layout: gentle scrubbed y-parallax per image.
+      mm.add(
+        "(prefers-reduced-motion: no-preference) and (max-width: 991px)",
+        () => {
+          projectImgs.forEach((img) => {
+            gsap.fromTo(
+              img,
+              { yPercent: -6, scale: 1.12 },
+              {
+                yPercent: 6,
+                scale: 1.12,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: img.parentElement,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true,
+                },
+              }
+            );
+          });
+        }
+      );
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         if (heading) {

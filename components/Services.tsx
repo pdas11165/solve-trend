@@ -285,7 +285,7 @@ const services = [
 export default function Services() {
   return (
     <div id="services" className="min-h-screen w-full bg-[var(--bg-light)] selection:bg-[var(--red)] selection:text-white">
-      <div className="relative flex h-[60vh] flex-col items-center justify-center px-4">
+      <div className="relative flex h-[60vh] flex-col items-center justify-center overflow-x-clip px-4">
         <div
           aria-hidden="true"
           className={cx(

@@ -21,7 +21,7 @@ const COLUMN_Y_RANGES: [string, string][] = [
 export default function VisionExpertiseSection() {
   return (
     <section
-      className="vision-expertise relative bg-[#FAFAFA]"
+      className="vision-expertise relative bg-[var(--bg-light)]"
       aria-label="Your vision, our expertise"
     >
       <ContainerStagger className="relative z-[9999] -mb-12 place-self-center px-6 pt-12 text-center">

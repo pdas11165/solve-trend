@@ -339,7 +339,7 @@ export default function TrendShowcaseSection() {
 
   return (
     <section
-      className="relative min-h-screen w-full bg-[#030305] text-zinc-100 overflow-hidden selection:bg-cyan-900/50 flex flex-col items-center justify-center font-sans"
+      className="relative min-h-screen w-full bg-[var(--bg-dark)] text-zinc-100 overflow-hidden selection:bg-cyan-900/50 flex flex-col items-center justify-center font-sans"
       aria-label="Solve Trend vs traditional agencies"
     >
       <BackgroundGradient isCompetitor={isCompetitor} />

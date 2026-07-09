@@ -1,4 +1,5 @@
 import GradientBlobCard from "@/components/ui/gradient-bold-card";
+import { RevealText } from "@/components/ui/reveal-text";
 
 export default function ContactSection() {
   return (
@@ -12,9 +13,11 @@ export default function ContactSection() {
           <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--red)]">
             Get in touch
           </span>
-          <h2 className="mt-3 font-[family-name:var(--font-display)] text-[clamp(2rem,4vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.02em] text-white">
-            Ready to start your next project?
-          </h2>
+          <RevealText
+            as="h2"
+            text="Ready to start your next project?"
+            className="mt-3 block font-[family-name:var(--font-display)] text-[length:var(--fs-section-title)] font-extrabold leading-[1.05] tracking-[-0.02em] text-white"
+          />
           <p className="mt-4 max-w-lg text-base leading-relaxed text-[var(--muted-dark)]">
             Send us your details and the services you need. Customer inquiries go straight to our
             team inbox so we can follow up quickly.

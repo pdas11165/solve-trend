@@ -30,7 +30,6 @@ export default function Nav() {
   const [open, setOpen] = React.useState(false);
   const headerRef = React.useRef<HTMLElement>(null);
   const overlayRef = React.useRef<HTMLDivElement>(null);
-  const lastScrollY = React.useRef(0);
 
   useNavSurfaceTone(headerRef);
 
@@ -83,26 +82,19 @@ export default function Nav() {
       });
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // The nav stays visible at all times (bug #1) — only its surface
+        // treatment changes once the page is scrolled.
         ScrollTrigger.create({
           start: 0,
           end: "max",
           onUpdate: (self) => {
             const y = self.scroll();
-            const delta = y - lastScrollY.current;
 
             if (y > 80) {
               header.classList.add("nav-shell--scrolled");
             } else {
               header.classList.remove("nav-shell--scrolled");
             }
-
-            if (y > 180 && delta > 14) {
-              header.classList.add("nav-shell--hidden");
-            } else if (delta < -10 || y <= 140) {
-              header.classList.remove("nav-shell--hidden");
-            }
-
-            lastScrollY.current = y;
           },
         });
 

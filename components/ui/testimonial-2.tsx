@@ -4,6 +4,7 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { RevealText } from "@/components/ui/reveal-text";
 
 interface Testimonial {
   imgSrc: string;
@@ -115,7 +116,7 @@ export const AnimatedTestimonialGrid = ({
           </div>
         )}
         <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-[var(--foreground)] mb-4 max-w-3xl">
-          {title}
+          {typeof title === "string" ? <RevealText text={title} /> : title}
         </h2>
         <p className="max-w-xl text-lg text-[var(--muted-foreground)] mb-8">
           {description}
