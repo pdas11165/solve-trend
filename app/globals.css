@@ -1073,8 +1073,15 @@ html.dark-mode-active .dark-transition-wrapper { background-color: var(--bg-dark
 }
 
 @media (max-width: 991px) {
-  .dark-transition-word { display: none; }
-  .dark-transition-row { gap: 0; }
+  .dark-transition-word {
+    font-size: clamp(1.25rem, 7vw, 2.25rem);
+    letter-spacing: -0.06rem;
+  }
+  .dark-transition-row { gap: 0.35rem; }
+  .dark-card {
+    width: clamp(96px, 22vw, 160px);
+    height: clamp(40px, 5.5vh, 64px);
+  }
   .dark-projects-heading-wrap { padding-left: 24px; height: auto; margin-bottom: 24px; }
   .dark-projects-heading {
     position: static;
@@ -2003,10 +2010,10 @@ body.expand-open { overflow: hidden; }
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: var(--text-light);
+  color: #0a0a0a;
   opacity: 0;
 }
 
@@ -2471,107 +2478,3 @@ body.expand-open { overflow: hidden; }
   .crafting-heading, .crafting-badge { opacity: 1 !important; transform: none !important; }
 }
 
-/* =========================================================================
-   HOW WE WORK — split scroll section
-   ========================================================================= */
-
-.how-we-work {
-  background-color: var(--bg-light);
-  color: var(--text-light);
-  padding: 80px 0 0;
-  overflow-x: clip;
-}
-
-.how-we-work__intro {
-  margin-bottom: 48px;
-}
-
-.how-we-work .eyebrow {
-  color: var(--red);
-}
-
-.how-we-work__heading {
-  margin: 12px 0 0;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.how-we-work__sub {
-  margin: 16px 0 0;
-  max-width: 520px;
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 2vw, 1.125rem);
-  line-height: 1.6;
-  color: var(--muted-light);
-}
-
-.how-we-work__track {
-  position: relative;
-  width: 100%;
-}
-
-.how-we-work__split {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  width: 100%;
-}
-
-.how-we-work__left {
-  width: 100%;
-  min-width: 0;
-}
-
-.how-we-work__right {
-  width: 100%;
-  min-width: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 0 24px 48px;
-}
-
-.how-we-work__grid {
-  margin-top: 0 !important;
-}
-
-.how-we-work__grid > div {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-  padding-top: 10vh !important;
-  padding-bottom: 10vh !important;
-}
-
-@media (min-width: 1024px) {
-  .how-we-work__split {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-
-  .how-we-work__right {
-    align-items: flex-start;
-    padding: 0 48px 0 24px;
-  }
-
-  .how-we-work__left {
-    padding-right: 12px;
-  }
-}
-
-@media (max-width: 1023px) {
-  .how-we-work__track {
-    min-height: auto !important;
-  }
-
-  .how-we-work__grid > div {
-    padding-top: 6vh !important;
-    padding-bottom: 6vh !important;
-  }
-
-  .how-we-work__right {
-    padding-top: 24px;
-  }
-}

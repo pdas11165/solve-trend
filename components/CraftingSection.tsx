@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import ResultsCards from "./ResultsCards";
-import PulseGrid from "./PulseGrid";
 import { useParallaxLayers } from "@/lib/scroll-parallax";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -165,14 +164,6 @@ export default function CraftingSection() {
       id="about"
       aria-label="About Solve Trend"
     >
-      <PulseGrid
-        shieldSelectors={[
-          ".crafting-heading",
-          ".crafting-badge--strategy",
-          ".crafting-badge--creativity",
-          ".crafting-badge--technology",
-        ]}
-      />
       <div className="container crafting-section__inner">
         <div className="crafting-intro">
           <h2 className="crafting-heading">

@@ -10,7 +10,7 @@ const PILLS: { word: string; accent: Accent }[] = [
   { word: "intelligent system", accent: "red" },
 ];
 
-const ROTATING_SERVICES = ["Brand", "Websites", "UI/UX", "Strategy", "Motion", "Content"];
+const ROTATING_SERVICES = ["Trend", "Brand", "Websites", "UI/UX", "Strategy", "Motion", "Content"];
 
 function shiftStyle(
   order: number,
@@ -25,33 +25,32 @@ function shiftStyle(
 }
 
 function RotatingTrend() {
-  const [active, setActive] = React.useState(false);
+  const [paused, setPaused] = React.useState(false);
   const [index, setIndex] = React.useState(0);
+  const currentWord = ROTATING_SERVICES[index];
+  const isRotating = currentWord !== "Trend";
 
   React.useEffect(() => {
-    if (!active) {
-      setIndex(0);
-      return;
-    }
+    if (paused) return;
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % ROTATING_SERVICES.length);
     }, 1100);
     return () => clearInterval(id);
-  }, [active]);
+  }, [paused]);
 
   return (
     <span
-      className={`hero-trend${active ? " is-rotating" : ""}`}
+      className={`hero-trend${isRotating ? " is-rotating" : ""}`}
       tabIndex={0}
       role="text"
       aria-label="Trend"
-      onMouseEnter={() => setActive(true)}
-      onMouseLeave={() => setActive(false)}
-      onFocus={() => setActive(true)}
-      onBlur={() => setActive(false)}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
     >
-      <span className="hero-trend-inner" key={active ? `s-${index}` : "trend"}>
-        {active ? ROTATING_SERVICES[index] : "Trend"}
+      <span className="hero-trend-inner" key={`s-${index}`}>
+        {currentWord}
       </span>
     </span>
   );

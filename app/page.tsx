@@ -1,7 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import CraftingSection from "@/components/CraftingSection";
-import HowWeWorkSection from "@/components/HowWeWorkSection";
 import VisionExpertiseSection from "@/components/VisionExpertiseSection";
 import Services from "@/components/Services";
 import TrendShowcaseSection from "@/components/TrendShowcaseSection";
@@ -26,7 +25,6 @@ export default function Page() {
           <Hero />
         </SectionReveal>
         <CraftingSection />
-        <HowWeWorkSection />
         <SectionReveal index={1} variant="fadeUp">
           <VisionExpertiseSection />
         </SectionReveal>
