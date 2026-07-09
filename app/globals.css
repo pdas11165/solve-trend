@@ -2295,7 +2295,7 @@ body.expand-open { overflow: hidden; }
 
 .crafting-marquee__track {
   display: flex;
-  width: 200vw;
+  width: max-content;
   animation: craftingMarquee 45s linear infinite reverse;
 }
 
@@ -2304,7 +2304,8 @@ body.expand-open { overflow: hidden; }
   align-items: center;
   justify-content: space-around;
   gap: 10px;
-  width: 100vw;
+  width: max-content;
+  min-width: 100vw;
   flex-shrink: 0;
   padding: 20px 0 0;
 }
