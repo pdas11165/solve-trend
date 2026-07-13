@@ -14,7 +14,7 @@ export default function MagneticButtons() {
     mm.add("(max-width: 768px)", () => {});
 
     mm.add("(prefers-reduced-motion: no-preference) and (min-width: 769px)", () => {
-      const selectors = ".btn--primary, .pill-cta, .hero-cta-neo";
+      const selectors = ".btn--primary, .pill-cta, .hero-cta-neo, .magnetic-cta";
       const buttons = gsap.utils.toArray<HTMLElement>(selectors);
       const cleanups: Array<() => void> = [];
 

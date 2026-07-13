@@ -205,26 +205,31 @@ const GradientBlobCard: React.FC = () => {
             </p>
           ) : null}
 
-          <Button
-            type="submit"
-            disabled={formState === "submitting"}
-            className={cn(
-              "mt-1 h-12 w-full rounded-lg bg-white text-base font-bold text-black transition-all duration-300 hover:border hover:border-[rgba(255,0,88,0.45)] hover:bg-[#ffcf4d] hover:shadow-[0_8px_24px_rgba(255,188,0,0.25)]",
-              formState === "submitting" && "opacity-80",
-            )}
-          >
-            {formState === "submitting" ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
-                Sending...
-              </>
-            ) : (
-              <>
-                <Send className="mr-2 h-4 w-4" aria-hidden="true" />
-                Send inquiry
-              </>
-            )}
-          </Button>
+          <div className="magnetic-cta mt-1">
+            <Button
+              type="submit"
+              disabled={formState === "submitting"}
+              className={cn(
+                "group/send h-12 w-full rounded-lg bg-white text-base font-bold text-black transition-all duration-300 hover:border hover:border-[rgba(255,0,88,0.45)] hover:bg-[#ffcf4d] hover:shadow-[0_8px_24px_rgba(255,188,0,0.25)]",
+                formState === "submitting" && "opacity-80",
+              )}
+            >
+              {formState === "submitting" ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send
+                    className="mr-2 h-4 w-4 transition-transform duration-300 ease-out group-hover/send:-translate-y-0.5 group-hover/send:translate-x-1 motion-reduce:transform-none"
+                    aria-hidden="true"
+                  />
+                  Send inquiry
+                </>
+              )}
+            </Button>
+          </div>
         </form>
       </div>
 

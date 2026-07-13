@@ -1,10 +1,15 @@
 "use client";
 
 import * as React from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { ScrollCharacterText } from "@/components/ui/text-scroll-animation";
 import ScrollFAQAccordion, {
   type FAQItem,
 } from "@/components/ui/scroll-faqaccordion";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const FAQ_DATA: FAQItem[] = [
   {
@@ -29,7 +34,7 @@ const FAQ_DATA: FAQItem[] = [
     id: 4,
     question: "What is your pricing?",
     answer:
-      "Projects start at CAD $18k for focused work and scale into the six figures for full brand-and-build engagements. We scope after a discovery call.",
+      "Our Business Launch Package starts at $3,000/month — branding, logo, brand guidelines, website, and three months of social media marketing. See our pricing section above for all tiers; custom enterprise engagements are scoped after a discovery call.",
   },
   {
     id: 5,
@@ -41,6 +46,33 @@ const FAQ_DATA: FAQItem[] = [
 
 export default function FAQ() {
   const rootRef = React.useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {});
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.from(".scroll-faq-accordion__item", {
+          opacity: 0,
+          y: 28,
+          duration: 0.7,
+          stagger: 0.09,
+          ease: "power3.out",
+          clearProps: "transform,opacity",
+          scrollTrigger: {
+            trigger: ".scroll-faq-accordion__list",
+            start: "top 80%",
+            once: true,
+          },
+        });
+      });
+
+      return () => mm.revert();
+    },
+    { scope: rootRef }
+  );
 
   return (
     <section ref={rootRef} className="faq" id="faq" aria-label="Frequently asked questions">

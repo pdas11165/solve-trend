@@ -3,8 +3,13 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { cn } from "@/lib/utils";
 import { RevealText } from "@/components/ui/reveal-text";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 interface Testimonial {
   imgSrc: string;
@@ -20,6 +25,12 @@ interface AnimatedTestimonialGridProps {
   ctaHref: string;
   className?: string;
 }
+
+/**
+ * Per-avatar scroll drift in px, alternating direction and varying magnitude
+ * so the floating portraits move at different speeds (depth parallax).
+ */
+const PARALLAX_SPEEDS = [-90, 50, -35, 75, -55, 40, -70, 60, -30, 80, -45, 55, -65, 45, -60];
 
 const imagePositions = [
   { top: "5%", left: "15%", className: "hidden lg:block w-24 h-24" },
@@ -78,35 +89,76 @@ export const AnimatedTestimonialGrid = ({
   ctaHref,
   className,
 }: AnimatedTestimonialGridProps) => {
+  const rootRef = React.useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {});
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.utils
+          .toArray<HTMLElement>(".testimonial-parallax-item")
+          .forEach((item) => {
+            const speed = Number(item.dataset.parallaxSpeed ?? 0);
+            gsap.fromTo(
+              item,
+              { y: -speed },
+              {
+                y: speed,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: rootRef.current,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 1,
+                },
+              }
+            );
+          });
+      });
+
+      return () => mm.revert();
+    },
+    { scope: rootRef }
+  );
+
   return (
     <div
+      ref={rootRef}
       className={cn(
         "relative w-full max-w-7xl mx-auto py-32 sm:py-40 px-4 min-h-[520px]",
         className
       )}
     >
       {testimonials.slice(0, imagePositions.length).map((testimonial, index) => (
-        <motion.div
+        <div
           key={index}
-          className={cn("absolute rounded-lg shadow-xl", imagePositions[index].className)}
+          className={cn("testimonial-parallax-item absolute", imagePositions[index].className)}
           style={{
             top: imagePositions[index].top,
             left: imagePositions[index].left,
             right: imagePositions[index].right,
             bottom: imagePositions[index].bottom,
           }}
-          variants={getImageVariants(index)}
-          initial="initial"
-          animate="animate"
-          whileHover={{ scale: 1.1, zIndex: 20 }}
+          data-parallax-speed={PARALLAX_SPEEDS[index % PARALLAX_SPEEDS.length]}
         >
-          <motion.img
-            src={testimonial.imgSrc}
-            alt={testimonial.alt}
-            className="w-full h-full object-cover rounded-lg"
-            animate={getFloatingAnimation(index)}
-          />
-        </motion.div>
+          <motion.div
+            className="relative h-full w-full rounded-lg shadow-xl"
+            variants={getImageVariants(index)}
+            initial="initial"
+            animate="animate"
+            whileHover={{ scale: 1.1, zIndex: 20 }}
+          >
+            <motion.img
+              src={testimonial.imgSrc}
+              alt={testimonial.alt}
+              className="w-full h-full object-cover rounded-lg"
+              animate={getFloatingAnimation(index)}
+            />
+          </motion.div>
+        </div>
       ))}
 
       <div className="relative z-10 flex flex-col items-center text-center">

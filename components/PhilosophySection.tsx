@@ -41,6 +41,23 @@ export default function PhilosophySection() {
             once: true,
           },
         });
+
+        // The grid texture drifts against the scroll direction; the pattern
+        // repeats every 54px so no edges are ever exposed.
+        gsap.fromTo(
+          ".philosophy-section__intro-grid",
+          { backgroundPosition: "0px 0px, 0px 0px" },
+          {
+            backgroundPosition: "0px -108px, 0px -108px",
+            ease: "none",
+            scrollTrigger: {
+              trigger: intro,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1,
+            },
+          }
+        );
       });
 
       ScrollTrigger.refresh();

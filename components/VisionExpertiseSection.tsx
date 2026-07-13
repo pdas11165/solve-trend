@@ -1,5 +1,10 @@
 "use client";
 
+import * as React from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+import { useGSAP } from "@gsap/react";
 import {
   ContainerAnimated,
   ContainerScroll,
@@ -12,6 +17,8 @@ import { Button } from "@/components/ui/button";
 import { VISION_GALLERY_COLUMNS } from "@/lib/vision-gallery";
 import { DotGridArrow } from "./Icons";
 
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
+
 const COLUMN_Y_RANGES: [string, string][] = [
   ["-10%", "2%"],
   ["15%", "5%"],
@@ -19,8 +26,43 @@ const COLUMN_Y_RANGES: [string, string][] = [
 ];
 
 export default function VisionExpertiseSection() {
+  const rootRef = React.useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {});
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        SplitText.create(".vision-split-title", {
+          type: "words",
+          mask: "words",
+          autoSplit: true,
+          onSplit(self) {
+            return gsap.from(self.words, {
+              yPercent: 120,
+              duration: 0.8,
+              stagger: 0.06,
+              ease: "power4.out",
+              scrollTrigger: {
+                trigger: rootRef.current,
+                start: "top 75%",
+                once: true,
+              },
+            });
+          },
+        });
+      });
+
+      return () => mm.revert();
+    },
+    { scope: rootRef }
+  );
+
   return (
     <section
+      ref={rootRef}
       className="vision-expertise relative bg-[var(--bg-light)]"
       aria-label="Your vision, our expertise"
     >
@@ -31,14 +73,12 @@ export default function VisionExpertiseSection() {
             <span>OUR EXPERTISE</span>
           </div>
         </ContainerAnimated>
-        <ContainerAnimated>
-          <h2 className="services-zoom-parallax__title text-[#1A1A1A]">
-            Your <span className="text-[#E8341A]">Vision</span>
-          </h2>
-        </ContainerAnimated>
-        <ContainerAnimated>
-          <p className="services-zoom-parallax__title mt-1 text-[#1A1A1A]">our Expertise</p>
-        </ContainerAnimated>
+        <h2 className="vision-split-title services-zoom-parallax__title text-[#1A1A1A]">
+          Your <span className="text-[#E8341A]">Vision</span>
+        </h2>
+        <p className="vision-split-title services-zoom-parallax__title mt-1 text-[#1A1A1A]">
+          our Expertise
+        </p>
 
         <ContainerAnimated className="my-4">
           <p className="mx-auto max-w-lg text-sm leading-relaxed tracking-tight text-[#555] md:text-base">

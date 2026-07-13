@@ -110,6 +110,7 @@ const STYLES = `
   font-family: var(--font-display);
   font-size: 13vw;
   line-height: 0.75;
+  bottom: 1rem;
   font-weight: 900;
   letter-spacing: -0.05em;
   color: transparent;
@@ -117,6 +118,13 @@ const STYLES = `
   background: linear-gradient(180deg, color-mix(in oklch, var(--foreground) 10%, transparent) 0%, transparent 60%);
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+@media (max-width: 767px) {
+  .footer-giant-bg-text {
+    font-size: 16vw;
+    bottom: 13rem;
+  }
 }
 
 .footer-text-glow {
@@ -405,7 +413,7 @@ export function CinematicFooter() {
 
           <div
             ref={giantTextRef}
-            className="footer-giant-bg-text pointer-events-none absolute -bottom-[5vh] left-1/2 z-0 -translate-x-1/2 select-none whitespace-nowrap"
+            className="footer-giant-bg-text pointer-events-none absolute inset-x-0 z-0 select-none whitespace-nowrap text-center"
           >
             SOLVE TREND
           </div>
