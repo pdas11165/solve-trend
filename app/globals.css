@@ -466,7 +466,9 @@ html.dark-mode-active .nav-logo { color: #fff; }
 }
 .hero-monument-wrap {
   position: relative;
-  z-index: 2;
+  /* Above .hero-strips (z 2) so orbiting cards pass behind the headline,
+     subtitle, and CTA instead of covering them. */
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -717,9 +719,20 @@ html.dark-mode-active .nav-logo { color: #fff; }
   z-index: 2;
   width: 100%;
   overflow: hidden;
+  /* Paint room for the wave peak (tiles scale up to 1.15 from their bottom
+     edge) without shifting the hero layout. */
+  padding-top: 90px;
+  margin-top: -90px;
   padding-bottom: 0;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+/* While the strip morphs into the orbit ring, tiles fly far outside the
+   strip box — release the clip and the edge fade for that phase. */
+.hero-strips--morphing {
+  overflow: visible;
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 .hero-strips-skew {
   will-change: transform;
@@ -727,29 +740,28 @@ html.dark-mode-active .nav-logo { color: #fff; }
   transform-origin: center bottom;
   perspective: 1000px;
 }
+/* Track motion, hover pause, and per-tile wave scaling are all driven by
+   GSAP in Hero.tsx (a CSS keyframe here would fight the inline transforms). */
 .hero-strips-track {
   display: flex;
   gap: 16px;
   align-items: flex-end;
   width: max-content;
   padding: 0 8px;
-  animation: heroStripScroll 45s linear infinite;
-}
-.hero-strips:hover .hero-strips-track { animation-play-state: paused; }
-@keyframes heroStripScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
 }
 
 .hero-strip {
   position: relative;
   flex: 0 0 auto;
   width: clamp(170px, 17vw, 280px);
-  height: clamp(300px, 50vh, 560px);
+  height: clamp(280px, 42vh, 500px);
   border-radius: 24px 24px 0 0;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.08);
   transition: border-color 0.4s var(--ease-smooth);
+  will-change: transform;
+  /* Wave scaling grows tiles upward from their bottom edge (mountain shape) */
+  transform-origin: 50% 100%;
 }
 .hero-strip-media {
   position: absolute;
@@ -796,13 +808,22 @@ html.dark-mode-active .nav-logo { color: #fff; }
   font-weight: 800;
   font-size: clamp(1.05rem, 1.4vw, 1.5rem);
 }
+/* Mobile: narrower cards and a tighter gap so at least three tiles share
+   the screen, and the wave peak clears the CTA with room to spare. */
+@media (max-width: 768px) {
+  .hero-strips-track { gap: 10px; }
+  .hero-strip {
+    width: clamp(96px, 29vw, 150px);
+    height: clamp(200px, 26vh, 280px);
+  }
+}
+
 /* Hover stays fully inside the tile — no outward growth, so nothing escapes the row */
 .hero-strip:hover { border-color: rgba(240, 50, 35, 0.5); }
 .hero-strip:hover .hero-strip-media { transform: scale(1.07); }
 .hero-strip:hover .hero-strip-frost { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-strips-track { animation: none; }
   .hero-strip-media, .hero-strip-frost { transition: none; }
 }
 
