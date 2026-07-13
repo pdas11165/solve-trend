@@ -8,6 +8,7 @@ import PhilosophySection from "@/components/PhilosophySection";
 import DarkTransition from "@/components/DarkTransition";
 import FAQ from "@/components/FAQ";
 import TestimonialShowcase from "@/components/TestimonialShowcase";
+import PricingSection from "@/components/PricingSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import SectionReveal from "@/components/SectionReveal";
@@ -42,13 +43,16 @@ export default function Page() {
           <SectionReveal index={5} variant="fadeUp">
             <TestimonialShowcase />
           </SectionReveal>
-          <SectionReveal index={6} variant="fadeUp">
-            <FAQ />
+          <SectionReveal index={6} variant="none">
+            <PricingSection />
           </SectionReveal>
           <SectionReveal index={7} variant="fadeUp">
+            <FAQ />
+          </SectionReveal>
+          <SectionReveal index={8} variant="fadeUp">
             <ContactSection />
           </SectionReveal>
-          <SectionReveal index={8} variant="none">
+          <SectionReveal index={9} variant="none">
             <Footer />
           </SectionReveal>
         </div>

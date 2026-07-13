@@ -11,11 +11,12 @@ import { useNavSurfaceTone } from "./useNavSurfaceTone";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const NAV_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#projects" },
-  { label: "About", href: "#about" },
-  { label: "Insights", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/#services" },
+  { label: "Portfolio", href: "/#projects" },
+  { label: "About", href: "/#about" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "Insights", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const NAV_LOGO_SIZE = Math.round(28 * 1.3);
@@ -99,7 +100,9 @@ export default function Nav() {
         });
 
         NAV_LINKS.forEach(({ href }) => {
-          const section = document.querySelector(href);
+          const hashIndex = href.indexOf("#");
+          if (hashIndex === -1) return;
+          const section = document.querySelector(href.slice(hashIndex));
           if (!section) return;
 
           ScrollTrigger.create({
@@ -154,7 +157,7 @@ export default function Nav() {
   return (
     <>
       <header ref={headerRef} className="nav-shell" aria-label="Primary">
-        <a href="#top" className="nav-logo" aria-label="Solve Trend — home">
+        <a href="/#top" className="nav-logo" aria-label="Solve Trend — home">
           <Monogram size={NAV_LOGO_SIZE} />
           <span className="wordmark" style={{ fontSize: NAV_WORDMARK_SIZE }}>
             solve trend
@@ -171,7 +174,7 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
-          <a className="pill-cta" href="#contact">
+          <a className="pill-cta" href="/#contact">
             Start a project
             <DotGridArrow />
           </a>
@@ -198,7 +201,7 @@ export default function Nav() {
         aria-label="Menu"
       >
         <div className="overlay-top">
-          <a href="#top" className="nav-logo" onClick={() => setOpen(false)}>
+          <a href="/#top" className="nav-logo" onClick={() => setOpen(false)}>
             <Monogram size={NAV_LOGO_SIZE} />
             <span className="wordmark" style={{ fontSize: NAV_WORDMARK_SIZE }}>
               solve trend
