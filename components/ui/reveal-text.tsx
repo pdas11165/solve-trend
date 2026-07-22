@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { cn } from "@/lib/utils";
 
 const container: Variants = {
   hidden: {},

@@ -2689,3 +2689,26 @@ body.expand-open { overflow: hidden; }
   .crafting-heading, .crafting-badge { opacity: 1 !important; transform: none !important; }
 }
 
+/* =========================================================================
+   Webflow-agency micro-interactions (polish pass)
+   ========================================================================= */
+
+/* Image/video hover-zoom: put .hover-zoom on an overflow-hidden frame whose
+   DIRECT child is the media. Scoped to direct children so it never fights
+   framer-motion transforms on nested elements. */
+.hover-zoom { overflow: hidden; }
+.hover-zoom > img,
+.hover-zoom > video {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.hover-zoom:hover > img,
+.hover-zoom:hover > video { transform: scale(1.05); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-zoom > img,
+  .hover-zoom > video { transition: none; }
+  .hover-zoom:hover > img,
+  .hover-zoom:hover > video { transform: none; }
+}
+

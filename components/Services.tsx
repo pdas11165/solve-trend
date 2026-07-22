@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { RevealText } from "@/components/ui/reveal-text";
 import { DotGridArrow } from "./Icons";
 
 const HERO_CDN = "https://cdn.prod.website-files.com/6904c591abb4bd2b6a67271b";
@@ -196,7 +197,7 @@ function ServiceAccordion() {
                   className="overflow-hidden"
                 >
                   <div className="pb-6">
-                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-black/[0.04]">
+                    <div className="hover-zoom relative aspect-[4/3] w-full rounded-xl bg-black/[0.04]">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={service.imageUrl}
@@ -253,9 +254,11 @@ export default function Services() {
             <span className="services-brand-dot" aria-hidden="true" />
             <span>What We&rsquo;re Good At</span>
           </div>
-          <h2 className="font-[family-name:var(--font-display)] text-4xl font-extrabold tracking-tight text-[#1A1A1A] md:text-5xl">
-            Eight disciplines, one team
-          </h2>
+          <RevealText
+            as="h2"
+            text="Eight disciplines, one team"
+            className="font-[family-name:var(--font-display)] text-4xl font-extrabold tracking-tight text-[#1A1A1A] md:text-5xl"
+          />
           <p className="mt-4 text-[15px] leading-relaxed text-[#555] md:text-base">
             <span className="hidden md:inline">Hover a discipline</span>
             <span className="md:hidden">Tap a discipline</span> to see what it
@@ -317,7 +320,7 @@ export default function Services() {
         <div className="mt-14 flex">
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 rounded-full bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
+            className="magnetic-cta group inline-flex items-center gap-2 rounded-full bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
           >
             Start a project
             <DotGridArrow />
