@@ -2,15 +2,16 @@ import Image from "next/image";
 
 type Service = { num: string; name: string; img: string; video?: string };
 
-// Placeholder imagery borrowed from Bungee — to be replaced with real assets later.
-const CDN = "https://cdn.prod.website-files.com/6904c591abb4bd2b6a67271b";
+// Real selected-works imagery from public/projects. The three video-backed
+// disciplines use poster frames captured from their clips (kept static here
+// so the hero never loads ~34MB of video above the fold).
 const SERVICES: Service[] = [
-  { num: "01", name: "Brand Identity", img: `${CDN}/6904ca7a4abbe56dfff89585_hero-marquee-img-02.avif` },
-  { num: "02", name: "Web Development", img: `${CDN}/6904ca7a4abbe56dfff89567_hero-marquee-img-04.avif` },
-  { num: "03", name: "UI/UX Design", img: `${CDN}/6904ca7a4abbe56dfff8956d_hero-marquee-img-05.avif` },
-  { num: "04", name: "Strategy", img: `${CDN}/6904ca7a4abbe56dfff89573_hero-marquee-img-06.avif` },
-  { num: "05", name: "Motion", img: `${CDN}/6904ca7a4abbe56dfff89578_hero-marquee-img-07.avif` },
-  { num: "06", name: "Content Strategy", img: `${CDN}/6904ca7a4abbe56dfff8957d_hero-marquee-img-08.avif` },
+  { num: "01", name: "Brand Strategy", img: "/projects/brand-strategy-poster.jpg" },
+  { num: "02", name: "Brand Identity", img: "/projects/brand-identity-hero.jpg" },
+  { num: "03", name: "Web Development", img: "/projects/web-development-hero.jpg" },
+  { num: "04", name: "E-Commerce", img: "/projects/ecommerce-hero.jpg" },
+  { num: "05", name: "Motion", img: "/projects/motion-poster.jpg" },
+  { num: "06", name: "AI Automation", img: "/projects/ai-automation-poster.jpg" },
 ];
 
 function Tile({
