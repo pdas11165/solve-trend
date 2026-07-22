@@ -16,10 +16,12 @@ import Footer from "@/components/Footer";
 import SectionReveal from "@/components/SectionReveal";
 import ScrollProgress from "@/components/ScrollProgress";
 import MagneticButtons from "@/components/MagneticButtons";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export default function Page() {
   return (
     <>
+      <SmoothScroll />
       <ScrollProgress />
       <MagneticButtons />
       <Nav />

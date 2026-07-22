@@ -2706,6 +2706,20 @@ body.expand-open { overflow: hidden; }
 .hover-zoom:hover img,
 .hover-zoom:hover video { transform: scale(1.05); }
 
+/* Lenis smooth-scroll: required base styles. `.lenis.lenis-smooth` overrides
+   the html { scroll-behavior: smooth } reset while smooth-scroll is active. */
+html.lenis,
+html.lenis body { height: auto; }
+/* Lenis controls scrolling once active, so drop the native smooth behaviour
+   (the reset's scroll-behavior:smooth) to avoid double-smoothing programmatic
+   scrolls. Only bites when the .lenis class is present — i.e. never under
+   reduced motion, where Lenis is not initialised. */
+html.lenis { scroll-behavior: auto !important; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
 /* Velocity marquee: outlined display type on the dark band. */
 .velocity-marquee-text {
   font-family: var(--font-display);
