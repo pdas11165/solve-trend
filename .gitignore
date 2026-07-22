@@ -42,3 +42,9 @@ next-env.d.ts
 e2e/test-results/
 playwright-report/
 test-results/
+
+# raw source assets (duplicates of the optimized copies in public/projects)
+/Hero Section/
+
+# local agent config / generated docs
+/.claude/

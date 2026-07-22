@@ -50,6 +50,7 @@ function Tile({
           {...(priority ? { priority: true } : { loading: "lazy" })}
         />
       )}
+      <div className="hero-strip-glass" aria-hidden="true" />
       <div className="hero-strip-frost">
         <span className="hero-strip-num">{s.num}</span>
         <span className="hero-strip-name">{s.name}</span>

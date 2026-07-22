@@ -103,8 +103,8 @@ export default function TestimonialShowcase() {
       <AnimatedTestimonialGrid
         testimonials={AVATAR_IMAGES}
         badgeText="Testimonials"
-        title="Trusted by leaders from various industries"
-        description="Learn why professionals trust our solutions to complete their customer journeys."
+        title="Real clients. Real results. Zero fluff."
+        description="Here's what happens when strategy, design, and a little bit of stubbornness come together."
         ctaText="Read Success Stories"
         ctaHref="#testimonials-marquee"
       />

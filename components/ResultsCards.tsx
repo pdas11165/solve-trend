@@ -3,13 +3,27 @@
 import * as React from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  Gem,
+  Globe,
+  Sparkles,
+  Rocket,
+  TrendingUp,
+  ShieldCheck,
+  PenTool,
+  Blocks,
+  type LucideIcon,
+} from "lucide-react";
 
 const AROUND_CDN =
   "https://cdn.prod.website-files.com/65647bbe0d57c8abad78e939";
 
+type ChipAccent = "red" | "amber" | "coral" | "blue" | "violet";
+
 type Chip = {
-  src?: string;
-  text?: string;
+  text: string;
+  accent: ChipAccent;
+  icon: LucideIcon;
   modifier: string;
 };
 
@@ -33,18 +47,9 @@ const RESULTS: Result[] = [
     title: "Years of Experience",
     subtext: "Building brands, experiences and intelligent systems.",
     chips: [
-      {
-        src: `${AROUND_CDN}/6891a46af0b791ba898a7ac1_1.avif`,
-        modifier: "crafting-result__chip--1",
-      },
-      {
-        src: `${AROUND_CDN}/6891a46afae8585420502f7c_2.png`,
-        modifier: "crafting-result__chip--2",
-      },
-      {
-        src: `${AROUND_CDN}/6891a46acf30c29013082e3c_3.avif`,
-        modifier: "crafting-result__chip--3",
-      },
+      { text: "Brand", accent: "red", icon: Gem, modifier: "crafting-result__chip--1" },
+      { text: "Web", accent: "blue", icon: Globe, modifier: "crafting-result__chip--2" },
+      { text: "AI", accent: "violet", icon: Sparkles, modifier: "crafting-result__chip--3" },
     ],
   },
   {
@@ -55,18 +60,9 @@ const RESULTS: Result[] = [
     title: "Happy Clients",
     subtext: "Trusted by startups and growing businesses.",
     chips: [
-      {
-        text: "Startups",
-        modifier: "crafting-result__chip--4",
-      },
-      {
-        text: "Scale",
-        modifier: "crafting-result__chip--5",
-      },
-      {
-        text: "Trust",
-        modifier: "crafting-result__chip--6",
-      },
+      { text: "Startups", accent: "amber", icon: Rocket, modifier: "crafting-result__chip--4" },
+      { text: "Scale", accent: "coral", icon: TrendingUp, modifier: "crafting-result__chip--5" },
+      { text: "Trust", accent: "red", icon: ShieldCheck, modifier: "crafting-result__chip--6" },
     ],
   },
   {
@@ -77,14 +73,8 @@ const RESULTS: Result[] = [
     title: "Projects Delivered",
     subtext: "From identities to AI-powered solutions.",
     chips: [
-      {
-        src: `${AROUND_CDN}/6891a46a999f186d8190b1bb_8.avif`,
-        modifier: "crafting-result__chip--7",
-      },
-      {
-        src: `${AROUND_CDN}/6891a46a87823a871a955d4f_7.png`,
-        modifier: "crafting-result__chip--8",
-      },
+      { text: "Design", accent: "blue", icon: PenTool, modifier: "crafting-result__chip--7" },
+      { text: "Build", accent: "amber", icon: Blocks, modifier: "crafting-result__chip--8" },
     ],
     cursor: true,
   },
@@ -150,19 +140,19 @@ function ResultCard({ result }: { result: Result }) {
         <p className="crafting-result__label">{result.title}</p>
         <p className="crafting-result__sub">{result.subtext}</p>
       </div>
-      {result.chips.map((chip) => (
-        <div
-          key={chip.modifier}
-          className={`crafting-result__chip ${chip.modifier}`}
-        >
-          {chip.text ? (
+      {result.chips.map((chip) => {
+        const Icon = chip.icon;
+        return (
+          <div
+            key={chip.modifier}
+            className={`crafting-result__chip crafting-result__chip--${chip.accent} ${chip.modifier}`}
+          >
+            <Icon className="crafting-result__chip-icon" aria-hidden="true" />
             <span className="crafting-result__chip-label">{chip.text}</span>
-          ) : (
-            <img src={chip.src} alt="" loading="lazy" />
-          )}
-          <div className="crafting-result__chip-blur" aria-hidden="true" />
-        </div>
-      ))}
+            <div className="crafting-result__chip-blur" aria-hidden="true" />
+          </div>
+        );
+      })}
       {result.cursor ? (
         <img
           className="crafting-result__cursor"

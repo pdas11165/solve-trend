@@ -63,7 +63,10 @@ export default function DarkTransition() {
           borderRadius: `${lerp(14, 0, p)}px`,
         });
 
-        const wordFade = gsap.utils.clamp(0, 1, (p - 0.08) / 0.22);
+        // Fade spread over p 0.10–0.45 so the words stay readable through
+        // the first stretch of the (now longer) runway instead of
+        // vanishing within the first ~100px of scroll.
+        const wordFade = gsap.utils.clamp(0, 1, (p - 0.1) / 0.35);
         if (wordLeft) gsap.set(wordLeft, { opacity: 1 - wordFade });
         if (wordRight) gsap.set(wordRight, { opacity: 1 - wordFade });
 
@@ -217,6 +220,10 @@ export default function DarkTransition() {
         window.addEventListener("resize", onResize);
         requestAnimationFrame(refreshAll);
 
+        if (process.env.NODE_ENV !== "production") {
+          (window as unknown as Record<string, unknown>).__st = ScrollTrigger;
+        }
+
         return () => window.removeEventListener("resize", onResize);
       });
 
@@ -229,7 +236,7 @@ export default function DarkTransition() {
     <section
       ref={wrapperRef}
       className="dark-transition-wrapper"
-      id="projects"
+      id="featured-work"
       aria-label="Featured projects"
     >
       <div ref={vignetteRef} className="dark-transition-vignette" aria-hidden="true" />

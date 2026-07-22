@@ -1,7 +1,7 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import CraftingSection from "@/components/CraftingSection";
-import VisionExpertiseSection from "@/components/VisionExpertiseSection";
+import ProjectsSection from "@/components/ProjectsSection";
 import Services from "@/components/Services";
 import TrendShowcaseSection from "@/components/TrendShowcaseSection";
 import PhilosophySection from "@/components/PhilosophySection";
@@ -26,8 +26,11 @@ export default function Page() {
           <Hero />
         </SectionReveal>
         <CraftingSection />
-        <SectionReveal index={1} variant="fadeUp">
-          <VisionExpertiseSection />
+        {/* variant="none": the section is taller than a mobile viewport, so a
+            whileInView reveal gated on 20% visibility never fires there. The
+            section runs its own per-card reveals instead. */}
+        <SectionReveal index={1} variant="none">
+          <ProjectsSection />
         </SectionReveal>
         <SectionReveal index={2} variant="none">
           <Services />

@@ -28,12 +28,12 @@ type Tier = {
 const TIERS: Tier[] = [
   {
     name: "Launch",
-    tagline: "Business Launch Package",
+    tagline: "Everything to go from zero to live",
     level: "Starter",
     levelIcon: Zap,
     price: 3000,
     billing: "Monthly · CAD",
-    description: "Everything you need to launch your business digitally.",
+    description: "Brand, website, and your first push into the world — all in one package.",
     features: [
       "Brand identity & logo design",
       "Brand guidelines document",
@@ -45,12 +45,12 @@ const TIERS: Tier[] = [
   },
   {
     name: "Growth",
-    tagline: "Ongoing Support & Marketing",
+    tagline: "For teams ready to keep the momentum",
     level: "Most popular",
     levelIcon: Sparkles,
     price: 5000,
     billing: "Monthly · CAD",
-    description: "For businesses ready to keep growing after launch.",
+    description: "You've launched. Now let's keep the wins coming.",
     features: [
       "Everything in Launch",
       "Ongoing social media support",
@@ -63,13 +63,13 @@ const TIERS: Tier[] = [
   },
   {
     name: "Enterprise",
-    tagline: "Custom Engagements",
+    tagline: "When your ambitions outgrow a template",
     level: "Custom",
     levelIcon: Crown,
     price: null,
     priceLabel: "Custom",
     billing: "Custom · CAD",
-    description: "Custom scope for larger companies with bigger ambitions.",
+    description: "Bigger scope, bigger stakes — a plan built around exactly what you need.",
     features: [
       "Custom scope & deliverables",
       "Multi-brand and multi-market support",
@@ -525,7 +525,9 @@ export default function PricingSection() {
           })}
         </div>
 
-        <p className="relative mt-12 text-center text-xs uppercase tracking-[0.18em] text-[var(--muted-dark)] lg:mt-16">
+        {/* The featured Growth card hangs 1rem below the grid (lg:mb-[-1rem])
+            plus its hover lift — clear both so this note never overlaps it. */}
+        <p className="relative mt-20 text-center text-xs uppercase tracking-[0.18em] text-[var(--muted-dark)] lg:mt-32">
           Prices in CAD · Scope confirmed after a discovery call
         </p>
       </div>

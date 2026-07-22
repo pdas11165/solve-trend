@@ -82,9 +82,9 @@ export default function VisionExpertiseSection() {
 
         <ContainerAnimated className="my-4">
           <p className="mx-auto max-w-lg text-sm leading-relaxed tracking-tight text-[#555] md:text-base">
-            At Solve Trend, we combine human insight, creative thinking and
-            intelligent systems to help ambitious businesses create meaningful
-            impact and sustainable growth.
+            We combine human insight, sharp creative, and intelligent
+            systems — so the work doesn&rsquo;t just look good, it moves the
+            needle.
           </p>
         </ContainerAnimated>
 

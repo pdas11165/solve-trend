@@ -4,10 +4,10 @@ import * as React from "react";
 
 type Accent = "red" | "amber" | "coral";
 const PILLS: { word: string; accent: Accent }[] = [
-  { word: "brand", accent: "red" },
-  { word: "digital experience", accent: "amber" },
-  { word: "website", accent: "coral" },
-  { word: "intelligent system", accent: "red" },
+  { word: "brands", accent: "red" },
+  { word: "digital experiences", accent: "amber" },
+  { word: "websites", accent: "coral" },
+  { word: "intelligent systems", accent: "red" },
 ];
 
 const ROTATING_SERVICES = ["Trend", "Brand", "Websites", "UI/UX", "Strategy", "Motion", "Content"];
@@ -166,7 +166,7 @@ export default function HeroHeadline() {
           style={shiftStyle(8, activePill, pillShift)}
         >
           {" "}
-          that help ambitious businesses grow.
+          that make ambitious businesses impossible to ignore.
         </span>
       </p>
     </div>

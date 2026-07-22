@@ -439,7 +439,7 @@ export function CinematicFooter() {
                   href={`mailto:${CONTACT_EMAIL}`}
                   className="footer-glass-pill group flex items-center gap-3 rounded-full px-10 py-5 text-sm font-bold md:text-base"
                 >
-                  Get Started
+                  Say hello
                   <DotGridArrow className="cinematic-footer-muted transition-colors group-hover:text-[var(--foreground)]" />
                 </MagneticAnchor>
 

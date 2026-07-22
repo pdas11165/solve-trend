@@ -1,372 +1,385 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import {
-  Activity,
-  LineChart,
-  ChevronRight,
-  Zap,
-  Timer,
-  TrendingDown,
-  Target,
+  Check,
+  Clock,
+  DollarSign,
+  Megaphone,
+  Cpu,
+  BarChart3,
+  Users,
+  Layers,
   type LucideIcon,
 } from "lucide-react";
 
-type PlatformFeature = {
-  label: string;
-  value: number;
-  icon: LucideIcon;
-};
+// ── Radar model ──────────────────────────────────────────────────────────
+// Five axes, three players. Scores are 0–100 and deliberately opinionated:
+// agencies win on craft but lose on speed/cost/tech; freelancers win on
+// cost/speed but cap out on scale and rarely bring tooling; Solve Trend is
+// the balanced outer envelope.
+const AXES = ["Speed", "Cost", "Craft", "Tech & AI", "Scale"];
 
-type PlatformData = {
+type Series = {
   id: string;
   label: string;
-  title: string;
-  description: string;
-  image: string;
-  colors: {
-    gradient: string;
-    glow: string;
-    ring: string;
-  };
-  stats: { connectionStatus: string; efficiency: number };
-  features: PlatformFeature[];
+  color: string;
+  scores: number[];
+  primary?: boolean;
 };
 
-const AGENCY_DATA: Record<string, PlatformData> = {
-  competitors: {
-    id: "competitors",
-    label: "Them",
-    title: "Traditional Agencies",
-    description:
-      "Slow execution, outdated SEO tactics, and opaque reporting. You pay for the hours, not the results.",
-    image:
-      "https://images.unsplash.com/photo-1604871000636-074fa5117945?auto=format&fit=crop&q=80&w=800",
-    colors: {
-      gradient: "from-red-600 to-rose-900",
-      glow: "bg-red-500",
-      ring: "border-l-red-500/50",
-    },
-    stats: { connectionStatus: "Lagging", efficiency: 32 },
-    features: [
-      { label: "Execution Speed", value: 35, icon: Timer },
-      { label: "Expected ROI", value: 42, icon: TrendingDown },
-    ],
+const SERIES: Series[] = [
+  {
+    id: "agencies",
+    label: "Creative Agencies",
+    color: "#fb923c",
+    scores: [45, 34, 88, 50, 68],
   },
-  solvetrend: {
+  {
+    id: "freelancers",
+    label: "Freelancers",
+    color: "#c084fc",
+    scores: [70, 82, 70, 38, 34],
+  },
+  {
     id: "solvetrend",
     label: "Solve Trend",
-    title: "Digital Dominance",
-    description:
-      "Data-driven growth, agile marketing, and transparent ROI. We scale your brand with precision and speed.",
-    image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800",
-    colors: {
-      gradient: "from-cyan-500 to-blue-900",
-      glow: "bg-cyan-400",
-      ring: "border-r-cyan-400/50",
-    },
-    stats: { connectionStatus: "Optimized", efficiency: 98 },
-    features: [
-      { label: "Growth Velocity", value: 96, icon: Zap },
-      { label: "Conversion Rate", value: 92, icon: Target },
-    ],
+    color: "#22d3ee",
+    scores: [92, 78, 90, 96, 88],
+    primary: true,
   },
+];
+
+const SIZE_W = 400;
+const SIZE_H = 380;
+const CX = SIZE_W / 2;
+const CY = SIZE_H / 2 + 4;
+const R = 126;
+const RINGS = [0.25, 0.5, 0.75, 1];
+
+const angleFor = (i: number) => ((-90 + i * (360 / AXES.length)) * Math.PI) / 180;
+
+const pointFor = (i: number, v: number): [number, number] => {
+  const a = angleFor(i);
+  return [CX + Math.cos(a) * R * (v / 100), CY + Math.sin(a) * R * (v / 100)];
 };
 
-const ANIMATIONS = {
-  container: {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-    },
-    exit: {
-      opacity: 0,
-      transition: { duration: 0.2 },
-    },
-  },
-  item: {
-    hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { type: "spring" as const, stiffness: 100, damping: 20 },
-    },
-    exit: { opacity: 0, y: -10, filter: "blur(5px)" },
-  },
-  image: (isCompetitor: boolean) => ({
-    initial: {
-      opacity: 0,
-      scale: 1.5,
-      filter: "blur(15px)",
-      rotate: isCompetitor ? -30 : 30,
-      x: isCompetitor ? -80 : 80,
-    },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      filter: "blur(0px)",
-      rotate: 0,
-      x: 0,
-      transition: { type: "spring" as const, stiffness: 260, damping: 20 },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.6,
-      filter: "blur(20px)",
-      transition: { duration: 0.25 },
-    },
-  }),
+const polyPoints = (scores: number[]) =>
+  scores.map((v, i) => pointFor(i, v).join(",")).join(" ");
+
+const ringPoints = (level: number) =>
+  AXES.map((_, i) => pointFor(i, level * 100).join(",")).join(" ");
+
+const labelFor = (i: number) => {
+  const a = angleFor(i);
+  const lr = R + 26;
+  const x = CX + Math.cos(a) * lr;
+  const y = CY + Math.sin(a) * lr;
+  const cos = Math.cos(a);
+  const anchor = Math.abs(cos) < 0.3 ? "middle" : cos > 0 ? "start" : "end";
+  return { x, y, anchor: anchor as "start" | "middle" | "end" };
 };
 
-const BackgroundGradient = ({ isCompetitor }: { isCompetitor: boolean }) => (
-  <div className="absolute inset-0 pointer-events-none">
-    <motion.div
-      animate={{
-        background: isCompetitor
-          ? "radial-gradient(circle at 0% 50%, rgba(239, 68, 68, 0.12), transparent 50%)"
-          : "radial-gradient(circle at 100% 50%, rgba(6, 182, 212, 0.15), transparent 50%)",
-      }}
-      transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-      className="absolute inset-0"
-    />
-  </div>
-);
+function RadarChart() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
-const PlatformVisual = ({
-  data,
-  isCompetitor,
-}: {
-  data: PlatformData;
-  isCompetitor: boolean;
-}) => (
-  <motion.div layout="position" className="relative group shrink-0">
-    <motion.div
-      animate={{ rotate: 360 }}
-      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      className={`absolute inset-[-20%] rounded-full border border-dashed border-white/10 ${data.colors.ring}`}
-    />
-    <motion.div
-      animate={{ scale: [1, 1.05, 1] }}
-      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      className={`absolute inset-0 rounded-full bg-gradient-to-br ${data.colors.gradient} blur-2xl opacity-40`}
-    />
-
-    <div className="relative h-80 w-80 md:h-[450px] md:w-[450px] rounded-full border border-white/10 shadow-2xl flex items-center justify-center overflow-hidden bg-zinc-900/50 backdrop-blur-md">
-      <motion.div
-        animate={{ y: [-10, 10, -10] }}
-        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-        className="relative z-10 w-full h-full flex items-center justify-center p-2"
+  return (
+    <div ref={ref} className="w-full max-w-[440px] mx-auto">
+      <svg
+        viewBox={`0 0 ${SIZE_W} ${SIZE_H}`}
+        className="w-full h-auto overflow-visible"
+        role="img"
+        aria-label="Radar chart comparing creative agencies, freelancers and Solve Trend across speed, cost, craft, technology and scalability"
       >
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={data.id}
-            src={data.image}
-            alt={data.title}
-            variants={ANIMATIONS.image(isCompetitor)}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="w-full h-full object-cover rounded-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-            draggable={false}
+        {/* Grid rings */}
+        {RINGS.map((level) => (
+          <polygon
+            key={level}
+            points={ringPoints(level)}
+            fill="none"
+            stroke="rgba(255,255,255,0.09)"
+            strokeWidth={1}
           />
-        </AnimatePresence>
-      </motion.div>
-    </div>
-
-    <motion.div
-      layout="position"
-      className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap"
-    >
-      <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 bg-zinc-950/90 px-5 py-2.5 rounded-full border border-white/10 backdrop-blur shadow-xl">
-        <span className={`h-2 w-2 rounded-full ${data.colors.glow} animate-pulse`} />
-        {data.stats.connectionStatus}
-      </div>
-    </motion.div>
-  </motion.div>
-);
-
-const PlatformDetails = ({
-  data,
-  isCompetitor,
-}: {
-  data: PlatformData;
-  isCompetitor: boolean;
-}) => {
-  const alignClass = isCompetitor ? "items-start text-left" : "items-end text-right";
-  const flexDirClass = isCompetitor ? "flex-row" : "flex-row-reverse";
-  const barColorClass = isCompetitor ? "left-0 bg-red-500" : "right-0 bg-cyan-400";
-
-  return (
-    <motion.div
-      variants={ANIMATIONS.container}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      className={`flex flex-col ${alignClass}`}
-    >
-      <motion.h2
-        variants={ANIMATIONS.item}
-        className="text-sm font-bold uppercase tracking-[0.2em] text-zinc-500 mb-2"
-      >
-        {data.label} Approach
-      </motion.h2>
-      <motion.h1
-        variants={ANIMATIONS.item}
-        className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500"
-      >
-        {data.title}
-      </motion.h1>
-      <motion.p
-        variants={ANIMATIONS.item}
-        className={`text-zinc-400 mb-8 max-w-sm leading-relaxed ${isCompetitor ? "mr-auto" : "ml-auto"}`}
-      >
-        {data.description}
-      </motion.p>
-
-      <motion.div
-        variants={ANIMATIONS.item}
-        className="w-full space-y-6 bg-zinc-900/40 p-6 rounded-2xl border border-white/5 backdrop-blur-sm shadow-xl"
-      >
-        {data.features.map((feature, idx) => (
-          <div key={feature.label} className="group">
-            <div className={`flex items-center justify-between mb-3 text-sm ${flexDirClass}`}>
-              <div
-                className={`flex items-center gap-2 ${feature.value > 50 ? "text-zinc-200" : "text-zinc-400"}`}
-              >
-                <feature.icon
-                  size={16}
-                  className={feature.value > 50 ? "text-cyan-400" : "text-red-400"}
-                />
-                <span className="font-medium">{feature.label}</span>
-              </div>
-              <span className="font-mono text-xs text-zinc-500">{feature.value}%</span>
-            </div>
-            <div className="relative h-2 w-full bg-zinc-950/50 rounded-full overflow-hidden border border-white/5">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${feature.value}%` }}
-                transition={{ duration: 1, delay: 0.4 + idx * 0.15 }}
-                className={`absolute top-0 bottom-0 ${barColorClass} opacity-90`}
-              />
-            </div>
-          </div>
         ))}
-
-        <div className={`pt-4 flex ${isCompetitor ? "justify-start" : "justify-end"}`}>
-          <button
-            type="button"
-            className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-400 hover:text-white transition-colors group"
-          >
-            <LineChart size={14} /> View Analytics
-            <ChevronRight
-              size={14}
-              className={`transition-transform ${isCompetitor ? "group-hover:translate-x-1" : "group-hover:-translate-x-1 rotate-180"}`}
+        {/* Spokes */}
+        {AXES.map((_, i) => {
+          const [x, y] = pointFor(i, 100);
+          return (
+            <line
+              key={i}
+              x1={CX}
+              y1={CY}
+              x2={x}
+              y2={y}
+              stroke="rgba(255,255,255,0.09)"
+              strokeWidth={1}
             />
-          </button>
-        </div>
-      </motion.div>
+          );
+        })}
 
-      <motion.div
-        variants={ANIMATIONS.item}
-        className={`mt-8 flex items-center gap-3 text-zinc-400 ${flexDirClass}`}
-      >
-        <Activity size={18} className={isCompetitor ? "text-red-500" : "text-cyan-400"} />
-        <span className="text-sm font-medium tracking-wide">
-          System Efficiency: {data.stats.efficiency}%
-        </span>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-const Switcher = ({
-  activeId,
-  onToggle,
-}: {
-  activeId: string;
-  onToggle: (id: string) => void;
-}) => {
-  const options = Object.values(AGENCY_DATA).map((p) => ({ id: p.id, label: p.label }));
-
-  return (
-    <div className="relative mt-16 flex justify-center z-10">
-      <motion.div
-        layout
-        className="flex items-center gap-2 p-2 rounded-full bg-zinc-900/80 backdrop-blur-2xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] ring-1 ring-white/5"
-      >
-        {options.map((opt) => (
-          <motion.button
-            key={opt.id}
-            onClick={() => onToggle(opt.id)}
-            whileTap={{ scale: 0.96 }}
-            className="relative w-32 h-12 rounded-full flex items-center justify-center text-sm font-bold tracking-wide focus:outline-none overflow-hidden"
-          >
-            {activeId === opt.id && (
-              <motion.div
-                layoutId="active-pill"
-                className="absolute inset-0 rounded-full bg-gradient-to-b from-white/10 to-white/5 shadow-inner border border-white/10"
-                transition={{ type: "spring", stiffness: 220, damping: 22 }}
-              />
-            )}
-            <span
-              className={`relative z-10 transition-colors duration-300 ${activeId === opt.id ? "text-white" : "text-zinc-500 hover:text-zinc-300"}`}
-            >
-              {opt.label}
-            </span>
-            {activeId === opt.id && (
-              <motion.span
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="absolute -bottom-1 h-1 w-8 rounded-full bg-gradient-to-r from-transparent via-white/60 to-transparent blur-[1px]"
-              />
-            )}
-          </motion.button>
+        {/* Data polygons — grow from the centre, staggered */}
+        {SERIES.map((s, si) => (
+          <motion.polygon
+            key={s.id}
+            points={polyPoints(s.scores)}
+            fill={s.primary ? s.color : "none"}
+            fillOpacity={s.primary ? 0.14 : 0}
+            stroke={s.color}
+            strokeWidth={s.primary ? 2.5 : 1.6}
+            strokeOpacity={s.primary ? 1 : 0.75}
+            strokeLinejoin="round"
+            strokeDasharray={s.primary ? "0" : "5 4"}
+            style={{ transformBox: "fill-box", transformOrigin: "center" }}
+            initial={{ scale: 0.15, opacity: 0 }}
+            animate={inView ? { scale: 1, opacity: 1 } : {}}
+            transition={{
+              duration: 0.9,
+              delay: 0.15 + si * 0.18,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+          />
         ))}
-      </motion.div>
+
+        {/* Vertex dots for the primary series */}
+        {SERIES.filter((s) => s.primary).map((s) =>
+          s.scores.map((v, i) => {
+            const [x, y] = pointFor(i, v);
+            return (
+              <motion.circle
+                key={`${s.id}-${i}`}
+                cx={x}
+                cy={y}
+                r={3.5}
+                fill={s.color}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={inView ? { scale: 1, opacity: 1 } : {}}
+                transition={{ duration: 0.4, delay: 0.9 + i * 0.06 }}
+                style={{ transformBox: "fill-box", transformOrigin: "center" }}
+              />
+            );
+          })
+        )}
+
+        {/* Axis labels */}
+        {AXES.map((axis, i) => {
+          const { x, y, anchor } = labelFor(i);
+          return (
+            <motion.text
+              key={axis}
+              x={x}
+              y={y}
+              textAnchor={anchor}
+              dominantBaseline="middle"
+              className="fill-zinc-400 font-[family-name:var(--font-display)]"
+              style={{ fontSize: 13, fontWeight: 600 }}
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.4 + i * 0.05 }}
+            >
+              {axis}
+            </motion.text>
+          );
+        })}
+      </svg>
     </div>
   );
+}
+
+// ── Detail matrix ────────────────────────────────────────────────────────
+type Row = {
+  icon: LucideIcon;
+  dim: string;
+  agency: string;
+  freelance: string;
+  us: string;
 };
+
+const ROWS: Row[] = [
+  {
+    icon: Megaphone,
+    dim: "How they sell it",
+    agency: "“Award-winning craft”",
+    freelance: "“Flexible & affordable”",
+    us: "Craft + speed + systems",
+  },
+  {
+    icon: Clock,
+    dim: "Turnaround",
+    agency: "Weeks to months",
+    freelance: "Unpredictable",
+    us: "Days, not quarters",
+  },
+  {
+    icon: DollarSign,
+    dim: "Cost model",
+    agency: "Heavy monthly retainers",
+    freelance: "Hourly, scope creep",
+    us: "Flat project pricing",
+  },
+  {
+    icon: Cpu,
+    dim: "Tech & AI",
+    agency: "Bolt-on, extra cost",
+    freelance: "Rarely in the toolkit",
+    us: "Built into every workflow",
+  },
+  {
+    icon: BarChart3,
+    dim: "Reporting",
+    agency: "Monthly slide decks",
+    freelance: "Ad-hoc updates",
+    us: "Live dashboards",
+  },
+  {
+    icon: Users,
+    dim: "Team",
+    agency: "Layers of account managers",
+    freelance: "One person, one risk",
+    us: "Lean senior team",
+  },
+  {
+    icon: Layers,
+    dim: "Scaling up",
+    agency: "Slow to ramp",
+    freelance: "Caps out fast",
+    us: "Scales with automation",
+  },
+];
+
+const ROW_GRID =
+  "grid grid-cols-[1.15fr_1fr_1fr_1.25fr] items-stretch";
+
+function ComparisonMatrix() {
+  return (
+    <div className="w-full overflow-x-auto">
+      <div className="min-w-[720px]">
+        {/* Header */}
+        <div className={`${ROW_GRID} text-xs uppercase tracking-[0.14em]`}>
+          <div className="px-4 py-4 text-zinc-500 font-semibold flex items-end">
+            The details
+          </div>
+          <div className="px-4 py-4 text-zinc-400 font-semibold flex items-end">
+            Creative Agencies
+          </div>
+          <div className="px-4 py-4 text-zinc-400 font-semibold flex items-end">
+            Freelancers
+          </div>
+          <div className="px-4 py-4 font-bold flex items-end gap-2 rounded-t-2xl bg-cyan-400/10 text-cyan-300 border-x border-t border-cyan-400/20">
+            Solve Trend
+          </div>
+        </div>
+
+        {ROWS.map((row, i) => {
+          const Icon = row.icon;
+          const last = i === ROWS.length - 1;
+          return (
+            <motion.div
+              key={row.dim}
+              className={`${ROW_GRID} border-t border-white/[0.06] text-sm`}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: i * 0.05, ease: "easeOut" }}
+            >
+              <div className="px-4 py-4 flex items-center gap-2.5 text-zinc-300 font-medium">
+                <Icon size={16} className="text-zinc-500 shrink-0" />
+                {row.dim}
+              </div>
+              <div className="px-4 py-4 flex items-center text-zinc-500">
+                {row.agency}
+              </div>
+              <div className="px-4 py-4 flex items-center text-zinc-500">
+                {row.freelance}
+              </div>
+              <div
+                className={`px-4 py-4 flex items-center gap-2 text-zinc-100 font-medium bg-cyan-400/10 border-x border-cyan-400/20 ${
+                  last ? "rounded-b-2xl border-b" : ""
+                }`}
+              >
+                <Check size={15} className="text-cyan-400 shrink-0" />
+                {row.us}
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function Legend() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+      {SERIES.map((s) => (
+        <div key={s.id} className="flex items-center gap-2 text-sm">
+          <span
+            className="inline-block h-2.5 w-2.5 rounded-full"
+            style={{
+              backgroundColor: s.primary ? s.color : "transparent",
+              border: `2px solid ${s.color}`,
+            }}
+          />
+          <span className={s.primary ? "text-white font-semibold" : "text-zinc-400"}>
+            {s.label}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function TrendShowcaseSection() {
-  const [activeSide, setActiveSide] = useState("competitors");
-
-  const currentData = AGENCY_DATA[activeSide];
-  const isCompetitor = activeSide === "competitors";
-
   return (
     <section
-      className="relative min-h-screen w-full bg-[var(--bg-dark)] text-zinc-100 overflow-hidden selection:bg-cyan-900/50 flex flex-col items-center justify-center font-sans"
-      aria-label="Solve Trend vs traditional agencies"
+      className="relative w-full bg-[var(--bg-dark)] text-zinc-100 overflow-hidden selection:bg-cyan-900/50"
+      aria-label="How Solve Trend compares with creative agencies and freelancers"
     >
-      <BackgroundGradient isCompetitor={isCompetitor} />
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none mix-blend-overlay" />
+      {/* Ambient glow + grain */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute left-1/2 top-24 h-[420px] w-[620px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[120px]" />
+      </div>
+      <div
+        className="absolute inset-0 opacity-[0.18] pointer-events-none mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        }}
+      />
 
-      <div className="relative z-10 w-full px-6 py-12 flex flex-col justify-center max-w-7xl mx-auto min-h-screen">
-        <motion.div
-          layout
-          transition={{ type: "spring", bounce: 0, duration: 0.9 }}
-          className={`flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 lg:gap-40 w-full ${
-            isCompetitor ? "md:flex-row" : "md:flex-row-reverse"
-          }`}
-        >
-          <PlatformVisual data={currentData} isCompetitor={isCompetitor} />
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-24 md:py-32">
+        {/* Heading */}
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <span className="eyebrow">The Comparison</span>
+          <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl md:text-5xl font-extrabold tracking-tight text-white">
+            Agencies, freelancers, or Solve Trend?
+          </h2>
+          <p className="mt-4 leading-relaxed text-zinc-400">
+            Creative agencies sell craft. Freelancers sell flexibility. We built
+            Solve Trend to hand you both — with modern tooling and AI doing the
+            heavy lifting. Here&rsquo;s the honest breakdown.
+          </p>
+        </div>
 
-          <motion.div layout="position" className="w-full max-w-md">
-            <AnimatePresence mode="wait">
-              <PlatformDetails
-                key={activeSide}
-                data={currentData}
-                isCompetitor={isCompetitor}
-              />
-            </AnimatePresence>
-          </motion.div>
-        </motion.div>
+        {/* Radar + legend */}
+        <div className="mx-auto mb-16 max-w-xl">
+          <RadarChart />
+          <div className="mt-6">
+            <Legend />
+          </div>
+        </div>
 
-        <Switcher activeId={activeSide} onToggle={setActiveSide} />
+        {/* Detail matrix */}
+        <div className="rounded-3xl border border-white/[0.07] bg-white/[0.02] p-2 md:p-4 backdrop-blur-sm shadow-[0_30px_80px_rgba(0,0,0,0.5)]">
+          <ComparisonMatrix />
+        </div>
+
+        {/* Closing line */}
+        <p className="mx-auto mt-10 max-w-xl text-center text-sm text-zinc-500">
+          Same craft you&rsquo;d expect from a top studio. The speed and pricing
+          you&rsquo;d hope for from a freelancer. None of the trade-offs.
+        </p>
       </div>
     </section>
   );

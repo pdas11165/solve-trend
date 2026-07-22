@@ -19,8 +19,8 @@ export default function ContactSection() {
             className="mt-3 block font-[family-name:var(--font-display)] text-[length:var(--fs-section-title)] font-extrabold leading-[1.05] tracking-[-0.02em] text-white"
           />
           <p className="mt-4 max-w-lg text-base leading-relaxed text-[var(--muted-dark)]">
-            Send us your details and the services you need. Customer inquiries go straight to our
-            team inbox so we can follow up quickly.
+            Tell us what you&rsquo;re building and what you need. We read every
+            message ourselves and reply fast — usually within a day.
           </p>
         </div>
 

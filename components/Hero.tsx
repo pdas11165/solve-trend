@@ -21,6 +21,8 @@ const MARQUEE_DURATION = 45;
 const ORBIT_SPEED = 0.22;
 /** Scroll distance (in viewport heights) the pinned morph occupies. */
 const MORPH_SCROLL = 1.4;
+/** Desktop only: how far the headline block settles down as the ring forms. */
+const BOUNCE_DROP = 22;
 
 export default function Hero() {
   const root = React.useRef<HTMLElement>(null);
@@ -113,6 +115,9 @@ export default function Hero() {
 
         const isDesktop = Boolean(ctx.conditions?.waveDesktop);
         const morphEase = gsap.parseEase("power2.inOut");
+        // Overshoots past 1 then settles — gives the headline block a
+        // gentle bounce as it drops into place while the ring forms.
+        const bounceEase = gsap.parseEase("elastic.out(1, 0.3)");
 
         let halfTrack = 1;
         let sectionW = 1;
@@ -221,6 +226,11 @@ export default function Hero() {
           const fullTrack = halfTrack * 2;
           track.style.transform = `translateX(${trackX}px)`;
 
+          if (isDesktop && monument) {
+            const bounceY = BOUNCE_DROP * bounceEase(e) * (1 - ex);
+            monument.style.transform = `translateY(${bounceY.toFixed(2)}px)`;
+          }
+
           // Pass 1 — wave state: bell-curve scale by distance from center.
           for (let i = 0; i < tiles.length; i++) {
             const lay = layout[i];
@@ -260,6 +270,7 @@ export default function Hero() {
 
             if (e === 0 || !isDesktop) {
               setTile(tiles[i], spread, 0, waveScale);
+              tiles[i].style.setProperty("--glass-t", "0");
               continue;
             }
 
@@ -279,6 +290,17 @@ export default function Hero() {
               Math.sin(angle) * ringRY * recede +
               (lay.h * scale) / 2 -
               60 * ex;
+
+            // Glass Morphism 2.0 sweep: the ring travels top → right →
+            // bottom → left as it spins (see angle above), and only the
+            // upper arc (sin < 0, i.e. left-through-top-through-right)
+            // carries the frosted treatment. Within that arc it reads
+            // clear near the right ("intelligent system") and thickens to
+            // full frost by the time it reaches the left ("We build").
+            const upperArc = Math.sin(angle) < 0 ? 1 : 0;
+            const sweep = (1 - Math.cos(angle)) / 2;
+            const glassT = upperArc * sweep * e * (1 - ex);
+            tiles[i].style.setProperty("--glass-t", glassT.toFixed(3));
 
             setTile(
               tiles[i],
@@ -350,10 +372,12 @@ export default function Hero() {
           strips.removeEventListener("mouseleave", onLeave);
           window.removeEventListener("resize", measure);
           strips.classList.remove("hero-strips--morphing");
+          if (monument) monument.style.transform = "";
           track.style.transform = "";
           tiles.forEach((t) => {
             t.style.transform = "";
             t.style.opacity = "";
+            t.style.removeProperty("--glass-t");
           });
         };
         }

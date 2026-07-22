@@ -70,7 +70,7 @@ function LogoMarquee() {
     <div className="crafting-marquee" aria-label="Trusted brands">
       <div className="crafting-marquee__divider">
         <span className="crafting-marquee__line" aria-hidden="true" />
-        <p>Loved by 100,000+ big and small brands around the world</p>
+        <p>Trusted by ambitious brands across North America and beyond</p>
         <span className="crafting-marquee__line" aria-hidden="true" />
       </div>
       <div className="crafting-marquee__wrap">
@@ -167,8 +167,8 @@ export default function CraftingSection() {
       <div className="container crafting-section__inner">
         <div className="crafting-intro">
           <h2 className="crafting-heading">
-            We combine strategy, creativity and technology to transform ideas
-            into experiences and systems that drive growth.
+            Strategy, creativity, and technology, mixed until your idea
+            turns into something people can&rsquo;t put down.
           </h2>
           <div className="crafting-badges">
             {BADGES.map((badge) => (
