@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { PHILOSOPHY_BLOCKS } from "@/lib/philosophy";
 import { ScrollCharacterText } from "@/components/ui/text-scroll-animation";
+import { ParallaxMedia } from "@/components/ui/parallax-media";
 import { DotGridArrow } from "./Icons";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -155,8 +156,10 @@ export default function PhilosophySection() {
               </a>
             </div>
             <div className="philosophy-post__media">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={block.image} alt={block.imageAlt} loading="lazy" />
+              <ParallaxMedia>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={block.image} alt={block.imageAlt} loading="lazy" />
+              </ParallaxMedia>
             </div>
           </article>
         ))}

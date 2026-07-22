@@ -4,6 +4,7 @@ import * as React from "react";
 import { motion, useInView } from "framer-motion";
 import { SHOWCASE_PROJECTS, type ShowcaseProject } from "@/lib/project-showcase";
 import { RevealText } from "@/components/ui/reveal-text";
+import { ParallaxMedia } from "@/components/ui/parallax-media";
 import { DotGridArrow } from "./Icons";
 
 /** Plays the clip only while it is on screen; static image otherwise. */
@@ -37,27 +38,29 @@ function ProjectMedia({ project }: { project: ShowcaseProject }) {
         className="pointer-events-none absolute -inset-6 opacity-60 blur-3xl"
         style={{ background: `radial-gradient(60% 60% at 50% 40%, ${project.accentSoft}, transparent)` }}
       />
-      <div className="hover-zoom relative h-full w-full rounded-xl bg-black/[0.03] shadow-[0_24px_60px_-24px_rgba(0,0,0,0.35)]">
-        {isVideo ? (
-          <video
-            ref={videoRef}
-            className="h-full w-full object-cover"
-            src={project.media}
-            muted
-            loop
-            playsInline
-            preload="none"
-            aria-label={`${project.category} showcase`}
-          />
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            className="h-full w-full object-cover"
-            src={project.media}
-            alt={`${project.category} showcase`}
-            loading="lazy"
-          />
-        )}
+      <div className="hover-zoom relative h-full w-full overflow-hidden rounded-xl bg-black/[0.03] shadow-[0_24px_60px_-24px_rgba(0,0,0,0.35)]">
+        <ParallaxMedia>
+          {isVideo ? (
+            <video
+              ref={videoRef}
+              className="h-full w-full object-cover"
+              src={project.media}
+              muted
+              loop
+              playsInline
+              preload="none"
+              aria-label={`${project.category} showcase`}
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              className="h-full w-full object-cover"
+              src={project.media}
+              alt={`${project.category} showcase`}
+              loading="lazy"
+            />
+          )}
+        </ParallaxMedia>
       </div>
     </div>
   );

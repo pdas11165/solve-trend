@@ -1,6 +1,8 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import CraftingSection from "@/components/CraftingSection";
+import ManifestoSection from "@/components/ManifestoSection";
+import VelocityMarquee from "@/components/VelocityMarquee";
 import ProjectsSection from "@/components/ProjectsSection";
 import Services from "@/components/Services";
 import TrendShowcaseSection from "@/components/TrendShowcaseSection";
@@ -26,6 +28,7 @@ export default function Page() {
           <Hero />
         </SectionReveal>
         <CraftingSection />
+        <ManifestoSection />
         {/* variant="none": the section is taller than a mobile viewport, so a
             whileInView reveal gated on 20% visibility never fires there. The
             section runs its own per-card reveals instead. */}
@@ -36,6 +39,7 @@ export default function Page() {
           <Services />
         </SectionReveal>
         <DarkTransition />
+        <VelocityMarquee />
         <SectionReveal index={3} variant="fadeUp">
           <TrendShowcaseSection />
         </SectionReveal>

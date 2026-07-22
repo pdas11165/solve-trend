@@ -13,6 +13,7 @@ import {
   Layers,
   type LucideIcon,
 } from "lucide-react";
+import { RevealText } from "@/components/ui/reveal-text";
 
 // ── Radar model ──────────────────────────────────────────────────────────
 // Five axes, three players. Scores are 0–100 and deliberately opinionated:
@@ -352,9 +353,11 @@ export default function TrendShowcaseSection() {
         {/* Heading */}
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <span className="eyebrow">The Comparison</span>
-          <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl md:text-5xl font-extrabold tracking-tight text-white">
-            Agencies, freelancers, or Solve Trend?
-          </h2>
+          <RevealText
+            as="h2"
+            text="Agencies, freelancers, or Solve Trend?"
+            className="mt-3 font-[family-name:var(--font-display)] text-3xl md:text-5xl font-extrabold tracking-tight text-white"
+          />
           <p className="mt-4 leading-relaxed text-zinc-400">
             Creative agencies sell craft. Freelancers sell flexibility. We built
             Solve Trend to hand you both — with modern tooling and AI doing the

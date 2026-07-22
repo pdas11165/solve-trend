@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import ResultsCards from "./ResultsCards";
+import { RevealText } from "@/components/ui/reveal-text";
 import { useParallaxLayers } from "@/lib/scroll-parallax";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -109,14 +110,12 @@ export default function CraftingSection() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        gsap.set([".crafting-heading", ".crafting-badge"], {
-          opacity: 1,
-          y: 0,
-        });
+        gsap.set(".crafting-badge", { opacity: 1, y: 0 });
       });
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.set(".crafting-heading", { opacity: 0, y: 100 });
+        // The heading now reveals via RevealText (shared word-rise grammar);
+        // GSAP only staggers the badges in behind it.
         gsap.set(".crafting-badge", { opacity: 0, y: 100 });
 
         const slideIn = {
@@ -125,15 +124,6 @@ export default function CraftingSection() {
           duration: 1,
           ease: "power4.out",
         };
-
-        gsap.to(".crafting-heading", {
-          ...slideIn,
-          scrollTrigger: {
-            trigger: ".crafting-heading",
-            start: "top 90%",
-            once: true,
-          },
-        });
 
         [
           ".crafting-badge--strategy",
@@ -166,10 +156,11 @@ export default function CraftingSection() {
     >
       <div className="container crafting-section__inner">
         <div className="crafting-intro">
-          <h2 className="crafting-heading">
-            Strategy, creativity, and technology, mixed until your idea
-            turns into something people can&rsquo;t put down.
-          </h2>
+          <RevealText
+            as="h2"
+            className="crafting-heading"
+            text="Strategy, creativity, and technology, mixed until your idea turns into something people can’t put down."
+          />
           <div className="crafting-badges">
             {BADGES.map((badge) => (
               <div key={badge.id} className={badge.className} tabIndex={0}>

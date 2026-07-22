@@ -2693,22 +2693,36 @@ body.expand-open { overflow: hidden; }
    Webflow-agency micro-interactions (polish pass)
    ========================================================================= */
 
-/* Image/video hover-zoom: put .hover-zoom on an overflow-hidden frame whose
-   DIRECT child is the media. Scoped to direct children so it never fights
-   framer-motion transforms on nested elements. */
+/* Image/video hover-zoom: put .hover-zoom on an overflow-hidden frame around
+   the media. The CSS scale lives on the media element itself while any
+   framer-motion transforms (e.g. ParallaxMedia drift) live on a wrapper div
+   between the two — separate elements, so they never fight. */
 .hover-zoom { overflow: hidden; }
-.hover-zoom > img,
-.hover-zoom > video {
+.hover-zoom img,
+.hover-zoom video {
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
-.hover-zoom:hover > img,
-.hover-zoom:hover > video { transform: scale(1.05); }
+.hover-zoom:hover img,
+.hover-zoom:hover video { transform: scale(1.05); }
+
+/* Velocity marquee: outlined display type on the dark band. */
+.velocity-marquee-text {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(247, 246, 242, 0.38);
+  padding-right: 0.35em;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .hover-zoom > img,
-  .hover-zoom > video { transition: none; }
-  .hover-zoom:hover > img,
-  .hover-zoom:hover > video { transform: none; }
+  .hover-zoom img,
+  .hover-zoom video { transition: none; }
+  .hover-zoom:hover img,
+  .hover-zoom:hover video { transform: none; }
 }
 
