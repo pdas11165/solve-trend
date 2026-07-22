@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { asset } from "@/lib/asset";
 
 type Service = { num: string; name: string; img: string; video?: string };
 
@@ -28,8 +29,8 @@ function Tile({
       {s.video ? (
         <video
           className="hero-strip-media"
-          src={s.video}
-          poster={s.img}
+          src={asset(s.video)}
+          poster={asset(s.img)}
           muted
           loop
           autoPlay
@@ -38,13 +39,13 @@ function Tile({
       ) : dup ? (
         <div
           className="hero-strip-media hero-strip-media--dup"
-          style={{ backgroundImage: `url(${s.img})` }}
+          style={{ backgroundImage: `url(${asset(s.img)})` }}
           role="presentation"
         />
       ) : (
         <Image
           className="hero-strip-media"
-          src={s.img}
+          src={asset(s.img)}
           alt=""
           fill
           sizes="(max-width: 768px) 170px, 280px"

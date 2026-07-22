@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { SHOWCASE_PROJECTS, type ShowcaseProject } from "@/lib/project-showcase";
 import { RevealText } from "@/components/ui/reveal-text";
 import { ParallaxMedia } from "@/components/ui/parallax-media";
+import { asset } from "@/lib/asset";
 import { DotGridArrow } from "./Icons";
 
 /** Plays the clip only while it is on screen; static image otherwise. */
@@ -44,7 +45,7 @@ function ProjectMedia({ project }: { project: ShowcaseProject }) {
             <video
               ref={videoRef}
               className="h-full w-full object-cover"
-              src={project.media}
+              src={asset(project.media)}
               muted
               loop
               playsInline
@@ -55,7 +56,7 @@ function ProjectMedia({ project }: { project: ShowcaseProject }) {
             // eslint-disable-next-line @next/next/no-img-element
             <img
               className="h-full w-full object-cover"
-              src={project.media}
+              src={asset(project.media)}
               alt={`${project.category} showcase`}
               loading="lazy"
             />
