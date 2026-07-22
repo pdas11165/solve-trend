@@ -6,13 +6,31 @@ type Service = { num: string; name: string; img: string; video?: string };
 // Real selected-works imagery from public/projects. The three video-backed
 // disciplines use poster frames captured from their clips (kept static here
 // so the hero never loads ~34MB of video above the fold).
+// The three video-backed disciplines loop a tiny (70–130KB) muted clip; the
+// poster shows instantly while it loads. The three mockup disciplines stay
+// static images.
 const SERVICES: Service[] = [
-  { num: "01", name: "Brand Strategy", img: "/projects/brand-strategy-poster.jpg" },
+  {
+    num: "01",
+    name: "Brand Strategy",
+    img: "/projects/brand-strategy-poster.jpg",
+    video: "/projects/brand-strategy-loop.mp4",
+  },
   { num: "02", name: "Brand Identity", img: "/projects/brand-identity-hero.jpg" },
   { num: "03", name: "Web Development", img: "/projects/web-development-hero.jpg" },
   { num: "04", name: "E-Commerce", img: "/projects/ecommerce-hero.jpg" },
-  { num: "05", name: "Motion", img: "/projects/motion-poster.jpg" },
-  { num: "06", name: "AI Automation", img: "/projects/ai-automation-poster.jpg" },
+  {
+    num: "05",
+    name: "Motion",
+    img: "/projects/motion-poster.jpg",
+    video: "/projects/motion-loop.mp4",
+  },
+  {
+    num: "06",
+    name: "AI Automation",
+    img: "/projects/ai-automation-poster.jpg",
+    video: "/projects/ai-automation-loop.mp4",
+  },
 ];
 
 function Tile({

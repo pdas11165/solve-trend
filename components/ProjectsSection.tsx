@@ -46,6 +46,7 @@ function ProjectMedia({ project }: { project: ShowcaseProject }) {
               ref={videoRef}
               className="h-full w-full object-cover"
               src={asset(project.media)}
+              poster={asset(project.media.replace(/\.mp4$/, "-poster.jpg"))}
               muted
               loop
               playsInline
