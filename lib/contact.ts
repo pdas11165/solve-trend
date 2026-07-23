@@ -1,4 +1,4 @@
-export const CONTACT_EMAIL = "hello@solvetrend.example.com";
+export const CONTACT_EMAIL = "hello@solvtrend.com";
 
 export const CONTACT_SERVICE_OPTIONS = [
   "Brand Strategy",
@@ -8,7 +8,7 @@ export const CONTACT_SERVICE_OPTIONS = [
   "User Experience Design",
   "Web Development",
   "eCommerce Solutions",
-  "AI Automation",
+  "Custom Software & AI Automation",
   "Multiple services",
   "Not sure yet",
 ] as const;

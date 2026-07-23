@@ -4,7 +4,8 @@ import * as React from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { PHILOSOPHY_BLOCKS } from "@/lib/philosophy";
+import Link from "next/link";
+import { BLOG_POSTS } from "@/lib/blog";
 import { ScrollCharacterText } from "@/components/ui/text-scroll-animation";
 import { ParallaxMedia } from "@/components/ui/parallax-media";
 import { DotGridArrow } from "./Icons";
@@ -133,36 +134,49 @@ export default function PhilosophySection() {
       </div>
 
       <div className="philosophy-posts">
-        {PHILOSOPHY_BLOCKS.map((block, i) => (
-          <article key={block.id} className="philosophy-post">
+        {BLOG_POSTS.map((post, i) => (
+          <article key={post.slug} className="philosophy-post">
             <div className="philosophy-post__text">
               <p className="philosophy-post__meta">
                 <span
                   className="philosophy-post__dot"
-                  style={{ backgroundColor: block.color }}
+                  style={{ backgroundColor: post.color }}
                   aria-hidden="true"
                 />
-                <span>{block.eyebrow}</span>
+                <span>{post.category}</span>
                 <span aria-hidden="true" className="philosophy-post__meta-sep">
                   —
                 </span>
                 <span>№ {String(i + 1).padStart(2, "0")}</span>
               </p>
-              <h3 className="philosophy-post__headline">{block.headline}</h3>
-              <p className="philosophy-post__body">{block.body}</p>
-              <a className="philosophy-post__link" href="#contact">
+              <h3 className="philosophy-post__headline">{post.title}</h3>
+              <p className="philosophy-post__body">{post.excerpt}</p>
+              <Link className="philosophy-post__link" href={`/blog/${post.slug}`}>
                 Read the post
                 <DotGridArrow />
-              </a>
+              </Link>
             </div>
             <div className="philosophy-post__media">
               <ParallaxMedia>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={block.image} alt={block.imageAlt} loading="lazy" />
+                <img src={post.coverImage} alt={post.coverAlt} loading="lazy" />
               </ParallaxMedia>
             </div>
           </article>
         ))}
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          padding: "2rem 1.5rem 1rem",
+        }}
+      >
+        <Link className="philosophy-post__link" href="/blog">
+          View all insights
+          <DotGridArrow />
+        </Link>
       </div>
     </section>
   );

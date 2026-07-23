@@ -14,3 +14,14 @@ export function asset(path: string): string {
   if (!path.startsWith("/")) return path;
   return `${BASE_PATH}${path}`;
 }
+
+/**
+ * Prefixes an internal route path (e.g. "/blog") with the deploy base path,
+ * for plain <a> tags that — unlike next/link — don't get the basePath applied
+ * automatically. Do NOT use this on same-page hash links ("/#services"):
+ * those are matched verbatim by the nav scroll-spy selector and handled by the
+ * Lenis anchor intercept, so they must stay unprefixed.
+ */
+export function route(path: string): string {
+  return asset(path);
+}

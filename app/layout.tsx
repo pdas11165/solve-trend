@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://solvetrend.example.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://solvtrend.com";
 
 export const metadata: Metadata = {
   title: "Solve Trend — Digital Marketing & Design Agency, Charlottetown PEI",

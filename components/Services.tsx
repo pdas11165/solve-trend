@@ -1,96 +1,11 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { RevealText } from "@/components/ui/reveal-text";
 import { DotGridArrow } from "./Icons";
-
-const HERO_CDN = "https://cdn.prod.website-files.com/6904c591abb4bd2b6a67271b";
-const WORK_CDN = "https://cdn.prod.website-files.com/69a2eb38c0f39fa49cd98ba1";
-const PROJECT_CDN = "https://cdn.prod.website-files.com/69a9212ffc8e44e1794fb799";
-
-type Service = {
-  number: string;
-  title: string;
-  description: string;
-  tags: string[];
-  accent: string;
-  imageUrl: string;
-};
-
-const SERVICES: Service[] = [
-  {
-    number: "01",
-    title: "Brand Strategy",
-    description:
-      "We figure out who you are, who's listening, and how to make them care.",
-    tags: ["Positioning", "Research", "Messaging", "Campaigns"],
-    accent: "#E8341A",
-    imageUrl: `${WORK_CDN}/69bac6c472b3ddaac9735644_CMS%20Work%2001%20webp.webp`,
-  },
-  {
-    number: "02",
-    title: "Brand Identity & Graphic Design",
-    description:
-      "A look that's unmistakably yours — logo, visual system, and everything it touches.",
-    tags: ["Logo", "Visual Systems", "Packaging", "Print"],
-    accent: "#F2A23B",
-    imageUrl: `${HERO_CDN}/6904ca7a4abbe56dfff89585_hero-marquee-img-02.avif`,
-  },
-  {
-    number: "03",
-    title: "Motion Graphics & Animation",
-    description:
-      "Movement that explains, delights, and makes people actually finish the video.",
-    tags: ["Motion", "Animation", "Explainers", "Kinetic Type"],
-    accent: "#ED649E",
-    imageUrl: `${WORK_CDN}/69bac6dee6fbe19c625613e7_CMS%20Work%2003%20webp.webp`,
-  },
-  {
-    number: "04",
-    title: "Video Editing & Production",
-    description:
-      "From raw footage to something worth sharing — commercials, reels, and everything between.",
-    tags: ["Commercials", "Reels", "Color Grading", "Sound"],
-    accent: "#764BA2",
-    imageUrl: `${WORK_CDN}/69bac6edbbaa23515e2a5e63_CMS%20Work%2004%20webp.webp`,
-  },
-  {
-    number: "05",
-    title: "User Experience Design",
-    description:
-      "Interfaces people figure out without a manual — wireframed, prototyped, and built to scale.",
-    tags: ["UX/UI", "Wireframes", "Prototyping", "Design Systems"],
-    accent: "#5196FD",
-    imageUrl: `${PROJECT_CDN}/69ce1bd505ea321d262a6ef4_uiux.jpg`,
-  },
-  {
-    number: "06",
-    title: "Web Development",
-    description:
-      "Fast, sturdy sites your team can actually update — built in React or Webflow, your call.",
-    tags: ["React", "Webflow", "CMS", "APIs"],
-    accent: "#1A3DE8",
-    imageUrl: `${HERO_CDN}/6904ca7a4abbe56dfff89567_hero-marquee-img-04.avif`,
-  },
-  {
-    number: "07",
-    title: "eCommerce Solutions",
-    description: "Stores built to convert, not just to look nice on launch day.",
-    tags: ["Shopify", "WooCommerce", "Checkout", "Marketplaces"],
-    accent: "#0E9F6E",
-    imageUrl: `${WORK_CDN}/69c6157dc7884d040282487d_Work%207%20WebP.webp`,
-  },
-  {
-    number: "08",
-    title: "AI Automation",
-    description:
-      "The busywork, automated — so your team spends time on what actually needs a human.",
-    tags: ["Chatbots", "Workflows", "CRM", "AI Content"],
-    accent: "#12B5C9",
-    imageUrl: `${HERO_CDN}/6904ca7a4abbe56dfff89573_hero-marquee-img-06.avif`,
-  },
-];
+import { SERVICES, type Service } from "@/lib/services";
 
 function PreviewCard({ service }: { service: Service }) {
   return (
@@ -105,7 +20,7 @@ function PreviewCard({ service }: { service: Service }) {
           <motion.img
             key={service.number}
             src={service.imageUrl}
-            alt={service.title}
+            alt={service.name}
             className="absolute inset-0 h-full w-full object-cover"
             loading="lazy"
             initial={{ opacity: 0, scale: 1.06 }}
@@ -129,7 +44,7 @@ function PreviewCard({ service }: { service: Service }) {
             className="text-xs font-bold uppercase tracking-[0.2em]"
             style={{ color: service.accent }}
           >
-            № {service.number} — {service.title}
+            № {service.number} — {service.name}
           </p>
           <p className="mt-3 max-w-md text-[15px] leading-relaxed text-[#555]">
             {service.description}
@@ -146,6 +61,14 @@ function PreviewCard({ service }: { service: Service }) {
               </React.Fragment>
             ))}
           </div>
+          <Link
+            href={`/services/${service.slug}`}
+            className="mt-5 inline-flex items-center gap-2 text-sm font-semibold"
+            style={{ color: service.accent }}
+          >
+            Explore {service.name}
+            <DotGridArrow />
+          </Link>
         </motion.div>
       </AnimatePresence>
     </div>
@@ -177,7 +100,7 @@ function ServiceAccordion() {
                 className="flex-1 font-[family-name:var(--font-display)] text-xl font-bold tracking-tight"
                 style={{ color: isOpen ? "#1A1A1A" : "#3d3d3d" }}
               >
-                {service.title}
+                {service.name}
               </span>
               <span
                 className="text-lg leading-none"
@@ -201,7 +124,7 @@ function ServiceAccordion() {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={service.imageUrl}
-                        alt={service.title}
+                        alt={service.name}
                         className="h-full w-full object-cover"
                         loading="lazy"
                       />
@@ -221,6 +144,14 @@ function ServiceAccordion() {
                         </React.Fragment>
                       ))}
                     </div>
+                    <Link
+                      href={`/services/${service.slug}`}
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-semibold"
+                      style={{ color: service.accent }}
+                    >
+                      Explore {service.name}
+                      <DotGridArrow />
+                    </Link>
                   </div>
                 </motion.div>
               ) : null}
@@ -260,9 +191,8 @@ export default function Services() {
             className="font-[family-name:var(--font-display)] text-4xl font-extrabold tracking-tight text-[#1A1A1A] md:text-5xl"
           />
           <p className="mt-4 text-[15px] leading-relaxed text-[#555] md:text-base">
-            <span className="hidden md:inline">Hover a discipline</span>
-            <span className="md:hidden">Tap a discipline</span> to see what it
-            looks like when we run it end to end.
+            <span className="hidden md:inline">Hover a discipline to preview it, then click to</span>
+            <span className="md:hidden">Tap a discipline to preview it, then</span> go deeper.
           </p>
         </div>
 
@@ -273,11 +203,10 @@ export default function Services() {
               const isActive = active === i;
               return (
                 <li key={service.number}>
-                  <button
-                    type="button"
+                  <Link
+                    href={`/services/${service.slug}`}
                     onMouseEnter={() => setActive(i)}
                     onFocus={() => setActive(i)}
-                    aria-pressed={isActive}
                     className="group flex w-full items-center gap-4 border-b border-black/10 py-4 text-left transition-colors"
                   >
                     <span
@@ -290,7 +219,7 @@ export default function Services() {
                       className="flex-1 font-[family-name:var(--font-display)] text-2xl font-bold leading-tight tracking-tight transition-colors lg:text-[1.9rem]"
                       style={{ color: isActive ? "#1A1A1A" : "#B8B6B0" }}
                     >
-                      {service.title}
+                      {service.name}
                     </span>
                     <span
                       className="transition-all duration-300"
@@ -303,7 +232,7 @@ export default function Services() {
                     >
                       <DotGridArrow />
                     </span>
-                  </button>
+                  </Link>
                 </li>
               );
             })}
@@ -317,10 +246,17 @@ export default function Services() {
         {/* Mobile: accordion */}
         <ServiceAccordion />
 
-        <div className="mt-14 flex">
+        <div className="mt-14 flex flex-wrap gap-3">
+          <Link
+            href="/services"
+            className="magnetic-cta group inline-flex items-center gap-2 rounded-full bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
+          >
+            View all services
+            <DotGridArrow />
+          </Link>
           <a
             href="#contact"
-            className="magnetic-cta group inline-flex items-center gap-2 rounded-full bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
+            className="group inline-flex items-center gap-2 rounded-full border border-black/15 px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] transition-colors hover:border-black/40"
           >
             Start a project
             <DotGridArrow />

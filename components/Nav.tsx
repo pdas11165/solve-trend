@@ -6,7 +6,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { DotGridArrow, DotGridIcon, Monogram } from "./Icons";
 import { FlipLink } from "@/components/ui/flip-links";
+import { route } from "@/lib/asset";
 import { useNavSurfaceTone } from "./useNavSurfaceTone";
+
+/** Route links need the deploy basePath; same-page hash links must stay verbatim. */
+const navHref = (href: string) => (href.includes("#") ? href : route(href));
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -15,7 +19,7 @@ const NAV_LINKS = [
   { label: "Portfolio", href: "/#projects" },
   { label: "About", href: "/#about" },
   { label: "Pricing", href: "/#pricing" },
-  { label: "Insights", href: "/#faq" },
+  { label: "Insights", href: "/blog" },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -170,7 +174,7 @@ export default function Nav() {
           aria-label="Sections"
         >
           {NAV_LINKS.map((l) => (
-            <a key={l.href} href={l.href}>
+            <a key={l.href} href={navHref(l.href)}>
               {l.label}
             </a>
           ))}
@@ -221,7 +225,7 @@ export default function Nav() {
           {NAV_LINKS.map((l) => (
             <FlipLink
               key={l.href}
-              href={l.href}
+              href={navHref(l.href)}
               onClick={() => setOpen(false)}
               className="font-[family-name:var(--font-display)] font-extrabold uppercase tracking-tight text-white [font-size:clamp(2.5rem,8vw,5.5rem)] hover:text-[var(--red)]"
             >

@@ -7,6 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { DotGridArrow } from "@/components/Icons";
 import { FlipLink } from "@/components/ui/flip-links";
+import { CONTACT_EMAIL } from "@/lib/contact";
+import { route } from "@/lib/asset";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -332,8 +334,6 @@ const MarqueeItem = () => (
   </div>
 );
 
-const CONTACT_EMAIL = "hello@solvetrend.example.com";
-
 export function CinematicFooter() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const giantTextRef = useRef<HTMLDivElement>(null);
@@ -454,25 +454,25 @@ export function CinematicFooter() {
 
               <div className="mt-2 flex w-full flex-wrap justify-center gap-3 md:gap-6">
                 <FlipLink
-                  href="#services"
+                  href={route("/services")}
                   className="cinematic-footer-muted text-sm font-bold uppercase tracking-widest hover:text-[var(--foreground)] md:text-base"
                 >
                   Services
                 </FlipLink>
                 <FlipLink
-                  href="#faq"
+                  href={route("/blog")}
                   className="cinematic-footer-muted text-sm font-bold uppercase tracking-widest hover:text-[var(--foreground)] md:text-base"
                 >
                   Insights
                 </FlipLink>
                 <FlipLink
-                  href="#"
+                  href={route("/privacy")}
                   className="cinematic-footer-muted text-sm font-bold uppercase tracking-widest hover:text-[var(--foreground)] md:text-base"
                 >
                   Privacy
                 </FlipLink>
                 <FlipLink
-                  href="#"
+                  href={route("/terms")}
                   className="cinematic-footer-muted text-sm font-bold uppercase tracking-widest hover:text-[var(--foreground)] md:text-base"
                 >
                   Terms
