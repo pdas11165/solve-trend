@@ -2,10 +2,6 @@
 // Consumed by the homepage Services section, the /services index,
 // and the /services/[slug] detail pages.
 
-const HERO_CDN = "https://cdn.prod.website-files.com/6904c591abb4bd2b6a67271b";
-const WORK_CDN = "https://cdn.prod.website-files.com/69a2eb38c0f39fa49cd98ba1";
-const PROJECT_CDN = "https://cdn.prod.website-files.com/69a9212ffc8e44e1794fb799";
-
 export type ServiceStep = {
   title: string;
   body: string;
@@ -68,7 +64,7 @@ export const SERVICES: Service[] = [
     ],
     tags: ["Positioning", "Research", "Messaging", "Campaigns"],
     accent: "#E8341A",
-    imageUrl: `${WORK_CDN}/69bac6c472b3ddaac9735644_CMS%20Work%2001%20webp.webp`,
+    imageUrl: "/projects/brand-strategy-poster.jpg",
   },
   {
     slug: "brand-identity",
@@ -105,7 +101,7 @@ export const SERVICES: Service[] = [
     ],
     tags: ["Logo", "Visual Systems", "Packaging", "Print"],
     accent: "#F2A23B",
-    imageUrl: `${HERO_CDN}/6904ca7a4abbe56dfff89585_hero-marquee-img-02.avif`,
+    imageUrl: "/projects/brand-identity-hero.jpg",
   },
   {
     slug: "motion-graphics",
@@ -142,7 +138,7 @@ export const SERVICES: Service[] = [
     ],
     tags: ["Motion", "Animation", "Explainers", "Kinetic Type"],
     accent: "#ED649E",
-    imageUrl: `${WORK_CDN}/69bac6dee6fbe19c625613e7_CMS%20Work%2003%20webp.webp`,
+    imageUrl: "/projects/motion-poster.jpg",
   },
   {
     slug: "video-production",
@@ -179,7 +175,7 @@ export const SERVICES: Service[] = [
     ],
     tags: ["Commercials", "Reels", "Color Grading", "Sound"],
     accent: "#764BA2",
-    imageUrl: `${WORK_CDN}/69bac6edbbaa23515e2a5e63_CMS%20Work%2004%20webp.webp`,
+    imageUrl: "/services/video-production.jpg",
   },
   {
     slug: "ux-design",
@@ -216,7 +212,7 @@ export const SERVICES: Service[] = [
     ],
     tags: ["UX/UI", "Wireframes", "Prototyping", "Design Systems"],
     accent: "#5196FD",
-    imageUrl: `${PROJECT_CDN}/69ce1bd505ea321d262a6ef4_uiux.jpg`,
+    imageUrl: "/services/ux-design.jpg",
   },
   {
     slug: "web-development",
@@ -253,7 +249,7 @@ export const SERVICES: Service[] = [
     ],
     tags: ["React", "Next.js", "Webflow", "CMS"],
     accent: "#1A3DE8",
-    imageUrl: `${HERO_CDN}/6904ca7a4abbe56dfff89567_hero-marquee-img-04.avif`,
+    imageUrl: "/projects/web-development-hero.jpg",
   },
   {
     slug: "ecommerce",
@@ -289,7 +285,7 @@ export const SERVICES: Service[] = [
     ],
     tags: ["Shopify", "WooCommerce", "Checkout", "Automations"],
     accent: "#0E9F6E",
-    imageUrl: `${WORK_CDN}/69c6157dc7884d040282487d_Work%207%20WebP.webp`,
+    imageUrl: "/projects/ecommerce-hero.jpg",
   },
   {
     slug: "custom-software-ai",
@@ -328,7 +324,7 @@ export const SERVICES: Service[] = [
     ],
     tags: ["Custom CRM", "Internal Tools", "Integrations", "AI Agents", "Workflows"],
     accent: "#12B5C9",
-    imageUrl: `${HERO_CDN}/6904ca7a4abbe56dfff89573_hero-marquee-img-06.avif`,
+    imageUrl: "/services/custom-software-ai.jpg",
   },
 ];
 

@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { DotGridArrow } from "@/components/Icons";
 import { SERVICES, getService } from "@/lib/services";
+import { asset } from "@/lib/asset";
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -111,7 +112,7 @@ export default async function ServiceDetailPage({
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-black/[0.04] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.4)]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={service.imageUrl}
+                    src={asset(service.imageUrl)}
                     alt={service.name}
                     className="h-full w-full object-cover"
                   />

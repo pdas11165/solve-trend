@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { RevealText } from "@/components/ui/reveal-text";
 import { DotGridArrow } from "./Icons";
 import { SERVICES, type Service } from "@/lib/services";
+import { asset } from "@/lib/asset";
 
 function PreviewCard({ service }: { service: Service }) {
   return (
@@ -19,7 +20,7 @@ function PreviewCard({ service }: { service: Service }) {
         <AnimatePresence mode="wait">
           <motion.img
             key={service.number}
-            src={service.imageUrl}
+            src={asset(service.imageUrl)}
             alt={service.name}
             className="absolute inset-0 h-full w-full object-cover"
             loading="lazy"
@@ -123,7 +124,7 @@ function ServiceAccordion() {
                     <div className="hover-zoom relative aspect-[4/3] w-full rounded-xl bg-black/[0.04]">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={service.imageUrl}
+                        src={asset(service.imageUrl)}
                         alt={service.name}
                         className="h-full w-full object-cover"
                         loading="lazy"

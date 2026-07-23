@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { DotGridArrow } from "@/components/Icons";
 import { BLOG_POSTS, getPost, formatPostDate, type BlogBlock } from "@/lib/blog";
+import { asset } from "@/lib/asset";
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((p) => ({ slug: p.slug }));
@@ -119,7 +120,7 @@ export default async function BlogPostPage({
             <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl bg-black/[0.04] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.4)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={post.coverImage}
+                src={asset(post.coverImage)}
                 alt={post.coverAlt}
                 className="h-full w-full object-cover"
               />
@@ -176,7 +177,7 @@ export default async function BlogPostPage({
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/[0.04] sm:aspect-auto sm:w-40 sm:shrink-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={p.coverImage}
+                    src={asset(p.coverImage)}
                     alt={p.coverAlt}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
                     loading="lazy"

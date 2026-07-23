@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { DotGridArrow } from "@/components/Icons";
 import { SERVICES } from "@/lib/services";
+import { asset } from "@/lib/asset";
 
 export const metadata: Metadata = {
   title: "Services — Solve Trend",
@@ -50,7 +51,7 @@ export default function ServicesIndexPage() {
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/[0.04]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={service.imageUrl}
+                    src={asset(service.imageUrl)}
                     alt={service.name}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     loading="lazy"

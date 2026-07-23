@@ -2,10 +2,6 @@
 // Consumed by the homepage Insights section, the /blog index,
 // and the /blog/[slug] post pages.
 
-const HERO_CDN = "https://cdn.prod.website-files.com/6904c591abb4bd2b6a67271b";
-const WORK_CDN = "https://cdn.prod.website-files.com/69a2eb38c0f39fa49cd98ba1";
-const PROJECT_CDN = "https://cdn.prod.website-files.com/69a9212ffc8e44e1794fb799";
-
 export type BlogBlock =
   | { type: "p"; text: string }
   | { type: "h2"; text: string }
@@ -38,8 +34,8 @@ export const BLOG_POSTS: BlogPost[] = [
     readingTime: "6 min read",
     author: "Solve Trend",
     color: "rgba(81, 150, 253, 0.8)",
-    coverImage: `${WORK_CDN}/69bac6c472b3ddaac9735644_CMS%20Work%2001%20webp.webp`,
-    coverAlt: "Custom CRM dashboard",
+    coverImage: "/blog/custom-crm-vs-off-the-shelf.jpg",
+    coverAlt: "A generic template CRM next to a custom-built CRM",
     body: [
       {
         type: "p",
@@ -103,8 +99,8 @@ export const BLOG_POSTS: BlogPost[] = [
     readingTime: "5 min read",
     author: "Solve Trend",
     color: "rgba(18, 181, 201, 0.8)",
-    coverImage: `${HERO_CDN}/6904ca7a4abbe56dfff89573_hero-marquee-img-06.avif`,
-    coverAlt: "AI automation workflow",
+    coverImage: "/blog/where-ai-automation-actually-pays-off.jpg",
+    coverAlt: "Abstract AI workflow automation diagram",
     body: [
       {
         type: "p",
@@ -168,8 +164,8 @@ export const BLOG_POSTS: BlogPost[] = [
     readingTime: "4 min read",
     author: "Solve Trend",
     color: "rgba(143, 137, 255, 0.8)",
-    coverImage: `${PROJECT_CDN}/69ce1dd984e68ff75cfcfcf3_prd.jpg`,
-    coverAlt: "Internal tools and dashboards",
+    coverImage: "/blog/outgrown-your-spreadsheets.jpg",
+    coverAlt: "A messy spreadsheet transforming into a clean analytics dashboard",
     body: [
       {
         type: "p",
@@ -235,8 +231,8 @@ export const BLOG_POSTS: BlogPost[] = [
     readingTime: "4 min read",
     author: "Solve Trend",
     color: "rgba(237, 100, 158, 0.8)",
-    coverImage: `${HERO_CDN}/6904ca7a4abbe56dfff89585_hero-marquee-img-02.avif`,
-    coverAlt: "Brand identity system",
+    coverImage: "/blog/your-brand-is-a-system-not-a-logo.jpg",
+    coverAlt: "A brand identity system: 3D shapes, color swatches, type, and logo variations",
     body: [
       {
         type: "p",
