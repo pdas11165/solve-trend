@@ -234,32 +234,9 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div className="overlay-socials" aria-label="Social media">
-          <FlipLink
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="text-sm uppercase tracking-[0.1em] text-white/60 hover:text-white"
-          >
-            Instagram
-          </FlipLink>
-          <FlipLink
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="text-sm uppercase tracking-[0.1em] text-white/60 hover:text-white"
-          >
-            LinkedIn
-          </FlipLink>
-          <FlipLink
-            href="https://tiktok.com"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="text-sm uppercase tracking-[0.1em] text-white/60 hover:text-white"
-          >
-            TikTok
-          </FlipLink>
-        </div>
+        {/* Social links removed until real profiles exist. To re-add, restore
+            an .overlay-socials block of FlipLinks here with real href values
+            (Instagram / LinkedIn / TikTok), target="_blank" rel="noreferrer noopener". */}
       </div>
     </>
   );

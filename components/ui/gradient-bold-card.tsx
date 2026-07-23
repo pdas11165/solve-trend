@@ -3,10 +3,33 @@
 import React from "react";
 import { Loader2, Mail, Phone, Send, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CONTACT_SERVICE_OPTIONS } from "@/lib/contact";
+import { CONTACT_EMAIL, CONTACT_SERVICE_OPTIONS } from "@/lib/contact";
 import { cn } from "@/lib/utils";
 
-type FormState = "idle" | "submitting" | "success" | "error";
+type FormState = "idle" | "submitting" | "success" | "error" | "fallback";
+
+type ContactPayload = {
+  name: string;
+  phone: string;
+  email: string;
+  service: string;
+};
+
+function buildMailto({ name, phone, email, service }: ContactPayload) {
+  const subject = `New project inquiry${name ? ` from ${name}` : ""}`;
+  const body = [
+    `Name: ${name}`,
+    `Phone: ${phone}`,
+    `Email: ${email}`,
+    `Service: ${service}`,
+    "",
+    "Tell us a bit more about your project:",
+    "",
+  ].join("\n");
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+    subject,
+  )}&body=${encodeURIComponent(body)}`;
+}
 
 const GRADIENT_FROM = "#ffbc00";
 const GRADIENT_TO = "#ff0058";
@@ -18,14 +41,16 @@ const glowPanelClass =
 const GradientBlobCard: React.FC = () => {
   const [formState, setFormState] = React.useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = React.useState("");
+  const [mailtoHref, setMailtoHref] = React.useState("");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget;
     setFormState("submitting");
     setErrorMessage("");
 
-    const formData = new FormData(event.currentTarget);
-    const payload = {
+    const formData = new FormData(form);
+    const payload: ContactPayload = {
       name: String(formData.get("name") ?? "").trim(),
       phone: String(formData.get("phone") ?? "").trim(),
       email: String(formData.get("email") ?? "").trim(),
@@ -42,16 +67,25 @@ const GradientBlobCard: React.FC = () => {
       const data = (await response.json()) as { error?: string };
 
       if (!response.ok) {
-        setErrorMessage(data.error ?? "Something went wrong. Please try again.");
-        setFormState("error");
+        // Validation problems (bad email, missing field) are the visitor's to
+        // fix — show them inline. Anything else (delivery not configured, or a
+        // server/network failure) shouldn't lose their inquiry: fall back to a
+        // pre-filled direct email so the message still reaches us.
+        if (response.status === 400 && data.error) {
+          setErrorMessage(data.error);
+          setFormState("error");
+          return;
+        }
+        setMailtoHref(buildMailto(payload));
+        setFormState("fallback");
         return;
       }
 
-      event.currentTarget.reset();
+      form.reset();
       setFormState("success");
     } catch {
-      setErrorMessage("Unable to reach the server. Please try again.");
-      setFormState("error");
+      setMailtoHref(buildMailto(payload));
+      setFormState("fallback");
     }
   }
 
@@ -203,6 +237,23 @@ const GradientBlobCard: React.FC = () => {
             <p className="rounded-lg border border-red-400/40 bg-red-500/15 px-4 py-3 text-sm text-red-100">
               {errorMessage}
             </p>
+          ) : null}
+
+          {formState === "fallback" ? (
+            <div className="rounded-lg border border-amber-400/40 bg-amber-500/15 px-4 py-3 text-sm text-amber-50">
+              <p>
+                We couldn&apos;t send that automatically right now — but your
+                details are ready to go. Email them to us directly and
+                we&apos;ll reply within a day.
+              </p>
+              <a
+                href={mailtoHref}
+                className="mt-3 inline-flex items-center gap-2 font-semibold text-white underline underline-offset-2 hover:text-amber-200"
+              >
+                <Mail className="h-4 w-4" aria-hidden="true" />
+                Email {CONTACT_EMAIL}
+              </a>
+            </div>
           ) : null}
 
           <div className="magnetic-cta mt-1">
