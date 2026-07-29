@@ -116,4 +116,4 @@ After the call, sort everything into three buckets:
 
 ---
 
-_Reference: this maps to the "Custom Software & AI Automation" service — solvtrend.com/services/custom-software-ai_
+_Reference: this maps to the "Custom Software & AI Automation" service — solvetrend.com/services/custom-software-ai_

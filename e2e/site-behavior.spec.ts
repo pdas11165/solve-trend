@@ -86,3 +86,81 @@ test.describe("Layout integrity", () => {
     }
   });
 });
+
+test.describe("Careers", () => {
+  test("careers is reachable from the footer but stays out of the nav", async ({
+    page,
+  }) => {
+    // Deliberately unlisted in the main nav — the footer link and the hiring
+    // strip are the only entry points.
+    await expect(page.locator('.nav-pill a[href*="/careers"]')).toHaveCount(0);
+
+    const footerLink = page.locator('footer a[href$="/careers"]').first();
+    await expect(footerLink).toHaveCount(1);
+  });
+
+  test("the homepage hiring strip tracks whether any role is open", async ({
+    page,
+  }) => {
+    const { IS_HIRING, OPEN_ROLES } = await import("../lib/careers");
+    const strip = page.locator('section[aria-label="Open roles"]');
+
+    if (!IS_HIRING) {
+      await expect(strip).toHaveCount(0);
+      return;
+    }
+
+    await expect(strip).toHaveCount(1);
+    await expect(strip).toContainText(
+      `${OPEN_ROLES.length} open ${OPEN_ROLES.length === 1 ? "role" : "roles"}`,
+    );
+    await expect(strip.locator('a[href$="/careers"]')).toHaveCount(1);
+  });
+
+  test("the careers page lists every open role", async ({ page }) => {
+    const { OPEN_ROLES } = await import("../lib/careers");
+    await page.goto("/careers");
+
+    for (const role of OPEN_ROLES) {
+      await expect(page.locator(`a[href$="/careers/${role.slug}"]`)).toHaveCount(1);
+    }
+
+    // Empty state and role list are mutually exclusive.
+    await expect(page.locator("#open-roles h2")).toHaveText(
+      OPEN_ROLES.length > 0 ? "Open roles" : "No open roles right now",
+    );
+  });
+
+  test("a role page prefills its own title in the application form", async ({
+    page,
+  }) => {
+    const { OPEN_ROLES } = await import("../lib/careers");
+    test.skip(OPEN_ROLES.length === 0, "no open roles to check");
+
+    const role = OPEN_ROLES[0];
+    await page.goto(`/careers/${role.slug}`);
+    await expect(page.locator("h1")).toHaveText(role.title);
+    await expect(page.locator('#apply select[name="role"]')).toHaveValue(role.title);
+  });
+
+  test("the application form refuses to submit without a resume", async ({
+    page,
+  }) => {
+    await page.goto("/careers");
+
+    let posted = false;
+    page.on("request", (request) => {
+      if (request.url().includes("/api/careers/apply")) posted = true;
+    });
+
+    await page.fill('#apply input[name="name"]', "Test Candidate");
+    await page.fill('#apply input[name="email"]', "test@example.com");
+    await page.fill('#apply input[name="phone"]', "555-0100");
+    await page.fill('#apply input[name="location"]', "Halifax, NS");
+    await page.selectOption('#apply select[name="experience"]', { index: 1 });
+    await page.click('#apply button[type="submit"]');
+
+    await expect(page.locator("#apply form")).toContainText("Please attach your resume.");
+    expect(posted, "no request should reach the API without a resume").toBe(false);
+  });
+});

@@ -81,7 +81,7 @@ function ProjectCard({ project, index }: { project: ShowcaseProject; index: numb
       {/* Text */}
       <div className={`flex flex-col ${reversed ? "md:order-2" : ""}`}>
         <span
-          className="mb-5 inline-flex w-fit items-center rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.12em]"
+          className="mb-5 inline-flex w-fit items-center rounded-[8px] px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.12em]"
           style={{ backgroundColor: project.accentSoft, color: project.accent }}
         >
           {project.category}
@@ -111,7 +111,7 @@ function ProjectCard({ project, index }: { project: ShowcaseProject; index: numb
 
         <a
           href="#contact"
-          className="magnetic-cta group mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#333]"
+          className="magnetic-cta group mt-8 inline-flex w-fit items-center gap-2 rounded-[14px] bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#333]"
         >
           Start a project like this
           <DotGridArrow />
@@ -168,7 +168,7 @@ export default function ProjectsSection() {
         <div className="mt-14 flex justify-center">
           <a
             href="#contact"
-            className="magnetic-cta group inline-flex items-center gap-2 rounded-full bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
+            className="magnetic-cta group inline-flex items-center gap-2 rounded-[14px] bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
           >
             Start your project
             <DotGridArrow />

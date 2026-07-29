@@ -1,0 +1,1040 @@
+{
+  "_comment": "Enhanced + remapped generation manifest. Supersedes imagery-manifest.json. Generated via Higgsfield browser UI on the unlimited trial (free models only).",
+  "generated": "2026-07-28",
+  "supersedes": "docs/imagery-manifest.json",
+  "changes": [
+    "Services remapped from 8 stale disciplines to the 5 live offers in lib/services.ts (consolidated 2026-07-28).",
+    "Project accents corrected to match lib/project-showcase.ts: P03 #1A3DE8 -> #5196FD, P04 #0E9F6E -> #764BA2.",
+    "Model switched off recraft_v4_1 (not on the unlimited tier) to Seedream 4.5 for editorial Family A and Nano Banana Pro for Family B device mockups.",
+    "Prompts enhanced: explicit camera/lens, single-hue dominance reinforced, thumbnail legibility for hero tiles, hardened no-text negatives for mockups.",
+    "PILOT FIX after H02: 'natural colour grade' was fighting 'one dominant hue owning the frame' and produced desaturated sepia instead of an amber wash. Replaced with 'saturated single-hue colour grade with a strong unmistakable colour cast' on the 21 colour-wash images; kept a natural grade on the 10 natural-scene-with-one-accent images. Also widened the 3 hero portraits from extreme macro to head-and-shoulders.",
+    "PILOT FIX 2 after S1: my rewrite had dropped the literal hex codes the original prompts carried, so crimson drifted to burgundy. Appended an explicit 'dominant hue must be exactly hex <accent>' clause to all 32 prompts.",
+    "REVISION on Promit's feedback: the first web-development mockup read as a flat grey wireframe. Rewrote P03/P04/P06 screen content to read as real designed product work (gradient hero panels, overlapping cards, real charts, saturated accent colour, depth) while keeping the hard no-readable-text constraint that stops garbled fake UI copy.",
+    "P01/P02 reassigned to Seedream 4.5 - they are natural editorial product photography (flat lay, collateral set), not device mockups, so the film-grain photographic model fits better than the UI model.",
+    "Promit feedback round 2: (a) too many laptop/computer mockups - added a 6-image AVELUNE brand application set covering packaging, signage, stationery, in-hand app, outdoor and apparel, and barred devices from P05; (b) reworked P05 from a screen to a strobe multiple-exposure dancer.",
+    "Promit feedback round 3: (a) removed literal 'plain white' backgrounds, replaced with saturated gradient backdrops; (b) Miro board checked \u2014 Envato links are all After Effects video templates (not usable for stills), Pinterest pins require login so actual visual content couldn't be fetched; applied the described aesthetic (glassmorphism/claymorphism/neumorphism/chromatic aberration/prism) directly via prompt language on a handful of images instead; (c) replaced single-brand AVELUNE-only projects set with a 5-brand, 5-industry mix (skincare, consumer tech, restaurant, real estate, financial services) - 16 brand images total, trimmed AVELUNE from 6 to 4.",
+    "Added 3 'capability showcase' images (G01-G03: web development, AI automation, brand design) styled after the bold flat-colour-block, screen-grid Envato agency-promo aesthetic (checked 2 Envato template preview pages directly - both use near-black backgrounds, one saturated flat colour block, and confident geometric type bars over screen/phone tiles). These are Solve Trend's own capability demos, not client-brand mockups.",
+    "Promit feedback round 4: capability-showcase screen/UI mockups (G01-G03) read as generic AI stock imagery. Reworked into pure abstract material/light still lifes matching the hero Family A aesthetic (glass+steel lattice, glass-sphere node cluster, ink-and-paper) - no screens, no UI, no devices at all. Switched model to Seedream 4.5 to match the rest of the abstract editorial set.",
+    "Promit feedback round 5: no more lifestyle-couch/interior phone shots - they read as generic AI stock. Rewrote every in-hand phone prompt (AVELUNE app, AERON app, ROSEMONT app) into a no-hand, no-room hero product-reveal shot: modern all-screen iPhone-style device floating against a single-hue or two-tone gradient void with a soft glow, polished realistic studio lighting, nicer/more modern UI treatment. B04 (AVELUNE app) will be regenerated since the accepted version used the old couch-background style.",
+    "Switched all brand-wordmark images to Nano Banana Pro regardless of photographic style - it renders short wordmarks (AVELUNE) correctly and reliably where Seedream 4.5 is less predictable with text; text accuracy matters more than the marginal grain/lighting difference here.",
+    "Promit feedback round 6: (a) renamed the accounting/financial brand from invented 'LEDGER & CO' to QUANTIVA - this is a real prior client (Quantiva Consulting), so its 3 images were simplified to a modern/minimalist direction rather than the ornate emerald+gold neumorphic look; (b) reworked AERON headphones/earbuds (C01, C03) toward a transparent-housing 'see-through tech' visual language (style-inspired only, no logos or trade dress copied) since the closed-shell shape wasn't liked; (c) added a 'single hero product on a lacquer-black pedestal under one hard overhead spotlight, extreme minimalism' luxury-advertising framing to the AERON pieces, taking compositional inspiration from high-fashion product photography (restraint, negative space, single dramatic light) rather than any specific brand's imagery."
+  ],
+  "model_rationale": {
+    "seedream-4.5": "Stylized creative expert; renders authentic film grain and photographic compositional detail where Nano Banana Pro reads sterile. Used for all 26 Family A editorial/abstract images.",
+    "nano-banana-pro": "Realism expert; benchmarks ahead on UI mockups and spatial logic. Used for the 6 Family B device/browser mockups."
+  },
+  "items": [
+    {
+      "id": "H01",
+      "surface": "hero",
+      "file": "public/hero/01-strategy-cards.jpg",
+      "dest": "website content/Hero section images/01-strategy-cards.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#E8341A",
+      "prompt": "Eight overlapping matte card-stock rectangles suspended mid-air in a shallow ascending arc, deep crimson seamless backdrop, the cards the same crimson as the ground so the frame reads as a single hue, one hard raking key light from the upper left carving long parallel shadows across the sweep, fine dust motes catching the beam, monochrome red-on-red still life, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #E8341A",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H02",
+      "surface": "hero",
+      "file": "public/hero/02-portrait-slats.jpg",
+      "dest": "website content/Hero section images/02-portrait-slats.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#F2A23B",
+      "prompt": "Close editorial portrait of a person looking up and away from camera, face raked by a hard slatted blind shadow in warm amber, the amber gel washing the whole frame, background unlit and falling to pure black, single hard gel source at forty-five degrees, skin texture and pores fully retained with no retouching sheen, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical head-and-shoulders framing with breathing room around the head, not an extreme macro crop, subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #F2A23B",
+      "colors": [
+        {
+          "rgb": [
+            242,
+            162,
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H03",
+      "surface": "hero",
+      "file": "public/hero/03-light-ribbon.jpg",
+      "dest": "website content/Hero section images/03-light-ribbon.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#ED649E",
+      "prompt": "A single continuous ribbon of hot pink light drawn in long exposure through dark air, forming one elegant looping curve, pure black studio void, soft bloom on the brightest bend, one faint mirrored reflection on a wet floor below, nothing else in frame, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #ED649E",
+      "colors": [
+        {
+          "rgb": [
+            237,
+            100,
+            158
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H04",
+      "surface": "hero",
+      "file": "public/hero/04-lens-glow.jpg",
+      "dest": "website content/Hero section images/04-lens-glow.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#764BA2",
+      "prompt": "Extreme macro of a cinema prime lens front element resting on a dark surface, deep violet light raking across the glass coatings, internal reflections forming concentric rings, the barrel edge just catching a highlight, everything beyond the glass falling into shadow, product photography grammar, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #764BA2",
+      "colors": [
+        {
+          "rgb": [
+            118,
+            75,
+            162
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H05",
+      "surface": "hero",
+      "file": "public/hero/05-acrylic-layers.jpg",
+      "dest": "website content/Hero section images/05-acrylic-layers.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#5196FD",
+      "prompt": "Six translucent frosted acrylic sheets standing upright in a row with air gaps between them, on a pale grey studio sweep, cool blue light passing through the stack and refracting into soft overlapping bands on the wall behind, one long soft shadow to the right, architectural minimalism, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, natural colour grade, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #5196FD",
+      "colors": [
+        {
+          "rgb": [
+            81,
+            150,
+            253
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H06",
+      "surface": "hero",
+      "file": "public/hero/06-portrait-prism.jpg",
+      "dest": "website content/Hero section images/06-portrait-prism.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#1A3DE8",
+      "prompt": "Editorial portrait in strict profile, a thin horizontal bar of spectral prism light cutting across the eyes, deep indigo ambient wash filling the frame, subject in dark clothing against near-black, single hard source refracting into a narrow rainbow edge, cinematic and restrained, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical head-and-shoulders framing with breathing room around the head, not an extreme macro crop, subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #1A3DE8",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H07",
+      "surface": "hero",
+      "file": "public/hero/07-glass-torus.jpg",
+      "dest": "website content/Hero section images/07-glass-torus.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#0E9F6E",
+      "prompt": "An iridescent clear glass torus resting on a brushed steel pedestal, bone-white seamless studio sweep, one soft key from camera right, a long soft shadow stretching to the left, caustic light pooling on the sweep beneath the glass, emerald refraction glowing inside the form, minimal luxury product photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #0E9F6E, chromatic aberration fringing at the highlight edges, subtle prismatic colour dispersion in the reflections",
+      "colors": [
+        {
+          "rgb": [
+            14,
+            159,
+            110
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H08",
+      "surface": "hero",
+      "file": "public/hero/08-hands-swatches.jpg",
+      "dest": "website content/Hero section images/08-hands-swatches.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#F2A23B",
+      "prompt": "Overhead close-up of two hands fanning a printed colour swatch deck across a warm concrete surface, warm directional window light from the left, deep falloff into shadow on the right, muted natural palette with one amber swatch catching the light as the only saturated note, documentary editorial reportage, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, natural colour grade, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #F2A23B",
+      "colors": [
+        {
+          "rgb": [
+            242,
+            162,
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H09",
+      "surface": "hero",
+      "file": "public/hero/09-chrome-mesh.jpg",
+      "dest": "website content/Hero section images/09-chrome-mesh.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#1A3DE8",
+      "prompt": "A polished chrome wireframe sphere built from thin intersecting rings, floating above a dark reflective floor, deep blue rim light along the upper edges, black void behind, sharp specular highlights tracing the ring geometry, studio product photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #1A3DE8, strong chromatic aberration and rainbow light dispersion where the chrome catches the rim light",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H10",
+      "surface": "hero",
+      "file": "public/hero/10-motion-figure.jpg",
+      "dest": "website content/Hero section images/10-motion-figure.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#12B5C9",
+      "prompt": "A figure in a loose white shirt captured in heavy motion blur crossing the frame from left to right, saturated teal seamless backdrop, slow-shutter exposure with one sharp trailing edge and the limbs smeared into pure colour, editorial fashion photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #12B5C9",
+      "colors": [
+        {
+          "rgb": [
+            18,
+            181,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H11",
+      "surface": "hero",
+      "file": "public/hero/11-liquid-drop.jpg",
+      "dest": "website content/Hero section images/11-liquid-drop.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#F2A23B",
+      "prompt": "A single suspended droplet of clear liquid frozen mid-fall against a deep charcoal drape, a warm amber beam passing through it and splitting into a narrow spectrum on the far side, extreme macro detail on the surface tension and the meniscus, everything else dark, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, natural colour grade, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #F2A23B",
+      "colors": [
+        {
+          "rgb": [
+            242,
+            162,
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H12",
+      "surface": "hero",
+      "file": "public/hero/12-portrait-red-wash.jpg",
+      "dest": "website content/Hero section images/12-portrait-red-wash.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#E8341A",
+      "prompt": "Editorial portrait, head tilted back and up, the entire frame washed in crimson light, a second cooler light grazing the jawline from behind to separate the subject from the ground, black background, high contrast, skin texture and pores retained, cinematic gel lighting, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical head-and-shoulders framing with breathing room around the head, not an extreme macro crop, subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #E8341A",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H13",
+      "surface": "hero",
+      "file": "public/hero/13-paper-fold.jpg",
+      "dest": "website content/Hero section images/13-paper-fold.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#ED649E",
+      "prompt": "A single sheet of heavy cotton paper folded into one sharp angular sculptural form standing on a pale bone seamless, hard low sun-angle key light from the right casting a long clean geometric shadow, subtle rose bounce filling the shadow side, minimal sculptural still life, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, natural colour grade, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #ED649E",
+      "colors": [
+        {
+          "rgb": [
+            237,
+            100,
+            158
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H14",
+      "surface": "hero",
+      "file": "public/hero/14-desk-overhead.jpg",
+      "dest": "website content/Hero section images/14-desk-overhead.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#764BA2",
+      "prompt": "Overhead editorial shot of a dark walnut desk holding a closed laptop, a ceramic cup, a folded pair of glasses and one open blank notebook, warm low-angle window light from the top left, deep shadows across the lower right, muted natural tones with a single violet object as the only accent, documentary workspace photography, blank unmarked pages, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, natural colour grade, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #764BA2",
+      "colors": [
+        {
+          "rgb": [
+            118,
+            75,
+            162
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H15",
+      "surface": "hero",
+      "file": "public/hero/15-caustics.jpg",
+      "dest": "website content/Hero section images/15-caustics.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#5196FD",
+      "prompt": "Abstract underwater light caustics rippling across a pale sand-coloured floor, cool blue water tones filling the frame, one bright refracted hotspot slightly off centre, no subject at all, a pure light study, soft focus falloff at the frame edges, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #5196FD",
+      "colors": [
+        {
+          "rgb": [
+            81,
+            150,
+            253
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H16",
+      "surface": "hero",
+      "file": "public/hero/16-node-cluster.jpg",
+      "dest": "website content/Hero section images/16-node-cluster.jpg",
+      "aspect_ratio": "9:16",
+      "model": "seedream-4.5",
+      "accent": "#12B5C9",
+      "prompt": "A cluster of small clear glass spheres joined by fine matte black rods into an irregular molecular lattice, suspended against a deep teal gradient void, one soft key from above and behind putting a bright rim highlight on every sphere, depth falling away into darkness, minimal scientific product photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, vertical composition with the subject in the upper two thirds, bold simple silhouette that stays legible at thumbnail size, high separation between subject and ground, the dominant hue must be exactly hex #12B5C9",
+      "colors": [
+        {
+          "rgb": [
+            18,
+            181,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S1",
+      "surface": "service",
+      "service": "Brand Strategy & Identity",
+      "file": "public/services/brand-strategy-identity.jpg",
+      "dest": "website content/Services section images/brand-strategy-identity.jpg",
+      "aspect_ratio": "4:3",
+      "model": "seedream-4.5",
+      "accent": "#E8341A",
+      "prompt": "A short stack of cream cotton paper cards resting on a vast deep crimson seamless sweep, the topmost card carrying a blind-deboss impression of an abstract geometric mark with no letterforms, one hard raking key light from the upper right revealing the depth of the emboss and the paper fibre while throwing a long dramatic shadow across the empty crimson ground, extreme negative space with the stack small in frame, print-craft still life, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, the dominant hue must be exactly hex #E8341A",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ],
+      "note": "kept as-is (paper/emboss craft look), no chrome treatment"
+    },
+    {
+      "id": "SW1",
+      "surface": "service-wide",
+      "service": "Brand Strategy & Identity",
+      "file": "public/services/brand-strategy-identity-wide.jpg",
+      "dest": "website content/Services section images/brand-strategy-identity-wide.jpg",
+      "aspect_ratio": "16:9",
+      "model": "seedream-4.5",
+      "accent": "#E8341A",
+      "prompt": "A short stack of cream cotton paper cards resting on a vast deep crimson seamless sweep, the topmost card carrying a blind-deboss impression of an abstract geometric mark with no letterforms, one hard raking key light from the upper right revealing the depth of the emboss and the paper fibre while throwing a long dramatic shadow across the empty crimson ground, extreme negative space with the stack small in frame, print-craft still life, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, wide cinematic framing, subject offset to the right third, generous empty negative space on the left for a headline overlay, horizontal composition, the dominant hue must be exactly hex #E8341A",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "surface": "service",
+      "service": "Web Design & Development",
+      "file": "public/services/web-design-development.jpg",
+      "dest": "website content/Services section images/web-design-development.jpg",
+      "aspect_ratio": "4:3",
+      "model": "seedream-4.5",
+      "accent": "#1A3DE8",
+      "prompt": "Nine frosted translucent acrylic rectangles arranged in a loose three-by-three grid, standing at slight varying angles on a pale grey studio sweep, deep indigo light passing through them and projecting overlapping soft-edged rectangles onto the wall behind, one long shadow raking right, architectural minimalism and clean geometry, no interface elements, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, the dominant hue must be exactly hex #1A3DE8",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SW2",
+      "surface": "service-wide",
+      "service": "Web Design & Development",
+      "file": "public/services/web-design-development-wide.jpg",
+      "dest": "website content/Services section images/web-design-development-wide.jpg",
+      "aspect_ratio": "16:9",
+      "model": "seedream-4.5",
+      "accent": "#1A3DE8",
+      "prompt": "Nine frosted translucent acrylic rectangles arranged in a loose three-by-three grid, standing at slight varying angles on a pale grey studio sweep, deep indigo light passing through them and projecting overlapping soft-edged rectangles onto the wall behind, one long shadow raking right, architectural minimalism and clean geometry, no interface elements, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, wide cinematic framing, subject offset to the right third, generous empty negative space on the left for a headline overlay, horizontal composition, the dominant hue must be exactly hex #1A3DE8",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "surface": "service",
+      "service": "Motion & Video",
+      "file": "public/services/motion-video.jpg",
+      "dest": "website content/Services section images/motion-video.jpg",
+      "aspect_ratio": "4:3",
+      "model": "seedream-4.5",
+      "accent": "#ED649E",
+      "prompt": "A cinema camera in silhouette in a darkened studio, backlit by a hot pink practical light, a long-exposure ribbon of the same pink light painting a fluid curve through the atmospheric haze around it, a second warm light just grazing the camera body edge, everything else falling to black, moody behind-the-scenes editorial, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, the dominant hue must be exactly hex #ED649E",
+      "colors": [
+        {
+          "rgb": [
+            237,
+            100,
+            158
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SW3",
+      "surface": "service-wide",
+      "service": "Motion & Video",
+      "file": "public/services/motion-video-wide.jpg",
+      "dest": "website content/Services section images/motion-video-wide.jpg",
+      "aspect_ratio": "16:9",
+      "model": "seedream-4.5",
+      "accent": "#ED649E",
+      "prompt": "A cinema camera in silhouette in a darkened studio, backlit by a hot pink practical light, a long-exposure ribbon of the same pink light painting a fluid curve through the atmospheric haze around it, a second warm light just grazing the camera body edge, everything else falling to black, moody behind-the-scenes editorial, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, wide cinematic framing, subject offset to the right third, generous empty negative space on the left for a headline overlay, horizontal composition, the dominant hue must be exactly hex #ED649E",
+      "colors": [
+        {
+          "rgb": [
+            237,
+            100,
+            158
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S4",
+      "surface": "service",
+      "service": "eCommerce",
+      "file": "public/services/ecommerce.jpg",
+      "dest": "website content/Services section images/ecommerce.jpg",
+      "aspect_ratio": "4:3",
+      "model": "seedream-4.5",
+      "accent": "#0E9F6E",
+      "prompt": "An unbranded matte cardboard box caught mid-fall against a deep emerald seamless backdrop, one strip of paper tape catching a hard key light, frozen motion with a faint trailing shadow beneath, extreme negative space above the box, minimal conceptual product photography, completely blank unprinted box, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, the dominant hue must be exactly hex #0E9F6E",
+      "colors": [
+        {
+          "rgb": [
+            14,
+            159,
+            110
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SW4",
+      "surface": "service-wide",
+      "service": "eCommerce",
+      "file": "public/services/ecommerce-wide.jpg",
+      "dest": "website content/Services section images/ecommerce-wide.jpg",
+      "aspect_ratio": "16:9",
+      "model": "seedream-4.5",
+      "accent": "#0E9F6E",
+      "prompt": "An unbranded matte cardboard box caught mid-fall against a deep emerald seamless backdrop, one strip of paper tape catching a hard key light, frozen motion with a faint trailing shadow beneath, extreme negative space above the box, minimal conceptual product photography, completely blank unprinted box, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, wide cinematic framing, subject offset to the right third, generous empty negative space on the left for a headline overlay, horizontal composition, the dominant hue must be exactly hex #0E9F6E",
+      "colors": [
+        {
+          "rgb": [
+            14,
+            159,
+            110
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S5",
+      "surface": "service",
+      "service": "Custom Software & AI Automation",
+      "file": "public/services/custom-software-ai.jpg",
+      "dest": "website content/Services section images/custom-software-ai.jpg",
+      "aspect_ratio": "4:3",
+      "model": "seedream-4.5",
+      "accent": "#12B5C9",
+      "prompt": "A dense irregular lattice of small clear glass nodes joined by fine matte black connectors, occupying the lower third of a deep teal gradient void, one soft key from above and behind lighting each node into a bright point, depth falling off into darkness at the back, minimal scientific still life, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, the dominant hue must be exactly hex #12B5C9",
+      "colors": [
+        {
+          "rgb": [
+            18,
+            181,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SW5",
+      "surface": "service-wide",
+      "service": "Custom Software & AI Automation",
+      "file": "public/services/custom-software-ai-wide.jpg",
+      "dest": "website content/Services section images/custom-software-ai-wide.jpg",
+      "aspect_ratio": "16:9",
+      "model": "seedream-4.5",
+      "accent": "#12B5C9",
+      "prompt": "A dense irregular lattice of small clear glass nodes joined by fine matte black connectors, occupying the lower third of a deep teal gradient void, one soft key from above and behind lighting each node into a bright point, depth falling off into darkness at the back, minimal scientific still life, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, saturated single-hue colour grade with a strong unmistakable colour cast across the whole image, no text, no lettering, no numbers, no logos, no watermarks, no signage, wide cinematic framing, subject offset to the right third, generous empty negative space on the left for a headline overlay, horizontal composition, the dominant hue must be exactly hex #12B5C9",
+      "colors": [
+        {
+          "rgb": [
+            18,
+            181,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P01",
+      "surface": "project",
+      "file": "public/projects/brand-strategy-still.jpg",
+      "dest": "website content/Projects images/brand-strategy-still.jpg",
+      "aspect_ratio": "4:3",
+      "model": "seedream-4.5",
+      "accent": "#E8341A",
+      "prompt": "Overhead flat lay of an open brand strategy document spread across a warm concrete surface, the printed pages showing only abstract diagram blocks, grey placeholder bars and crimson colour chips with absolutely no readable text, a crimson marker and a folded pair of glasses beside them, warm directional window light from the upper left, deep soft shadows, documentary editorial photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, natural colour grade, no text, no lettering, no numbers, no logos, no watermarks, no signage, no readable text, no fake UI copy, all labels as neutral placeholder bars, the accent colour in this image must be exactly hex #E8341A",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P02",
+      "surface": "project",
+      "file": "public/projects/brand-identity-still.jpg",
+      "dest": "website content/Projects images/brand-identity-still.jpg",
+      "aspect_ratio": "4:3",
+      "model": "seedream-4.5",
+      "accent": "#F2A23B",
+      "prompt": "A brand collateral set arranged on a warm sand-toned surface, stacked business cards, a folded poster, a matte tote bag and a ceramic cup, every item unbranded and printed only with abstract amber geometric shapes and no letterforms, one hard raking key light from the right throwing long parallel shadows, minimal art direction, product photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, one dominant hue owning the entire frame, subtle matte film grain, natural colour grade, no text, no lettering, no numbers, no logos, no watermarks, no signage, no readable text, no fake UI copy, all labels as neutral placeholder bars, the accent colour in this image must be exactly hex #F2A23B",
+      "colors": [
+        {
+          "rgb": [
+            242,
+            162,
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P03",
+      "surface": "project",
+      "file": "public/projects/web-development-still.jpg",
+      "dest": "website content/Projects images/web-development-still.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#5196FD",
+      "prompt": "A modern laptop at a three-quarter angle on a dark textured slate surface, the screen showing a bold premium website design caught mid-scroll, a large full-bleed hero panel filled with a rich cool blue gradient and a soft light bloom, an oversized headline rendered as two thick solid bars, a row of three overlapping content cards below with soft rounded corners and their own image panels, a slim top navigation of small solid pills, generous white space and strong visual hierarchy, it must look like a real award-winning designed website with depth and colour, not a flat grey wireframe, screen glow spilling onto the slate, one cool key light from the upper left, soft reflection on the slate, near-black background, premium device mockup photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, natural colour grade, no text, no lettering, no numbers, no logos, no watermarks, no signage, no readable text, no fake UI copy, all type rendered as clean solid bars, the accent colour in this image must be exactly hex #5196FD",
+      "colors": [
+        {
+          "rgb": [
+            81,
+            150,
+            253
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P04",
+      "surface": "project",
+      "file": "public/projects/ecommerce-still.jpg",
+      "dest": "website content/Projects images/ecommerce-still.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#764BA2",
+      "prompt": "Two smartphones overlapping and floating at slight angles above a flat violet backdrop, the screens showing a vivid premium mobile commerce interface, the front phone a product page with a large rounded product image panel, a bold violet call-to-action bar and a price rendered as one solid block, the rear phone a checkout flow with a stepped progress indicator and three stacked order cards, rich saturated colour and real visual hierarchy with depth, not a flat grey wireframe, soft contact shadows beneath each device, one broad soft key light, bright minimal commercial mockup photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, natural colour grade, no text, no lettering, no numbers, no logos, no watermarks, no signage, no readable text, no fake UI copy, all type rendered as clean solid bars, the accent colour in this image must be exactly hex #764BA2",
+      "colors": [
+        {
+          "rgb": [
+            118,
+            75,
+            162
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P05",
+      "surface": "project",
+      "file": "public/projects/motion-still.jpg",
+      "dest": "website content/Projects images/motion-still.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#ED649E",
+      "prompt": "A multiple-exposure photograph of a dancer caught mid-spin against a pure black studio ground, four overlapping ghosted positions of the body frozen by strobe, long hot pink light trails arcing off the trailing arm and the hem of a loose skirt, one hard rim light separating the figure from the dark, a sense of real physical movement and speed, editorial dance photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, saturated single-hue colour grade with a strong unmistakable pink cast, no text, no lettering, no numbers, no logos, no watermarks, no signage, no screens, no monitors, no devices, the dominant hue must be exactly hex #ED649E",
+      "colors": [
+        {
+          "rgb": [
+            237,
+            100,
+            158
+          ]
+        }
+      ],
+      "note": "Reworked on Promit's feedback: the monitor-showing-abstract-shapes version read as a screensaver rather than motion design. Now pure captured movement, no screen."
+    },
+    {
+      "id": "P06",
+      "surface": "project",
+      "file": "public/projects/ai-automation-still.jpg",
+      "dest": "website content/Projects images/ai-automation-still.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#22D3EE",
+      "prompt": "A floating browser window tilted slightly with a soft drop shadow, displaying a vivid modern analytics dashboard, a dark slim sidebar with small glowing cyan icons, four KPI cards along the top each with a small sparkline, one large area chart with a bright cyan gradient fill and a clearly visible upward curve, a donut chart and a dense data table rendered as clean alternating bars, rich contrast and real visual hierarchy with depth, not a flat grey wireframe, set against a rich pale-to-saturated cyan gradient studio backdrop with soft directional light, bright even studio light, crisp modern SaaS mockup, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, natural colour grade, no text, no lettering, no numbers, no logos, no watermarks, no signage, no readable text, no fake UI copy, all type rendered as clean solid bars, the accent colour in this image must be exactly hex #22D3EE",
+      "colors": [
+        {
+          "rgb": [
+            34,
+            211,
+            238
+          ]
+        }
+      ]
+    },
+    {
+      "id": "B01",
+      "surface": "brand",
+      "brand": "AVELUNE",
+      "file": "public/projects/avelune-packaging.jpg",
+      "dest": "Projects images/avelune-packaging.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#F2A23B",
+      "prompt": "A premium skincare packaging suite arranged on a low travertine plinth, a tall frosted glass dropper bottle, a squat amber glass jar and two rigid cream cardboard boxes, all in a restrained sand and warm amber palette, one soft key from camera right with a long soft shadow to the left, bone-white seamless studio sweep behind, luxury product photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, natural colour grade, the only text anywhere in the image is the wordmark \"AVELUNE\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly A-V-E-L-U-N-E, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks",
+      "colors": [
+        {
+          "rgb": [
+            242,
+            162,
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "id": "B02",
+      "surface": "brand",
+      "brand": "AVELUNE",
+      "file": "public/projects/avelune-signage.jpg",
+      "dest": "Projects images/avelune-signage.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#F2A23B",
+      "prompt": "An exterior storefront at blue-hour dusk, a warm brushed-brass wordmark mounted on a smooth sand-coloured plaster facade above a plate glass window, soft warm interior light spilling onto the pavement, one street lamp flaring gently at the frame edge, shallow architectural perspective, moody documentary architectural photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, natural colour grade, the only text anywhere in the image is the wordmark \"AVELUNE\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly A-V-E-L-U-N-E, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks",
+      "colors": [
+        {
+          "rgb": [
+            242,
+            162,
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "id": "B04",
+      "surface": "brand",
+      "brand": "AVELUNE",
+      "file": "public/projects/avelune-app.jpg",
+      "dest": "Projects images/avelune-app.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#F2A23B",
+      "prompt": "A hero product-reveal shot of a single modern smartphone with an edge-to-edge display, a slim uniform bezel and no home button, floating upright and slightly angled in mid-air, the screen showing a polished premium skincare shopping app with a large rounded full-bleed product hero image, a soft amber call-to-action pill and two rounded product cards below with subtle depth and soft shadows, no hand, no person, no interior room, no furniture, the phone is the only object in frame set against a warm golden-amber gradient void fading from bright amber at the top to deep bronze at the bottom with a subtle soft glow behind the device and a soft contact shadow beneath it, premium advertising product photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, subtle matte film grain, shallow depth of field, photorealistic studio lighting with a crisp specular highlight along the phone edge, all interface labels rendered as clean solid bars with crisp modern iconography and no readable words, the only text anywhere in the image is the wordmark \"AVELUNE\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly A-V-E-L-U-N-E, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks, the accent colour in this image must be exactly hex #F2A23B",
+      "colors": [
+        {
+          "rgb": [
+            242,
+            162,
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "id": "B06",
+      "surface": "brand",
+      "brand": "AVELUNE",
+      "file": "public/projects/avelune-apparel.jpg",
+      "dest": "Projects images/avelune-apparel.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#F2A23B",
+      "prompt": "A folded heavyweight natural cotton tote bag and a folded sand-coloured cotton tee stacked on a warm concrete ledge, the wordmark screen printed small in warm amber on both, one soft directional key from the upper left, deep soft shadow to the right, restrained muted palette, premium apparel product photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, natural colour grade, the only text anywhere in the image is the wordmark \"AVELUNE\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly A-V-E-L-U-N-E, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks",
+      "colors": [
+        {
+          "rgb": [
+            242,
+            162,
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C01",
+      "surface": "brand",
+      "brand": "C",
+      "file": "public/projects/aeron-headphones.jpg",
+      "dest": "Projects images/aeron-headphones.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#5196FD",
+      "prompt": "A pair of premium over-ear headphones with a transparent smoke-tinted housing revealing visible internal components, tiny precision screws and a exposed circuit lattice beneath the clear shell, matte white ear cushions, a thin ring of red LED light glowing at the hinge, resting on a slim lacquer-black pedestal, extreme minimalism, generous negative space, one dramatic hard spotlight from directly above carving a tight pool of light on a pure black seamless, transparent-tech product photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, crisp clinical colour grade, the only text anywhere in the image is the wordmark \"AERON\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly A-E-R-O-N, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks, the accent colour in this image must be exactly hex #5196FD",
+      "colors": [
+        {
+          "rgb": [
+            81,
+            150,
+            253
+          ]
+        }
+      ],
+      "note": "Reworked on Promit's feedback: shape/style now takes visual-language inspiration from transparent-housing tech design (see-through shell, exposed components, dot/LED accent) rather than a generic closed-shell headphone. Style influence only - no logos, wordmarks, or trade dress copied."
+    },
+    {
+      "id": "C02",
+      "surface": "brand",
+      "brand": "C",
+      "file": "public/projects/aeron-app.jpg",
+      "dest": "Projects images/aeron-app.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#5196FD",
+      "prompt": "A hero product-reveal shot of a single modern smartphone with an edge-to-edge display, a slim uniform bezel and no home button, floating upright and slightly angled in mid-air, the screen showing a sleek dark music app with a glassmorphic frosted now-playing panel, a glowing electric-blue waveform and two soft rounded control pills with subtle depth, no hand, no person, no interior room, no furniture, the phone is the only object in frame set against a deep indigo-to-black gradient void with a faint cool blue glow with a subtle soft glow behind the device and a soft contact shadow beneath it, premium advertising product photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, subtle matte film grain, shallow depth of field, photorealistic studio lighting with a crisp specular highlight along the phone edge, all interface labels rendered as clean solid bars with crisp modern iconography and no readable words, the only text anywhere in the image is the wordmark \"AERON\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly A-E-R-O-N, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks, the accent colour in this image must be exactly hex #5196FD",
+      "colors": [
+        {
+          "rgb": [
+            81,
+            150,
+            253
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C03",
+      "surface": "brand",
+      "brand": "C",
+      "file": "public/projects/aeron-ad.jpg",
+      "dest": "Projects images/aeron-ad.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#5196FD",
+      "prompt": "A single premium wireless earbud case, transparent smoke-tinted shell showing the earbuds nested inside, floating just above a slim lacquer-black pedestal, one dramatic hard spotlight from directly above, extreme minimalism, generous negative space, pure black seamless falling to nothing at the edges, a thin ring of red LED light beneath the case, transparent-tech advertising hero shot, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, crisp clinical colour grade, the only text anywhere in the image is the wordmark \"AERON\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly A-E-R-O-N, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks, the accent colour in this image must be exactly hex #5196FD",
+      "colors": [
+        {
+          "rgb": [
+            81,
+            150,
+            253
+          ]
+        }
+      ]
+    },
+    {
+      "id": "D01",
+      "surface": "brand",
+      "brand": "D",
+      "file": "public/projects/rosemont-tabletop.jpg",
+      "dest": "Projects images/rosemont-tabletop.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#E8341A",
+      "prompt": "An overhead flat lay of a restaurant table setting, a folded linen napkin, a matte terracotta ceramic plate, a small brass fork and knife, and a single sprig of rosemary, on a warm rust-and-olive linen tablecloth, warm low window light from one side, deep soft shadows, documentary hospitality photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, natural colour grade, the only text anywhere in the image is the wordmark \"ROSEMONT\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly R-O-S-E-M-O-N-T, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks, the accent colour in this image must be exactly hex #E8341A",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "D02",
+      "surface": "brand",
+      "brand": "D",
+      "file": "public/projects/rosemont-signage.jpg",
+      "dest": "Projects images/rosemont-signage.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#E8341A",
+      "prompt": "A restaurant entrance at dusk, a small brass-and-walnut wordmark sign mounted beside a dark wood door, warm amber light glowing through a nearby window, a hint of string lights softly out of focus above, terracotta-toned brick facade, moody documentary architectural photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, natural colour grade, the only text anywhere in the image is the wordmark \"ROSEMONT\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly R-O-S-E-M-O-N-T, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks, the accent colour in this image must be exactly hex #E8341A",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "D03",
+      "surface": "brand",
+      "brand": "D",
+      "file": "public/projects/rosemont-app.jpg",
+      "dest": "Projects images/rosemont-app.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#E8341A",
+      "prompt": "A hero product-reveal shot of a single modern smartphone with an edge-to-edge display, a slim uniform bezel and no home button, floating upright and slightly angled in mid-air, the screen showing a warm restaurant reservation app with a large rounded full-bleed photo panel, a terracotta call-to-action pill and two rounded menu cards below with subtle depth, no hand, no person, no interior room, no furniture, the phone is the only object in frame set against a warm terracotta-to-rust gradient void with a soft amber glow with a subtle soft glow behind the device and a soft contact shadow beneath it, premium advertising product photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, subtle matte film grain, shallow depth of field, photorealistic studio lighting with a crisp specular highlight along the phone edge, all interface labels rendered as clean solid bars with crisp modern iconography and no readable words, the only text anywhere in the image is the wordmark \"ROSEMONT\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly R-O-S-E-M-O-N-T, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks, the accent colour in this image must be exactly hex #E8341A",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "E01",
+      "surface": "brand",
+      "brand": "E",
+      "file": "public/projects/meridian-signage.jpg",
+      "dest": "Projects images/meridian-signage.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#1A3DE8",
+      "prompt": "A real estate yard sign on a slim brass post in front of a modern house at golden hour, deep navy sign face with a small centred wordmark, warm late sunlight raking across a manicured lawn, shallow depth of field with the house softly out of focus behind, documentary real estate photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, natural colour grade, the only text anywhere in the image is the wordmark \"MERIDIAN\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly M-E-R-I-D-I-A-N, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks, the accent colour in this image must be exactly hex #1A3DE8",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "E02",
+      "surface": "brand",
+      "brand": "E",
+      "file": "public/projects/meridian-app.jpg",
+      "dest": "Projects images/meridian-app.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#1A3DE8",
+      "prompt": "A modern laptop at a three-quarter angle on a pale marble desk, the screen showing a premium property-listing website, a large full-bleed hero photo panel of an architectural exterior with a navy gradient overlay at the bottom, an oversized headline rendered as two thick solid bars, a row of three overlapping listing cards below with rounded corners, generous white space and strong visual hierarchy, screen glow spilling onto the marble, one cool key light from the upper left, premium device mockup photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, natural colour grade, all type rendered as clean solid bars, the only text anywhere in the image is the wordmark \"MERIDIAN\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly M-E-R-I-D-I-A-N, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks, the accent colour in this image must be exactly hex #1A3DE8",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "E03",
+      "surface": "brand",
+      "brand": "E",
+      "file": "public/projects/meridian-exterior.jpg",
+      "dest": "Projects images/meridian-exterior.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#1A3DE8",
+      "prompt": "A striking modern architectural home exterior at blue hour, warm interior light glowing through large glass walls, a navy twilight sky above, clean geometric lines and a reflecting pool in the foreground, architectural real estate photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, natural colour grade, no text, no lettering, no numbers, no logos, no watermarks, no signage, the accent colour in this image must be exactly hex #1A3DE8",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F01",
+      "surface": "brand",
+      "brand": "F",
+      "file": "public/projects/quantiva-dashboard.jpg",
+      "dest": "Projects images/quantiva-dashboard.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#0E9F6E",
+      "prompt": "A single sheet of frosted glass mounted upright on a slim brushed-steel stand, a soft cool grey gradient glow behind it suggesting a minimal dashboard silhouette rendered only as three clean thin horizontal bars and one small circular mark etched into the glass, extreme minimalism, generous negative space, one soft key light from above, pale grey-to-white studio sweep, restrained modern corporate still life, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, natural colour grade, no readable text, no charts, no icons, the only text anywhere in the image is the wordmark \"QUANTIVA\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly Q-U-A-N-T-I-V-A, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks",
+      "colors": [
+        {
+          "rgb": [
+            14,
+            159,
+            110
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F02",
+      "surface": "brand",
+      "brand": "F",
+      "file": "public/projects/quantiva-stationery.jpg",
+      "dest": "Projects images/quantiva-stationery.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#0E9F6E",
+      "prompt": "Overhead flat lay of a minimal stationery set on a pale grey linen surface, one thick cream business card, one slim matte-black portfolio folder and a single steel pen, arranged with generous empty space around them, one soft raking key light from the left, extremely restrained modern palette, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, natural colour grade, the only text anywhere in the image is the wordmark \"QUANTIVA\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly Q-U-A-N-T-I-V-A, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks",
+      "colors": [
+        {
+          "rgb": [
+            14,
+            159,
+            110
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F03",
+      "surface": "brand",
+      "brand": "F",
+      "file": "public/projects/quantiva-office.jpg",
+      "dest": "Projects images/quantiva-office.jpg",
+      "aspect_ratio": "4:3",
+      "model": "nano-banana-pro",
+      "accent": "#0E9F6E",
+      "prompt": "A minimal modern office reception wall, pale grey painted plaster with one small brushed-steel wordmark sign mounted at eye level, no furniture in frame, soft even daylight from a large unseen window, extremely clean architectural composition, generous negative space, documentary corporate interior photography, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, natural colour grade, the only text anywhere in the image is the wordmark \"QUANTIVA\" set in clean geometric sans-serif capitals with wide letter spacing, spelled exactly Q-U-A-N-T-I-V-A, no other words, no taglines, no paragraphs, no numbers, no other logos, no watermarks",
+      "colors": [
+        {
+          "rgb": [
+            14,
+            159,
+            110
+          ]
+        }
+      ]
+    },
+    {
+      "id": "G01",
+      "surface": "capability",
+      "file": "public/projects/capability-web-development.jpg",
+      "dest": "Projects images/capability-web-development.jpg",
+      "aspect_ratio": "4:3",
+      "model": "seedream-4.5",
+      "accent": "#1A3DE8",
+      "prompt": "A precise structure of thin brushed-steel rods and interlocking clear glass panels, assembled like an architectural lattice, standing on a dark reflective floor, deep indigo light raking across the glass edges and throwing sharp geometric shadows, black void behind, nothing else in frame, minimal sculptural still life representing structure and craft, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, saturated single-hue colour grade with a strong indigo cast, no text, no lettering, no numbers, no logos, no watermarks, no signage, no screens, no devices, no UI, the dominant hue must be exactly hex #1A3DE8",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "G02",
+      "surface": "capability",
+      "file": "public/projects/capability-ai-automation.jpg",
+      "dest": "Projects images/capability-ai-automation.jpg",
+      "aspect_ratio": "4:3",
+      "model": "seedream-4.5",
+      "accent": "#12B5C9",
+      "prompt": "A dense cluster of small clear glass spheres joined by fine matte black threads into an irregular knotted lattice, suspended in mid-air against a deep teal-black gradient void, one soft key from above and behind lighting each sphere into a bright point, depth falling into darkness at the edges, minimal scientific still life representing interconnected systems, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, saturated single-hue colour grade with a strong cyan cast, no text, no lettering, no numbers, no logos, no watermarks, no signage, no screens, no devices, no UI, the dominant hue must be exactly hex #12B5C9",
+      "colors": [
+        {
+          "rgb": [
+            18,
+            181,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "id": "G03",
+      "surface": "capability",
+      "file": "public/projects/capability-brand-design.jpg",
+      "dest": "Projects images/capability-brand-design.jpg",
+      "aspect_ratio": "4:3",
+      "model": "seedream-4.5",
+      "accent": "#ED649E",
+      "prompt": "A single sheet of heavy cotton paper mid-fold, caught in the moment of creasing, deep magenta ink bleeding and diffusing into a shallow dish of water beside it, both lit by one hard raking key light on a bone-white seamless sweep, long clean shadow, minimal sculptural still life representing creative craft, shot on medium-format digital with an 80mm lens, single soft key light with controlled falloff, deep shadow retention, subtle matte film grain, shallow depth of field, saturated single-hue colour grade with a strong pink cast, no text, no lettering, no numbers, no logos, no watermarks, no signage, no screens, no devices, no UI, the dominant hue must be exactly hex #ED649E",
+      "colors": [
+        {
+          "rgb": [
+            237,
+            100,
+            158
+          ]
+        }
+      ]
+    }
+  ],
+  "brand_showcase": {
+    "roster": [
+      "AVELUNE (skincare/wellness) \u2014 4 images",
+      "AERON (consumer tech/headphones) \u2014 3 images",
+      "ROSEMONT (restaurant/hospitality) \u2014 3 images",
+      "MERIDIAN (real estate) \u2014 3 images",
+      "QUANTIVA (Quantiva Consulting - real prior client, accounting/financial services) \u2014 3 images"
+    ],
+    "rationale": "Diversified per Promit's request. Verticals chosen from research on top digital-marketing-spend industries: e-commerce/wellness, real estate, financial services, hospitality/restaurant, plus consumer tech as a design-forward product category. Total 16 brand images across 5 fake clients, each spanning physical product/space, signage/environment, and a digital touchpoint, so the projects section reads as a portfolio of applied work across industries rather than repeated device mockups.",
+    "research_sources": [
+      "https://www.goodvibesquad.com/blog/top-industries-that-will-need-digital-marketing-the-most-by/",
+      "https://clutch.co/resources/state-of-web-design"
+    ]
+  }
+}

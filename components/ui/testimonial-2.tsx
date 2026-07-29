@@ -163,7 +163,7 @@ export const AnimatedTestimonialGrid = ({
 
       <div className="relative z-10 flex flex-col items-center text-center">
         {badgeText && (
-          <div className="mb-4 inline-block rounded-full bg-[var(--secondary)] px-3 py-1 text-sm font-semibold text-[var(--secondary-foreground)]">
+          <div className="mb-4 inline-block rounded-[8px] bg-[var(--secondary)] px-3 py-1 text-sm font-semibold text-[var(--secondary-foreground)]">
             {badgeText}
           </div>
         )}
@@ -175,7 +175,7 @@ export const AnimatedTestimonialGrid = ({
         </p>
         <a
           href={ctaHref}
-          className="inline-flex items-center justify-center rounded-full bg-[var(--primary)] px-6 py-3 text-base font-medium text-[var(--primary-foreground)] shadow-sm transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2 focus:ring-offset-[var(--background)]"
+          className="inline-flex items-center justify-center rounded-[14px] bg-[var(--primary)] px-6 py-3 text-base font-medium text-[var(--primary-foreground)] shadow-sm transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2 focus:ring-offset-[var(--background)]"
         >
           {ctaText}
           <ArrowRight className="ml-2 h-5 w-5" />

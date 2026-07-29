@@ -250,14 +250,14 @@ export default function Services() {
         <div className="mt-14 flex flex-wrap gap-3">
           <Link
             href="/services"
-            className="magnetic-cta group inline-flex items-center gap-2 rounded-full bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
+            className="magnetic-cta group inline-flex items-center gap-2 rounded-[14px] bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
           >
             View all services
             <DotGridArrow />
           </Link>
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 rounded-full border border-black/15 px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] transition-colors hover:border-black/40"
+            className="group inline-flex items-center gap-2 rounded-[14px] border border-black/15 px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] transition-colors hover:border-black/40"
           >
             Start a project
             <DotGridArrow />

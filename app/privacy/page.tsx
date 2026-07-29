@@ -1,23 +1,26 @@
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
 import { CONTACT_EMAIL } from "@/lib/contact";
+import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — Solve Trend",
   description: "How Solve Trend collects, uses, and protects your information.",
+  alternates: { canonical: absoluteUrl("/privacy") },
 };
 
 export default function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy Policy"
-      lastUpdated="July 22, 2026"
+      lastUpdated="July 28, 2026"
       intro="This Privacy Policy explains how Solve Trend (“we,” “us,” or “our”) collects, uses, and protects information when you visit our website or get in touch with us. We keep this simple: we collect only what we need, and we don't sell your data."
       sections={[
         {
           heading: "Information we collect",
           paragraphs: [
             "When you submit our contact form, we collect the details you choose to provide — typically your name, email address, phone number, and a note about the service you're interested in.",
+            "If you apply for a role through our careers page, we collect your name, email, phone number, location, experience level, any links you share, and the resume you upload.",
             "Like most websites, we may also collect basic technical and usage data automatically, such as your browser type, device, and how you navigate the site. This helps us understand what's useful and improve the experience.",
           ],
         },
@@ -38,6 +41,7 @@ export default function PrivacyPage() {
           heading: "Data retention and security",
           paragraphs: [
             "We keep inquiry details only as long as needed to respond and maintain our business records, then delete them. We take reasonable measures to protect your information, though no method of transmission over the internet is completely secure.",
+            "Job applications are not stored in any database or applicant-tracking system. Your details and resume are forwarded directly to our email inbox and kept only as long as we need them to consider you for a role. Ask us to delete them at any time and we will.",
           ],
         },
         {

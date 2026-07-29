@@ -27,20 +27,20 @@ export default function NotFound() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/"
-                className="magnetic-cta group inline-flex items-center gap-2 rounded-full bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
+                className="magnetic-cta group inline-flex items-center gap-2 rounded-[14px] bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
               >
                 Back home
                 <DotGridArrow />
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 rounded-full border border-black/15 px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] transition-colors hover:border-black/40"
+                className="inline-flex items-center gap-2 rounded-[14px] border border-black/15 px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] transition-colors hover:border-black/40"
               >
                 Services
               </Link>
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 rounded-full border border-black/15 px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] transition-colors hover:border-black/40"
+                className="inline-flex items-center gap-2 rounded-[14px] border border-black/15 px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] transition-colors hover:border-black/40"
               >
                 Insights
               </Link>

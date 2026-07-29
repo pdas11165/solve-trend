@@ -1,0 +1,790 @@
+{
+  "$comment": "Generation manifest for docs/IMAGERY.md. Feed each item to Higgsfield generate_image; params go top-level inside `params`.",
+  "model": "recraft_v4_1",
+  "resolution": "2k",
+  "count_per_prompt": 2,
+  "blocked": {
+    "as_of": "2026-07-28",
+    "reason": "Higgsfield account on plan 'plus' with 0 credits; trial cancelled_by_user. generate_image returns 403 only_website_usage_on_trial_is_available.",
+    "unblock": "Top up credits or change plan at higgsfield.ai, then re-run."
+  },
+  "postprocess": "sips -s format jpeg -s formatOptions 82 -Z 1600 in.png --out out.jpg  (chrome/* keep PNG + run remove_background first)",
+  "items": [
+    {
+      "id": "H01",
+      "surface": "hero",
+      "file": "public/hero/01-strategy-cards.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#E8341A",
+      "prompt": "Eight overlapping matte card stock rectangles suspended mid-air in a shallow arc, deep crimson #E8341A seamless backdrop, one hard raking key light from upper left casting long parallel shadows, dust motes catching the beam, monochrome red on red, medium-format editorial still life, matte film grain, shallow depth of field, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H02",
+      "surface": "hero",
+      "file": "public/hero/02-portrait-slats.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#F2A23B",
+      "prompt": "Close editorial portrait of a person looking up and away, face lit by a hard slatted blind shadow in warm amber #F2A23B, deep unlit background falling to black, single gel light source, skin texture retained, cinematic colour, medium-format, matte grain, shallow depth of field, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            242,
+            162,
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H03",
+      "surface": "hero",
+      "file": "public/hero/03-light-ribbon.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#ED649E",
+      "prompt": "A single continuous ribbon of hot pink #ED649E light drawn in long exposure through dark air, forming one elegant looping curve, black studio void, soft bloom on the brightest bend, faint reflection on a wet floor below, cinematic, matte grain, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            237,
+            100,
+            158
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H04",
+      "surface": "hero",
+      "file": "public/hero/04-lens-glow.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#764BA2",
+      "prompt": "Extreme close-up of a cinema prime lens front element on a dark surface, deep violet #764BA2 light raking across the glass coatings, internal reflections forming concentric rings, everything else in shadow, product photography grammar, medium-format, matte grain, shallow depth of field, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            118,
+            75,
+            162
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H05",
+      "surface": "hero",
+      "file": "public/hero/05-acrylic-layers.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#5196FD",
+      "prompt": "Six translucent frosted acrylic sheets stacked with air gaps between them, standing upright on a pale grey studio sweep, cool blue #5196FD light passing through and refracting on the surface behind, one long soft shadow, minimal, architectural, medium-format still life, matte grain, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            81,
+            150,
+            253
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H06",
+      "surface": "hero",
+      "file": "public/hero/06-portrait-prism.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#1A3DE8",
+      "prompt": "Editorial portrait in profile, a thin horizontal bar of spectral prism light cutting across the eyes, deep indigo #1A3DE8 ambient wash, subject in dark clothing against near-black, single hard source with rainbow refraction, cinematic, medium-format, matte grain, shallow depth of field, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H07",
+      "surface": "hero",
+      "file": "public/hero/07-glass-torus.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#0E9F6E",
+      "prompt": "An iridescent clear glass torus resting on a brushed steel pedestal, bone-white seamless studio sweep, one soft key from camera right, long soft shadow stretching left, caustic light pooling under the glass, emerald #0E9F6E refraction inside the form, minimal luxury product photography, medium-format, matte grain, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            14,
+            159,
+            110
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H08",
+      "surface": "hero",
+      "file": "public/hero/08-hands-swatches.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#F2A23B",
+      "prompt": "Overhead close-up of two hands fanning a printed colour swatch deck across a warm concrete surface, warm directional window light from the left, deep shadow on the right, muted natural palette with one amber #F2A23B swatch catching the light, documentary editorial, medium-format, matte grain, shallow depth of field, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            242,
+            162,
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H09",
+      "surface": "hero",
+      "file": "public/hero/09-chrome-mesh.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#1A3DE8",
+      "prompt": "A polished chrome wireframe sphere made of thin intersecting rings, floating above a dark reflective floor, deep blue #1A3DE8 rim light on the upper edges, black void background, sharp specular highlights, studio product photography, medium-format, matte grain, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H10",
+      "surface": "hero",
+      "file": "public/hero/10-motion-figure.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#12B5C9",
+      "prompt": "A figure in a loose white shirt captured in heavy motion blur crossing the frame left to right, saturated teal #12B5C9 seamless backdrop, one slow-shutter exposure with a sharp trailing edge, limbs smeared into colour, editorial fashion photography, medium-format, matte grain, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            18,
+            181,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H11",
+      "surface": "hero",
+      "file": "public/hero/11-liquid-drop.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#F2A23B",
+      "prompt": "A single suspended droplet of clear liquid frozen mid-fall against a deep charcoal drape, a warm amber light beam passing through it and splitting into a spectrum on the far side, macro product photography, extreme detail on the surface tension, matte grain, shallow depth of field, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            242,
+            162,
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H12",
+      "surface": "hero",
+      "file": "public/hero/12-portrait-red-wash.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#E8341A",
+      "prompt": "Editorial portrait, head tilted back and up, entire frame washed in crimson #E8341A light, a second cooler light grazing the jawline from behind, black background, high contrast, skin texture and pores retained, cinematic gel lighting, medium-format, matte grain, shallow depth of field, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H13",
+      "surface": "hero",
+      "file": "public/hero/13-paper-fold.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#ED649E",
+      "prompt": "A single sheet of heavy cotton paper folded into a sharp angular form standing on a pale bone seamless, hard low sun-angle key light from the right casting a long geometric shadow, subtle rose #ED649E bounce on the shadow side, minimal sculptural still life, medium-format, matte grain, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            237,
+            100,
+            158
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H14",
+      "surface": "hero",
+      "file": "public/hero/14-desk-overhead.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#764BA2",
+      "prompt": "Overhead editorial shot of a dark walnut desk with a closed laptop, a ceramic cup, a folded pair of glasses and one open notebook, warm low-angle window light from the top left, deep shadows, muted natural tones with one violet #764BA2 object accent, documentary workspace photography, medium-format, matte grain, no text, no logos, no readable writing",
+      "colors": [
+        {
+          "rgb": [
+            118,
+            75,
+            162
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H15",
+      "surface": "hero",
+      "file": "public/hero/15-caustics.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#5196FD",
+      "prompt": "Abstract underwater light caustics rippling across a pale sand-coloured floor, cool blue #5196FD water tones, one bright refracted hotspot, no subject, pure light study, soft focus falloff at the edges, medium-format, matte grain, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            81,
+            150,
+            253
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H16",
+      "surface": "hero",
+      "file": "public/hero/16-node-cluster.jpg",
+      "aspect_ratio": "9:16",
+      "model_type": "standard",
+      "accent": "#12B5C9",
+      "prompt": "A cluster of small clear glass spheres connected by fine matte black rods forming an irregular molecular lattice, suspended against a dark teal #12B5C9 gradient void, one soft key from above rear producing rim highlights on each sphere, minimal scientific product photography, medium-format, matte grain, shallow depth of field, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            18,
+            181,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S01",
+      "surface": "service",
+      "slug": "brand-strategy-identity",
+      "file": "public/services/brand-strategy-identity.jpg",
+      "aspect_ratio": "4:3",
+      "model_type": "standard",
+      "accent": "#E8341A",
+      "prompt": "Close macro of a blind-deboss impression pressed into thick cotton paper, an abstract geometric mark with no letterforms, raking crimson #E8341A light from the left revealing the depth of the emboss and the paper fibre texture, rich shadow in the recesses, print-craft product photography, medium-format, matte grain, shallow depth of field, no text, no lettering, no logos",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SW01",
+      "surface": "service-wide",
+      "slug": "brand-strategy-identity",
+      "file": "public/services/brand-strategy-identity-wide.jpg",
+      "aspect_ratio": "16:9",
+      "model_type": "standard",
+      "accent": "#E8341A",
+      "prompt": "Close macro of a blind-deboss impression pressed into thick cotton paper, an abstract geometric mark with no letterforms, raking crimson #E8341A light from the left revealing the depth of the emboss and the paper fibre texture, rich shadow in the recesses, print-craft product photography, medium-format, matte grain, shallow depth of field, no text, no lettering, no logos , wide cinematic framing, subject offset to the right third, generous empty space on the left for a headline overlay, horizontal composition",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "surface": "service",
+      "slug": "web-design-development",
+      "file": "public/services/web-design-development.jpg",
+      "aspect_ratio": "4:3",
+      "model_type": "standard",
+      "accent": "#1A3DE8",
+      "prompt": "Nine frosted translucent acrylic rectangles arranged in a loose grid, standing at slight angles on a dark studio sweep, deep indigo #1A3DE8 light passing through them and projecting overlapping soft-edged shapes on the wall behind, architectural minimalism, one long shadow, medium-format still life, matte grain, no text, no interface elements, no logos",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SW02",
+      "surface": "service-wide",
+      "slug": "web-design-development",
+      "file": "public/services/web-design-development-wide.jpg",
+      "aspect_ratio": "16:9",
+      "model_type": "standard",
+      "accent": "#1A3DE8",
+      "prompt": "Nine frosted translucent acrylic rectangles arranged in a loose grid, standing at slight angles on a dark studio sweep, deep indigo #1A3DE8 light passing through them and projecting overlapping soft-edged shapes on the wall behind, architectural minimalism, one long shadow, medium-format still life, matte grain, no text, no interface elements, no logos , wide cinematic framing, subject offset to the right third, generous empty space on the left for a headline overlay, horizontal composition",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "surface": "service",
+      "slug": "motion-video",
+      "file": "public/services/motion-video.jpg",
+      "aspect_ratio": "4:3",
+      "model_type": "standard",
+      "accent": "#ED649E",
+      "prompt": "Long-exposure light painting of a hot pink #ED649E luminous line tracing a fluid three-dimensional spiral through dark air, motion trails with visible speed falloff, black studio void, soft bloom, one faint reflection below, cinematic abstract, matte grain, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            237,
+            100,
+            158
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SW03",
+      "surface": "service-wide",
+      "slug": "motion-video",
+      "file": "public/services/motion-video-wide.jpg",
+      "aspect_ratio": "16:9",
+      "model_type": "standard",
+      "accent": "#ED649E",
+      "prompt": "Long-exposure light painting of a hot pink #ED649E luminous line tracing a fluid three-dimensional spiral through dark air, motion trails with visible speed falloff, black studio void, soft bloom, one faint reflection below, cinematic abstract, matte grain, no text, no logos , wide cinematic framing, subject offset to the right third, generous empty space on the left for a headline overlay, horizontal composition",
+      "colors": [
+        {
+          "rgb": [
+            237,
+            100,
+            158
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "surface": "service",
+      "slug": "ecommerce",
+      "file": "public/services/ecommerce.jpg",
+      "aspect_ratio": "4:3",
+      "model_type": "standard",
+      "accent": "#0E9F6E",
+      "prompt": "An unbranded matte cardboard box mid-fall against a deep emerald #0E9F6E seamless backdrop, one strip of paper tape catching a hard key light, frozen motion with a faint trailing shadow, extreme negative space above, minimal conceptual product photography, medium-format, matte grain, no text, no printing on the box, no logos",
+      "colors": [
+        {
+          "rgb": [
+            14,
+            159,
+            110
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SW04",
+      "surface": "service-wide",
+      "slug": "ecommerce",
+      "file": "public/services/ecommerce-wide.jpg",
+      "aspect_ratio": "16:9",
+      "model_type": "standard",
+      "accent": "#0E9F6E",
+      "prompt": "An unbranded matte cardboard box mid-fall against a deep emerald #0E9F6E seamless backdrop, one strip of paper tape catching a hard key light, frozen motion with a faint trailing shadow, extreme negative space above, minimal conceptual product photography, medium-format, matte grain, no text, no printing on the box, no logos , wide cinematic framing, subject offset to the right third, generous empty space on the left for a headline overlay, horizontal composition",
+      "colors": [
+        {
+          "rgb": [
+            14,
+            159,
+            110
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "surface": "service",
+      "slug": "custom-software-ai",
+      "file": "public/services/custom-software-ai.jpg",
+      "aspect_ratio": "4:3",
+      "model_type": "standard",
+      "accent": "#12B5C9",
+      "prompt": "A dense irregular lattice of small clear glass nodes joined by fine matte black connectors, occupying the lower third of a deep teal #12B5C9 gradient void, one soft key from above rear lighting each node into a bright point, depth falloff into darkness at the back, minimal scientific still life, medium-format, matte grain, shallow depth of field, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            18,
+            181,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SW05",
+      "surface": "service-wide",
+      "slug": "custom-software-ai",
+      "file": "public/services/custom-software-ai-wide.jpg",
+      "aspect_ratio": "16:9",
+      "model_type": "standard",
+      "accent": "#12B5C9",
+      "prompt": "A dense irregular lattice of small clear glass nodes joined by fine matte black connectors, occupying the lower third of a deep teal #12B5C9 gradient void, one soft key from above rear lighting each node into a bright point, depth falloff into darkness at the back, minimal scientific still life, medium-format, matte grain, shallow depth of field, no text, no logos , wide cinematic framing, subject offset to the right third, generous empty space on the left for a headline overlay, horizontal composition",
+      "colors": [
+        {
+          "rgb": [
+            18,
+            181,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P01",
+      "surface": "project",
+      "file": "public/projects/brand-strategy-still.jpg",
+      "aspect_ratio": "4:3",
+      "model_type": "utility",
+      "accent": "#E8341A",
+      "prompt": "Overhead flat lay of an open brand strategy document spread across a warm concrete surface, printed pages showing abstract diagram blocks and colour bars with no readable text, a crimson #E8341A marker and a folded pair of glasses beside them, warm directional window light from the upper left, deep soft shadows, documentary editorial photography, medium-format, matte grain, no text, no lettering, no logos",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P02",
+      "surface": "project",
+      "file": "public/projects/brand-identity-still.jpg",
+      "aspect_ratio": "4:3",
+      "model_type": "utility",
+      "accent": "#F2A23B",
+      "prompt": "A brand collateral set arranged on a warm sand-toned surface \u2014 stacked business cards, a folded poster, a matte tote, a ceramic cup \u2014 all unbranded with abstract amber #F2A23B geometric shapes printed on them, one hard raking key light from the right, long parallel shadows, minimal art direction, medium-format product photography, matte grain, no text, no lettering, no logos",
+      "colors": [
+        {
+          "rgb": [
+            242,
+            162,
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P03",
+      "surface": "project",
+      "file": "public/projects/web-development-still.jpg",
+      "aspect_ratio": "4:3",
+      "model_type": "utility",
+      "accent": "#5196FD",
+      "prompt": "A modern laptop at a three-quarter angle on a dark textured slate surface, screen displaying an abstract website layout of clean rectangular blocks and a wide hero band in deep indigo #1A3DE8, no readable text on screen, one cool key light from the upper left, soft reflection on the surface, near-black background, premium device mockup photography, medium-format, matte grain, shallow depth of field, no logos",
+      "colors": [
+        {
+          "rgb": [
+            81,
+            150,
+            253
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P04",
+      "surface": "project",
+      "file": "public/projects/ecommerce-still.jpg",
+      "aspect_ratio": "4:3",
+      "model_type": "utility",
+      "accent": "#0E9F6E",
+      "prompt": "Two smartphones overlapping and floating at slight angles above a flat emerald #0E9F6E backdrop, screens showing an abstract product-grid and checkout layout of clean blocks with no readable text, soft contact shadows below each device, one broad soft key light, bright minimal commercial mockup photography, medium-format, matte grain, no logos",
+      "colors": [
+        {
+          "rgb": [
+            14,
+            159,
+            110
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P05",
+      "surface": "project",
+      "file": "public/projects/motion-still.jpg",
+      "aspect_ratio": "4:3",
+      "model_type": "utility",
+      "accent": "#ED649E",
+      "prompt": "A widescreen display on a dark studio table showing an abstract motion-graphics frame of overlapping hot pink #ED649E and black geometric shapes mid-transition, screen glow spilling onto the table surface, atmospheric haze, everything else in shadow, moody studio mockup photography, medium-format, matte grain, shallow depth of field, no text, no logos",
+      "colors": [
+        {
+          "rgb": [
+            237,
+            100,
+            158
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P06",
+      "surface": "project",
+      "file": "public/projects/ai-automation-still.jpg",
+      "aspect_ratio": "4:3",
+      "model_type": "utility",
+      "accent": "#22D3EE",
+      "prompt": "A floating browser window with a soft drop shadow, tilted slightly, displaying an abstract analytics dashboard of clean rectangular cards, a sidebar, and cyan #22D3EE chart shapes with no readable text or numbers, set against a pale grey to white gradient background, bright even studio light, crisp modern SaaS mockup, medium-format, no logos",
+      "colors": [
+        {
+          "rgb": [
+            34,
+            211,
+            238
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C01",
+      "surface": "chrome",
+      "file": "public/chrome/monogram-st.png",
+      "aspect_ratio": "1:1",
+      "model_type": "standard",
+      "accent": "#E8341A",
+      "prompt": "A chunky extruded 3D monogram of two abstract interlocking geometric shapes, polished liquid-chrome material with a thick bevelled edge, rainbow iridescent reflections across the surface, floating against a plain near-black background, sharp specular highlights from an overhead studio light, soft contact shadow, high-detail 3D render, octane, no text, no letters, no logos",
+      "postprocess": "remove_background",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "surface": "chrome",
+      "file": "public/chrome/badge-brand.png",
+      "aspect_ratio": "1:1",
+      "model_type": "standard",
+      "accent": "#E8341A",
+      "prompt": "A rounded-square badge tile with a thick bevelled polished chrome rim and a flat crimson #E8341A inset face, a simple abstract geometric glyph embossed at its centre, floating at a slight three-quarter tilt against plain near-black, sharp specular highlights, soft contact shadow, glossy 3D render, no text, no letters, no logos",
+      "postprocess": "remove_background",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C03",
+      "surface": "chrome",
+      "file": "public/chrome/badge-web.png",
+      "aspect_ratio": "1:1",
+      "model_type": "standard",
+      "accent": "#1A3DE8",
+      "prompt": "A rounded-square badge tile with a thick bevelled polished chrome rim and a flat deep-indigo #1A3DE8 inset face, a simple abstract angular glyph embossed at its centre, floating at a slight three-quarter tilt against plain near-black, sharp specular highlights, soft contact shadow, glossy 3D render, no text, no letters, no logos",
+      "postprocess": "remove_background",
+      "colors": [
+        {
+          "rgb": [
+            26,
+            61,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C04",
+      "surface": "chrome",
+      "file": "public/chrome/badge-motion.png",
+      "aspect_ratio": "1:1",
+      "model_type": "standard",
+      "accent": "#ED649E",
+      "prompt": "A rounded-square badge tile with a thick bevelled polished chrome rim and a flat hot-pink #ED649E inset face, a simple abstract swooping glyph embossed at its centre, floating at a slight three-quarter tilt against plain near-black, sharp specular highlights, soft contact shadow, glossy 3D render, no text, no letters, no logos",
+      "postprocess": "remove_background",
+      "colors": [
+        {
+          "rgb": [
+            237,
+            100,
+            158
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C05",
+      "surface": "chrome",
+      "file": "public/chrome/badge-ecommerce.png",
+      "aspect_ratio": "1:1",
+      "model_type": "standard",
+      "accent": "#0E9F6E",
+      "prompt": "A rounded-square badge tile with a thick bevelled polished chrome rim and a flat emerald #0E9F6E inset face, a simple abstract cube glyph embossed at its centre, floating at a slight three-quarter tilt against plain near-black, sharp specular highlights, soft contact shadow, glossy 3D render, no text, no letters, no logos",
+      "postprocess": "remove_background",
+      "colors": [
+        {
+          "rgb": [
+            14,
+            159,
+            110
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C06",
+      "surface": "chrome",
+      "file": "public/chrome/badge-ai.png",
+      "aspect_ratio": "1:1",
+      "model_type": "standard",
+      "accent": "#12B5C9",
+      "prompt": "A rounded-square badge tile with a thick bevelled polished chrome rim and a flat teal #12B5C9 inset face, a simple abstract node-lattice glyph embossed at its centre, floating at a slight three-quarter tilt against plain near-black, sharp specular highlights, soft contact shadow, glossy 3D render, no text, no letters, no logos",
+      "postprocess": "remove_background",
+      "colors": [
+        {
+          "rgb": [
+            18,
+            181,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C07",
+      "surface": "chrome",
+      "file": "public/chrome/fluted-glass-slab.png",
+      "aspect_ratio": "1:1",
+      "model_type": "standard",
+      "accent": "#E8341A",
+      "prompt": "A vertical slab of thick fluted ribbed clear glass standing upright, rainbow prismatic refraction running down each flute, crisp caustic light passing through onto the surface behind, floating against plain near-black, overhead studio key light, high-detail 3D render, no text, no logos",
+      "postprocess": "remove_background",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C08",
+      "surface": "chrome",
+      "file": "public/chrome/stone-plinth.png",
+      "aspect_ratio": "1:1",
+      "model_type": "standard",
+      "accent": "#12B5C9",
+      "prompt": "A rough dark volcanic stone plinth with sharp fractured facets and a flat polished top surface, cool rim light along the upper edges, deep shadow in the crevices, floating against plain near-black, photoreal 3D render, no text, no logos",
+      "postprocess": "remove_background",
+      "colors": [
+        {
+          "rgb": [
+            18,
+            181,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C09",
+      "surface": "chrome",
+      "file": "public/chrome/orb-sky.png",
+      "aspect_ratio": "1:1",
+      "model_type": "standard",
+      "accent": "#5196FD",
+      "prompt": "A glossy rounded 3D sphere with a soft blue sky-and-cloud gradient rendered across its surface, a small four-point sparkle catching one edge, thick chrome bevel around its equator, floating against plain near-black, glossy toy-like 3D render, sharp specular highlight, no text, no logos",
+      "postprocess": "remove_background",
+      "colors": [
+        {
+          "rgb": [
+            81,
+            150,
+            253
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C10",
+      "surface": "chrome",
+      "file": "public/chrome/arrow-chrome.png",
+      "aspect_ratio": "1:1",
+      "model_type": "standard",
+      "accent": "#E8341A",
+      "prompt": "A chunky extruded 3D arrow pointing up and to the right, polished liquid-chrome material with a thick bevelled edge and iridescent rainbow reflections, floating at a three-quarter angle against plain near-black, sharp overhead specular highlights, soft contact shadow, high-detail 3D render, no text, no logos",
+      "postprocess": "remove_background",
+      "colors": [
+        {
+          "rgb": [
+            232,
+            52,
+            26
+          ]
+        }
+      ]
+    }
+  ]
+}

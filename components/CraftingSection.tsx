@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 import ResultsCards from "./ResultsCards";
 import { RevealText } from "@/components/ui/reveal-text";
 import { useParallaxLayers } from "@/lib/scroll-parallax";
+import { asset } from "@/lib/asset";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -56,13 +57,27 @@ function BadgeIcons() {
   );
 }
 
-const BRAND_LOGOS = [
+type BrandLogo = { src: string; alt: string };
+
+// Confirmed clients — real marks, kept named so the owner can find these
+// quickly when swapping in official brand-kit assets later.
+const CLIENT_LOGOS: BrandLogo[] = [
+  { src: asset("/logos/honda.svg"), alt: "Honda" },
+  { src: asset("/logos/home-depot.svg"), alt: "The Home Depot" },
+  { src: asset("/logos/unicef.svg"), alt: "UNICEF" },
+];
+
+// Placeholder marks while the owner collects logo assets from the rest of
+// the client roster — decorative (alt="") until swapped for real ones.
+const PLACEHOLDER_LOGOS: BrandLogo[] = [
   `${AWAKE_CDN}/68e4f1b2e90a76715c1a1806_brand-icon-2.svg`,
   `${AWAKE_CDN}/68e4f1b2e90a76715c1a1809_brand-icon-5.svg`,
   `${AWAKE_CDN}/68e4f1b2e90a76715c1a1808_brand-icon-3.svg`,
   `${AWAKE_CDN}/68e4f1b2e90a76715c1a1807_brand-icon-1.svg`,
   `${AWAKE_CDN}/68e4f1b2e90a76715c1a1805_brand-icon-4.svg`,
-];
+].map((src) => ({ src, alt: "" }));
+
+const BRAND_LOGOS: BrandLogo[] = [...CLIENT_LOGOS, ...PLACEHOLDER_LOGOS];
 
 function LogoMarquee() {
   const rows = [BRAND_LOGOS, BRAND_LOGOS];
@@ -78,11 +93,11 @@ function LogoMarquee() {
         <div className="crafting-marquee__track">
           {rows.map((row, rowIndex) => (
             <div key={rowIndex} className="crafting-marquee__row">
-              {row.map((src, i) => (
+              {row.map((logo, i) => (
                 <img
                   key={`${rowIndex}-${i}`}
-                  src={src}
-                  alt=""
+                  src={logo.src}
+                  alt={logo.alt}
                   width={140}
                   height={40}
                   loading="lazy"

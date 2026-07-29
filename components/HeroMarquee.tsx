@@ -1,49 +1,34 @@
+import * as React from "react";
 import Image from "next/image";
 import { asset } from "@/lib/asset";
+import { HERO_TILES, type HeroTile } from "@/lib/hero-tiles";
 
-type Service = { num: string; name: string; img: string; video?: string };
-
-// Real selected-works imagery from public/projects. The three video-backed
-// disciplines use poster frames captured from their clips (kept static here
-// so the hero never loads ~34MB of video above the fold).
-// The three video-backed disciplines loop a tiny (70–130KB) muted clip; the
-// poster shows instantly while it loads. The three mockup disciplines stay
-// static images.
-const SERVICES: Service[] = [
-  {
-    num: "01",
-    name: "Brand Strategy",
-    img: "/projects/brand-strategy-poster.jpg",
-    video: "/projects/brand-strategy-loop.mp4",
-  },
-  { num: "02", name: "Brand Identity", img: "/projects/brand-identity-hero.jpg" },
-  { num: "03", name: "Web Development", img: "/projects/web-development-hero.jpg" },
-  { num: "04", name: "E-Commerce", img: "/projects/ecommerce-hero.jpg" },
-  {
-    num: "05",
-    name: "Motion",
-    img: "/projects/motion-poster.jpg",
-    video: "/projects/motion-loop.mp4",
-  },
-  {
-    num: "06",
-    name: "AI Automation",
-    img: "/projects/ai-automation-poster.jpg",
-    video: "/projects/ai-automation-loop.mp4",
-  },
-];
+// Tiles come from lib/hero-tiles.ts, not from SERVICES. That file explains
+// why: the strip is named for disciplines, which are narrower than the five
+// offers, and five tiles was never enough width to fill a loop without the
+// track visibly repeating.
+//
+// Only Brand Strategy carries a looping video, so the hero never loads more
+// than one autoplaying clip above the fold. Its poster is the loop's own first
+// frame (`brand-strategy-poster.jpg`) rather than the service card's image —
+// posting a clip of falling chess pieces with a photo of a hand holding a card
+// meant the still and the motion had nothing to do with each other.
 
 function Tile({
   s,
   dup,
   priority,
 }: {
-  s: Service;
+  s: HeroTile;
   dup?: boolean;
   priority?: boolean;
 }) {
   return (
-    <div className="hero-strip" aria-hidden={dup ? "true" : undefined}>
+    <div
+      className="hero-strip"
+      style={{ "--card-accent": s.accent } as React.CSSProperties}
+      aria-hidden={dup ? "true" : undefined}
+    >
       {s.video ? (
         <video
           className="hero-strip-media"
@@ -57,7 +42,10 @@ function Tile({
       ) : dup ? (
         <div
           className="hero-strip-media hero-strip-media--dup"
-          style={{ backgroundImage: `url(${asset(s.img)})` }}
+          style={{
+            backgroundImage: `url(${asset(s.img)})`,
+            ...(s.position ? { backgroundPosition: s.position } : null),
+          }}
           role="presentation"
         />
       ) : (
@@ -67,6 +55,7 @@ function Tile({
           alt=""
           fill
           sizes="(max-width: 768px) 170px, 280px"
+          {...(s.position ? { style: { objectPosition: s.position } } : null)}
           {...(priority ? { priority: true } : { loading: "lazy" })}
         />
       )}
@@ -84,10 +73,10 @@ export default function HeroMarquee() {
     <div className="hero-strips" aria-label="Our services">
       <div className="hero-strips-skew">
         <div className="hero-strips-track">
-          {SERVICES.map((s, index) => (
+          {HERO_TILES.map((s, index) => (
             <Tile key={s.num} s={s} priority={index === 0} />
           ))}
-          {SERVICES.map((s) => (
+          {HERO_TILES.map((s) => (
             <Tile key={`dup-${s.num}`} s={s} dup />
           ))}
         </div>

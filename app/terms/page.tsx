@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
 import { CONTACT_EMAIL } from "@/lib/contact";
+import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Terms of Service — Solve Trend",
   description: "The terms that govern your use of the Solve Trend website.",
+  alternates: { canonical: absoluteUrl("/terms") },
 };
 
 export default function TermsPage() {

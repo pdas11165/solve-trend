@@ -428,7 +428,7 @@ export default function PricingSection() {
                         </h3>
                       </div>
                       <span
-                        className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] ${
+                        className={`inline-flex shrink-0 items-center gap-1.5 rounded-[8px] border px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] ${
                           tier.featured
                             ? "border-[rgba(240,50,35,0.5)] bg-[rgba(240,50,35,0.16)] text-[#FFB59E]"
                             : "border-white/12 bg-white/[0.06] text-white/70"
@@ -508,7 +508,7 @@ export default function PricingSection() {
                       </div>
                       <a
                         href="/#contact"
-                        className={`magnetic-cta inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold transition-colors duration-300 ${
+                        className={`magnetic-cta inline-flex items-center justify-center gap-2 rounded-[14px] px-6 py-3.5 text-sm font-bold transition-colors duration-300 ${
                           tier.featured
                             ? "bg-[var(--red)] text-white hover:bg-[#d42f17]"
                             : "border border-[rgba(255,255,255,0.18)] text-white hover:border-white/40 hover:bg-white/5"

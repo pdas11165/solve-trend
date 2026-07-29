@@ -1,20 +1,47 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://solvtrend.com";
+const TITLE = "Solve Trend — Digital Marketing & Design Agency, Charlottetown PEI";
+const DESCRIPTION =
+  "Solve Trend is a full-service digital marketing and design agency based in Charlottetown, PEI. We design, develop, and grow digital brands end-to-end.";
 
 export const metadata: Metadata = {
-  title: "Solve Trend — Digital Marketing & Design Agency, Charlottetown PEI",
-  description:
-    "Solve Trend is a full-service digital marketing and design agency based in Charlottetown, PEI. We design, develop, and grow digital brands end-to-end.",
-  metadataBase: new URL(siteUrl),
+  title: TITLE,
+  description: DESCRIPTION,
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Solve Trend — Digital Marketing & Design Agency",
+    siteName: SITE_NAME,
+    title: TITLE,
     description:
       "End-to-end digital brand design, development and marketing from Charlottetown, PEI.",
     type: "website",
+    url: "/",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description:
+      "End-to-end digital brand design, development and marketing from Charlottetown, PEI.",
+  },
+};
+
+const ORGANIZATION_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: SITE_NAME,
+  url: SITE_URL,
+  description: DESCRIPTION,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Charlottetown",
+    addressRegion: "PE",
+    addressCountry: "CA",
+  },
+  email: CONTACT_EMAIL,
+  areaServed: "North America",
 };
 
 export const viewport: Viewport = {
@@ -58,6 +85,10 @@ export default function RootLayout({
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }}
         />
       </head>
       <body suppressHydrationWarning>{children}</body>

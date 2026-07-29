@@ -4,11 +4,15 @@ import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { DotGridArrow } from "@/components/Icons";
-import { SERVICES, getService } from "@/lib/services";
+import { ALL_SERVICE_SLUGS, SERVICES, getService } from "@/lib/services";
 import { asset } from "@/lib/asset";
+import { absoluteUrl, SITE_NAME } from "@/lib/seo";
 
+// Includes the pre-consolidation slugs (brand-strategy, ux-design, …) so links
+// shared before the 8→5 merge still resolve. They render the merged offer and
+// self-canonicalize to its new slug via generateMetadata below.
 export function generateStaticParams() {
-  return SERVICES.map((s) => ({ slug: s.slug }));
+  return ALL_SERVICE_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -19,11 +23,21 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return { title: "Service not found — Solve Trend" };
+  const title = `${service.name} — Solve Trend`;
   return {
-    title: `${service.name} — Solve Trend`,
+    title,
     description: service.overview,
+    alternates: { canonical: absoluteUrl(`/services/${service.slug}`) },
     openGraph: {
-      title: `${service.name} — Solve Trend`,
+      title,
+      description: service.overview,
+      url: absoluteUrl(`/services/${service.slug}`),
+      type: "website",
+      images: [service.imageUrl],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
       description: service.overview,
       images: [service.imageUrl],
     },
@@ -42,8 +56,25 @@ export default async function ServiceDetailPage({
   const related = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3);
   const tint = `${service.accent}14`;
 
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.name,
+    description: service.overview,
+    provider: {
+      "@type": "ProfessionalService",
+      name: SITE_NAME,
+    },
+    areaServed: "North America",
+    url: absoluteUrl(`/services/${service.slug}`),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
       <Nav />
       <main className="bg-[var(--bg-light)] text-[#1A1A1A]">
         {/* Hero */}
@@ -94,7 +125,7 @@ export default async function ServiceDetailPage({
                 <div className="mt-8">
                   <Link
                     href="/#contact"
-                    className="magnetic-cta group inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+                    className="magnetic-cta group inline-flex items-center gap-2 rounded-[14px] px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
                     style={{ background: service.accent }}
                   >
                     Start a project
@@ -213,14 +244,14 @@ export default async function ServiceDetailPage({
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
                 href="/#contact"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-[14px] bg-white px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] transition-transform hover:-translate-y-0.5"
               >
                 Start a project
                 <DotGridArrow />
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:border-white"
+                className="inline-flex items-center gap-2 rounded-[14px] border border-white/40 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:border-white"
               >
                 All services
               </Link>

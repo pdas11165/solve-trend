@@ -11,10 +11,55 @@ import {
   useTransform,
   useVelocity,
 } from "framer-motion";
+import { SERVICES } from "@/lib/services";
 
-const PHRASE = "Brand · Web · Motion · AI · eCommerce · Strategy · ";
+// One word per offer, each carrying that offer's accent — so the strip reads
+// as the same colour-coded set as the services list rather than a single
+// amber→red gradient applied to everything.
+//
+// Plus one word that isn't an offer: "Design" in yellow. It spans brand and
+// web rather than belonging to either, and it puts a warm hue back in the
+// strip that the 8→5 consolidation retired.
+const EXTRA_WORD = { word: "Design", accent: "var(--brand-yellow)" };
+
+const WORDS = (() => {
+  const fromServices = SERVICES.map((s) => ({
+    word: s.marqueeWord,
+    accent: s.accent,
+  }));
+  // Slotted second so the yellow lands early in each repeat rather than
+  // bunching at the seam between copies.
+  return [fromServices[0], EXTRA_WORD, ...fromServices.slice(1)];
+})();
+
 /** Base drift in percent of one phrase-copy per second. */
 const BASE_SPEED = 4.5;
+
+/** One phrase copy, words split out so each can carry its own radiance and hover glow. */
+function PhraseCopy() {
+  return (
+    <span className="velocity-marquee-text">
+      {WORDS.map(({ word, accent }, i) => (
+        <React.Fragment key={word}>
+          <span
+            className="velocity-word"
+            style={
+              {
+                "--word-delay": `${i * 0.35}s`,
+                "--word-color": accent,
+              } as React.CSSProperties
+            }
+          >
+            {word}
+          </span>
+          <span className="velocity-dot" aria-hidden="true">
+            {" · "}
+          </span>
+        </React.Fragment>
+      ))}
+    </span>
+  );
+}
 
 const wrap = (min: number, max: number, v: number) => {
   const range = max - min;
@@ -57,9 +102,7 @@ export default function VelocityMarquee() {
         style={reduce ? undefined : { x, skewX }}
       >
         {[0, 1, 2, 3].map((i) => (
-          <span key={i} className="velocity-marquee-text">
-            {PHRASE}
-          </span>
+          <PhraseCopy key={i} />
         ))}
       </motion.div>
     </div>

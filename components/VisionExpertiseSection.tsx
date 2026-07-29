@@ -91,7 +91,7 @@ export default function VisionExpertiseSection() {
         <ContainerAnimated className="flex flex-wrap items-center justify-center gap-3">
           <Button
             asChild
-            className="h-11 gap-1 rounded-full border-0 bg-[#E8341A] px-6 text-white hover:bg-[#d42f17]"
+            className="h-11 gap-1 rounded-[14px] border-0 bg-[#E8341A] px-6 text-white hover:bg-[#d42f17]"
           >
             <a href="#contact">
               Start a project

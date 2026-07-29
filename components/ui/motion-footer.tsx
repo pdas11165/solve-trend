@@ -437,7 +437,7 @@ export function CinematicFooter() {
               <div className="flex w-full flex-wrap justify-center gap-4">
                 <MagneticAnchor
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="footer-glass-pill group flex items-center gap-3 rounded-full px-10 py-5 text-sm font-bold md:text-base"
+                  className="footer-glass-pill group flex items-center gap-3 rounded-[14px] px-10 py-5 text-sm font-bold md:text-base"
                 >
                   Say hello
                   <DotGridArrow className="cinematic-footer-muted transition-colors group-hover:text-[var(--foreground)]" />
@@ -445,7 +445,7 @@ export function CinematicFooter() {
 
                 <MagneticAnchor
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="footer-glass-pill group flex items-center gap-3 rounded-full px-10 py-5 text-sm font-bold md:text-base"
+                  className="footer-glass-pill group flex items-center gap-3 rounded-[14px] px-10 py-5 text-sm font-bold md:text-base"
                 >
                   Start a project
                   <DotGridArrow className="cinematic-footer-muted transition-colors group-hover:text-[var(--foreground)]" />
@@ -454,16 +454,40 @@ export function CinematicFooter() {
 
               <div className="mt-2 flex w-full flex-wrap justify-center gap-3 md:gap-6">
                 <FlipLink
+                  href={route("/about")}
+                  className="cinematic-footer-muted text-sm font-bold uppercase tracking-widest hover:text-[var(--foreground)] md:text-base"
+                >
+                  About
+                </FlipLink>
+                <FlipLink
                   href={route("/services")}
                   className="cinematic-footer-muted text-sm font-bold uppercase tracking-widest hover:text-[var(--foreground)] md:text-base"
                 >
                   Services
                 </FlipLink>
                 <FlipLink
+                  href={route("/projects")}
+                  className="cinematic-footer-muted text-sm font-bold uppercase tracking-widest hover:text-[var(--foreground)] md:text-base"
+                >
+                  Projects
+                </FlipLink>
+                <FlipLink
+                  href={route("/pricing")}
+                  className="cinematic-footer-muted text-sm font-bold uppercase tracking-widest hover:text-[var(--foreground)] md:text-base"
+                >
+                  Pricing
+                </FlipLink>
+                <FlipLink
                   href={route("/blog")}
                   className="cinematic-footer-muted text-sm font-bold uppercase tracking-widest hover:text-[var(--foreground)] md:text-base"
                 >
                   Insights
+                </FlipLink>
+                <FlipLink
+                  href={route("/careers")}
+                  className="cinematic-footer-muted text-sm font-bold uppercase tracking-widest hover:text-[var(--foreground)] md:text-base"
+                >
+                  Careers
                 </FlipLink>
                 <FlipLink
                   href={route("/privacy")}
@@ -486,7 +510,7 @@ export function CinematicFooter() {
               © 2026 Solve Trend. All rights reserved.
             </div>
 
-            <div className="footer-glass-pill cinematic-footer-badge-border order-1 flex cursor-default items-center gap-2 rounded-full border px-6 py-3 md:order-2">
+            <div className="footer-glass-pill cinematic-footer-badge-border order-1 flex cursor-default items-center gap-2 rounded-[14px] border px-6 py-3 md:order-2">
               <span className="cinematic-footer-muted text-[10px] font-bold uppercase tracking-widest md:text-xs">
                 Crafted with
               </span>

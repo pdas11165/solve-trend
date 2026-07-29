@@ -5,11 +5,27 @@ import Footer from "@/components/Footer";
 import { DotGridArrow } from "@/components/Icons";
 import { BLOG_POSTS, formatPostDate } from "@/lib/blog";
 import { asset } from "@/lib/asset";
+import { absoluteUrl } from "@/lib/seo";
+
+const TITLE = "Insights — Solve Trend";
+const DESCRIPTION =
+  "Practical notes on custom software, AI automation, CRMs, brand, and design from the Solve Trend team.";
 
 export const metadata: Metadata = {
-  title: "Insights — Solve Trend",
-  description:
-    "Practical notes on custom software, AI automation, CRMs, brand, and design from the Solve Trend team.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: absoluteUrl("/blog") },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: absoluteUrl("/blog"),
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function BlogIndexPage() {

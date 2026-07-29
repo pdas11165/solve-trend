@@ -5,11 +5,27 @@ import Footer from "@/components/Footer";
 import { DotGridArrow } from "@/components/Icons";
 import { SERVICES } from "@/lib/services";
 import { asset } from "@/lib/asset";
+import { absoluteUrl } from "@/lib/seo";
+
+const TITLE = "Services — Solve Trend";
+const DESCRIPTION =
+  "Brand, design, web, eCommerce, and custom software with AI automation. Explore what Solve Trend builds — and how.";
 
 export const metadata: Metadata = {
-  title: "Services — Solve Trend",
-  description:
-    "Brand, design, web, eCommerce, and custom software with AI automation. Explore what Solve Trend builds — and how.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: absoluteUrl("/services") },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: absoluteUrl("/services"),
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function ServicesIndexPage() {
@@ -57,7 +73,7 @@ export default function ServicesIndexPage() {
                     loading="lazy"
                   />
                   <span
-                    className="absolute left-4 top-4 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-white"
+                    className="absolute left-4 top-4 rounded-[8px] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-white"
                     style={{ background: service.accent }}
                   >
                     № {service.number}
@@ -90,12 +106,16 @@ export default function ServicesIndexPage() {
               </h2>
               <p className="mt-2 max-w-lg text-[15px] leading-relaxed text-[#555] md:text-base">
                 Most projects touch two or three of these. Tell us the problem —
-                we&rsquo;ll figure out the mix.
+                we&rsquo;ll figure out the mix, or see{" "}
+                <Link href="/pricing" className="underline underline-offset-2 hover:text-[#1A1A1A]">
+                  how pricing works
+                </Link>
+                .
               </p>
             </div>
             <Link
               href="/#contact"
-              className="magnetic-cta group inline-flex shrink-0 items-center gap-2 rounded-full bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
+              className="magnetic-cta group inline-flex shrink-0 items-center gap-2 rounded-[14px] bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
             >
               Start a project
               <DotGridArrow />

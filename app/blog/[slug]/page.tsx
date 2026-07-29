@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { DotGridArrow } from "@/components/Icons";
 import { BLOG_POSTS, getPost, formatPostDate, type BlogBlock } from "@/lib/blog";
 import { asset } from "@/lib/asset";
+import { absoluteUrl, SITE_NAME } from "@/lib/seo";
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((p) => ({ slug: p.slug }));
@@ -22,10 +23,19 @@ export async function generateMetadata({
   return {
     title: `${post.title} — Solve Trend`,
     description: post.excerpt,
+    alternates: { canonical: absoluteUrl(`/blog/${post.slug}`) },
     openGraph: {
       title: post.title,
       description: post.excerpt,
+      url: absoluteUrl(`/blog/${post.slug}`),
       type: "article",
+      publishedTime: post.date,
+      images: [post.coverImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
       images: [post.coverImage],
     },
   };
@@ -82,8 +92,24 @@ export default async function BlogPostPage({
 
   const more = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 2);
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: { "@type": "Organization", name: post.author },
+    publisher: { "@type": "Organization", name: SITE_NAME },
+    image: absoluteUrl(post.coverImage),
+    url: absoluteUrl(`/blog/${post.slug}`),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Nav />
       <main className="bg-[var(--bg-light)] text-[#1A1A1A]">
         <article>
@@ -146,14 +172,14 @@ export default async function BlogPostPage({
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   href="/#contact"
-                  className="magnetic-cta group inline-flex items-center gap-2 rounded-full bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
+                  className="magnetic-cta group inline-flex items-center gap-2 rounded-[14px] bg-[#E8341A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#d42f17]"
                 >
                   Start a conversation
                   <DotGridArrow />
                 </Link>
                 <Link
                   href="/services/custom-software-ai"
-                  className="inline-flex items-center gap-2 rounded-full border border-black/15 px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] transition-colors hover:border-black/40"
+                  className="inline-flex items-center gap-2 rounded-[14px] border border-black/15 px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] transition-colors hover:border-black/40"
                 >
                   Custom Software & AI
                 </Link>

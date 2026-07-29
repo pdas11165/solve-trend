@@ -12,6 +12,7 @@ import FAQ from "@/components/FAQ";
 import TestimonialShowcase from "@/components/TestimonialShowcase";
 import PricingSection from "@/components/PricingSection";
 import ContactSection from "@/components/ContactSection";
+import HiringStrip from "@/components/HiringStrip";
 import Footer from "@/components/Footer";
 import SectionReveal from "@/components/SectionReveal";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -61,7 +62,10 @@ export default function Page() {
           <SectionReveal index={8} variant="fadeUp">
             <ContactSection />
           </SectionReveal>
-          <SectionReveal index={9} variant="none">
+          <SectionReveal index={9} variant="fadeUp">
+            <HiringStrip />
+          </SectionReveal>
+          <SectionReveal index={10} variant="none">
             <Footer />
           </SectionReveal>
         </div>

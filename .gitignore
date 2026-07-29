@@ -49,3 +49,7 @@ test-results/
 
 # local agent config / generated docs
 /.claude/
+
+# Image generation staging area (273MB of source + _originals).
+# Everything shipped from here lives in public/ — see docs/IMAGERY-CURATION-v2.md.
+website content/

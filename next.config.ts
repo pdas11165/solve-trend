@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_BASE_PATH: basePath,
     NEXT_PUBLIC_SITE_URL: isGhPages
       ? "https://pdas11165.github.io/solve-trend"
-      : "https://solvtrend.com",
+      : "https://solvetrend.com",
   },
   images: {
     unoptimized: isGhPages,
