@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup Lab — Solve Trend</title>
+<meta name="description" content="Coded HTML/CSS mockup components and industry case-study presentation for Solve Trend.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../06-solvetrend-signature/tokens.css">
+<link rel="stylesheet" href="../_shared/mockups.css">
+<style>
+  /* page chrome only — every mockup rule lives in _shared/mockups.css */
+  body { background: var(--c-canvas); color: var(--c-text-2); }
+  .wrap { max-width: var(--s-container); margin-inline: auto; padding-inline: var(--s-gutter); }
+  .lede { max-width: 62ch; }
+
+  header.masthead { padding: var(--s-section) 0 var(--s-section-md); }
+  .kicker {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-family: var(--f-mono); font-size: var(--fs-2xs);
+    letter-spacing: var(--ls-label); text-transform: uppercase;
+    color: var(--c-accent-text);
+    padding: .35rem .75rem; border-radius: var(--r-pill);
+    border: 1px solid var(--c-line); background: var(--c-accent-soft);
+    margin-bottom: var(--s-5);
+  }
+  h1 { font-size: var(--fs-d3); font-weight: 600; margin-bottom: var(--s-5); }
+  h2 { margin-bottom: var(--s-3); }
+  .section { padding-block: var(--s-section-md); }
+  .section > .wrap > header { margin-bottom: var(--s-10); }
+  .num {
+    font-family: var(--f-mono); font-size: var(--fs-2xs);
+    letter-spacing: var(--ls-label); text-transform: uppercase;
+    color: var(--c-text-3); display: block; margin-bottom: var(--s-2);
+  }
+  hr.rule { border: 0; border-top: 1px solid var(--c-line); margin: 0; }
+
+  /* spec sheet for the primitive library */
+  .specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(15rem,100%), 1fr)); gap: var(--s-5); }
+  .spec { border: 1px solid var(--c-line); border-radius: var(--r-md); overflow: hidden; background: var(--c-surface); }
+  .spec__stage { display: grid; place-items: center; padding: var(--s-6) var(--s-4); background: var(--mk-tint, #f6f2ea); min-height: 12rem; }
+  .spec__meta { padding: var(--s-4); border-top: 1px solid var(--c-line); }
+  .spec__meta code { font-family: var(--f-mono); font-size: var(--fs-xs); color: var(--c-accent-text); }
+  .spec__meta p { font-size: var(--fs-sm); color: var(--c-text-3); margin: .35rem 0 0; }
+
+  .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem,1fr)); gap: var(--s-3); }
+  .sw { border-radius: var(--r-sm); overflow: hidden; border: 1px solid var(--c-line); }
+  .sw__chip { height: 4.5rem; display: grid; place-items: center; font-family: var(--f-mono); font-size: var(--fs-2xs); }
+  .sw__name { padding: .5rem .625rem; font-family: var(--f-mono); font-size: var(--fs-2xs); color: var(--c-text-3); background: var(--c-surface); }
+
+  footer.foot { padding: var(--s-section-md) 0; border-top: 1px solid var(--c-line); color: var(--c-text-3); font-size: var(--fs-sm); }
+</style>
+</head>
+<body>
+
+<div class="ds-frame">
+
+<!-- ============================================================
+     MASTHEAD
+     ============================================================ -->
+<header class="masthead">
+  <div class="wrap">
+    <span class="kicker">Solve Trend · Design System</span>
+    <h1>Mockup Lab</h1>
+    <p class="lede">A coded mockup layer for portfolio and case-study presentation. Device shells, packaging forms, and a sticky-stacking case deck — all built on the <code>06-solvetrend-signature</code> token contract, so swapping one <code>tokens.css</code> import re-skins every mockup on the page.</p>
+    <p class="lede">Four industries represented. Bright pastel project palette, deliberately scoped outside the house tokens: each project owns a colour, the card gets tinted, the work never does.</p>
+  </div>
+</header>
+
+<hr class="rule">
+
+<!-- ============================================================
+     01 · PASTEL PROJECT PALETTE
+     ============================================================ -->
+<section class="section">
+  <div class="wrap">
+    <header>
+      <span class="num">01 — Palette</span>
+      <h2>Eight pastels, three tones each</h2>
+      <p class="lede">Tint for the card, deep for borders and strips, ink for type. Every ink pairing clears 7:1 on its tint — well past WCAG AA, matching the ratios recorded in each system README.</p>
+    </header>
+
+    <div class="swatches">
+      <div class="sw mk-mint">   <div class="sw__chip" style="background:var(--mk-tint);color:var(--mk-tint-ink)">Aa</div><div class="sw__name">--mk-mint</div></div>
+      <div class="sw mk-peach">  <div class="sw__chip" style="background:var(--mk-tint);color:var(--mk-tint-ink)">Aa</div><div class="sw__name">--mk-peach</div></div>
+      <div class="sw mk-lilac">  <div class="sw__chip" style="background:var(--mk-tint);color:var(--mk-tint-ink)">Aa</div><div class="sw__name">--mk-lilac</div></div>
+      <div class="sw mk-butter"> <div class="sw__chip" style="background:var(--mk-tint);color:var(--mk-tint-ink)">Aa</div><div class="sw__name">--mk-butter</div></div>
+      <div class="sw mk-sky">    <div class="sw__chip" style="background:var(--mk-tint);color:var(--mk-tint-ink)">Aa</div><div class="sw__name">--mk-sky</div></div>
+      <div class="sw mk-blush">  <div class="sw__chip" style="background:var(--mk-tint);color:var(--mk-tint-ink)">Aa</div><div class="sw__name">--mk-blush</div></div>
+      <div class="sw mk-sage">   <div class="sw__chip" style="background:var(--mk-tint);color:var(--mk-tint-ink)">Aa</div><div class="sw__name">--mk-sage</div></div>
+      <div class="sw mk-cream">  <div class="sw__chip" style="background:var(--mk-tint);color:var(--mk-tint-ink)">Aa</div><div class="sw__name">--mk-cream</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============================================================
+     02 · COMPONENT LIBRARY
+     ============================================================ -->
+<section class="section">
+  <div class="wrap">
+    <header>
+      <span class="num">02 — Primitives</span>
+      <h2>Shells and packaging forms</h2>
+      <p class="lede">Drop any screen into a shell, or compose a packaging family shot with <code>.mk-lineup</code>. Everything scales by container width — no fixed pixel sizes above the label type.</p>
+    </header>
+
+    <div class="specs">
+
+      <!-- PHONE -->
+      <article class="spec mk-lilac">
+        <div class="spec__stage">
+          <div class="mk-phone is-sm">
+            <div class="mk-phone__island"></div>
+            <div class="mk-phone__screen mk-ui">
+              <div class="mk-ui__bar"><span>9:41</span><span>●●●</span></div>
+              <div class="mk-ui__body">
+                <div class="mk-ui__hero">
+                  <span class="mk-ui__eyebrow">Balance</span>
+                  <span class="mk-ui__metric">$4,280</span>
+                </div>
+                <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line"></div><div class="mk-ui__line is-short"></div></div></div>
+                <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line is-mid"></div><div class="mk-ui__line is-short"></div></div></div>
+                <div class="mk-ui__cta">Transfer</div>
+              </div>
+              <div class="mk-ui__tabs"><i></i><i></i><i></i><i></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="spec__meta"><code>.mk-phone</code><p>Device frame with island cutout. <code>.is-sm</code> / <code>.is-lg</code> modifiers.</p></div>
+      </article>
+
+      <!-- BROWSER -->
+      <article class="spec mk-sky">
+        <div class="spec__stage">
+          <div class="mk-browser" style="max-width:20rem">
+            <div class="mk-browser__bar">
+              <div class="mk-browser__dots"><i></i><i></i><i></i></div>
+              <div class="mk-browser__url">solvetrend.ca</div>
+            </div>
+            <div class="mk-browser__viewport mk-ui">
+              <div class="mk-ui__body" style="height:100%">
+                <div class="mk-ui__hero"><span class="mk-ui__eyebrow">Overview</span><span class="mk-ui__title">Weekly performance</span></div>
+                <div class="mk-ui__chart">
+                  <i style="--v:.35"></i><i style="--v:.52"></i><i style="--v:.44"></i><i style="--v:.71"></i><i style="--v:.6"></i><i style="--v:.88" class="is-peak"></i><i style="--v:.66"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec__meta"><code>.mk-browser</code><p>Chrome bar, traffic lights, URL slot. 16:10 viewport.</p></div>
+      </article>
+
+      <!-- LAPTOP -->
+      <article class="spec mk-sage">
+        <div class="spec__stage">
+          <div class="mk-laptop" style="max-width:17rem">
+            <div class="mk-laptop__lid">
+              <div class="mk-laptop__screen mk-ui">
+                <div class="mk-ui__body" style="height:100%">
+                  <div class="mk-ui__hero"><span class="mk-ui__eyebrow">Clinic</span><span class="mk-ui__title">Today · 14 appointments</span></div>
+                  <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line is-mid"></div></div></div>
+                  <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line is-short"></div></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="mk-laptop__base"></div>
+          </div>
+        </div>
+        <div class="spec__meta"><code>.mk-laptop</code><p>Lid + base, 16:10. Base overhangs 6% each side for perspective.</p></div>
+      </article>
+
+      <!-- POUCH -->
+      <article class="spec mk-mint">
+        <div class="spec__stage">
+          <div class="mk-lineup">
+            <div class="mk-pack mk-pouch is-sm">
+              <div class="mk-pack__face">
+                <div class="mk-pack__mark"></div>
+                <div class="mk-pack__name">Halcyon</div>
+                <div class="mk-pack__rule"></div>
+                <div class="mk-pack__desc">Single Origin<br>Medium Roast</div>
+                <div class="mk-pack__weight">250 G</div>
+              </div>
+            </div>
+            <div class="mk-pack mk-pouch">
+              <div class="mk-pack__face">
+                <div class="mk-pack__mark"></div>
+                <div class="mk-pack__name">Halcyon</div>
+                <div class="mk-pack__rule"></div>
+                <div class="mk-pack__desc">Espresso<br>Dark Roast</div>
+                <div class="mk-pack__weight">500 G</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec__meta"><code>.mk-pouch</code><p>Stand-up pouch. Crimped seal, gusset shadow. <code>.is-sm</code> / <code>.is-lg</code>.</p></div>
+      </article>
+
+      <!-- CANS -->
+      <article class="spec mk-butter">
+        <div class="spec__stage">
+          <div class="mk-lineup">
+            <div class="mk-pack mk-can mk-lilac"><div class="mk-pack__face"><div class="mk-pack__mark"></div><div class="mk-pack__name">Halcyon</div><div class="mk-pack__desc">Yuzu<br>Botanical</div><div class="mk-pack__weight">355 ML</div></div></div>
+            <div class="mk-pack mk-can mk-butter"><div class="mk-pack__face"><div class="mk-pack__mark"></div><div class="mk-pack__name">Halcyon</div><div class="mk-pack__desc">Ginger<br>Botanical</div><div class="mk-pack__weight">355 ML</div></div></div>
+            <div class="mk-pack mk-can mk-sky"><div class="mk-pack__face"><div class="mk-pack__mark"></div><div class="mk-pack__name">Halcyon</div><div class="mk-pack__desc">Elderflower<br>Botanical</div><div class="mk-pack__weight">355 ML</div></div></div>
+          </div>
+        </div>
+        <div class="spec__meta"><code>.mk-can</code><p>Rolled rim, cylindrical light. Colourway class per can gives a flavour range.</p></div>
+      </article>
+
+      <!-- BEAUTY SET -->
+      <article class="spec mk-blush">
+        <div class="spec__stage">
+          <div class="mk-lineup">
+            <div class="mk-pack mk-bottle"><div class="mk-pack__face"><div class="mk-pack__name">Lumea</div><div class="mk-pack__desc">Serum</div><div class="mk-pack__weight">30 ML</div></div></div>
+            <div class="mk-pack mk-jar"><div class="mk-pack__face"><div class="mk-pack__name">Lumea</div><div class="mk-pack__desc">Night Cream</div><div class="mk-pack__weight">50 ML</div></div></div>
+            <div class="mk-pack mk-tube"><div class="mk-pack__face"><div class="mk-pack__mark"></div><div class="mk-pack__name">Lumea</div></div></div>
+          </div>
+        </div>
+        <div class="spec__meta"><code>.mk-bottle</code> <code>.mk-jar</code> <code>.mk-tube</code><p>Dropper cap, screw lid, crimp seal. Composed with <code>.mk-lineup</code>.</p></div>
+      </article>
+
+      <!-- BOXES -->
+      <article class="spec mk-peach">
+        <div class="spec__stage">
+          <div class="mk-lineup">
+            <div class="mk-pack mk-box">
+              <div class="mk-box__front">
+                <div class="mk-pack__mark"></div>
+                <div class="mk-pack__name">Halcyon</div>
+                <div class="mk-pack__rule"></div>
+                <div class="mk-pack__desc">Discovery Set</div>
+              </div>
+              <div class="mk-box__side"></div>
+            </div>
+            <div class="mk-pack mk-box is-sm mk-cream">
+              <div class="mk-box__front"><div class="mk-pack__name">Halcyon</div><div class="mk-pack__desc">Filters</div></div>
+              <div class="mk-box__side"></div>
+            </div>
+          </div>
+        </div>
+        <div class="spec__meta"><code>.mk-box</code><p>Two visible faces, side skewed −7°. <code>.is-sm</code> modifier.</p></div>
+      </article>
+
+      <!-- LABEL FLAT -->
+      <article class="spec mk-sky">
+        <div class="spec__stage">
+          <div class="mk-label">
+            <div class="mk-pack__mark" style="margin-bottom:.6rem"></div>
+            <div class="mk-pack__name" style="font-size:.9375rem">Harbour Lane</div>
+            <div class="mk-pack__rule" style="margin:.6rem 0"></div>
+            <div class="mk-pack__desc" style="font-size:.5625rem">Wild Blueberry Preserve · Prince Edward Island</div>
+            <div class="mk-pack__weight" style="font-size:.5625rem">NET 250 G</div>
+          </div>
+        </div>
+        <div class="spec__meta"><code>.mk-label</code><p>Flat die-line artwork with a dashed trim edge — for showing label design without a 3D form.</p></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============================================================
+     03 · CASE DECK
+     ============================================================ -->
+<section class="section">
+  <div class="wrap">
+    <header>
+      <span class="num">03 — Case deck</span>
+      <h2>Four industries, one sticky stack</h2>
+      <p class="lede">Ascending <code>top</code> plus ascending <code>z-index</code> on <code>position:sticky</code>. Zero JavaScript. Scrolling deals the cards into a deck, so a prospect sees one project at a time instead of skimming a grid. Collapses to a plain list at 900px and under <code>prefers-reduced-motion</code>.</p>
+    </header>
+
+    <div class="mk-deck">
+
+      <!-- ---------- 01 · FOOD & BEVERAGE / CPG ---------- -->
+      <article class="mk-case mk-mint" style="--mk-case-top:5rem;--mk-case-z:1">
+        <div class="mk-case__text">
+          <p class="mk-case__industry">Food &amp; Beverage · CPG</p>
+          <h3 class="mk-case__title">A coffee brand that survived its first retail shelf</h3>
+          <p class="mk-case__summary">Identity, packaging system, and a Shopify storefront for a specialty roaster moving from farmers' market to grocery. Built one master die-line so every new roast ships without a design ticket.</p>
+          <dl class="mk-case__stats">
+            <div><dt class="mk-case__stat-label">SKUs in system</dt><dd class="mk-case__stat-value">14</dd></div>
+            <div><dt class="mk-case__stat-label">Project duration</dt><dd class="mk-case__stat-value">9 weeks</dd></div>
+            <div><dt class="mk-case__stat-label">Scope</dt><dd class="mk-case__stat-value">Brand + packaging + store</dd></div>
+            <div><dt class="mk-case__stat-label">Location</dt><dd class="mk-case__stat-value">Charlottetown, PE</dd></div>
+          </dl>
+          <div class="mk-case__client">
+            <span class="mk-case__avatar" aria-hidden="true">HR</span>
+            <span class="mk-case__who"><b>Halcyon Roasters</b><span>Specialty coffee</span></span>
+            <a class="mk-case__cta" href="#">View project
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="mk-case__media">
+          <div class="mk-stage is-wide" style="background:rgb(255 255 255 / .45)">
+            <div class="mk-lineup">
+              <div class="mk-pack mk-pouch is-sm mk-cream"><div class="mk-pack__face"><div class="mk-pack__mark"></div><div class="mk-pack__name">Halcyon</div><div class="mk-pack__rule"></div><div class="mk-pack__desc">Filter<br>Light Roast</div><div class="mk-pack__weight">250 G</div></div></div>
+              <div class="mk-pack mk-pouch is-lg mk-mint"><div class="mk-pack__face"><div class="mk-pack__mark"></div><div class="mk-pack__name">Halcyon</div><div class="mk-pack__rule"></div><div class="mk-pack__desc">Single Origin<br>Ethiopia Guji</div><div class="mk-pack__weight">500 G</div></div></div>
+              <div class="mk-pack mk-pouch is-sm mk-peach"><div class="mk-pack__face"><div class="mk-pack__mark"></div><div class="mk-pack__name">Halcyon</div><div class="mk-pack__rule"></div><div class="mk-pack__desc">Espresso<br>Dark Roast</div><div class="mk-pack__weight">250 G</div></div></div>
+              <div class="mk-pack mk-box is-sm mk-cream"><div class="mk-box__front"><div class="mk-pack__name">Halcyon</div><div class="mk-pack__desc">Trio Set</div></div><div class="mk-box__side"></div></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---------- 02 · HEALTH, BEAUTY & WELLNESS ---------- -->
+      <article class="mk-case mk-blush" style="--mk-case-top:6.75rem;--mk-case-z:2">
+        <div class="mk-case__text">
+          <p class="mk-case__industry">Health, Beauty &amp; Wellness</p>
+          <h3 class="mk-case__title">Skincare packaging and the app that reorders it</h3>
+          <p class="mk-case__summary">A pastel-forward identity across primary packaging, secondary cartons, and a subscription app. Colour does the sorting — customers find their step on the shelf and in the app the same way.</p>
+          <dl class="mk-case__stats">
+            <div><dt class="mk-case__stat-label">Product lines</dt><dd class="mk-case__stat-value">3</dd></div>
+            <div><dt class="mk-case__stat-label">Project duration</dt><dd class="mk-case__stat-value">11 weeks</dd></div>
+            <div><dt class="mk-case__stat-label">Scope</dt><dd class="mk-case__stat-value">Packaging + iOS app</dd></div>
+            <div><dt class="mk-case__stat-label">Handoff</dt><dd class="mk-case__stat-value">Component library</dd></div>
+          </dl>
+          <div class="mk-case__client">
+            <span class="mk-case__avatar" aria-hidden="true">LM</span>
+            <span class="mk-case__who"><b>Lumea</b><span>Skincare &amp; wellness</span></span>
+            <a class="mk-case__cta" href="#">View project
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="mk-case__media">
+          <div class="mk-stage is-wide" style="background:rgb(255 255 255 / .45)">
+            <div class="mk-lineup" style="align-items:flex-end">
+              <div class="mk-pack mk-bottle mk-blush"><div class="mk-pack__face"><div class="mk-pack__name">Lumea</div><div class="mk-pack__desc">01 Serum</div><div class="mk-pack__weight">30 ML</div></div></div>
+              <div class="mk-pack mk-jar mk-cream"><div class="mk-pack__face"><div class="mk-pack__name">Lumea</div><div class="mk-pack__desc">02 Cream</div><div class="mk-pack__weight">50 ML</div></div></div>
+              <div class="mk-pack mk-tube mk-sage"><div class="mk-pack__face"><div class="mk-pack__mark"></div><div class="mk-pack__name">Lumea</div></div></div>
+              <div class="mk-phone is-sm mk-blush" style="--mk-phone-w:7.5rem">
+                <div class="mk-phone__island"></div>
+                <div class="mk-phone__screen mk-ui">
+                  <div class="mk-ui__bar"><span>9:41</span><span>●●●</span></div>
+                  <div class="mk-ui__body">
+                    <div class="mk-ui__hero"><span class="mk-ui__eyebrow">Your routine</span><span class="mk-ui__title">Step 2 of 3</span></div>
+                    <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line is-mid"></div></div></div>
+                    <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line is-short"></div></div></div>
+                    <div class="mk-ui__cta">Reorder</div>
+                  </div>
+                  <div class="mk-ui__tabs"><i></i><i></i><i></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---------- 03 · TECH / SAAS / FINTECH ---------- -->
+      <article class="mk-case mk-lilac" style="--mk-case-top:8.5rem;--mk-case-z:3">
+        <div class="mk-case__text">
+          <p class="mk-case__industry">Technology · SaaS &amp; Fintech</p>
+          <h3 class="mk-case__title">A dashboard rebuilt from the support tickets</h3>
+          <p class="mk-case__summary">Research, wireframes, and a shipped design system for a payments platform — desktop console and companion app on one token set. Engineering received components, not screenshots.</p>
+          <dl class="mk-case__stats">
+            <div><dt class="mk-case__stat-label">Screens designed</dt><dd class="mk-case__stat-value">40+</dd></div>
+            <div><dt class="mk-case__stat-label">Support tickets</dt><dd class="mk-case__stat-value">Down in month 1</dd></div>
+            <div><dt class="mk-case__stat-label">Scope</dt><dd class="mk-case__stat-value">Web app + iOS</dd></div>
+            <div><dt class="mk-case__stat-label">Handoff</dt><dd class="mk-case__stat-value">Design tokens</dd></div>
+          </dl>
+          <div class="mk-case__client">
+            <span class="mk-case__avatar" aria-hidden="true">NP</span>
+            <span class="mk-case__who"><b>Northpeak</b><span>Payments platform</span></span>
+            <a class="mk-case__cta" href="#">View project
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="mk-case__media">
+          <div class="mk-stage is-wide" style="background:rgb(255 255 255 / .45)">
+            <div style="position:relative;width:100%;max-width:26rem">
+              <div class="mk-browser">
+                <div class="mk-browser__bar">
+                  <div class="mk-browser__dots"><i></i><i></i><i></i></div>
+                  <div class="mk-browser__url">app.northpeak.io/overview</div>
+                </div>
+                <div class="mk-browser__viewport mk-ui mk-lilac">
+                  <div class="mk-ui__body" style="height:100%">
+                    <div class="mk-ui__hero" style="flex-direction:row;justify-content:space-between;align-items:flex-end">
+                      <div style="display:flex;flex-direction:column;gap:.3rem">
+                        <span class="mk-ui__eyebrow">Volume · 30 days</span>
+                        <span class="mk-ui__metric">$1.24M</span>
+                      </div>
+                      <span class="mk-ui__eyebrow">+18.4%</span>
+                    </div>
+                    <div class="mk-ui__chart">
+                      <i style="--v:.3"></i><i style="--v:.44"></i><i style="--v:.38"></i><i style="--v:.56"></i><i style="--v:.5"></i><i style="--v:.68"></i><i style="--v:.62"></i><i style="--v:.8"></i><i style="--v:.72"></i><i style="--v:.95" class="is-peak"></i><i style="--v:.84"></i><i style="--v:.9"></i>
+                    </div>
+                    <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line is-mid"></div><div class="mk-ui__line is-short"></div></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="mk-phone mk-lilac" style="--mk-phone-w:7rem;position:absolute;right:-1.5rem;bottom:-1.75rem">
+                <div class="mk-phone__island"></div>
+                <div class="mk-phone__screen mk-ui">
+                  <div class="mk-ui__bar"><span>9:41</span><span>●●●</span></div>
+                  <div class="mk-ui__body">
+                    <div class="mk-ui__hero"><span class="mk-ui__eyebrow">Today</span><span class="mk-ui__metric">$8,412</span></div>
+                    <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line is-short"></div></div></div>
+                    <div class="mk-ui__cta">Payouts</div>
+                  </div>
+                  <div class="mk-ui__tabs"><i></i><i></i><i></i><i></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---------- 04 · LOCAL SERVICES & HOSPITALITY ---------- -->
+      <article class="mk-case mk-butter" style="--mk-case-top:10.25rem;--mk-case-z:4">
+        <div class="mk-case__text">
+          <p class="mk-case__industry">Local Services &amp; Hospitality</p>
+          <h3 class="mk-case__title">One brand across a dining room, a jar, and a booking screen</h3>
+          <p class="mk-case__summary">Identity, takeaway packaging, signage, and a reservation app for a coastal restaurant group. Built so a second location could open without redrawing anything.</p>
+          <dl class="mk-case__stats">
+            <div><dt class="mk-case__stat-label">Touchpoints</dt><dd class="mk-case__stat-value">22</dd></div>
+            <div><dt class="mk-case__stat-label">Project duration</dt><dd class="mk-case__stat-value">7 weeks</dd></div>
+            <div><dt class="mk-case__stat-label">Scope</dt><dd class="mk-case__stat-value">Brand + packaging + app</dd></div>
+            <div><dt class="mk-case__stat-label">Location</dt><dd class="mk-case__stat-value">Prince Edward Island</dd></div>
+          </dl>
+          <div class="mk-case__client">
+            <span class="mk-case__avatar" aria-hidden="true">HL</span>
+            <span class="mk-case__who"><b>Harbour Lane</b><span>Restaurant group</span></span>
+            <a class="mk-case__cta" href="#">View project
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="mk-case__media">
+          <div class="mk-stage is-wide" style="background:rgb(255 255 255 / .45)">
+            <div class="mk-lineup" style="align-items:flex-end">
+              <div class="mk-pack mk-jar mk-butter"><div class="mk-pack__face"><div class="mk-pack__name">Harbour</div><div class="mk-pack__desc">Wild Blueberry</div><div class="mk-pack__weight">250 G</div></div></div>
+              <div class="mk-pack mk-box is-sm mk-sky"><div class="mk-box__front"><div class="mk-pack__name">Harbour</div><div class="mk-pack__desc">Takeaway</div></div><div class="mk-box__side"></div></div>
+              <div class="mk-phone is-sm mk-butter" style="--mk-phone-w:8rem">
+                <div class="mk-phone__island"></div>
+                <div class="mk-phone__screen mk-ui">
+                  <div class="mk-ui__bar"><span>9:41</span><span>●●●</span></div>
+                  <div class="mk-ui__body">
+                    <div class="mk-ui__hero"><span class="mk-ui__eyebrow">Reserve</span><span class="mk-ui__title">Fri 7:30pm<br>Table for 4</span></div>
+                    <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line is-mid"></div></div></div>
+                    <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line is-short"></div></div></div>
+                    <div class="mk-ui__cta">Confirm booking</div>
+                  </div>
+                  <div class="mk-ui__tabs"><i></i><i></i><i></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============================================================
+     04 · GRID
+     ============================================================ -->
+<section class="section">
+  <div class="wrap">
+    <header>
+      <span class="num">04 — Grid</span>
+      <h2>The flat alternative</h2>
+      <p class="lede">Same components, no sticky choreography. Use <code>.mk-grid</code> on services pages and related-work rows where the deck is too tall to earn its height.</p>
+    </header>
+
+    <div class="mk-grid">
+
+      <a class="mk-tile mk-sky" href="#">
+        <div class="mk-tile__media">
+          <div class="mk-lineup">
+            <div class="mk-pack mk-can mk-sky"><div class="mk-pack__face"><div class="mk-pack__mark"></div><div class="mk-pack__name">Halcyon</div><div class="mk-pack__desc">Elderflower</div><div class="mk-pack__weight">355 ML</div></div></div>
+            <div class="mk-pack mk-can mk-lilac"><div class="mk-pack__face"><div class="mk-pack__mark"></div><div class="mk-pack__name">Halcyon</div><div class="mk-pack__desc">Yuzu</div><div class="mk-pack__weight">355 ML</div></div></div>
+            <div class="mk-pack mk-can mk-butter"><div class="mk-pack__face"><div class="mk-pack__mark"></div><div class="mk-pack__name">Halcyon</div><div class="mk-pack__desc">Ginger</div><div class="mk-pack__weight">355 ML</div></div></div>
+          </div>
+        </div>
+        <div class="mk-tile__meta">
+          <span class="mk-tile__industry">Food &amp; Beverage</span>
+          <span class="mk-tile__title">Botanical soda range</span>
+        </div>
+      </a>
+
+      <a class="mk-tile mk-peach" href="#">
+        <div class="mk-tile__media">
+          <div class="mk-browser" style="max-width:16rem">
+            <div class="mk-browser__bar"><div class="mk-browser__dots"><i></i><i></i><i></i></div><div class="mk-browser__url">shop.halcyon.coffee</div></div>
+            <div class="mk-browser__viewport mk-ui mk-peach">
+              <div class="mk-ui__body" style="height:100%">
+                <div class="mk-ui__hero"><span class="mk-ui__eyebrow">New</span><span class="mk-ui__title">Ethiopia Guji</span></div>
+                <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line is-mid"></div></div></div>
+                <div class="mk-ui__cta">Add to cart · $24</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mk-tile__meta">
+          <span class="mk-tile__industry">eCommerce</span>
+          <span class="mk-tile__title">Roaster storefront</span>
+        </div>
+      </a>
+
+      <a class="mk-tile mk-sage" href="#">
+        <div class="mk-tile__media">
+          <div class="mk-phone mk-sage" style="--mk-phone-w:8.5rem">
+            <div class="mk-phone__island"></div>
+            <div class="mk-phone__screen mk-ui">
+              <div class="mk-ui__bar"><span>9:41</span><span>●●●</span></div>
+              <div class="mk-ui__body">
+                <div class="mk-ui__hero"><span class="mk-ui__eyebrow">Next visit</span><span class="mk-ui__title">Tue 10:15am</span></div>
+                <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line is-mid"></div><div class="mk-ui__line is-short"></div></div></div>
+                <div class="mk-ui__row"><i class="mk-ui__dot"></i><div class="mk-ui__lines"><div class="mk-ui__line is-short"></div></div></div>
+                <div class="mk-ui__cta">Book appointment</div>
+              </div>
+              <div class="mk-ui__tabs"><i></i><i></i><i></i><i></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="mk-tile__meta">
+          <span class="mk-tile__industry">Health &amp; Clinics</span>
+          <span class="mk-tile__title">Patient booking app</span>
+        </div>
+      </a>
+
+      <a class="mk-tile mk-mint" href="#">
+        <div class="mk-tile__media">
+          <div class="mk-lineup">
+            <div class="mk-pack mk-pouch mk-mint"><div class="mk-pack__face"><div class="mk-pack__mark"></div><div class="mk-pack__name">Fernbrook</div><div class="mk-pack__rule"></div><div class="mk-pack__desc">Daily Greens</div><div class="mk-pack__weight">300 G</div></div></div>
+            <div class="mk-pack mk-jar mk-lilac"><div class="mk-pack__face"><div class="mk-pack__name">Fernbrook</div><div class="mk-pack__desc">Sleep</div><div class="mk-pack__weight">60 CT</div></div></div>
+          </div>
+        </div>
+        <div class="mk-tile__meta">
+          <span class="mk-tile__industry">Wellness</span>
+          <span class="mk-tile__title">Supplement range</span>
+        </div>
+      </a>
+
+      <a class="mk-tile mk-lilac" href="#">
+        <div class="mk-tile__media">
+          <div class="mk-laptop" style="max-width:15rem">
+            <div class="mk-laptop__lid">
+              <div class="mk-laptop__screen mk-ui mk-lilac">
+                <div class="mk-ui__body" style="height:100%">
+                  <div class="mk-ui__hero"><span class="mk-ui__eyebrow">Pipeline</span><span class="mk-ui__title">32 open deals</span></div>
+                  <div class="mk-ui__chart"><i style="--v:.4"></i><i style="--v:.62"></i><i style="--v:.5"></i><i style="--v:.86" class="is-peak"></i><i style="--v:.7"></i></div>
+                </div>
+              </div>
+            </div>
+            <div class="mk-laptop__base"></div>
+          </div>
+        </div>
+        <div class="mk-tile__meta">
+          <span class="mk-tile__industry">SaaS &amp; Internal Tools</span>
+          <span class="mk-tile__title">Custom CRM console</span>
+        </div>
+      </a>
+
+      <a class="mk-tile mk-butter" href="#">
+        <div class="mk-tile__media">
+          <div class="mk-label">
+            <div class="mk-pack__mark" style="margin-bottom:.6rem"></div>
+            <div class="mk-pack__name" style="font-size:.875rem">Harbour Lane</div>
+            <div class="mk-pack__rule" style="margin:.55rem 0"></div>
+            <div class="mk-pack__desc" style="font-size:.5rem">Sea Salt Caramel · Small Batch</div>
+            <div class="mk-pack__weight" style="font-size:.5rem">NET 180 G</div>
+          </div>
+        </div>
+        <div class="mk-tile__meta">
+          <span class="mk-tile__industry">Hospitality</span>
+          <span class="mk-tile__title">Retail label system</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <p><strong>Solve Trend · Mockup Lab.</strong> Components live in <code>design-systems/_shared/mockups.css</code>. Case data in <code>lib/industry-portfolio.ts</code>. Reference teardown: designmonks.co sticky case deck.</p>
+    <p>All mockups are coded HTML/CSS/SVG — no images, no image credits, fully editable. Swap <code>../06-solvetrend-signature/tokens.css</code> for any other system in this folder to re-skin the page chrome.</p>
+  </div>
+</footer>
+
+</div><!-- /.ds-frame -->
+</body>
+</html>

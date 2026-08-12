@@ -1,0 +1,61 @@
+/* =============================================================
+   FONT LAYER
+   Load BEFORE tokens.css.
+
+   The reference sites use four typefaces that are not on Google
+   Fonts (Satoshi, Mona Sans, Mona Sans Narrow, InterDisplay).
+   This file loads free equivalents that keep the same voice, so
+   every system looks correct out of the box. Swap in the licensed
+   originals for client work where the budget allows.
+   ============================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&family=Archivo:wdth,wght@62..125,100..900&family=Oswald:wght@300;400;500;600;700&display=swap");
+
+/* -------------------------------------------------------------
+   SUBSTITUTION MAP
+
+   | System         | Original          | Substitute here          |
+   |----------------|-------------------|--------------------------|
+   | 01 Ritovex     | Satoshi           | Inter Tight              |
+   | 02 Fluke       | Inter Tight       | Inter Tight (exact)      |
+   | 03 Unusually   | Mona Sans Narrow  | Archivo (width 62)       |
+   |                | Mona Sans         | Inter                    |
+   |                | DM Mono           | DM Mono (exact)          |
+   | 04 Stuxen      | Poppins           | Poppins (exact)          |
+   | 05 Qubix       | InterDisplay      | Inter Tight              |
+   | 06 Solve Trend | Inter Tight/Inter | exact                    |
+
+   Licensed originals, if you buy them:
+     Satoshi       https://www.fontshare.com/fonts/satoshi        (free)
+     Mona Sans     https://github.com/github/mona-sans            (free, OFL)
+     InterDisplay  https://rsms.me/inter/                         (free, OFL)
+
+   All three are actually free — Fontshare and GitHub host Satoshi
+   and Mona Sans directly. Self-host them for production; the
+   Google substitutes below are only so nothing renders unstyled.
+   ------------------------------------------------------------- */
+
+/* Archivo is a variable-width face. This narrow instance stands in
+   for Mona Sans Narrow in system 03. */
+.ds-narrow,
+[style*="Mona Sans Narrow"] {
+  font-variation-settings: "wdth" 62;
+}
+
+:root {
+  /* Applied automatically when a system asks for a narrow display face. */
+  --f-narrow-fallback: "Archivo", "Oswald", Impact, sans-serif;
+}
+
+/* System 03 uses a condensed display face for every heading. Without
+   the real Mona Sans Narrow this keeps the condensed proportion. */
+[data-fonts="substitute"] h1,
+[data-fonts="substitute"] h2,
+[data-fonts="substitute"] h3,
+[data-fonts="substitute"] h4,
+[data-fonts="substitute"] h5,
+[data-fonts="substitute"] .ds-d1,
+[data-fonts="substitute"] .ds-d2,
+[data-fonts="substitute"] .ds-d3 {
+  font-variation-settings: "wdth" 62;
+}

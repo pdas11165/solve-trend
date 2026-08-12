@@ -1,0 +1,196 @@
+/* =============================================================
+   04 · STUXEN — Violet SaaS
+   Derived from https://stuxen.webflow.io/
+   Archetype: modern startup / digital agency, conversion-oriented
+   Signature: pill CTA with inset circular arrow badge,
+              uppercase headings at -4% tracking, faint hero grid
+   ============================================================= */
+
+:root {
+  /* ---------- LAYER 1 · PRIMITIVES ---------- */
+  --p-violet:      #5235f6;
+  --p-violet-dark: #3f27cf;
+  --p-violet-soft: #eeeaff;
+  --p-ink:         #212121;
+  --p-smoke:       #f5f5f5;
+  --p-white:       #ffffff;
+  --p-grey-line:   #e4e4e4;
+
+  /* the alpha ladder — one ink at three opacities */
+  --p-ink-70: rgb(33 33 33 / 0.70);
+  --p-ink-16: rgb(33 33 33 / 0.16);
+  --p-ink-12: rgb(33 33 33 / 0.12);
+
+  /* ---------- LAYER 2 · SEMANTIC ---------- */
+  --c-canvas:    var(--p-smoke);
+  --c-surface:   var(--p-white);
+  --c-surface-2: var(--p-violet-soft);
+  --c-surface-3: var(--p-ink);
+  --c-frost:     rgb(255 255 255 / 0.65);
+
+  --c-text:      var(--p-ink);
+  --c-text-2:    var(--p-ink-70);
+  --c-text-3:    rgb(33 33 33 / 0.45);
+  --c-text-inv:  var(--p-white);
+
+  --c-accent:       var(--p-violet);
+  --c-accent-ink:   var(--p-white);
+  --c-accent-hover: var(--p-violet-dark);
+  --c-accent-soft:  var(--p-violet-soft);
+
+  --c-line:      var(--p-ink-16);
+  --c-line-soft: var(--p-ink-12);
+  --c-grid-line: var(--p-grey-line);   /* the hero grid */
+
+  /* contract completions */
+  --c-text-mute:   #949494;            /* 3.03:1 — display type only */
+  --c-frame:       var(--c-canvas);
+  --c-gutter:      var(--c-canvas);
+  --c-accent-text: var(--p-violet);    /* 6.57:1 on white */
+
+  /* ---------- TYPE ---------- */
+  --f-display: "Poppins", "Inter", system-ui, -apple-system, sans-serif;
+  --f-body:    var(--f-display);
+  --f-mono:    ui-monospace, "SF Mono", monospace;
+
+  /* source: 56/52/48/40/36/32/28/22 px */
+  --fs-d1: clamp(2.5rem, 1.4rem + 4.4vw, 4rem);
+  --fs-d2: clamp(2.25rem, 1.4rem + 3.5vw, 3.5rem);
+  --fs-d3: clamp(2rem, 1.3rem + 2.8vw, 3rem);
+  --fs-h1: clamp(2.125rem, 1.3rem + 3.3vw, 3.5rem);   /* → 56 */
+  --fs-h2: clamp(1.875rem, 1.2rem + 2.7vw, 3rem);     /* → 48 */
+  --fs-h3: clamp(1.625rem, 1.15rem + 1.9vw, 2.25rem); /* → 36 */
+  --fs-h4: clamp(1.5rem, 1.1rem + 1.6vw, 2rem);       /* → 32 */
+  --fs-h5: clamp(1.375rem, 1.1rem + 1.1vw, 1.75rem);  /* → 28 */
+  --fs-h6: 1.375rem;                                   /* → 22 */
+  --fs-xl: 1.5rem;
+  --fs-lg: 1.25rem;
+  --fs-md: 1rem;
+  --fs-sm: 0.875rem;
+  --fs-xs: 0.8125rem;
+
+  /* source stores precise px-derived percentages; rounded sensibly here */
+  --lh-tight: 100%;
+  --lh-head:  118%;
+  --lh-body:  145%;
+  --lh-loose: 171%;
+
+  /* THE RULE: tracking is ≈ -4% of size at every step. One declaration. */
+  --ls-display: -0.04em;
+  --ls-head:    -0.04em;
+  --ls-body:    -0.02em;
+  --ls-label:   0.1em;
+
+  --fw-light: 300; --fw-regular: 400; --fw-medium: 500;
+  --fw-semibold: 600;  /* ← headings */
+  --fw-bold: 700;
+
+  /* ---------- SPACE ---------- */
+  --s-1: 0.5rem;   --s-2: 0.75rem;  --s-3: 1.25rem;  --s-4: 1.375rem;
+  --s-5: 1.5rem;   --s-6: 1.875rem; --s-7: 2rem;     --s-8: 2.25rem;
+  --s-10: 2.5rem;  --s-12: 2.8125rem; --s-14: 3.75rem; --s-16: 5rem;
+
+  --s-section:    clamp(3.5rem, 2rem + 5vw, 6.25rem);  /* → 100 */
+  --s-section-md: clamp(3rem, 1.8rem + 4vw, 5.75rem);
+  --s-section-sm: clamp(2.25rem, 1.4rem + 3vw, 3.75rem);
+  --s-gutter:     clamp(1.25rem, 0.5rem + 3vw, 3rem);
+  --s-container:  1320px;
+
+  /* ---------- RADIUS · three radii, three meanings ---------- */
+  --r-xs: 12px;
+  --r-sm: 16px;
+  --r-md: 20px;    /* ← the house radius: cards */
+  --r-lg: 32px;
+  --r-xl: 62px;    /* ← pill CTAs */
+  --r-pill: 62px;
+  --r-round: 50%;  /* ← badges */
+
+  /* ---------- MOTION ---------- */
+  --d-micro: 200ms;
+  --d-base:  400ms;   /* ← the source's house default. Snappier than 500. */
+  --d-slow:  700ms;
+  --d-marquee: 30s;
+
+  /* the site's own custom bézier, promoted over its default `ease` */
+  --e-out:    cubic-bezier(0.702, 0.311, 0.292, 0.983);
+  --e-in-out: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --e-over:   cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ---------- LAYER 3 · COMPONENT ---------- */
+  --btn-radius: var(--r-pill);
+  --btn-pad-y: 0.75rem;
+  --btn-pad-x: 1.5rem;
+  --btn-badge: 2.25rem;         /* the inset circular arrow */
+  --btn-badge-gap: 0.75rem;
+  --card-radius: var(--r-md);
+  --card-pad: var(--s-7);
+  --nav-radius: var(--r-pill);
+  --nav-h: 6rem;
+  --frame-radius: 0;
+  --frame-gutter: 0;
+  --input-radius: var(--r-pill);
+}
+
+/* ---------- BASE ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--c-canvas);
+  color: var(--c-text-2);
+  font-family: var(--f-body);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: var(--c-text);
+  font-family: var(--f-display);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-head);
+  text-transform: uppercase;
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+h5 { font-size: var(--fs-h5); }
+h6 { font-size: var(--fs-h6); }
+
+/* italic final word — the headline signature */
+.ds-em { font-style: italic; font-weight: var(--fw-medium); }
+
+.ds-container {
+  width: 100%; max-width: var(--s-container);
+  margin-inline: auto; padding-inline: var(--s-gutter);
+}
+.ds-section { padding-block: var(--s-section); }
+
+/* faint architectural grid behind the hero */
+.ds-grid-bg {
+  position: relative;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--c-grid-line) 0 1px,
+    transparent 1px calc(100% / 4)
+  );
+  background-size: 100% 100%;
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

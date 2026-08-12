@@ -1,7 +1,5 @@
-// Case-study content for the standalone /projects page. Deliberately
-// decoupled from lib/project-showcase.ts (homepage ProjectsSection) and
-// lib/projects.ts (DarkTransition) so this page has no dependency on either
-// component while they're being reworked.
+// Case-study content. Powers both the standalone /projects page and the
+// homepage's Selected Work rows (ProjectsSection renders the first four).
 
 export type PortfolioCaseStudy = {
   slug: string;

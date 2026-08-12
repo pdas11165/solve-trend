@@ -59,25 +59,52 @@ function BadgeIcons() {
 
 type BrandLogo = { src: string; alt: string };
 
-// Confirmed clients — real marks, kept named so the owner can find these
-// quickly when swapping in official brand-kit assets later.
+// Real client roster — full-colour marks trimmed to their bounding box and
+// normalised by height on the wall (see .crafting-marquee__row img). Ordered
+// so the widely-recognised names are spread through the loop rather than
+// bunched. Source art lives in "All Client Logo (extract.me)/".
 const CLIENT_LOGOS: BrandLogo[] = [
-  { src: asset("/logos/honda.svg"), alt: "Honda" },
-  { src: asset("/logos/home-depot.svg"), alt: "The Home Depot" },
-  { src: asset("/logos/unicef.svg"), alt: "UNICEF" },
+  { src: asset("/logos/clients/honda.png"), alt: "Honda" },
+  { src: asset("/logos/clients/livpure.png"), alt: "Livpure" },
+  { src: asset("/logos/clients/rupayan-sky-villa.png"), alt: "Rupayan Sky Villa" },
+  { src: asset("/logos/clients/shakti-foundation.png"), alt: "Shakti Foundation" },
+  { src: asset("/logos/clients/bigbite.png"), alt: "BigBite" },
+  { src: asset("/logos/clients/fu-wang-resort.png"), alt: "Fu-Wang Dominous Resort" },
+  { src: asset("/logos/clients/highflyers.png"), alt: "HighFlyers Education" },
+  { src: asset("/logos/clients/tm-assets.png"), alt: "TM Assets" },
+  { src: asset("/logos/clients/planetary-health-academia.png"), alt: "Planetary Health Academia" },
+  { src: asset("/logos/clients/elysion-properties.png"), alt: "Elysion Properties Ltd" },
+  { src: asset("/logos/clients/orko-connect-care.png"), alt: "Orko Connect Care" },
+  { src: asset("/logos/clients/koyla.png"), alt: "Koyla Restaurant" },
+  { src: asset("/logos/clients/austin-merchant-bank.png"), alt: "Austin Merchant Bank" },
+  { src: asset("/logos/clients/tiger-new-energy.png"), alt: "Tiger New Energy" },
+  { src: asset("/logos/clients/innoveau.png"), alt: "Innoveau" },
+  { src: asset("/logos/clients/allion-estate.png"), alt: "Allion Estate Limited" },
+  { src: asset("/logos/clients/joy-toy.png"), alt: "Joy Toy" },
+  { src: asset("/logos/clients/namss-motors.png"), alt: "NAMSS Motors Limited" },
+  { src: asset("/logos/clients/iccb-heritage.png"), alt: "ICCB Heritage Restaurant" },
+  { src: asset("/logos/clients/glow-on.png"), alt: "Glow On" },
+  { src: asset("/logos/clients/bba-australia.png"), alt: "Business Buyers Advocacy Australia" },
+  { src: asset("/logos/clients/deshi-food-mart.png"), alt: "Deshi Food Mart" },
+  { src: asset("/logos/clients/vision-air-conditioner.png"), alt: "Vision Air Conditioner" },
+  { src: asset("/logos/clients/alpha-entertainment.png"), alt: "Alpha Unique Entertainment" },
+  { src: asset("/logos/clients/violet-grove.png"), alt: "Violet Grove" },
+  { src: asset("/logos/clients/as-financials.png"), alt: "A&S Financials" },
+  { src: asset("/logos/clients/shubornobhumi.png"), alt: "Shubornobhumi Housing Limited" },
+  { src: asset("/logos/clients/defender-fashion.png"), alt: "Defender Fashion Ltd" },
+  { src: asset("/logos/clients/tanter-golpo.png"), alt: "Tanter Golpo" },
+  { src: asset("/logos/clients/kolapata.png"), alt: "Kolapata Restaurant" },
+  { src: asset("/logos/clients/urban-academy.png"), alt: "Urban Academy" },
+  { src: asset("/logos/clients/bsawa.png"), alt: "Bangladeshi Student Association of Western Australia" },
+  { src: asset("/logos/clients/puffkin.png"), alt: "Puffkin" },
+  { src: asset("/logos/clients/tanowra.png"), alt: "Tanowra" },
+  { src: asset("/logos/clients/silmoon.png"), alt: "Silmöon" },
+  { src: asset("/logos/clients/blend.png"), alt: "Blend" },
+  { src: asset("/logos/clients/ohio.png"), alt: "Ohio" },
+  { src: asset("/logos/clients/sharot.png"), alt: "Sharot" },
 ];
 
-// Placeholder marks while the owner collects logo assets from the rest of
-// the client roster — decorative (alt="") until swapped for real ones.
-const PLACEHOLDER_LOGOS: BrandLogo[] = [
-  `${AWAKE_CDN}/68e4f1b2e90a76715c1a1806_brand-icon-2.svg`,
-  `${AWAKE_CDN}/68e4f1b2e90a76715c1a1809_brand-icon-5.svg`,
-  `${AWAKE_CDN}/68e4f1b2e90a76715c1a1808_brand-icon-3.svg`,
-  `${AWAKE_CDN}/68e4f1b2e90a76715c1a1807_brand-icon-1.svg`,
-  `${AWAKE_CDN}/68e4f1b2e90a76715c1a1805_brand-icon-4.svg`,
-].map((src) => ({ src, alt: "" }));
-
-const BRAND_LOGOS: BrandLogo[] = [...CLIENT_LOGOS, ...PLACEHOLDER_LOGOS];
+const BRAND_LOGOS: BrandLogo[] = CLIENT_LOGOS;
 
 function LogoMarquee() {
   const rows = [BRAND_LOGOS, BRAND_LOGOS];

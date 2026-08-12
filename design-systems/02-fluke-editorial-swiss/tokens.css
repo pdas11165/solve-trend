@@ -1,0 +1,190 @@
+/* =============================================================
+   02 · FLUKE — Editorial Swiss
+   Derived from https://kitpro-fluke.webflow.io/
+   Archetype: monochrome editorial studio, poster-scale type
+   Signature: vw-based type + spacing, ghosted/solid headlines,
+              full-bleed red takeover, scroll-driven CSS variables
+   ============================================================= */
+
+:root {
+  /* ---------- LAYER 1 · PRIMITIVES ---------- */
+  --p-black:    #000000;
+  --p-ink:      #111111;
+  --p-grey-700: #5d5d5d;
+  --p-grey-500: #9f9f9f;
+  --p-grey-300: #d1d1d1;
+  --p-smoke:    #f5f5f5;
+  --p-white:    #ffffff;
+  --p-red:      #c82a2a;
+
+  /* ---------- LAYER 2 · SEMANTIC ---------- */
+  --c-canvas:     var(--p-white);
+  --c-surface:    var(--p-smoke);
+  --c-surface-2:  var(--p-white);
+  --c-surface-3:  var(--p-ink);
+  --c-frost:      rgb(17 17 17 / 0.04);
+
+  --c-text:       var(--p-ink);
+  --c-text-2:     var(--p-grey-700);
+  --c-text-3:     var(--p-grey-500);
+  /* Ghosted-headline token. Source uses #d1d1d1 = 1.53:1 on white, which
+     fails even for display text. Darkened to clear the 3:1 large-text floor. */
+  --c-text-ghost: #8f8f8f;             /* 3.23:1 on canvas */
+  --c-text-inv:   var(--p-white);
+
+  --c-accent:       var(--p-red);
+  --c-accent-ink:   var(--p-white);
+  --c-accent-hover: #a92222;
+
+  --c-line:      rgb(17 17 17 / 0.14);
+  --c-line-soft: rgb(17 17 17 / 0.07);
+
+  /* contract completions */
+  --c-text-mute:   var(--c-text-ghost);   /* alias — .ds-ghost reads --c-text-mute */
+  --c-frame:       var(--c-canvas);
+  --c-gutter:      var(--c-canvas);
+  --c-accent-text: var(--p-red);          /* 5.5:1 on white */
+  --c-accent-soft: rgb(200 42 42 / 0.10);
+
+  /* ---------- TYPE ---------- */
+  --f-display: "Inter Tight", "Inter", system-ui, -apple-system, sans-serif;
+  --f-body:    var(--f-display);
+  --f-mono:    ui-monospace, "SF Mono", monospace;
+
+  /* Source is vw-native (8vw / 3.5vw / 2.5vw / 2vw / 1.5vw / 1.2vw).
+     Reproduced as clamp() so it stays legible below 1024 and above 1920. */
+  --fs-d1: clamp(3rem, 8vw, 9rem);          /* hero        */
+  --fs-d2: clamp(2.25rem, 5vw, 5rem);
+  --fs-d3: clamp(2rem, 3.5vw, 3.75rem);     /* section head */
+  --fs-h1: clamp(2rem, 3.5vw, 3.75rem);
+  --fs-h2: clamp(1.75rem, 2.5vw, 2.75rem);
+  --fs-h3: clamp(1.5rem, 2vw, 2.125rem);
+  --fs-h4: clamp(1.25rem, 1.5vw, 1.625rem);
+  --fs-h5: clamp(1.125rem, 1.3vw, 1.375rem);
+  --fs-h6: clamp(1rem, 1.15vw, 1.125rem);
+  --fs-lg: clamp(1.0625rem, 1.2vw, 1.25rem);
+  --fs-md: 1rem;
+  --fs-sm: 0.9rem;
+  --fs-xs: 0.8125rem;
+
+  --lh-tight: 92%;      /* poster-tight */
+  --lh-head:  105%;
+  --lh-body:  150%;
+  --lh-loose: 165%;
+
+  --ls-display: -0.04em;
+  --ls-head:    -0.03em;
+  --ls-body:    -0.005em;
+  --ls-label:   0.1em;
+
+  --fw-light: 300;  --fw-regular: 400; --fw-medium: 500;
+  --fw-bold: 700;   --fw-black: 900;
+
+  /* ---------- SPACE (vw-native, like the source) ---------- */
+  --s-1: 0.25rem; --s-2: 0.5rem;  --s-3: 0.75rem; --s-4: 1rem;
+  --s-5: 1.25rem; --s-6: 1.5rem;  --s-8: 2rem;    --s-10: 2.5rem;
+  --s-12: 3rem;   --s-14: 3.5rem; --s-16: 4rem;
+
+  --s-1x:      clamp(0.75rem, 1vw, 1.25rem);
+  --s-section: clamp(4rem, 9vw, 10rem);
+  --s-section-md: clamp(3rem, 6vw, 6.5rem);
+  --s-section-sm: clamp(2rem, 4vw, 4rem);
+  --s-gutter:  clamp(1.25rem, 3vw, 3.5rem);
+  --s-container: 1600px;
+
+  /* ---------- RADIUS (viewport-relative, like the source) ---------- */
+  --r-xs: clamp(2px, 0.25vw, 5px);
+  --r-sm: clamp(4px, 0.5vw, 10px);
+  --r-md: clamp(8px, 1vw, 18px);
+  --r-lg: clamp(12px, 1.4vw, 26px);
+  --r-xl: clamp(16px, 2vw, 36px);
+  --r-pill: 999px;
+  --r-round: 50%;
+
+  /* ---------- SCROLL-DRIVEN VARIABLES (the PLUGIN_VARIABLE trick) ----------
+     Animate these with GSAP/ScrollTrigger; CSS cascades them to many nodes. */
+  --sv-image-radius: 0px;
+  --sv-work-pad: 0px;
+  --sv-reveal: 0;     /* 0 → 1 progress */
+
+  /* ---------- MOTION ---------- */
+  --d-micro: 150ms;
+  --d-base:  500ms;
+  --d-slow:  1500ms;
+  --d-marquee: 30s;
+
+  /* the source's signature: quint easings, never `ease` */
+  --e-out:    cubic-bezier(0.23, 1, 0.32, 1);          /* outQuint */
+  --e-in-out: cubic-bezier(0.86, 0, 0.07, 1);          /* inOutQuint */
+  --e-over:   cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ---------- LAYER 3 · COMPONENT ---------- */
+  --btn-radius: var(--r-pill);
+  --btn-pad-y: 0.9rem;
+  --btn-pad-x: 1.75rem;
+  --btn-badge: 2.5rem;
+  --card-radius: var(--r-md);
+  --card-pad: clamp(1.25rem, 2vw, 2.5rem);
+  --nav-radius: 0;
+  --nav-h: 5rem;
+  --frame-radius: 0;
+  --frame-gutter: 0;
+  --input-radius: var(--r-sm);
+}
+
+/* ---------- BASE ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--c-canvas);
+  color: var(--c-text-2);
+  font-family: var(--f-body);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: var(--c-text);
+  font-family: var(--f-display);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-head);
+}
+h1 { font-size: var(--fs-h1); line-height: var(--lh-tight); letter-spacing: var(--ls-display); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+h5 { font-size: var(--fs-h5); }
+h6 { font-size: var(--fs-h6); }
+
+.ds-container {
+  width: 100%; max-width: var(--s-container);
+  margin-inline: auto; padding-inline: var(--s-gutter);
+}
+.ds-section { padding-block: var(--s-section); }
+
+/* full-bleed accent takeover — the site's whole colour strategy */
+.ds-takeover {
+  background: var(--c-accent);
+  color: var(--c-accent-ink);
+  padding-block: var(--s-section);
+}
+.ds-takeover :where(h1,h2,h3,h4,h5,h6) { color: var(--c-accent-ink); }
+
+/* ---------- ACCESSIBILITY ---------- */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,177 @@
+/* =============================================================
+   01 · RITOVEX — Corporate Light
+   Derived from https://ritovex.webflow.io/
+   Archetype: bright, high-trust services agency
+   Signature: square primary buttons in a rounded UI, coral accent
+   ============================================================= */
+
+:root {
+  /* ---------- LAYER 1 · PRIMITIVES ---------- */
+  --p-ink:          #141414;
+  --p-ink-soft:     #494852;
+  --p-white:        #ffffff;
+  --p-grey-50:      #f6f6f9;
+  --p-grey-100:     #ebebf0;
+  --p-grey-200:     #dcdce4;
+  --p-coral:        #ff7a52;
+  --p-coral-dark:   #e8613a;
+
+  /* ---------- LAYER 2 · SEMANTIC ---------- */
+  /* surfaces */
+  --c-canvas:       var(--p-white);
+  --c-surface:      var(--p-grey-50);
+  --c-surface-2:    var(--p-grey-100);
+  --c-surface-3:    var(--p-ink);
+  --c-frost:        rgb(20 20 20 / 0.04);
+
+  /* ink — alpha ladder off one hue */
+  --c-text:         var(--p-ink);
+  --c-text-2:       var(--p-ink-soft);
+  --c-text-3:       rgb(20 20 20 / 0.55);
+  --c-text-inv:     var(--p-white);
+
+  /* accent */
+  --c-accent:       var(--p-coral);
+  --c-accent-ink:   var(--p-ink);
+  --c-accent-hover: var(--p-coral-dark);
+
+  /* lines */
+  --c-line:         rgb(20 20 20 / 0.12);
+  --c-line-soft:    rgb(20 20 20 / 0.07);
+
+  /* contract completions */
+  --c-text-mute:    #949494;              /* 3.03:1 — display type only */
+  --c-frame:        var(--c-canvas);
+  --c-gutter:       var(--c-canvas);
+  --c-accent-text:  #c2451f;              /* coral is 2.2:1 as text; darkened cut = 5.6:1 */
+  --c-accent-soft:  rgb(255 122 82 / 0.12);
+
+  /* ---------- TYPE ---------- */
+  --f-display: "Satoshi", "Inter", system-ui, -apple-system, sans-serif;
+  --f-body:    var(--f-display);
+  --f-mono:    ui-monospace, "SF Mono", "DM Mono", monospace;
+
+  /* fluid scale — source used fixed 120/60/48/40/33/28/24/20 */
+  --fs-d1: clamp(3.5rem, 1.5rem + 8.5vw, 7.5rem);   /* 56 → 120 */
+  --fs-d2: clamp(2.75rem, 1.6rem + 4.8vw, 3.75rem); /* 44 → 60  */
+  --fs-d3: clamp(2.25rem, 1.5rem + 3.2vw, 3rem);    /* 36 → 48  */
+  --fs-h1: clamp(2.25rem, 1.5rem + 3.2vw, 3rem);    /* 36 → 48  */
+  --fs-h2: clamp(1.875rem, 1.4rem + 2.1vw, 2.5rem); /* 30 → 40  */
+  --fs-h3: clamp(1.625rem, 1.3rem + 1.4vw, 2.0625rem);
+  --fs-h4: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --fs-h5: 1.5rem;
+  --fs-h6: 1.25rem;
+  --fs-lg: 1.125rem;
+  --fs-md: 1rem;
+  --fs-sm: 0.875rem;
+  --fs-xs: 0.8125rem;
+
+  --lh-tight: 100%;
+  --lh-head:  120%;
+  --lh-body:  150%;
+  --lh-loose: 165%;
+
+  --ls-display: -0.03em;
+  --ls-head:    -0.02em;
+  --ls-body:    0em;
+  --ls-label:   0.08em;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-black: 900;
+
+  /* ---------- SPACE ---------- */
+  --s-1: 0.25rem;  --s-2: 0.5rem;   --s-3: 0.75rem;  --s-4: 1rem;
+  --s-5: 1.25rem;  --s-6: 1.5rem;   --s-8: 2rem;     --s-10: 2.5rem;
+  --s-12: 3rem;    --s-14: 3.5rem;  --s-16: 4rem;
+
+  --s-section:    clamp(4rem, 2rem + 6vw, 6.875rem);  /* → 110px */
+  --s-section-md: clamp(3rem, 1.8rem + 4vw, 5rem);    /* → 80px  */
+  --s-section-sm: clamp(2.5rem, 1.5rem + 3vw, 3.75rem);
+  --s-gutter:     clamp(1.25rem, 0.5rem + 3vw, 3rem);
+  --s-container:  1280px;
+
+  /* ---------- RADIUS ---------- */
+  /* SIGNATURE: primary button is square while everything else is soft */
+  --r-xs: 3px;  --r-sm: 8px;  --r-md: 10px;  --r-lg: 12px;
+  --r-xl: 20px; --r-pill: 100px; --r-round: 50%;
+
+  /* ---------- MOTION ---------- */
+  --d-micro:  200ms;
+  --d-base:   500ms;   /* house default from source */
+  --d-slow:   1000ms;
+  --d-marquee: 40s;
+
+  /* upgraded from the source's `ease` */
+  --e-out:    cubic-bezier(0.165, 0.84, 0.44, 1);      /* outQuart */
+  --e-in-out: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --e-over:   cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ---------- LAYER 3 · COMPONENT ---------- */
+  --btn-radius: 0;                 /* ← the signature */
+  --btn-radius-soft: var(--r-md);
+  --btn-pad-y: 1.125rem;
+  --btn-pad-x: 2rem;
+  --btn-badge: 2.75rem;
+  --card-radius: var(--r-lg);
+  --card-pad: var(--s-8);
+  --nav-radius: 0;
+  --nav-h: 5.25rem;
+  --frame-radius: 0;
+  --frame-gutter: 0;
+  --input-radius: var(--r-sm);
+}
+
+/* ---------- BASE ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--c-canvas);
+  color: var(--c-text-2);
+  font-family: var(--f-body);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: var(--c-text);
+  font-family: var(--f-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-head);
+}
+h1 { font-size: var(--fs-h1); letter-spacing: var(--ls-display); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+h5 { font-size: var(--fs-h5); }
+h6 { font-size: var(--fs-h6); }
+
+.ds-container {
+  width: 100%;
+  max-width: var(--s-container);
+  margin-inline: auto;
+  padding-inline: var(--s-gutter);
+}
+.ds-section { padding-block: var(--s-section); }
+
+/* ---------- ACCESSIBILITY ---------- */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

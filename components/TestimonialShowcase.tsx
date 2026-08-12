@@ -1,115 +1,275 @@
 "use client";
 
 import * as React from "react";
-import { AnimatedTestimonialGrid } from "@/components/ui/testimonial-2";
-import {
-  TestimonialMarquee,
-  type TestimonialCardT,
-} from "@/components/ui/testimonial-marquee";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { asset } from "@/lib/asset";
 
-const AVATAR_IMAGES = [
-  { imgSrc: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300", alt: "Professional Man" },
-  { imgSrc: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=300", alt: "Smiling Man" },
-  { imgSrc: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300", alt: "Professional Woman" },
-  { imgSrc: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=300", alt: "Smiling Woman" },
-  { imgSrc: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=300", alt: "Man in a suit" },
-  { imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300", alt: "Bearded Man" },
-  { imgSrc: "https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=300", alt: "Man in a blue shirt" },
-  { imgSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=300", alt: "Older Man" },
-  { imgSrc: "https://images.unsplash.com/photo-1619895862022-09114b41f16f?q=80&w=300", alt: "Woman with curly hair" },
-  { imgSrc: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=300", alt: "Woman in an office" },
-  { imgSrc: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=300", alt: "Woman with glasses" },
-  { imgSrc: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=300", alt: "Woman with a dog" },
+// Alture-recipe testimonials (reference-websites/alture-template_webflow_io.html):
+// head + client-data bars | featured image-quote cover | two stacked cards,
+// then a giant numbers row. Restyled for the dark shell. Quotes come from the
+// real client roster (same names as the logo wall); portraits are generic
+// stock, not headshots of named individuals.
+
+const DATA_STATS = [
+  { value: 92, label: "of our clients return for a second project" },
+  { value: 87, label: "report a stronger brand after relaunch" },
+  { value: 74, label: "see higher engagement across digital" },
 ];
 
-const MARQUEE_ROW_1: TestimonialCardT[] = [
+const FEATURED = {
+  quote:
+    "Solve Trend felt like an extension of our founding team. The relaunch tripled our sign-ups overnight.",
+  name: "Orko Connect Care",
+  role: "Founding team · Digital health",
+  image: "/testimonials/featured-portrait.jpg",
+  alt: "A smiling professional in a grey blazer beside an office window.",
+};
+
+const SIDE_CARDS = [
   {
-    image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
-    name: "Duo Nutrition",
-    handle: "@duonutrition",
     quote:
-      "Solve Trend felt like an extension of our founding team. The relaunch tripled our conversion overnight.",
+      "They turned our packaging and site into one story. The brand finally tastes as good as it looks online.",
+    name: "BigBite",
+    role: "Marketing lead · Food & beverage",
+    avatar: "/testimonials/avatar-1.jpg",
+    alt: "A smiling man in a blue shirt.",
   },
   {
-    image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
-    name: "Lesse Studio",
-    handle: "@lessestudio",
     quote:
-      "Every detail landed exactly where it needed to. The team thinks in systems, not in pages.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&auto=format&fit=crop&q=60",
-    name: "AERUK Digital",
-    handle: "@aerukdigital",
-    quote:
-      "We finally know what's working. Solve Trend built the whole growth engine in eight weeks.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&auto=format&fit=crop&q=60",
-    name: "Northwind Labs",
-    handle: "@northwindlabs",
-    quote:
-      "From strategy to launch, they moved with clarity and speed. Our brand finally feels like us.",
+      "Solve Trend gave our developments a brand as premium as the address. Enquiries jumped the week we relaunched.",
+    name: "Rupayan Sky Villa",
+    role: "Sales director · Real estate",
+    avatar: "/testimonials/avatar-2.jpg",
+    alt: "A smiling woman with dark hair.",
   },
 ];
 
-const MARQUEE_ROW_2: TestimonialCardT[] = [
-  {
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200",
-    name: "Harbor & Co.",
-    handle: "@harborco",
-    quote:
-      "The design system they built scaled across every touchpoint. Our team ships faster now.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200",
-    name: "Vela Health",
-    handle: "@velahealth",
-    quote:
-      "Solve Trend translated complex product value into a story customers actually understand.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200",
-    name: "Forge Collective",
-    handle: "@forgecollective",
-    quote:
-      "They don't just deliver assets — they deliver momentum. Best agency partnership we've had.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200",
-    name: "Atlas Retail",
-    handle: "@atlasretail",
-    quote:
-      "Our e-commerce relaunch paid for itself in the first month. The numbers speak for themselves.",
-  },
+// Placeholder scale numbers — swap in real figures when Promit confirms them.
+// "50+" intentionally matches the "50+ Happy Clients" claim in CraftingSection.
+const NUMBERS = [
+  { prefix: "$", end: 2, suffix: "M+", label: "Revenue influenced by our work" },
+  { prefix: "", end: 30, suffix: "K+", label: "Leads generated for our clients" },
+  { prefix: "", end: 50, suffix: "+", label: "Brands we've partnered with" },
 ];
+
+function Stars() {
+  return (
+    <div className="tsm-stars" aria-label="Rated five out of five">
+      {Array.from({ length: 5 }, (_, i) => (
+        <svg key={i} viewBox="0 0 20 20" className="tsm-star" aria-hidden="true">
+          <path d="M10 1.5l2.47 5.34 5.84.63-4.35 3.94 1.19 5.76L10 14.27l-5.15 2.9 1.19-5.76L1.69 7.47l5.84-.63L10 1.5z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
+function RollingNumber({
+  prefix,
+  end,
+  suffix,
+}: {
+  prefix: string;
+  end: number;
+  suffix: string;
+}) {
+  const ref = React.useRef<HTMLSpanElement>(null);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      const proxy = { value: 0 };
+      const render = () => {
+        el.textContent = `${prefix}${Math.round(proxy.value)}${suffix}`;
+      };
+      render();
+
+      gsap.matchMedia().add(
+        {
+          reduce: "(prefers-reduced-motion: reduce)",
+          motion: "(prefers-reduced-motion: no-preference)",
+        },
+        (context) => {
+          if (context.conditions?.reduce) {
+            proxy.value = end;
+            render();
+            return;
+          }
+          gsap.to(proxy, {
+            value: end,
+            duration: 1.6,
+            ease: "power2.out",
+            onUpdate: render,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 88%",
+              once: true,
+            },
+          });
+        }
+      );
+    }, ref);
+
+    return () => ctx.revert();
+  }, [prefix, end, suffix]);
+
+  return (
+    <span ref={ref} className="tsm-number__value">
+      {prefix}0{suffix}
+    </span>
+  );
+}
 
 export default function TestimonialShowcase() {
+  const rootRef = React.useRef<HTMLElement>(null);
+
+  // Data bars grow to their percentage once scrolled into view.
+  React.useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      const bars = gsap.utils.toArray<HTMLElement>(".tsm-data__bar-fill");
+
+      gsap.matchMedia().add(
+        {
+          reduce: "(prefers-reduced-motion: reduce)",
+          motion: "(prefers-reduced-motion: no-preference)",
+        },
+        (context) => {
+          bars.forEach((bar) => {
+            const target = `${bar.dataset.value ?? 0}%`;
+            if (context.conditions?.reduce) {
+              gsap.set(bar, { width: target });
+              return;
+            }
+            gsap.fromTo(
+              bar,
+              { width: "0%" },
+              {
+                width: target,
+                duration: 1.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: bar,
+                  start: "top 90%",
+                  once: true,
+                },
+              }
+            );
+          });
+        }
+      );
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
       id="testimonials"
       aria-label="Client testimonials"
-      className="testimonial-showcase w-full relative"
-      style={{
-        ["--background" as string]: "var(--bg-dark)",
-        ["--foreground" as string]: "var(--text-dark)",
-        ["--primary" as string]: "var(--brand-red)",
-        ["--primary-foreground" as string]: "#fff",
-        ["--secondary" as string]: "rgba(255, 255, 255, 0.08)",
-        ["--secondary-foreground" as string]: "var(--text-dark)",
-        ["--muted-foreground" as string]: "var(--muted-dark)",
-      }}
+      className="tsm"
+      ref={rootRef}
     >
-      <AnimatedTestimonialGrid
-        testimonials={AVATAR_IMAGES}
-        badgeText="Testimonials"
-        title="Real clients. Real results. Zero fluff."
-        description="Here's what happens when strategy, design, and a little bit of stubbornness come together."
-        ctaText="Read Success Stories"
-        ctaHref="#testimonials-marquee"
-      />
-      <div id="testimonials-marquee">
-        <TestimonialMarquee row1={MARQUEE_ROW_1} row2={MARQUEE_ROW_2} />
+      <div className="container">
+        <div className="tsm-layout">
+          <div className="tsm-head">
+            <div>
+              <span className="eyebrow tsm-eyebrow">
+                <span className="tsm-eyebrow__dot" aria-hidden="true" />
+                Testimonials
+              </span>
+              <h2 className="tsm-title">What our clients are saying</h2>
+            </div>
+
+            <div className="tsm-data">
+              <div className="tsm-data__head">Some data about our clients</div>
+              <ul className="tsm-data__items">
+                {DATA_STATS.map((stat) => (
+                  <li key={stat.label} className="tsm-data__item">
+                    <div className="tsm-data__number">{stat.value}%</div>
+                    <div className="tsm-data__label">{stat.label}</div>
+                    <div className="tsm-data__bar">
+                      <div
+                        className="tsm-data__bar-fill"
+                        data-value={stat.value}
+                        style={{ width: "0%" }}
+                      />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <figure className="tsm-cover">
+            <img
+              src={asset(FEATURED.image)}
+              alt={FEATURED.alt}
+              className="tsm-cover__img"
+              loading="lazy"
+            />
+            <div className="tsm-cover__scrim" aria-hidden="true" />
+            <figcaption className="tsm-cover__body">
+              <div>
+                <Stars />
+                <blockquote className="tsm-cover__quote">
+                  “{FEATURED.quote}”
+                </blockquote>
+              </div>
+              <div className="tsm-author">
+                <div className="tsm-author__name">{FEATURED.name}</div>
+                <div className="tsm-author__role">{FEATURED.role}</div>
+              </div>
+            </figcaption>
+          </figure>
+
+          <div className="tsm-stack">
+            {SIDE_CARDS.map((card) => (
+              <article key={card.name} className="tsm-card">
+                <div>
+                  <Stars />
+                  <blockquote className="tsm-card__quote">
+                    “{card.quote}”
+                  </blockquote>
+                </div>
+                <div className="tsm-card__author">
+                  <img
+                    src={asset(card.avatar)}
+                    alt={card.alt}
+                    className="tsm-card__avatar"
+                    loading="lazy"
+                  />
+                  <div className="tsm-author">
+                    <div className="tsm-author__name">{card.name}</div>
+                    <div className="tsm-author__role">{card.role}</div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="tsm-numbers">
+          {NUMBERS.map((num) => (
+            <div key={num.label} className="tsm-number">
+              <RollingNumber
+                prefix={num.prefix}
+                end={num.end}
+                suffix={num.suffix}
+              />
+              <p className="tsm-number__desc">{num.label}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

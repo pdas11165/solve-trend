@@ -1,0 +1,209 @@
+/* =============================================================
+   05 · QUBIX — Dark Gallery
+   Derived from https://qubix-flowdevz.webflow.io/
+   Archetype: pure-black portfolio studio, work-forward
+   Signature: five-near-black elevation ladder, blur+grayscale depth,
+              medium-weight display type, live scroll-% nav
+   ============================================================= */
+
+:root {
+  /* ---------- LAYER 1 · PRIMITIVES ----------
+     Five near-blacks. On dark you cannot use shadow for elevation,
+     so depth is built from a ladder of almost-identical blacks. */
+  --p-black:     #000000;
+  --p-ink-950:   #0f0f0f;
+  --p-ink-900:   #1c1c1c;
+  --p-ink-850:   #1d1d1d;
+  --p-ink-800:   #222222;
+
+  --p-grey-400:  #a1a1a1;
+  --p-snow:      #fdfcfc;   /* NOT #fff — avoids halation on black */
+  --p-white:     #ffffff;
+  --p-orange:    #fe6512;
+  --p-orange-dk: #d94f08;
+
+  --p-white-26:  rgb(255 255 255 / 0.26);   /* the frost layer */
+  --p-white-12:  rgb(255 255 255 / 0.12);
+  --p-white-08:  rgb(255 255 255 / 0.08);
+
+  /* ---------- LAYER 2 · SEMANTIC ---------- */
+  --c-canvas:    var(--p-black);
+  --c-surface:   var(--p-ink-950);
+  --c-surface-2: var(--p-ink-900);
+  --c-surface-3: var(--p-ink-800);
+  --c-frost:     var(--p-white-26);
+
+  --c-text:      var(--p-snow);
+  --c-text-2:    var(--p-grey-400);
+  --c-text-3:    rgb(161 161 161 / 0.6);
+  --c-text-inv:  var(--p-black);
+
+  --c-accent:       var(--p-orange);
+  /* Source site uses white on this orange = 2.96:1 — a real WCAG failure.
+     Corrected to near-black: 6.47:1. */
+  --c-accent-ink:   var(--p-ink-950);
+  --c-accent-hover: var(--p-orange-dk);
+
+  --c-line:      var(--p-white-12);
+  --c-line-soft: var(--p-white-08);
+
+  /* contract completions */
+  --c-text-mute:   #4a4a4a;            /* 3.1:1 on black — display type only */
+  --c-frame:       var(--c-canvas);
+  --c-gutter:      var(--c-canvas);
+  --c-accent-text: var(--p-orange);    /* 6.9:1 on black */
+  --c-accent-soft: rgb(254 101 18 / 0.14);
+
+  /* ---------- TYPE ---------- */
+  --f-display: "InterDisplay", "Inter Display", "Inter", system-ui, sans-serif;
+  --f-body:    var(--f-display);
+  --f-mono:    ui-monospace, "SF Mono", "DM Mono", monospace;
+
+  /* source: 128/58/44/32/24/20 px */
+  --fs-d1: clamp(3.5rem, 1rem + 9vw, 8rem);      /* → 128 */
+  --fs-d2: clamp(2.75rem, 1.4rem + 5vw, 5rem);
+  --fs-d3: clamp(2.25rem, 1.3rem + 3.6vw, 3.625rem);
+  --fs-h1: clamp(3rem, 1rem + 8vw, 8rem);
+  --fs-h2: clamp(2.125rem, 1.3rem + 3.4vw, 3.625rem); /* → 58 */
+  --fs-h3: clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem);   /* → 44 */
+  --fs-h4: clamp(1.5rem, 1.1rem + 1.6vw, 2rem);       /* → 32 */
+  --fs-h5: 1.5rem;
+  --fs-h6: 1.25rem;
+  --fs-lg: 1.125rem;
+  --fs-md: 1rem;
+  --fs-sm: 0.9375rem;
+  --fs-xs: 0.8125rem;
+
+  /* generous leading — the "gallery wall label" feel */
+  --lh-tight: 100%;
+  --lh-head:  122%;
+  --lh-body:  154%;
+  --lh-loose: 165%;
+
+  --ls-display: -0.03em;
+  --ls-head:    -0.02em;
+  --ls-body:    -0.01em;
+  --ls-label:   0.1em;
+
+  --fw-extra-light: 200; --fw-light: 300; --fw-regular: 400;
+  --fw-medium: 500;      /* ← ALL headings. Not bold. */
+  --fw-semibold: 600;    --fw-black: 900;
+
+  /* ---------- SPACE ---------- */
+  --s-1: 0.375rem; --s-2: 0.5rem;   --s-3: 0.625rem; --s-4: 1rem;
+  --s-5: 1.25rem;  --s-6: 1.5rem;   --s-8: 2rem;     --s-10: 2.5rem;
+  --s-12: 3rem;    --s-14: 4rem;    --s-16: 5rem;    --s-20: 6.875rem;
+
+  --s-section:    clamp(4rem, 2rem + 5.5vw, 6.875rem);  /* → 110 */
+  --s-section-md: clamp(3rem, 1.6rem + 4vw, 5rem);
+  --s-section-sm: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+  --s-gutter:     clamp(1.25rem, 0.5rem + 2.5vw, 2.5rem); /* → 40 */
+  --s-container:  1400px;
+
+  /* ---------- RADIUS ---------- */
+  --r-xs: 8px;  --r-sm: 12px; --r-md: 16px; --r-lg: 24px;
+  --r-xl: 32px; --r-2xl: 48px; --r-3xl: 70px;
+  --r-pill: 999px; --r-round: 50%;
+
+  /* ---------- DEPTH · blur + grayscale instead of shadow ---------- */
+  --depth-blur:  6px;
+  --depth-gray:  0.85;
+  --depth-dim:   0.45;
+
+  /* ---------- MOTION ---------- */
+  --d-micro: 200ms;
+  --d-base:  500ms;
+  --d-slow:  800ms;
+  --d-marquee: 30s;
+
+  /* asymmetric hover: arrive slowly, leave quickly */
+  --d-enter: 600ms;
+  --d-exit:  400ms;
+
+  --e-out:    cubic-bezier(0.25, 0.46, 0.45, 0.94);  /* outQuad  */
+  --e-enter:  cubic-bezier(0.215, 0.61, 0.355, 1);   /* power3.out */
+  --e-exit:   cubic-bezier(0.25, 0.46, 0.45, 0.94);  /* power2.out */
+  --e-in-out: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --e-over:   cubic-bezier(0.34, 1.56, 0.64, 1);     /* outBack  */
+
+  /* ---------- LAYER 3 · COMPONENT ---------- */
+  --btn-radius: var(--r-pill);
+  --btn-pad-y: 0.9375rem;
+  --btn-pad-x: 1.75rem;
+  --btn-badge: 3.25rem;
+  --card-radius: var(--r-lg);
+  --card-pad: var(--s-8);
+  --nav-radius: var(--r-pill);
+  --nav-h: 3.75rem;
+  --frame-radius: 0;
+  --frame-gutter: 0;
+  --input-radius: var(--r-pill);
+}
+
+/* ---------- BASE ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--c-canvas);
+  color: var(--c-text-2);
+  font-family: var(--f-body);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: var(--c-text);
+  font-family: var(--f-display);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-head);
+}
+h1 { font-size: var(--fs-h1); letter-spacing: var(--ls-display); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+h5 { font-size: var(--fs-h5); }
+h6 { font-size: var(--fs-h6); }
+
+.ds-container {
+  width: 100%; max-width: var(--s-container);
+  margin-inline: auto; padding-inline: var(--s-gutter);
+}
+.ds-section { padding-block: var(--s-section); }
+
+/* glass surface built from the frost token */
+.ds-glass {
+  background: rgb(255 255 255 / 0.06);
+  border: 1px solid var(--c-line);
+  backdrop-filter: blur(14px);
+  border-radius: var(--card-radius);
+}
+
+/* depth: unfocused items recede via filter, not shadow */
+.ds-depth-group:has(.ds-depth:hover) .ds-depth:not(:hover) {
+  filter: blur(var(--depth-blur)) grayscale(var(--depth-gray));
+  opacity: var(--depth-dim);
+}
+.ds-depth { transition: filter var(--d-exit) var(--e-exit),
+                        opacity var(--d-exit) var(--e-exit); }
+
+/* ---------- ACCESSIBILITY ---------- */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ds-depth-group:has(.ds-depth:hover) .ds-depth:not(:hover) {
+    filter: none; opacity: 0.7;
+  }
+}

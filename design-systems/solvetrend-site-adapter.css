@@ -1,0 +1,188 @@
+/* =============================================================
+   SOLVE TREND SITE ADAPTER
+   Maps the design-system token contract onto the tokens that
+   already exist in app/globals.css.
+
+   Purpose: use the component + motion layer in design-systems/
+   WITHOUT replacing the site's brand. Nothing in globals.css
+   changes. This file only adds aliases.
+
+     app/globals.css
+       @import "tailwindcss";
+       ... existing brand tokens ...
+       @import "../design-systems/solvetrend-site-adapter.css";
+       @import "../design-systems/_shared/components.css";
+
+   Load order matters: this must come AFTER globals.css defines
+   --surface / --ink / --rule, and BEFORE components.css.
+   ============================================================= */
+
+/* -------------------------------------------------------------
+   1 · SURFACE-RELATIVE MAPPING
+
+   globals.css already rebinds --surface / --ink / --ink-muted /
+   --rule inside .on-dark. By aliasing the contract onto THOSE
+   rather than onto --bg-light / --text-light, every component
+   inherits the same behaviour for free: drop a .c-card inside a
+   .on-dark panel and it flips tone with no extra rules.
+
+   This is the reason the adapter is 60 lines instead of 400.
+   ------------------------------------------------------------- */
+:root,
+.on-dark {
+  /* surfaces */
+  --c-canvas:    var(--surface);
+  --c-surface:   var(--surface);
+  --c-surface-2: color-mix(in srgb, var(--ink) 5%, var(--surface));
+  --c-surface-3: color-mix(in srgb, var(--ink) 10%, var(--surface));
+  --c-frost:     color-mix(in srgb, var(--surface) 82%, transparent);
+  --c-frame:     var(--surface);
+  --c-gutter:    var(--bg-light);
+
+  /* ink */
+  --c-text:      var(--ink);
+  --c-text-2:    var(--ink-muted);
+  --c-text-3:    color-mix(in srgb, var(--ink) 55%, var(--surface));
+  --c-text-mute: color-mix(in srgb, var(--ink) 28%, var(--surface));
+  --c-text-inv:  var(--surface);
+
+  /* lines */
+  --c-line:      var(--rule);
+  --c-line-soft: color-mix(in srgb, var(--rule) 55%, transparent);
+  --c-grid-line: var(--rule);
+
+  /* accent — the brand red */
+  --c-accent:       var(--brand-red);
+  --c-accent-hover: #d42314;
+  --c-accent-soft:  color-mix(in srgb, var(--brand-red) 12%, transparent);
+
+  /* type */
+  --f-display: var(--font-display);
+  --f-body:    var(--font-body);
+  --f-mono:    ui-monospace, "SF Mono", "DM Mono", monospace;
+
+  /* motion — --ease-smooth is already cubic-bezier(.23,1,.32,1),
+     which is outQuint. Same curve the systems use. */
+  --e-out:    var(--ease-smooth);
+  --e-in-out: var(--ease-spring);
+  --e-exit:   var(--ease-card);
+  --e-enter:  var(--ease-spring);
+  --e-over:   cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --d-micro: 180ms;
+  --d-base:  400ms;
+  --d-slow:  700ms;
+  --d-enter: 600ms;
+  --d-exit:  380ms;
+  --d-marquee: 32s;
+
+  /* space — reuse the existing rhythm */
+  --s-section:    var(--section-pad);
+  --s-section-md: var(--section-pad-sm);
+  --s-section-sm: clamp(2rem, 4vw, 3.5rem);
+  --s-gutter:     var(--panel-inset);
+  --s-container:  1360px;
+  --s-container-narrow: 880px;
+
+  --s-1: .25rem;  --s-2: .5rem;   --s-3: .75rem;  --s-4: 1rem;
+  --s-5: 1.25rem; --s-6: 1.5rem;  --s-7: 1.75rem; --s-8: 2rem;
+  --s-10: 2.5rem; --s-12: 3rem;   --s-14: 3.5rem; --s-16: 4rem;
+  --s-20: 5rem;   --s-24: 6rem;
+
+  /* radius — anchored to the existing panel geometry */
+  --r-xs: 6px;  --r-sm: 10px; --r-md: 16px;
+  --r-lg: 22px; --r-xl: var(--panel-radius); --r-2xl: 44px;
+  --r-pill: 999px; --r-round: 50%;
+
+  /* type scale */
+  --fs-d1: clamp(3rem, 1rem + 8.5vw, 7rem);
+  --fs-d2: clamp(2.5rem, 1.2rem + 6vw, 5rem);
+  --fs-d3: var(--fs-section-title);
+  --fs-h1: clamp(2.5rem, 1.2rem + 5.5vw, 4.5rem);
+  --fs-h2: var(--fs-section-title);
+  --fs-h3: clamp(1.625rem, 1rem + 2.6vw, 2.5rem);
+  --fs-h4: clamp(1.375rem, 1rem + 1.6vw, 1.875rem);
+  --fs-h5: clamp(1.1875rem, 1rem + .9vw, 1.5rem);
+  --fs-h6: 1.125rem;
+  --fs-xl: 1.375rem; --fs-lg: 1.125rem; --fs-md: 1rem;
+  --fs-sm: .9375rem; --fs-xs: .8125rem; --fs-2xs: .75rem;
+
+  --lh-tight: 100%; --lh-head: 112%; --lh-body: 155%; --lh-loose: 172%;
+  --ls-display: -0.04em; --ls-head: -0.03em;
+  --ls-body: -0.011em;   --ls-label: 0.12em;
+
+  --fw-light: 300; --fw-regular: 400; --fw-medium: 500;
+  --fw-semibold: 600; --fw-bold: 700;
+
+  /* depth */
+  --depth-blur: 5px; --depth-gray: .8; --depth-dim: .45;
+
+  /* component tokens */
+  --btn-radius: var(--r-pill);
+  --btn-pad-y: .875rem;  --btn-pad-x: 1.5rem;
+  --btn-badge: 2.375rem; --btn-badge-gap: .875rem;
+  --card-radius: var(--r-lg);
+  --card-pad: var(--s-7);
+  --nav-radius: var(--r-pill);
+  --nav-h: 3.75rem;
+  --frame-radius: var(--panel-radius);
+  --frame-gutter: var(--panel-inset);
+  --input-radius: var(--r-pill);
+
+  /* scroll-driven vars */
+  --sv-progress: 0; --sv-reveal: 0;
+  --sv-media-radius: var(--r-lg); --sv-media-pad: 0px;
+}
+
+/* -------------------------------------------------------------
+   2 · CONTRAST CORRECTIONS
+
+   Three ratios measured against the live tokens fall below WCAG AA.
+   Fixed here rather than in globals.css so nothing existing breaks.
+
+     --muted-light #888888 on ivory #F7F6F2 ....... 3.28  FAIL
+     --brand-red   #F03223 as text on ivory ....... 3.74  FAIL
+     white on --brand-red fill .................... 4.05  FAIL (normal text)
+
+   The red is fine as a FILL and fine as text on the dark panels
+   (4.95). It only fails as text on ivory.
+   ------------------------------------------------------------- */
+
+:root {
+  /* Body text on the ivory page. #6E6E6E = 5.13:1 (was 3.28). */
+  --c-text-2: #6e6e6e;
+
+  /* Red used as TEXT or an ICON on ivory. #C21D10 = 5.58:1.
+     Keep --c-accent as the true brand red for fills. */
+  --c-accent-text: #c21d10;
+
+  /* Ink that sits ON a brand-red fill. brand-black = 5.14:1,
+     white would be 4.05:1 and fails for button labels. */
+  --c-accent-ink: var(--brand-black);
+}
+
+.on-dark {
+  /* On the dark panels the brand red clears AA as text (4.95:1),
+     so no darkened cut is needed there. */
+  --c-accent-text: var(--brand-red);
+  --c-accent-ink:  var(--brand-black);
+  --c-text-2:      var(--muted-dark);   /* 7.03:1 — already fine */
+}
+
+/* -------------------------------------------------------------
+   3 · NOTES
+
+   · Only aliases are defined above. globals.css is untouched, so
+     every existing component keeps working exactly as before.
+
+   · Adopting a component is additive: import it, use it, leave the
+     old one in place until you've compared them side by side.
+
+   · If you later want the brand-red darkened globally rather than
+     only inside these aliases, change --muted-light and add a
+     --brand-red-text to globals.css and delete section 2 here.
+
+   · The `.ds-frame` component and --panel-radius/--panel-inset
+     express the same idea. The site already has the floating-panel
+     move; don't add a second frame on top of it.
+   ------------------------------------------------------------- */

@@ -4,8 +4,8 @@ import * as React from "react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FolderKanban, Layers, ArrowUpRight, Users, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { DotGridArrow } from "@/components/Icons";
 import { FlipLink } from "@/components/ui/flip-links";
 import { CONTACT_EMAIL } from "@/lib/contact";
 import { route } from "@/lib/asset";
@@ -167,6 +167,71 @@ const STYLES = `
 
 .cinematic-footer-badge-border {
   border-color: color-mix(in oklch, var(--border) 50%, transparent);
+}
+
+/* Floating glass dock — a designmonks-style pill nav that floats over the
+   giant wordmark: plain link items either side of a raised brand-gradient
+   "Start a project" CTA in the middle. */
+.footer-dock {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--background) 78%, transparent);
+  border: 1px solid var(--pill-border);
+  box-shadow: 0 20px 50px -12px var(--pill-shadow), inset 0 1px 1px var(--pill-highlight);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+.footer-dock__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: var(--muted-foreground);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+.footer-dock__item svg {
+  width: 18px;
+  height: 18px;
+}
+.footer-dock__item:hover {
+  color: var(--foreground);
+  background: color-mix(in oklch, var(--foreground) 6%, transparent);
+}
+.footer-dock__item--cta {
+  flex-direction: row;
+  gap: 8px;
+  padding: 12px 22px;
+  color: #fff;
+  font-size: 13px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  box-shadow: 0 10px 24px -6px color-mix(in oklch, var(--primary) 55%, transparent);
+}
+.footer-dock__item--cta:hover {
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.footer-dock__item--cta svg {
+  width: 15px;
+  height: 15px;
+}
+
+@media (max-width: 640px) {
+  .footer-dock { gap: 2px; padding: 5px; }
+  .footer-dock__item { padding: 8px 10px; font-size: 9px; }
+  .footer-dock__item--cta { padding: 10px 16px; font-size: 11px; }
+  .footer-dock__item--cta span { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -434,23 +499,50 @@ export function CinematicFooter() {
             </h2>
 
             <div ref={linksRef} className="flex w-full flex-col items-center gap-6">
-              <div className="flex w-full flex-wrap justify-center gap-4">
+              <nav className="footer-dock" aria-label="Quick links">
+                <MagneticAnchor
+                  href={route("/projects")}
+                  className="footer-dock__item"
+                  aria-label="Projects"
+                >
+                  <FolderKanban aria-hidden="true" />
+                  <span>Projects</span>
+                </MagneticAnchor>
+                <MagneticAnchor
+                  href={route("/services")}
+                  className="footer-dock__item"
+                  aria-label="Services"
+                >
+                  <Layers aria-hidden="true" />
+                  <span>Services</span>
+                </MagneticAnchor>
+                {/* Bare hash href on purpose: the Lenis intercept + nav
+                    scroll-spy match same-page hash links verbatim. */}
+                <MagneticAnchor
+                  href="/#contact"
+                  className="footer-dock__item footer-dock__item--cta"
+                  aria-label="Start a project"
+                >
+                  <span>Start a project</span>
+                  <ArrowUpRight aria-hidden="true" />
+                </MagneticAnchor>
+                <MagneticAnchor
+                  href={route("/careers")}
+                  className="footer-dock__item"
+                  aria-label="Careers"
+                >
+                  <Users aria-hidden="true" />
+                  <span>Careers</span>
+                </MagneticAnchor>
                 <MagneticAnchor
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="footer-glass-pill group flex items-center gap-3 rounded-[14px] px-10 py-5 text-sm font-bold md:text-base"
+                  className="footer-dock__item"
+                  aria-label="Email us"
                 >
-                  Say hello
-                  <DotGridArrow className="cinematic-footer-muted transition-colors group-hover:text-[var(--foreground)]" />
+                  <Mail aria-hidden="true" />
+                  <span>Contact</span>
                 </MagneticAnchor>
-
-                <MagneticAnchor
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className="footer-glass-pill group flex items-center gap-3 rounded-[14px] px-10 py-5 text-sm font-bold md:text-base"
-                >
-                  Start a project
-                  <DotGridArrow className="cinematic-footer-muted transition-colors group-hover:text-[var(--foreground)]" />
-                </MagneticAnchor>
-              </div>
+              </nav>
 
               <div className="mt-2 flex w-full flex-wrap justify-center gap-3 md:gap-6">
                 <FlipLink

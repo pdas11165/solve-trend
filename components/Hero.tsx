@@ -271,6 +271,7 @@ export default function Hero() {
             if (e === 0 || !isDesktop) {
               setTile(tiles[i], spread, 0, waveScale);
               tiles[i].style.setProperty("--glass-t", "0");
+              tiles[i].style.setProperty("--cap-t", "1");
               continue;
             }
 
@@ -301,6 +302,9 @@ export default function Hero() {
             const sweep = (1 - Math.cos(angle)) / 2;
             const glassT = upperArc * sweep * e * (1 - ex);
             tiles[i].style.setProperty("--glass-t", glassT.toFixed(3));
+            // The caption is ~4px tall at ring scale — fade it out rather
+            // than leave sub-pixel noise sitting on the glass.
+            tiles[i].style.setProperty("--cap-t", (1 - e).toFixed(3));
 
             setTile(
               tiles[i],
@@ -378,6 +382,7 @@ export default function Hero() {
             t.style.transform = "";
             t.style.opacity = "";
             t.style.removeProperty("--glass-t");
+            t.style.removeProperty("--cap-t");
           });
         };
         }

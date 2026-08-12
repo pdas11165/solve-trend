@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" id="root">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Solve Trend · Design Systems Preview</title>
+
+<!-- font layer — loads before tokens -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="_shared/fonts.css">
+<!-- token layer — swapped at runtime by the switcher -->
+<link id="tokens" rel="stylesheet" href="06-solvetrend-signature/tokens.css">
+<!-- shared component layer — never changes -->
+<link rel="stylesheet" href="_shared/components.css">
+
+<style>
+  /* preview chrome only — not part of any system */
+  .pv-bar{position:fixed;inset-block-start:0;inset-inline:0;z-index:999;display:flex;
+    gap:.5rem;flex-wrap:wrap;align-items:center;padding:.6rem 1rem;
+    background:#0b0b0c;border-block-end:1px solid #ffffff1f;font:500 12px/1 ui-sans-serif,system-ui}
+  .pv-bar button{padding:.5rem .75rem;border:1px solid #ffffff2a;border-radius:99px;
+    background:transparent;color:#e9e9ee;cursor:pointer;font:inherit}
+  .pv-bar button[aria-pressed=true]{background:#e9e9ee;color:#0b0b0c;border-color:#e9e9ee}
+  .pv-bar .pv-sp{flex:1}
+  .pv-body{padding-block-start:56px}
+  .pv-label{font:500 11px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--c-text-3);padding-block:2rem .5rem}
+  .pv-swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.5rem}
+  .pv-sw{border:1px solid var(--c-line);border-radius:var(--r-sm);overflow:hidden}
+  .pv-sw i{display:block;height:56px}
+  .pv-sw span{display:block;padding:.4rem .5rem;font:400 10px/1.4 ui-monospace,monospace;
+    color:var(--c-text-3);background:var(--c-surface)}
+  .pv-type > * {margin-block:.35rem}
+</style>
+</head>
+
+<body>
+
+<div class="pv-bar">
+  <strong style="color:#c5f24c">Design Systems</strong>
+  <button data-sys="01-ritovex-corporate-light"   data-theme="">01 Ritovex</button>
+  <button data-sys="02-fluke-editorial-swiss"      data-theme="">02 Fluke</button>
+  <button data-sys="03-unusually-condensed-frame"  data-theme="">03 Unusually</button>
+  <button data-sys="04-stuxen-violet-saas"         data-theme="">04 Stuxen</button>
+  <button data-sys="05-qubix-dark-gallery"         data-theme="">05 Qubix</button>
+  <button data-sys="06-solvetrend-signature" data-theme="" aria-pressed="true">06 Solve Trend</button>
+  <span class="pv-sp"></span>
+  <button id="themeBtn" title="Only 06 ships a light theme">◐ Theme</button>
+</div>
+
+<div class="pv-body">
+<div class="ds-frame">
+
+  <!-- ============ NAV ============ -->
+  <nav class="c-nav">
+    <a class="c-nav__brand" href="#">SOLVE&nbsp;TREND<sup>®</sup>
+      <span class="c-nav__tag">Creative Technology</span></a>
+    <ul class="c-nav__links">
+      <li><a class="c-nav__link" href="#" aria-current="page">Work</a></li>
+      <li><a class="c-nav__link" href="#">Services</a></li>
+      <li><a class="c-nav__link" href="#">Studio</a></li>
+      <li><a class="c-nav__link" href="#">Contact</a></li>
+    </ul>
+    <span class="c-nav__progress" data-anim="scroll-percent">0%</span>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="ds-section ds-grid-bg">
+    <div class="ds-container">
+      <span class="c-pill"><i class="c-pill__dot"></i>Prince Edward Island · Worldwide</span>
+      <h1 class="ds-d2" style="margin-block:1.25rem 1.5rem;max-width:16ch">
+        We build brands <span class="ds-ghost">that</span> move.
+      </h1>
+      <p style="max-width:52ch;font-size:var(--fs-lg)">
+        Websites, product design, video, motion, and the AI automation behind them —
+        built as one system, not five disconnected projects.
+      </p>
+      <div class="c-row" style="margin-block-start:2rem">
+        <a class="c-btn c-btn--accent" href="#">Start a project
+          <span class="c-btn__badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <a class="c-btn c-btn--ghost" href="#">See our work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="c-marquee" aria-hidden="true">
+    <div class="c-marquee__track">
+      <span class="c-marquee__item">Web Design ✳</span><span class="c-marquee__item">Motion ✳</span>
+      <span class="c-marquee__item">UI/UX ✳</span><span class="c-marquee__item">Video ✳</span>
+      <span class="c-marquee__item">AI Automation ✳</span>
+    </div>
+    <div class="c-marquee__track">
+      <span class="c-marquee__item">Web Design ✳</span><span class="c-marquee__item">Motion ✳</span>
+      <span class="c-marquee__item">UI/UX ✳</span><span class="c-marquee__item">Video ✳</span>
+      <span class="c-marquee__item">AI Automation ✳</span>
+    </div>
+  </div>
+
+  <!-- ============ WORD REVEAL ============ -->
+  <section class="ds-section">
+    <div class="ds-container">
+      <span class="ds-eyebrow">✳ Studio — driven by design</span>
+      <h2 class="ds-d3" data-anim="words" style="margin-block-start:1.5rem">
+        We design digital experiences that empower brands to stand out and stay ahead.
+      </h2>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section class="ds-section--md ds-section">
+    <div class="ds-container">
+      <div class="c-grid c-grid--4" data-anim="stagger">
+        <div class="c-card"><span class="c-odometer" data-anim="count" data-to="250" data-suffix="+"></span>
+          <p class="c-card__body">Projects delivered</p></div>
+        <div class="c-card"><span class="c-odometer" data-anim="count" data-to="12" data-suffix="+"></span>
+          <p class="c-card__body">Years combined experience</p></div>
+        <div class="c-card"><span class="c-odometer" data-anim="count" data-to="98" data-suffix="%"></span>
+          <p class="c-card__body">Client retention</p></div>
+        <div class="c-card"><span class="c-odometer" data-anim="count" data-to="40" data-suffix="+"></span>
+          <p class="c-card__body">Brands worldwide</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES (depth group) ============ -->
+  <section class="ds-section">
+    <div class="ds-container">
+      <span class="ds-eyebrow">Services</span>
+      <h2 style="margin-block:1rem 2rem">Your needs, our expertise</h2>
+      <div class="c-grid c-grid--3 c-depth-group" data-anim="stagger">
+        <div class="c-depth"><div class="c-card c-card--numbered">
+          <span class="c-card__num">01</span><h3 class="c-card__title">Web Design & Build</h3>
+          <p class="c-card__body">Sites that load fast, convert, and stay easy to edit.</p></div></div>
+        <div class="c-depth"><div class="c-card c-card--numbered">
+          <span class="c-card__num">02</span><h3 class="c-card__title">Product & UI/UX</h3>
+          <p class="c-card__body">Mockups and design systems your developers can actually ship.</p></div></div>
+        <div class="c-depth"><div class="c-card c-card--numbered">
+          <span class="c-card__num">03</span><h3 class="c-card__title">Video & Motion</h3>
+          <p class="c-card__body">Editing, animation, and motion graphics for launch and social.</p></div></div>
+        <div class="c-depth"><div class="c-card c-card--numbered">
+          <span class="c-card__num">04</span><h3 class="c-card__title">AI Automation</h3>
+          <p class="c-card__body">Workflows that remove the admin between you and the work.</p></div></div>
+        <div class="c-depth"><div class="c-card c-card--numbered">
+          <span class="c-card__num">05</span><h3 class="c-card__title">Marketing Systems</h3>
+          <p class="c-card__body">Assets, funnels, and reporting that compound instead of reset.</p></div></div>
+        <div class="c-depth"><div class="c-card c-card--numbered">
+          <span class="c-card__num">06</span><h3 class="c-card__title">Brand Identity</h3>
+          <p class="c-card__body">Logo, type, colour, and the rules that keep it consistent.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAKEOVER ============ -->
+  <section class="ds-takeover ds-section">
+    <div class="ds-container">
+      <h2 class="ds-d3" style="max-width:20ch">Have a project in mind? Let's talk.</h2>
+      <div class="c-row" style="margin-block-start:1.5rem">
+        <a class="c-btn c-btn--surface" href="#">Connect with us
+          <span class="c-btn__badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="ds-section">
+    <div class="ds-container" style="max-width:820px">
+      <span class="ds-eyebrow">FAQ</span>
+      <h2 style="margin-block:1rem 1.5rem">Common questions</h2>
+      <div data-acc-group>
+        <div class="c-acc"><button class="c-acc__btn" aria-expanded="true">How long does a site take?
+          <span class="c-acc__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="c-acc__panel"><div><p>Most marketing sites run 3–6 weeks from kickoff to launch, depending on how ready the content is.</p></div></div></div>
+        <div class="c-acc"><button class="c-acc__btn" aria-expanded="false">Do you work with existing brands?
+          <span class="c-acc__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="c-acc__panel"><div><p>Yes. We can work inside existing guidelines or extend them where they've run out of coverage.</p></div></div></div>
+        <div class="c-acc"><button class="c-acc__btn" aria-expanded="false">What do you need from me to start?
+          <span class="c-acc__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="c-acc__panel"><div><p>A short call, any existing brand assets, and a rough sense of the outcome you're aiming for.</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TOKEN INSPECTOR ============ -->
+  <section class="ds-section">
+    <div class="ds-container">
+      <span class="ds-eyebrow">Token inspector</span>
+
+      <p class="pv-label">Surfaces & ink</p>
+      <div class="pv-swatches" id="swatches"></div>
+
+      <p class="pv-label">Type scale</p>
+      <div class="pv-type">
+        <div class="ds-d1">Display 1</div>
+        <div class="ds-d2">Display 2</div>
+        <div class="ds-d3">Display 3</div>
+        <h1>Heading 1</h1><h2>Heading 2</h2><h3>Heading 3</h3>
+        <h4>Heading 4</h4><h5>Heading 5</h5><h6>Heading 6</h6>
+        <p style="font-size:var(--fs-lg)">Large body — the quick brown fox jumps over the lazy dog.</p>
+        <p>Base body — the quick brown fox jumps over the lazy dog.</p>
+        <p style="font-size:var(--fs-sm);color:var(--c-text-3)">Small — the quick brown fox jumps over the lazy dog.</p>
+        <p class="ds-eyebrow">Mono eyebrow · 0123456789</p>
+      </div>
+
+      <p class="pv-label">Buttons</p>
+      <div class="c-row">
+        <a class="c-btn c-btn--accent" href="#">Accent<span class="c-btn__badge"><svg viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <a class="c-btn" href="#">Solid</a>
+        <a class="c-btn c-btn--ghost" href="#">Ghost</a>
+        <a class="c-btn c-btn--surface" href="#">Surface</a>
+        <a class="c-btn c-btn--square" href="#">Square</a>
+        <a class="c-link" href="#">Text link</a>
+      </div>
+
+      <p class="pv-label">Radii</p>
+      <div class="c-row" id="radii"></div>
+    </div>
+  </section>
+
+  <footer class="ds-section--sm ds-section" style="border-block-start:1px solid var(--c-line)">
+    <div class="ds-container">
+      <span class="ds-eyebrow">Solve Trend · Design Systems · Preview</span>
+    </div>
+  </footer>
+
+</div><!-- /frame -->
+</div><!-- /pv-body -->
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.3.1/dist/lenis.min.js"></script>
+<script src="_shared/motion.js"></script>
+
+<script>
+/* ---- system switcher ---- */
+const bar = document.querySelector('.pv-bar');
+const link = document.getElementById('tokens');
+bar.addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-sys]');
+  if (!b) return;
+  bar.querySelectorAll('button[data-sys]').forEach(x => x.setAttribute('aria-pressed','false'));
+  b.setAttribute('aria-pressed','true');
+  link.href = b.dataset.sys + '/tokens.css';
+  document.documentElement.removeAttribute('data-theme');
+  // system 03 needs the condensed-width substitute for its display face
+  document.documentElement.setAttribute('data-fonts',
+    b.dataset.sys.startsWith('03') ? 'substitute' : '');
+  setTimeout(paint, 120);
+});
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const r = document.documentElement;
+  r.getAttribute('data-theme') === 'light' ? r.removeAttribute('data-theme')
+                                           : r.setAttribute('data-theme','light');
+  setTimeout(paint, 60);
+});
+
+/* ---- token inspector ---- */
+const SURF = ['--c-canvas','--c-surface','--c-surface-2','--c-surface-3','--c-accent',
+              '--c-text','--c-text-2','--c-text-3','--c-line'];
+const RAD  = ['--r-xs','--r-sm','--r-md','--r-lg','--r-xl','--r-pill'];
+
+function paint() {
+  const cs = getComputedStyle(document.documentElement);
+  document.getElementById('swatches').innerHTML = SURF.map(n => {
+    const v = cs.getPropertyValue(n).trim() || '—';
+    return `<div class="pv-sw"><i style="background:${v}"></i><span>${n}<br>${v}</span></div>`;
+  }).join('');
+  document.getElementById('radii').innerHTML = RAD.map(n => {
+    const v = cs.getPropertyValue(n).trim() || '0';
+    return `<div style="width:76px"><div style="height:56px;background:var(--c-surface-2);
+      border:1px solid var(--c-line);border-radius:${v}"></div>
+      <div style="font:400 10px/1.5 ui-monospace,monospace;color:var(--c-text-3);padding-top:4px">
+      ${n.replace('--r-','')}<br>${v}</div></div>`;
+  }).join('');
+}
+addEventListener('load', paint);
+paint();
+</script>
+</body>
+</html>

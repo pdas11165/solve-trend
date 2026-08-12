@@ -1,0 +1,356 @@
+/* =============================================================
+   06 · SOLVE TREND — Signature
+   Synthesis of the five references, tuned for premium
+   digital-marketing / creative-technology positioning.
+
+   Adopted:
+     · floating rounded frame ............ Unusually
+     · five-near-black elevation ladder .. Qubix
+     · alpha ladders over grey palettes .. Stuxen + Unusually
+     · tracking as a fixed -4% ratio ...... Stuxen
+     · pill CTA with inset arrow badge .... Stuxen
+     · quint easings, never `ease` ........ Fluke
+     · 400ms house duration ............... Stuxen
+     · three-voice type system ............ Unusually
+     · asymmetric hover timing ............ Qubix
+     · scroll-driven CSS variables ........ Fluke
+     · #fdfcfc not #ffffff on dark ........ Qubix
+
+   Ships dark (default) and light themes on one token contract.
+   ============================================================= */
+
+:root {
+  /* ---------- LAYER 1 · PRIMITIVES ---------- */
+
+  /* neutral ladder — five near-blacks (Qubix pattern) */
+  --p-black:   #000000;
+  --p-ink-950: #0b0b0c;
+  --p-ink-900: #131315;
+  --p-ink-850: #1a1a1d;
+  --p-ink-800: #232327;
+  --p-ink-700: #313137;
+
+  --p-grey-500: #8a8a93;
+  --p-grey-400: #a8a8b2;
+  --p-grey-300: #c9c9d1;
+  --p-grey-200: #e4e4e8;
+  --p-grey-100: #f1f1f4;
+  --p-grey-50:  #f7f7f9;
+
+  --p-snow:  #fdfcfc;   /* body text on dark — never pure white */
+  --p-white: #ffffff;
+
+  /* accent — electric lime. Distinctive against the coral / red /
+     indigo / orange of the reference set, and reads "motion studio". */
+  --p-lime:      #c5f24c;
+  --p-lime-dark: #a8d92e;
+  --p-lime-soft: #eaf9c4;
+
+  /* alpha primitives — first-class tokens */
+  --p-white-26: rgb(255 255 255 / 0.26);
+  --p-white-12: rgb(255 255 255 / 0.12);
+  --p-white-08: rgb(255 255 255 / 0.08);
+  --p-ink-70:   rgb(11 11 12 / 0.70);
+  --p-ink-16:   rgb(11 11 12 / 0.16);
+  --p-ink-10:   rgb(11 11 12 / 0.10);
+
+  /* ---------- LAYER 2 · SEMANTIC · DARK (default) ---------- */
+  --c-canvas:    var(--p-black);
+  --c-surface:   var(--p-ink-950);
+  --c-surface-2: var(--p-ink-900);
+  --c-surface-3: var(--p-ink-800);
+  --c-frost:     var(--p-white-08);
+
+  --c-text:      var(--p-snow);
+  --c-text-2:    var(--p-grey-400);
+  --c-text-3:    var(--p-grey-500);
+  --c-text-mute: var(--p-ink-700);   /* de-emphasised headline words */
+  --c-text-inv:  var(--p-ink-950);
+
+  --c-accent:       var(--p-lime);
+  --c-accent-ink:   var(--p-ink-950);   /* 15.2:1 on lime */
+  --c-accent-hover: var(--p-lime-dark);
+  --c-accent-soft:  rgb(197 242 76 / 0.14);
+  /* Accent used AS TEXT/ICON rather than as a fill. On dark the lime
+     itself is fine (15.2:1); light mode overrides this — see below. */
+  --c-accent-text:  var(--p-lime);
+
+  --c-line:      var(--p-white-12);
+  --c-line-soft: var(--p-white-08);
+
+  --c-frame:     var(--p-ink-950);   /* frame interior */
+  --c-gutter:    var(--p-black);     /* around the frame */
+
+  /* ---------- TYPE · three voices ---------- */
+  --f-display: "Inter Tight", "Inter", system-ui, -apple-system, sans-serif;
+  --f-body:    "Inter", system-ui, -apple-system, sans-serif;
+  --f-mono:    "DM Mono", ui-monospace, "SF Mono", monospace;
+
+  /* every size fluid — no fixed px above h4 */
+  --fs-d1: clamp(3rem, 1rem + 8.5vw, 7.5rem);
+  --fs-d2: clamp(2.5rem, 1.2rem + 6vw, 5.5rem);
+  --fs-d3: clamp(2rem, 1.1rem + 4.2vw, 4rem);
+  --fs-h1: clamp(2.5rem, 1.2rem + 5.5vw, 5rem);
+  --fs-h2: clamp(2rem, 1.1rem + 3.8vw, 3.5rem);
+  --fs-h3: clamp(1.625rem, 1rem + 2.6vw, 2.5rem);
+  --fs-h4: clamp(1.375rem, 1rem + 1.6vw, 1.875rem);
+  --fs-h5: clamp(1.1875rem, 1rem + 0.9vw, 1.5rem);
+  --fs-h6: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-lg: 1.125rem;
+  --fs-md: 1rem;
+  --fs-sm: 0.9375rem;
+  --fs-xs: 0.8125rem;
+  --fs-2xs: 0.75rem;
+
+  --lh-tight: 100%;
+  --lh-head:  112%;
+  --lh-body:  155%;
+  --lh-loose: 172%;
+
+  --ls-display: -0.04em;   /* the -4% rule */
+  --ls-head:    -0.03em;
+  --ls-body:    -0.011em;
+  --ls-label:   0.12em;
+
+  --fw-light: 300; --fw-regular: 400; --fw-medium: 500;
+  --fw-semibold: 600; --fw-bold: 700;
+
+  /* ---------- SPACE · 4px base ---------- */
+  --s-1: 0.25rem;  --s-2: 0.5rem;   --s-3: 0.75rem;  --s-4: 1rem;
+  --s-5: 1.25rem;  --s-6: 1.5rem;   --s-7: 1.75rem;  --s-8: 2rem;
+  --s-10: 2.5rem;  --s-12: 3rem;    --s-14: 3.5rem;  --s-16: 4rem;
+  --s-20: 5rem;    --s-24: 6rem;    --s-32: 8rem;
+
+  --s-section:    clamp(4rem, 2rem + 6vw, 7.5rem);
+  --s-section-md: clamp(3rem, 1.6rem + 4.5vw, 5.5rem);
+  --s-section-sm: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+  --s-gutter:     clamp(1.25rem, 0.5rem + 2.5vw, 2.5rem);
+  --s-container:  1360px;
+  --s-container-narrow: 880px;
+
+  /* ---------- RADIUS ---------- */
+  --r-xs: 6px;  --r-sm: 10px; --r-md: 16px; --r-lg: 22px;
+  --r-xl: 32px; --r-2xl: 44px;
+  --r-pill: 999px; --r-round: 50%;
+
+  /* ---------- DEPTH (dark: filter, not shadow) ---------- */
+  --depth-blur: 5px;
+  --depth-gray: 0.8;
+  --depth-dim:  0.42;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.30);
+  --shadow-md: 0 8px 28px rgb(0 0 0 / 0.35);
+  --shadow-lg: 0 24px 60px rgb(0 0 0 / 0.45);
+
+  /* ---------- MOTION ---------- */
+  --d-micro: 180ms;
+  --d-base:  400ms;    /* house default */
+  --d-slow:  700ms;
+  --d-enter: 600ms;    /* asymmetric pair */
+  --d-exit:  380ms;
+  --d-marquee: 32s;
+
+  --e-out:    cubic-bezier(0.23, 1, 0.32, 1);          /* outQuint */
+  --e-in-out: cubic-bezier(0.86, 0, 0.07, 1);          /* inOutQuint */
+  --e-enter:  cubic-bezier(0.215, 0.61, 0.355, 1);     /* outCubic */
+  --e-exit:   cubic-bezier(0.25, 0.46, 0.45, 0.94);    /* outQuad */
+  --e-over:   cubic-bezier(0.34, 1.56, 0.64, 1);       /* outBack */
+
+  /* ---------- SCROLL-DRIVEN VARIABLES (Fluke PLUGIN_VARIABLE pattern) ----- */
+  --sv-progress: 0;        /* 0 → 1 page scroll */
+  --sv-reveal: 0;          /* 0 → 1 section reveal */
+  --sv-media-radius: var(--r-lg);
+  --sv-media-pad: 0px;
+
+  /* ---------- LAYER 3 · COMPONENT ---------- */
+  --btn-radius: var(--r-pill);
+  --btn-pad-y: 0.875rem;
+  --btn-pad-x: 1.5rem;
+  --btn-badge: 2.375rem;
+  --btn-badge-gap: 0.875rem;
+  --card-radius: var(--r-lg);
+  --card-pad: var(--s-7);
+  --nav-radius: var(--r-pill);
+  --nav-h: 3.75rem;
+  --frame-radius: clamp(1rem, 1.8vw, 1.75rem);
+  --frame-gutter: clamp(0.5rem, 1.2vw, 1rem);
+  --input-radius: var(--r-pill);
+}
+
+/* =============================================================
+   LIGHT THEME — same contract, inverted values
+   <html data-theme="light">
+   ============================================================= */
+[data-theme="light"] {
+  --c-canvas:    var(--p-grey-50);
+  --c-surface:   var(--p-white);
+  --c-surface-2: var(--p-grey-100);
+  --c-surface-3: var(--p-grey-200);
+  --c-frost:     rgb(255 255 255 / 0.7);
+
+  --c-text:      var(--p-ink-950);
+  --c-text-2:    var(--p-ink-70);
+  --c-text-3:    #6e6e77;                 /* 5.05:1 on white (was 3.42) */
+  --c-text-mute: #949494;                 /* 3.03:1 — display type only */
+  --c-text-inv:  var(--p-snow);
+
+  --c-accent:       var(--p-lime-dark);   /* fills: 11.8:1 with ink on top */
+  --c-accent-ink:   var(--p-ink-950);
+  --c-accent-hover: #93c024;
+  --c-accent-soft:  var(--p-lime-soft);
+  /* Lime as text on white is only 1.66:1. Any accent-coloured TEXT or
+     icon in light mode must use this olive cut instead: 5.29:1. */
+  --c-accent-text:  #587512;
+
+  --c-line:      var(--p-ink-16);
+  --c-line-soft: var(--p-ink-10);
+
+  --c-frame:     var(--p-white);
+  --c-gutter:    var(--p-grey-50);
+
+  --depth-dim: 0.5;
+  --shadow-sm: 0 1px 2px rgb(11 11 12 / 0.06);
+  --shadow-md: 0 8px 28px rgb(11 11 12 / 0.08);
+  --shadow-lg: 0 24px 60px rgb(11 11 12 / 0.12);
+}
+
+/* =============================================================
+   BASE
+   ============================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--c-gutter);
+  color: var(--c-text-2);
+  font-family: var(--f-body);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: var(--c-text);
+  font-family: var(--f-display);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-head);
+  text-wrap: balance;
+}
+h1 { font-size: var(--fs-h1); letter-spacing: var(--ls-display); line-height: var(--lh-tight); }
+h2 { font-size: var(--fs-h2); letter-spacing: var(--ls-display); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+h5 { font-size: var(--fs-h5); }
+h6 { font-size: var(--fs-h6); }
+
+p { margin: 0 0 var(--s-4); text-wrap: pretty; }
+a { color: inherit; }
+
+/* ---------- LAYOUT PRIMITIVES ---------- */
+
+/* THE FRAME — wrap the whole page */
+.ds-frame {
+  margin: var(--frame-gutter);
+  border-radius: var(--frame-radius);
+  background: var(--c-frame);
+  overflow: clip;
+  min-height: calc(100dvh - (var(--frame-gutter) * 2));
+}
+
+.ds-container {
+  width: 100%; max-width: var(--s-container);
+  margin-inline: auto; padding-inline: var(--s-gutter);
+}
+.ds-container--narrow { max-width: var(--s-container-narrow); }
+.ds-section { padding-block: var(--s-section); }
+.ds-section--md { padding-block: var(--s-section-md); }
+.ds-section--sm { padding-block: var(--s-section-sm); }
+
+/* ---------- TYPE UTILITIES ---------- */
+
+/* mono eyebrow — the third voice */
+.ds-eyebrow {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-text-3);
+}
+
+/* ghosted headline word (Fluke) */
+.ds-ghost { color: var(--c-text-mute); }
+
+/* accent headline word — uses the TEXT cut, safe in both themes */
+.ds-hl { color: var(--c-accent-text); }
+
+/* italic emphasis word (Stuxen) */
+.ds-em { font-style: italic; font-weight: var(--fw-light); }
+
+/* display sizes */
+.ds-d1 { font-size: var(--fs-d1); line-height: var(--lh-tight); letter-spacing: var(--ls-display); }
+.ds-d2 { font-size: var(--fs-d2); line-height: var(--lh-tight); letter-spacing: var(--ls-display); }
+.ds-d3 { font-size: var(--fs-d3); line-height: var(--lh-head);  letter-spacing: var(--ls-display); }
+
+/* ---------- SURFACE UTILITIES ---------- */
+.ds-glass {
+  background: var(--c-frost);
+  border: 1px solid var(--c-line);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--card-radius);
+}
+
+/* full-bleed accent takeover (Fluke) */
+.ds-takeover {
+  background: var(--c-accent);
+  color: var(--c-accent-ink);
+}
+.ds-takeover :where(h1,h2,h3,h4,h5,h6,.ds-eyebrow) { color: var(--c-accent-ink); }
+
+/* depth via filter, not shadow (Qubix) */
+.ds-depth { transition: filter var(--d-exit) var(--e-exit),
+                        opacity var(--d-exit) var(--e-exit); }
+.ds-depth-group:has(.ds-depth:hover) .ds-depth:not(:hover) {
+  filter: blur(var(--depth-blur)) grayscale(var(--depth-gray));
+  opacity: var(--depth-dim);
+}
+
+/* faint architectural grid (Stuxen) */
+.ds-grid-bg {
+  background-image: repeating-linear-gradient(
+    to right, var(--c-line-soft) 0 1px, transparent 1px calc(100% / 4));
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+  border-radius: var(--r-xs);
+}
+
+.ds-sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ds-depth-group:has(.ds-depth:hover) .ds-depth:not(:hover) {
+    filter: none; opacity: 0.65;
+  }
+}

@@ -1,0 +1,219 @@
+/* ============================================================
+   SOLVE TREND — BUSINESS DOCUMENT DESIGN SYSTEM v2.0
+   Invoices, quotes, statements of work, proposals, reports.
+
+   Brand tokens are lifted verbatim from app/globals.css so a
+   document and the website are provably the same brand.
+   If the site palette changes, update the PRIMITIVES block only.
+
+   Three layers, in order:
+     1. Primitives  — raw values, never used directly in markup
+     2. Semantic    — what a thing MEANS; use these
+     3. Components  — composed classes for documents
+
+   Print-first. Every component is tested against A4 and Letter.
+   ============================================================ */
+
+/* ---------- 1. PRIMITIVES ---------- */
+:root {
+  /* Brand — authoritative, from the site's hero monument spec */
+  --st-brand-red:    #F03223;
+  --st-brand-coral:  #F26B3A;
+  --st-brand-amber:  #F7A23B;
+  --st-brand-yellow: #F5C518;
+  --st-brand-black:  #050005;
+  --st-brand-white:  #E1E1E1;
+
+  /* Brand tints — derived, for document surfaces the site never needs */
+  --st-red-50:   #fdeceb;
+  --st-red-100:  #fad4d0;
+  --st-red-700:  #c0261a;
+  --st-amber-50: #fef4e6;
+  --st-amber-700:#a86a14;
+
+  /* Neutrals — anchored to the site's ivory page, not generic grey */
+  --st-ivory:      #F7F6F2;
+  --st-ivory-deep: #EFEDE6;
+  --st-neutral-0:   #ffffff;
+  --st-neutral-100: #E6E4DD;
+  --st-neutral-200: #D5D2C9;
+  --st-neutral-400: #9A968C;
+  --st-neutral-600: #5C594F;
+  --st-neutral-800: #2A2823;
+  --st-neutral-900: #1A1A1A;
+
+  /* Status — reserved strictly for meaning */
+  --st-green-50: #E8F4EE; --st-green-600: #1F6F52;
+  --st-stop-50:  #FBECEE; --st-stop-600:  #A32D3C;
+
+  /* Type — site fonts first, then graceful fallbacks.
+     Cabinet Grotesk / Satoshi are licensed webfonts; a printed
+     document must not depend on them resolving. */
+  --st-font-display: 'Cabinet Grotesk', 'Satoshi', ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif;
+  --st-font-body:    'Satoshi', ui-sans-serif, -apple-system, "Segoe UI", Inter, system-ui, sans-serif;
+  --st-font-mono:    ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Scale — 1.25 ratio, capped. Documents don't need nine sizes. */
+  --st-text-xs:   11px;
+  --st-text-sm:   12.5px;
+  --st-text-base: 14px;
+  --st-text-md:   16px;
+  --st-text-lg:   20px;
+  --st-text-xl:   26px;
+  --st-text-2xl:  34px;
+
+  /* Space — 4px base */
+  --st-space-1: 4px;   --st-space-2: 8px;   --st-space-3: 12px;
+  --st-space-4: 16px;  --st-space-5: 24px;  --st-space-6: 32px;
+  --st-space-7: 44px;  --st-space-8: 60px;
+
+  --st-radius-sm: 4px; --st-radius-md: 10px; --st-radius-lg: 16px;
+
+  /* ---------- 2. SEMANTIC ---------- */
+  --st-ink:          var(--st-neutral-900);
+  --st-ink-muted:    var(--st-neutral-600);
+  --st-ink-subtle:   var(--st-neutral-400);
+  --st-ink-inverse:  var(--st-brand-white);
+
+  --st-surface:          var(--st-neutral-0);
+  --st-surface-sunken:   var(--st-ivory);
+  --st-surface-inverse:  var(--st-brand-black);
+  --st-surface-selected: var(--st-red-50);
+
+  --st-border:        var(--st-neutral-200);
+  --st-border-strong: var(--st-neutral-400);
+  --st-border-brand:  var(--st-brand-red);
+
+  --st-action:    var(--st-brand-red);
+  --st-highlight: var(--st-brand-amber);
+
+  --st-doc-width: 820px;
+  --st-doc-pad: var(--st-space-8);
+}
+
+/* ---------- 3. BASE ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+body.st-doc {
+  margin: 0;
+  padding: var(--st-space-6) var(--st-space-4) var(--st-space-8);
+  background: var(--st-surface-sunken);
+  font-family: var(--st-font-body);
+  font-size: var(--st-text-base);
+  line-height: 1.55;
+  color: var(--st-ink);
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+.st-sheet {
+  max-width: var(--st-doc-width);
+  margin: 0 auto;
+  background: var(--st-surface);
+  padding: var(--st-doc-pad);
+  border-radius: var(--st-radius-lg);
+  box-shadow: 0 1px 2px rgba(5,0,5,.05), 0 14px 40px -18px rgba(5,0,5,.18);
+}
+
+/* ---------- TYPOGRAPHY ---------- */
+.st-h1 { font-family: var(--st-font-display); font-size: var(--st-text-2xl); line-height: 1.05; letter-spacing: -.025em; font-weight: 700; margin: 0; }
+.st-h2 { font-family: var(--st-font-display); font-size: var(--st-text-xl); line-height: 1.15; letter-spacing: -.02em; font-weight: 700; margin: 0 0 var(--st-space-2); }
+.st-h3 { font-size: var(--st-text-md); font-weight: 700; margin: 0 0 var(--st-space-2); }
+.st-eyebrow { font-size: var(--st-text-xs); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--st-ink-subtle); margin: 0 0 var(--st-space-2); }
+.st-eyebrow--brand { color: var(--st-brand-red); }
+.st-body { font-size: var(--st-text-base); color: var(--st-ink-muted); margin: 0 0 var(--st-space-3); }
+.st-small { font-size: var(--st-text-sm); color: var(--st-ink-muted); }
+.st-fine { font-size: var(--st-text-xs); color: var(--st-ink-subtle); line-height: 1.5; }
+.st-num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+/* ---------- LAYOUT ---------- */
+.st-rule { height: 1px; background: var(--st-border); border: 0; margin: var(--st-space-5) 0; }
+.st-rule--brand { height: 3px; background: var(--st-brand-red); border-radius: 2px; margin: var(--st-space-4) 0 var(--st-space-5); }
+.st-cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--st-space-5); }
+.st-cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--st-space-3); }
+
+/* ---------- MASTHEAD ---------- */
+.st-masthead { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--st-space-5); }
+.st-brandlock { display: flex; align-items: center; gap: 10px; }
+.st-brandlock svg { display: block; flex: none; }
+.st-wordmark { font-family: var(--st-font-display); font-size: var(--st-text-lg); font-weight: 700; letter-spacing: -.03em; text-transform: lowercase; margin: 0; line-height: 1; }
+.st-logo-sub { font-size: var(--st-text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--st-ink-subtle); margin-top: 10px; }
+
+/* ---------- META / PARTIES ---------- */
+.st-meta { display: grid; grid-template-columns: auto 1fr; gap: var(--st-space-1) var(--st-space-4); font-size: var(--st-text-sm); margin: 0; }
+.st-meta dt { color: var(--st-ink-subtle); }
+.st-meta dd { margin: 0; font-weight: 700; text-align: right; }
+.st-party { font-size: var(--st-text-sm); line-height: 1.65; color: var(--st-ink-muted); }
+.st-party strong { display: block; color: var(--st-ink); font-size: var(--st-text-base); font-weight: 700; margin-bottom: 2px; }
+
+/* ---------- TABLE ---------- */
+.st-table { width: 100%; border-collapse: collapse; font-size: var(--st-text-base); }
+.st-table thead th { text-align: left; font-size: var(--st-text-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--st-ink-subtle); padding: 0 var(--st-space-3) var(--st-space-2); border-bottom: 1px solid var(--st-border-strong); }
+.st-table tbody td { padding: var(--st-space-3); border-bottom: 1px solid var(--st-border); vertical-align: top; }
+.st-table tbody tr:last-child td { border-bottom: 0; }
+.st-td-desc strong { display: block; font-weight: 700; margin-bottom: 3px; }
+.st-td-desc span { font-size: var(--st-text-sm); color: var(--st-ink-muted); display: block; }
+.st-td-right { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.st-table--compact tbody td { padding: var(--st-space-2) var(--st-space-3); }
+.st-table--zebra tbody tr:nth-child(odd) td { background: var(--st-surface-sunken); }
+.st-row-hero td { background: var(--st-red-50) !important; }
+
+/* ---------- TOTALS ---------- */
+.st-totals { margin-left: auto; width: 330px; }
+.st-totals dl { display: grid; grid-template-columns: 1fr auto; gap: var(--st-space-2) var(--st-space-4); margin: 0; }
+.st-totals dt { color: var(--st-ink-muted); }
+.st-totals dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.st-total-row dt, .st-total-row dd { font-size: var(--st-text-lg); font-weight: 700; color: var(--st-ink); padding-top: var(--st-space-3); border-top: 2px solid var(--st-brand-black); }
+
+/* ---------- OPTION CARDS ---------- */
+.st-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--st-space-3); }
+.st-option { border: 1px solid var(--st-border); border-radius: var(--st-radius-md); padding: var(--st-space-4); background: var(--st-surface); display: flex; flex-direction: column; }
+.st-option--recommended { border: 2px solid var(--st-brand-red); background: var(--st-surface-selected); }
+.st-option-tag { font-size: 9.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--st-brand-red); margin-bottom: var(--st-space-2); min-height: 13px; }
+.st-option-name { font-family: var(--st-font-display); font-size: var(--st-text-md); font-weight: 700; letter-spacing: -.01em; margin: 0 0 var(--st-space-1); }
+.st-option-price { font-family: var(--st-font-display); font-size: var(--st-text-xl); font-weight: 700; letter-spacing: -.03em; font-variant-numeric: tabular-nums; margin: 0 0 var(--st-space-3); }
+.st-option ul { list-style: none; margin: 0; padding: 0; font-size: var(--st-text-sm); color: var(--st-ink-muted); }
+.st-option li { padding-left: 16px; position: relative; margin-bottom: var(--st-space-2); line-height: 1.45; }
+.st-option li::before { content: "—"; position: absolute; left: 0; color: var(--st-ink-subtle); }
+.st-option li.st-li-new::before { content: "+"; color: var(--st-brand-red); font-weight: 700; }
+.st-option-check { margin-top: auto; padding-top: var(--st-space-4); }
+.st-checkbox { display: inline-block; width: 15px; height: 15px; border: 1.5px solid var(--st-border-strong); border-radius: 3px; vertical-align: -3px; margin-right: var(--st-space-2); }
+
+/* ---------- CALLOUT ---------- */
+.st-callout { border-left: 3px solid var(--st-border-brand); background: var(--st-red-50); padding: var(--st-space-4) var(--st-space-5); border-radius: 0 var(--st-radius-md) var(--st-radius-md) 0; }
+.st-callout--warn { border-left-color: var(--st-brand-amber); background: var(--st-amber-50); }
+.st-callout--quiet { border-left-color: var(--st-border-strong); background: var(--st-surface-sunken); }
+.st-callout p { margin: 0; font-size: var(--st-text-sm); line-height: 1.6; }
+.st-callout p + p { margin-top: var(--st-space-2); }
+
+/* ---------- BADGE ---------- */
+.st-badge { display: inline-block; font-size: var(--st-text-xs); font-weight: 700; padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
+.st-badge--neutral { background: var(--st-neutral-100); color: var(--st-ink-muted); }
+.st-badge--brand   { background: var(--st-red-50);    color: var(--st-red-700); }
+.st-badge--zero    { background: var(--st-green-50);  color: var(--st-green-600); }
+.st-badge--stop    { background: var(--st-stop-50);   color: var(--st-stop-600); }
+
+/* ---------- SIGNATURE ---------- */
+.st-sign { display: grid; grid-template-columns: 1fr 180px; gap: var(--st-space-6); align-items: end; }
+.st-sign-line { border-bottom: 1px solid var(--st-brand-black); height: 34px; }
+.st-sign-label { font-size: var(--st-text-xs); color: var(--st-ink-subtle); margin-top: var(--st-space-2); }
+
+/* ---------- FOOTER ---------- */
+.st-footer { margin-top: var(--st-space-7); padding-top: var(--st-space-4); border-top: 1px solid var(--st-border); }
+
+/* ---------- PRINT ---------- */
+@media print {
+  body.st-doc { background: #fff; padding: 0; font-size: 11.5px; }
+  .st-sheet { max-width: none; box-shadow: none; border-radius: 0; padding: 13mm 11mm; }
+  .st-page-break { page-break-before: always; }
+  .st-no-print { display: none !important; }
+  .st-table tbody tr, .st-option, .st-callout { page-break-inside: avoid; }
+  .st-option--recommended { border-color: var(--st-brand-red); }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 720px) {
+  :root { --st-doc-pad: var(--st-space-5); }
+  .st-cols-2, .st-cols-3, .st-options { grid-template-columns: 1fr; }
+  .st-masthead { flex-direction: column; }
+  .st-totals { width: 100%; }
+  .st-sign { grid-template-columns: 1fr; }
+}

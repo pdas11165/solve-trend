@@ -60,7 +60,9 @@ function Tile({
         />
       )}
       <div className="hero-strip-glass" aria-hidden="true" />
-      <div className="hero-strip-frost">
+      {/* Bottom caption bar, not a full-card frost — the image stays clear
+          and the label reads white-on-dark against the scrim. */}
+      <div className="hero-strip-caption">
         <span className="hero-strip-num">{s.num}</span>
         <span className="hero-strip-name">{s.name}</span>
       </div>
